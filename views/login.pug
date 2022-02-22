@@ -1,0 +1,27 @@
+doctype doctype html
+html(lang="en")
+    head
+      title Spokane Ecomomic Dashboard | Authorized User Sign-in
+      meta(name="description", content="Authorized User Login Page")
+      meta(charset="UTF-8")
+      meta(name="viewport" content="width=device-width, initial-scale=1.0")
+      link(rel='stylesheet' type="text/css" href="css/login.css")
+      link(rel="shortcut icon" href="images/favicon.ico" type="image/x-icon")
+      script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+      script(src="javascripts/login.js")
+    body
+      div#login-window
+        h1 Authorized User Sign-in
+        form(action="/login" id='auth-login' method="post") 
+          div#input-container
+            section.entry
+            label(for="username") Username
+            input.text-field( type="text" id="username" name="username" required)
+            section.entry
+            label(for="password") Password
+            input.text-field( type="password" id="password" name="password" required)
+            p.error-msg.hide
+          div#button-container
+            input(type="submit" value="Login")
+        button#clear Clear
+        button#back Back to Dashboard

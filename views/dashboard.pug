@@ -1,0 +1,18 @@
+extends layout.pug
+block page-title
+    title Spokane Economic Dashboard | Dashboard
+block style-sheet
+    link(rel='stylesheet', type="text/css", href='../css/style.css')
+block scripts 
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js")
+    script(src="https://unpkg.com/vue@3.2.29") 
+    script(type="text/javascript" src="../javascripts/dashboard-utils.js" defer)
+block page-name
+    h1 Economic Indicator Dashboard
+block content
+    include dashboard-content.html
+
+            
+
+
+  

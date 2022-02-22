@@ -1,0 +1,37 @@
+doctype html
+html(lang='en')
+  head
+    block page-title 
+      title Spokane Economic Dashboard | #{title}
+    meta(name="description", content="Prototype website for CS07 Economic Recovery Dashboard")
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon")
+    block style-sheet
+      link(rel='stylesheet', type="text/css", href='../css/style.css')
+    block scripts
+      script(src="../javascripts/page_default_template.js") 
+  body
+    header 
+      block page-name
+          h1 Page Name
+      section#navbar
+        h2 Navigation 
+        a(href="index") About
+        a(href="dashboard") Dashboard Mockup
+        a(href="login") Authorized Area
+    main
+      block content
+    footer 
+      section.info
+        hr
+        table 
+          tbody 
+            tr 
+              td #[u Find information for]
+              td #[u Contact Us]
+            tr 
+              td 
+                a(href="https://greaterspokane.org/") Greater Spokane Inc.
+              td 
+                a(href="https://www.gonzaga.edu/school-of-engineering-applied-science/student-experiences/cede/senior-design-projects/cpsc") Gonzaga Senior Design Projects

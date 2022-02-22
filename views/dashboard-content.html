@@ -1,0 +1,145 @@
+<div class="dashboard" id="app">
+    <!-- <p>{{ descriptionText }}</p> -->
+    <div class="tab w3-bar">
+        <button class="tablinks active" onclick="filtercards(event, 'all')">All</button>
+        <button class="tablinks" onclick="filtercards(event, 'income')">Income</button>
+        <button class="tablinks" onclick="filtercards(event, 'employment')">Employment</button>
+        <button class="tablinks" onclick="filtercards(event, 'housing')">Housing</button>
+        <button class="tablinks" onclick="filtercards(event, 'other')">Other</button>
+    </div>
+    <hr>
+    <div class="dashboard-body">
+        <!-- <detail-indicator-card class="card w3-round-large"></detail-indicator-card> -->
+        <div id="detailed-view-card">
+            <div class="detailed-view-half">
+                <!-- <p><b>Description about the indicator</b> Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+                </p>
+                <p><b>Notes about the data source</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<a
+                        href="https://data.census.gov/cedsci/" style="color:blue;">Data source</a></p> -->
+                <!-- <detail-indicator-card></detail-indicator-card> -->
+                <p><b><span v-bind>{{ detailViewName }}</span> description</b> {{ loremIpsum }} {{ loremIpsum }}</p>
+                <p><b>About the data source</b> {{ loremIpsum }}</p>
+                <p><b>Compare data</b></p>
+                <div class="compare-data-checkboxes">
+                    <input class="checkboxes" type="checkbox" id="spokane-checkbox" name="spokane-checkbox" checked>
+                    <label for="spokane-checkbox" id="spokane-checkbox-label">Spokane</label>
+                    <input class="checkboxes" type="checkbox" id="wa-checkbox" name="wa-checkbox" checked>
+                    <label for="wa-checkbox" id="wa-checkbox-label">Washington</label>
+                    <input class="checkboxes" type="checkbox" id="boise-checkbox" name="boise-checkbox">
+                    <label for="boise-checkbox" id="boise-checkbox-label">Boise</label>
+                    <input class="checkboxes" type="checkbox" id="saltlake-checkbox" name="saltlake-checkbox">
+                    <label for="saltlake-checkbox" id="saltlake-checkbox-label">Salt Lake City</label>
+                </div>
+                <br>
+                <span><b>Time Range</b></span>
+                <div class="range-sliders">
+                    <label for="start-range">Start: 2010 </label>
+                    <input type="range" id="start-range" name="start-range" min="2010" max="2021">
+                    <br>
+                    <label for="end-range">End: 2021 </label>
+                    <input type="range" id="end-range" name="end-range" min="2010" max="2021">
+                </div>
+                <br>
+            </div>
+            <div class="detailed-view-half" id="detail-graph-container"><canvas id="detailed-chart-canvas"></canvas><br>
+            </div>
+        </div>
+        <div class="indicator-container">
+            <div class="row" id="row1">
+                <div class="column">
+                    <div @click="toggleDetailView('mhi')" class="card all income w3-round-large" id="mhi-card">
+                        <div class="card-header">
+                            <h3>Median Household Income</h3>
+                            <p>{{ mhiIncDec }} {{ mhiChange }}% between 2018 and 2019.</p>
+                        </div>
+                        <div class="card-body"><canvas id="mhi"></canvas></div>
+                        <div class="card-footer"></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div @click="toggleDetailView('lfpr')" class="card all employment w3-round-large" id="lfpr-card">
+                        <div class="card-header">
+                            <h3>Labor Force Participation Rate</h3>
+                            <p>Short metric about indicator performance</p>
+                        </div>
+                        <div class="card-body"><canvas id="lfpr"></canvas></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div @click="toggleDetailView('hai')" class="card all housing w3-round-large" id="hai-card">
+                        <div class="card-header">
+                            <h3>Housing Affordability Index</h3>
+                            <p>Short metric about indicator performance</p>
+                        </div>
+                        <div class="card-body"><canvas id="hai"></canvas></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div @click="toggleDetailView('mhrv')" class="card all housing w3-round-large" id="mhrv-card">
+                        <div class="card-header">
+                            <h3>Median Home Resale Value</h3>
+                            <p>Short metric about indicator performance</p>
+                        </div>
+                        <div class="card-body"><canvas id="mhrv"></canvas></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Things to work on: 
+    //         1. continue to break up sections of code into components 
+    //         2. figure out a better place for the vue code besides here
+    let app = Vue.createApp({
+        data: function () {
+            return {
+                showDetailView: false,
+                descriptionText: "this works!",
+                detailViewName: "",
+                loremIpsum: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                mhiChange: 0.0,
+                mhiIncDec: "Changed" // this gets changed in the created() function
+            }
+        },
+        methods: {
+            toggleDetailView(indicatorName) {
+                console.log("Showing detail view for ", indicatorName)
+                this.detailViewName = getIndicatorName(indicatorName)
+            }
+        },
+        created: function () {
+            // move all this to its own method later
+            mhiData = getData('mhi', 'Spokane')
+            this.mhiChange = (((mhiData[mhiData.length - 1] - mhiData[mhiData.length - 2]) / mhiData[mhiData.length - 2]) * 100).toFixed(1)
+            console.log(this.mhiChange)
+            this.mhiIncDec = (this.mhiChange >= 0) ? 'Increased' : 'Decreased'
+        }
+    })
+    // app.component('detail-indicator-card', {
+    //     template: `
+    //         <div class='detail-indicator-card'>
+    //             <p><b>Descrition for {{ detailViewName }}</b> {{ loremIpsum }} {{ loremIpsum }}</p>
+    //             <p><b>About the data source</b> {{ loremIpsum }}</p>
+    //         </div>
+    //     `,
+    //     data() {
+    //         return {
+    //             showDetailView: false,
+    //             indicatorName: "",
+    //             loremIpsum: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
+    //                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+    //         }
+    //     },
+    //     methods: {
+
+    //     }
+    // })
+
+    const vm = app.mount('#app') 
+</script>

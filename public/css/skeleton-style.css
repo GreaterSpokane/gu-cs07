@@ -1,0 +1,100 @@
+h1 {
+    text-align: center;
+    color: #04395E
+}
+
+body {
+    background-color: #eBDBC1;
+    justify-content: center;
+    margin-left: 15%;
+    margin-right: 5%;
+    color: #031D44;
+    font-family: Helvetica, sans-serif;
+    font-size: 100%;
+}
+
+header {
+    background-color: #BE5937;
+    margin-left: -5%;
+    margin-right: 5%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+main {
+    padding-bottom: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.text_visuals h2 {
+    text-align: center;
+}
+
+.info {
+    margin: auto;
+}
+
+.info table {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+li {
+    padding-bottom: 8px;
+    text-emphasis-color: #04395E;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #BE5937;
+}
+
+
+/* Navbar links */
+
+.topnav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+/* Links - change color on hover */
+
+.topnav a:hover {
+    color: black;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #BE5937;
+    color: #031D44;
+    text-align: center;
+}
+
+.column {
+    float: left;
+}
+
+.column.side {
+    width: 25%;
+}
+
+.column.middle {
+    width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+    .column.side,
+    .column.middle {
+        width: 100%;
+    }
+}

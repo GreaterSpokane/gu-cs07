@@ -1,0 +1,304 @@
+header {
+    background-color: #333;
+    color: #FFFFFF;
+    justify-content: center;
+    fill-opacity: 5%;
+    background-image: "\\html\\stockvault-spokane-washington-city-view241358.jpg";
+    padding-bottom: 25px;
+}
+
+h1 {
+    text-align: center;
+    color: #db6140;
+    padding: 1%;
+}
+
+#navbar h2 {
+    text-align: center;
+    color: #719a45;
+}
+
+h2 {
+    color: #719a45;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #eeebea;
+    justify-content: center;
+    color: #2f2f2e;
+    font-size: 100%;
+}
+
+main {
+    padding-bottom: 1%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+footer {
+    background-color: #3B3B39;
+    color: #FFFFFF;
+    height: 150px;
+}
+
+.info {
+    margin: auto;
+    color: #FFFFFF;
+    float: center;
+}
+
+.info table {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+li {
+    padding-bottom: 8px;
+    text-emphasis-color: #04395E;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #3B3B39;
+    text-align: center;
+    position: relative;
+    padding: 1%;
+}
+
+
+/* Navbar links */
+
+#navbar a {
+    float: center;
+    font-size: 24px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+#navbar a:hover {
+    color: #719a45;
+    border: 2px white solid;
+}
+
+a:link {
+    color: #FFFFFF;
+    padding: 1%;
+}
+
+a:visited {
+    color: whitesmoke;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #BE5937;
+    color: #031D44;
+    text-align: center;
+}
+
+.footer table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.column {
+    float: left;
+}
+
+.column.side {
+    width: 25%;
+}
+
+.column.middle {
+    width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+    .column.side,
+    .column.middle {
+        width: 100%;
+    }
+}
+
+#navbar {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.text_visuals>h2 {
+    text-align: center;
+    background-color: #2f2f2e;
+}
+
+.indicator-label {
+    background-color: #2f2f2e;
+}
+
+.indicator-text-section {
+    width: 40%;
+}
+
+.indicator-data-section {
+    width: 60%;
+}
+
+#group-photo {
+    float: left;
+    padding: 0 20px 15px 0;
+    height: 35%;
+    width: 50%;
+}
+
+.visualization-container>* {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+/* Start Dashboard Specific CSS */
+
+* {
+  box-sizing: border-box;
+}
+  
+body {
+  font-family: 'proxima-nova', Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {
+  margin: 0 -5px;
+  margin-top: 16px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+} 
+
+/* CUSTOM CSS */
+#detailed-view-card {
+  /* display: none; */
+  padding: 0 10px;
+  margin: 5px;
+  margin-bottom: 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+  /* border: 1px solid #ccc; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+  display: flex;
+}
+
+.detailed-view-half {
+  flex: 50%;
+  padding: 10px;
+}
+
+.active, .card:hover{
+  box-shadow:0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+  cursor: pointer;
+}
+
+
+/* old css below */
+.dashboard {
+    /* border: 1px solid #2f2f2e; */
+    margin: 1em;
+    font-family: 'proxima-nova', Helvetica, sans-serif;
+
+
+}
+
+.dashboard-flex-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.dashboard-flex-container>div {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    background-color: #f1f1f1;
+    margin: 7px;
+    border: 2px solid #2f2f2e;
+    padding: 7px; 
+    border-radius: 7px;
+}
+
+.dashboard>h2 {
+    text-align: center;
+}
+
+/* End Dashboard Specific CSS */

@@ -1,0 +1,151 @@
+header {
+    background-color: #333;
+    color: #FFFFFF;
+    justify-content: center;
+    fill-opacity: 5%;
+    background-image: "\\html\\stockvault-spokane-washington-city-view241358.jpg";
+}
+
+h1 {
+    text-align: center;
+    color: #db6140;
+    padding: 1%;
+}
+
+h2 {
+    text-align: center;
+    color: #719a45;
+}
+
+body {
+    background-color: #eeebea;
+    justify-content: center;
+    color: #2f2f2e;
+    font-family: Helvetica, sans-serif;
+    font-size: 100%;
+}
+
+main {
+    padding-bottom: 1%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.text_visuals h2 {
+    text-align: center;
+}
+
+footer {
+    background-color: #3B3B39;
+    color: #FFFFFF;
+    height: 150px;
+}
+
+.info {
+    margin: auto;
+    color: #FFFFFF;
+    float: center;
+}
+
+.info table {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+a:link {
+    color: #FFFFFF;
+    padding: 1%;
+}
+
+a:visited {
+    color: #db6140;
+}
+
+a:active {
+    color: #719a45
+}
+
+a:hover {
+    color: #0A9FCD;
+}
+
+li {
+    padding-bottom: 8px;
+    text-emphasis-color: #04395E;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #3B3B39;
+    text-align: center;
+    position: relative;
+    padding: 1%;
+}
+
+
+/* Navbar links */
+
+#navbar a {
+    float: center;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+/* Links - change color on hover */
+
+#navbar a:hover {
+    color: #0A9FCD;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #BE5937;
+    color: #031D44;
+    text-align: center;
+}
+
+.column {
+    float: left;
+}
+
+.column.side {
+    width: 25%;
+}
+
+.column.middle {
+    width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+    .column.side,
+    .column.middle {
+        width: 100%;
+    }
+}
+
+.dashboard-flex-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.dashboard-flex-container>div {
+    text-align: center;
+    width: 100%;
+    max-width: 550px;
+    background-color: #f1f1f1;
+    margin: 7px;
+    border: 2px solid #2f2f2e;
+    padding: 12px;
+}
+
+.dashboard-visuals>h1 {
+    background-color: #333
+}

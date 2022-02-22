@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Mock data views for initial skeleton">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Spokane Economic Indicators | Data View </title>
+    <link rel="stylesheet" type="text/css" href="..\css\skeleton.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Economic Indicators with Visualizations</h1>
+        <section id="navbar">
+            <h2>Navigation</h2>
+            <a href="index.html">Home</a> <a href="features.html">Features</a> <a href="data.html">Economic Indicators</a> <a href="questions.html">Questions</a> <a href="med_house_income.html">Median Household Income</a> <a href="dashboard.html">Dashboard Mockup</a>
+        </section>
+    </header>
+    <main>
+        <section class="text_visuals">
+            <hr>
+            <h2>Housing Affordability Index (HIA)</h2>
+            <table class="indicator-entry">
+                <tbody>
+                    <tr>
+                        <td id="indicator-text-section">
+                            <p> A well constructed and researched explaination of the HIA and it's relevance to the people of Spokane.</p>
+                        </td>
+                        <td id="indicator-data-section">
+                            <canvas id="hia_chart" style="width: 300px; height: 250px; display: block;" width="300" height="250"></canvas>
+                            <script>
+                                var xVals = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+                                new Chart("hia_chart", {
+                                    type: "line",
+                                    data: {
+                                        labels: xVals,
+                                        datasets: [{
+                                            data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+                                            borderColor: "red",
+                                            fill: false
+                                        }, {
+                                            data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+                                            borderColor: "green",
+                                            fill: false
+                                        }, {
+                                            data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+                                            borderColor: "blue",
+                                            fill: false
+                                        }]
+                                    },
+                                    options: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    }
+                                });
+                            </script>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <h2>Average Household Income</h2>
+            <table id="indicator-entry">
+                <tbody>
+                    <tr>
+                        <td id="indicator-text-section">
+                            <p> A timely and relevant display of the trends in Average Household Income for Spokane.</p>
+                        </td>
+                        <td id="indicator-data-section">
+                            <canvas id="avg_chart" style="width: 300px; height: 250px; display: block;" width="300" height="250"></canvas>
+                            <script>
+                                var years = [2016, 2017, 2018, 2019, 2020, 2021];
+                                new Chart("avg_chart", {
+                                    type: "horizontalBar",
+                                    data: {
+                                        labels: years,
+                                        datasets: [{
+                                            axis: 'y',
+                                            label: 'Average Household Income ($)',
+                                            data: [91960, 100105, 100746, 110043, 112001, 112345],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)',
+                                                'rgba(255, 205, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)',
+                                                'rgba(255, 205, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)'
+                                            ],
+                                            boarderWidth: 1
+                                        }],
+                                    },
+                                    options: {
+                                        scales: {
+                                            xAxes: [{
+                                                ticks: {
+                                                    min: 90000,
+                                                    max: 120000
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <h2>Median Family Income</h2>
+            <table id="indicator-entry">
+                <tbody>
+                    <tr>
+                        <td id="indicator-text-section">
+                            <p> A comprehensive visualization of key factors contributing to the Median Family Income in Spokane.</p>
+                        </td>
+                        <td id="indicator-data-section">
+                            <canvas id="med_chart" style="width: 300px; height: 250px; display: block;" width="300" height="250"></canvas>
+                            <script>
+                                var years = [2016, 2017, 2018, 2019, 2020, 2021];
+                                new Chart("med_chart", {
+                                    type: "horizontalBar",
+                                    data: {
+                                        labels: years,
+                                        datasets: [{
+                                            axis: 'y',
+                                            label: 'Median Family Income ($)',
+                                            data: [86500, 89150, 89100, 89400, 89760, 91900],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)',
+                                                'rgba(255, 205, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)',
+                                                'rgba(255, 205, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)'
+                                            ],
+                                            boarderWidth: 1
+                                        }],
+                                    },
+                                    options: {
+                                        scales: {
+                                            xAxes: [{
+                                                ticks: {
+                                                    min: 85000,
+                                                    max: 95000
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <h2>Educational Attainment</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <td id="indicator-text-section">
+                            <p> A through and detailed compilation of Educational Attainment indicators and their effects of the greater economy of Spokane.</p>
+                        </td id="indicator-data-section">
+                        <td>
+                            <canvas id="edu_chart" style="width: 300px; height: 250px; display: block;" width="300" height="250"></canvas>
+                            <script>
+                                var years = [2016, 2017, 2018, 2019, 2020, 2021];
+                                new Chart("edu_chart", {
+                                    type: "bar",
+                                    data: {
+                                        labels: years,
+                                        datasets: [{
+                                            label: "Spokane Graduation Rate (%)",
+                                            data: [86, 89, 91, 94, 93, 92],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)',
+                                                'rgba(255, 205, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)',
+                                                'rgba(255, 205, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                            ],
+                                            boarderWidth: 1
+                                        }],
+                                    },
+                                    options: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                });
+                            </script>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <section class="info">
+            <hr>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p><u>Find Information for</u></p>
+                        </td>
+                        <td>
+                            <p><u>Contact Us</u></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://greaterspokane.org/">Greater Spokane Inc.</a></td>
+                        <td>Contact Us 📲</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.gonzaga.edu/school-of-engineering-applied-science/student-experiences/cede/senior-design-projects/cpsc">Gonzaga Senior Design Projects</a></td>
+                        <td>Contact Us 📩</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </footer>
+</body>
