@@ -1,5 +1,6 @@
 
-// hides/shows cards based on what categorie (eg. housing) is selected 
+// TODO: fix this, it's not working for some reason
+// hides/shows cards based on what category (eg. housing, income) is selected 
 function filtercards(event, tabName) {
     console.log("filter cards!");
     //toggle active tab color
@@ -23,7 +24,7 @@ function filtercards(event, tabName) {
 
 // returns the full name of the indicator abbreviation
 function getIndicatorName(indicatorAbbrev) {
-    names = {
+    const names = {
         'mhi': "Median Household Income",
         'lfpr': "Labor Force Participation Rate",
         'hai': "Housing Affordability Index",
@@ -32,57 +33,97 @@ function getIndicatorName(indicatorAbbrev) {
     return names[indicatorAbbrev]
 }
 
-function renderDetailChart(detailChart, indicatorName) {
-    console.log("inside renderDetailChart");
-    // var oldDetailedChartElement = document.getElementById('detailed-chart-canvas'); 
-    // if (oldDetailedChartElement) {
-    //     oldDetailedChartElement.remove()
-    // }
+// creates the chart in the detailed view
+function renderDetailView(indicatorName) {
+    console.log("render detail view for:", indicatorName);
+
+    // reset checkbox checks
+    var checkboxes = document.getElementsByClassName("checkboxes");
+    for (let i = 0; i < checkboxes.length; i++) {
+        var checkboxID = checkboxes[i].id.slice(0,2);
+        if (checkboxID == "sp" || checkboxID == "wa") {
+            checkboxes[i].checked = true;
+        } else {
+            checkboxes[i].checked = false;
+        }
+    }
+
+    // TODO use the built in destroy() method for the chart instead of this 
+    var oldDetailedChartElement = document.getElementById('detailed-chart-canvas'); 
+    if (oldDetailedChartElement) {
+        oldDetailedChartElement.remove()
+    }
+    var newDetailedChartElement = document.createElement("canvas");
+    newDetailedChartElement.setAttribute("id", "detailed-chart-canvas");
+    document.getElementById('detail-graph-container').appendChild(newDetailedChartElement);
 
     let detailChartCtx = document.getElementById("detailed-chart-canvas").getContext("2d");
-    detailChart = new Chart(detailChartCtx, getConfig(indicatorName, true));
-    console.log("end of renderDetailChart");
+    window.detailChart = new Chart(detailChartCtx, getConfig(indicatorName, true));
+
+    // range slider
+    var slider = document.getElementById('slider');
+    if (window.rangeSlider) {
+        slider.noUiSlider.destroy()     // needed because cant update start range after created
+    }
+    
+    const range = getData(indicatorName, "years");
+    let startRange = Number(range[0]);
+    let endRange = Number(range[range.length - 1]);
+    window.rangeSlider = noUiSlider.create(slider, {
+        start: [startRange, endRange],
+        connect: true,
+        step: 1,
+        range: {
+            'min': startRange,
+            'max': endRange
+        },
+        margin: 1,
+        tooltips: [
+            wNumb({decimals: 0}),
+            wNumb({decimals: 0})
+        ]
+    });
 
 
-    // already commented: document.getElementById('detailed-chart-canvas').remove()
-    // already commented: document.getElementsByClassName('detailed-view-half')[0].appendChild(document.createElement("canvas id='detailed-view-half'"))
-    // var oldDetailedChartElement = document.getElementById('detailed-chart-canvas'); // this is my <canvas> element
-    // if (oldDetailedChartElement) {
-    //     oldDetailedChartElement.remove()
-    // }
-    // var newDetailedChartElement = document.createElement("canvas");
-    // newDetailedChartElement.setAttribute("id", "detailed-chart-canvas");
-    // document.getElementById('detail-graph-container').appendChild(newDetailedChartElement);
-    // var detailChartObj;
-    // var canvasID;
-    // switch (indicatorName) {
-    //     case "mhi":
-    //         console.log("inside case:", indicatorName);
-    //         detailChartObj = renderMhi(canvasID);
-    //         break;
-    //     case "lfpr":
-    //         console.log("inside case:", indicatorName);
-    //         detailChartObj = renderLfpr(canvasID);
-    //         break;
-    //     case "hai":
-    //         console.log("inside case:", indicatorName);
-    //         detailChartObj = renderHai(canvasID);
-    //         break;
-    //     case "mhrv":
-    //         console.log("inside case:", indicatorName);
-    //         detailChartObj = renderMhrv(canvasID);
-    //         break;
-    //     default:
-    //         console.log("No indicaor matches", indicatorName)
-    // }
-    // return [detailChartObj, indicatorName];
+    // set event listner for range slider
+    slider.noUiSlider.on('change', function (values) {
+        console.log('range slider values:', values);
+        let startIndex = range.indexOf(Math.trunc(values[0]));
+        let endIndex = range.indexOf(Math.trunc(values[1]));
+        updateRange(startIndex, endIndex);
+    });
+
+
+    console.log("end of renderDetailView");
 }
 
-// hiddes/shows data in detailed chart based on checkbox - NOT WORKING
-function changeData(detailChart, labelText, isChecked) {
-    console.log("inside changeData function");
+// updates the chart year/data range based on the range slider
+function updateRange(startIndex, endIndex) {
+    console.log("inside updateRange function");
+    console.log("start/end indexes:", startIndex, endIndex);
 
-    detailChart.data.datasets.array.forEach(dataset => {
+    let backupLabels = JSON.parse(JSON.stringify(window.detailChart.data.labels)); // deep copy
+    window.detailChart.data.labels = backupLabels.slice(startIndex, endIndex + 1);
+
+    let backupData = []
+    window.detailChart.data.datasets.forEach((dataset) => {
+        backupData.push(JSON.parse(JSON.stringify(dataset.data)))
+        dataset.data = dataset.data.slice(startIndex, endIndex + 1);
+    });
+    window.detailChart.update();
+
+    // reset values
+    window.detailChart.data.labels = JSON.parse(JSON.stringify(backupLabels));
+    backupData.reverse();
+    window.detailChart.data.datasets.forEach((dataset) => {
+        dataset.data = JSON.parse(JSON.stringify(backupData.pop()));
+    });
+}
+
+// updates the locations shown in the detailed view based on the checkboxs
+function toggleLocations(labelText, isChecked) {
+    console.log("inside toggleLocations function");
+    window.detailChart.data.datasets.forEach((dataset) => {
         if (dataset.label == labelText) {
             if (isChecked) {
                 console.log("adding data: " + labelText);
@@ -95,27 +136,11 @@ function changeData(detailChart, labelText, isChecked) {
 
         }
     });
-    detailChart.update();
-
-    // var newData = getData(indicatorName, labelText);
-    // var newDataset = {
-    //     data: newData,
-    //     label: labelText
-    // }
-    // if (isChecked) {
-    //     // add data
-    //     console.log("adding data")
-    //     chart.data.datasets.push(newDataset)
-    // }
-    // else {
-    //     // remove data
-    //     console.log("removing data")
-    // }
-    // chart.update()
-
+    window.detailChart.update();
+    slider.noUiSlider.reset();
 }
 
-window.onload = function () {
+window.onload = function () { 
     console.log("inside window.onload fuction!");
 
     // render each indicator chart
@@ -123,15 +148,14 @@ window.onload = function () {
     let lfprChart = new Chart("lfpr", getConfig("lfpr", false));
     let haiChart = new Chart("hai", getConfig("hai", false));
     let mhrvChart = new Chart("mhrv", getConfig("mhrv", false));
-    let detailChart;
-
+    
     // adds event listeners to each card
     var cards = document.getElementsByClassName("card");
     for (var i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", function () {
             // render the detailed view
             let cardId = String(this.id);
-            renderDetailChart(detailChart, cardId.slice(0, -5));
+            renderDetailView(cardId.slice(0, -5));
 
             // display detailed view
             this.classList.toggle("active");
@@ -145,6 +169,27 @@ window.onload = function () {
         });
     }
 
+    // create the short stat percentage for each card
+    const stats = document.getElementsByClassName("stat");
+    for (var i = 0; i < stats.length; i++) {
+        console.log("inside short stat fucntion")
+        let statId = String(cards[i].id);
+        console.log("stat sliced", statId)
+        const spokaneStatData = getData(statId.slice(0, -5), 'Spokane')
+        const yearsData = getData(statId.slice(0, -5), 'years')
+        const dataLen = spokaneStatData.length
+        const endData = spokaneStatData[dataLen - 1]
+        const startData = spokaneStatData[dataLen - 2]
+        const statPercent = (((endData - startData) / startData) * 100).toFixed(1)
+        const endYear = yearsData[dataLen - 1]
+        const startYear = yearsData[dataLen - 2]
+        let incOrDec = 'Increased'
+        if (statPercent < 0) {
+            incOrDec = 'Decreased'
+        }
+        stats[i].innerHTML = incOrDec + " " + String(statPercent) + "% between " + startYear + " and " + endYear
+    }
+
     // add event listeners to checkboxes
     var checkboxes = document.getElementsByClassName("checkboxes");
     for (var i = 0; i < checkboxes.length; i++) {
@@ -152,15 +197,14 @@ window.onload = function () {
             var labelText = document.getElementById(this.id + "-label").textContent;
             if (this.checked) {
                 console.log("Checkbox is checked..");
-                changeData(detailChart, labelText, true);
+                toggleLocations(labelText, true);
 
             } else {
                 console.log("Checkbox is not checked..");
-                changeData(detailChart, labelText, false);
+                toggleLocations(labelText, false);
             }
         })
     }
-
 
 }
 
@@ -179,7 +223,7 @@ function getData(indicatorName, key) {
             "years": ["2017-Q2", "2017-Q3", "2017-Q4", "2018-Q1", "2018-Q2", "2018-Q3", "2018-Q4", "2019-Q1", "2019-Q2",
                 "2019-Q3", "2019-Q4", "2020-Q1", "2020-Q2", "2020-Q3", "2020-Q4", "2021-Q1", "2021-Q2"],
             "Spokane": [120, 119.2, 124.9, 119, 101.2, 100.3, 102.3, 107.8, 101, 107, 107.2, 109, 101, 104.3, 104.7, 100, 91],
-            "Washington": [120, 119.2, 124.9, 119, 101.2, 100.3, 102.3, 107.8, 101, 107, 107.2, 109, 101, 104.3, 104.7, 100, 91],
+            "Washington": [113, 105.2, 116.9, 105, 93.2, 94.3, 96.3, 98.8, 95, 97, 96.2, 99, 94, 94.3, 97.7, 93, 81],
             "Salt Lake City": [123, 115.2, 126.9, 115, 103.2, 104.3, 106.3, 108.8, 105, 107, 106.2, 109, 104, 104.3, 107.7, 103, 91],
             "Boise": [123, 116.2, 123.9, 117, 102.2, 101.3, 107.3, 102.8, 104, 106, 101.2, 108, 100, 103.3, 103.7, 105, 101]
         },
@@ -211,26 +255,15 @@ function getData(indicatorName, key) {
             "Boise": [44583, 48583, 50591, 52078, 53664, 51105, 49374, 50745, 51427, 51736, 52094, 55193, 54467, 56590, 60999]
         },
         "mhrv": {
-            "years": ["2010-Q2", "2010-Q3", "2010-Q4", "2011-Q1", "2011-Q2", "2011-Q3", "2011-Q4", "2012-Q1", "2012-Q2",
-                "2012-Q3", "2012-Q4", "2013-Q1", "2013-Q2", "2013-Q3", "2013-Q4", "2014-Q1", "2014-Q2", "2014-Q3", "2014-Q4",
-                "2015-Q1", "2015-Q2", "2015-Q3", "2015-Q4", "2016-Q1", "2016-Q2", "2016-Q3", "2016-Q4", "2017-Q1", "2017-Q2",
-                "2017-Q3", "2017-Q4", "2018-Q1", "2018-Q2", "2018-Q3", "2018-Q4", "2019-Q1", "2019-Q2", "2019-Q3", "2019-Q4",
+            "years": ["2018-Q1", "2018-Q2", "2018-Q3", "2018-Q4", "2019-Q1", "2019-Q2", "2019-Q3", "2019-Q4",
                 "2020-Q1", "2020-Q2", "2020-Q3", "2020-Q4", "2021-Q1", "2021-Q2"],
-            "Spokane": [171400, 181000, 168500, 162600, 161500, 166800, 158100, 158100, 168100, 175300, 171300, 166300, 174800,
-                181700, 171900, 168000, 178500, 185800, 177600, 180300, 191400, 199400, 191100, 192700, 209500, 204600, 205500,
-                208100, 225100, 225100, 222700, 225100, 253200, 252800, 247400, 255600, 277400, 284200, 276900, 288100, 307100,
+            "Spokane": [225100, 253200, 252800, 247400, 255600, 277400, 284200, 276900, 288100, 307100,
                 330200, 332900, 350900, 393700],
-            "Washington": [246800, 248900, 239000, 228200, 226900, 225300, 217000, 208300, 236000, 243100, 242500, 237600, 251100,
-                263400, 256300, 249300, 270900, 277100, 266900, 270300, 289300, 291900, 292900, 289400, 317500, 305000, 323000,
-                324300, 337700, 363200, 352200, 360200, 373400, 368900, 356100, 374700, 410600, 400700, 396900, 415000, 433400,
+            "Washington": [360200, 373400, 368900, 356100, 374700, 410600, 400700, 396900, 415000, 433400,
                 452900, 460300, 491900, 570800],
-            "Salt Lake City": [171400, 181000, 168500, 162600, 161500, 166800, 158100, 158100, 168100, 175300, 171300, 166300, 174800,
-                181700, 171900, 168000, 178500, 185800, 177600, 180300, 191400, 199400, 191100, 192700, 209500, 204600, 205500,
-                208100, 225100, 225100, 222700, 225100, 253200, 252800, 247400, 255600, 277400, 284200, 276900, 288100, 307100,
+            "Salt Lake City": [225100, 253200, 252800, 247400, 255600, 277400, 284200, 276900, 288100, 307100,
                 330200, 332900, 350900, 393700],
-            "Boise": [246800, 248900, 239000, 228200, 226900, 225300, 217000, 208300, 236000, 243100, 242500, 237600, 251100,
-                263400, 256300, 249300, 270900, 277100, 266900, 270300, 289300, 291900, 292900, 289400, 317500, 305000, 323000,
-                324300, 337700, 363200, 352200, 360200, 373400, 368900, 356100, 374700, 410600, 400700, 396900, 415000, 433400,
+            "Boise": [360200, 373400, 368900, 356100, 374700, 410600, 400700, 396900, 415000, 433400,
                 452900, 460300, 491900, 570800],
         }
     }
@@ -281,24 +314,10 @@ function getConfig(indicatorName, isDetailView) {
                 },
                 plugins: {
                     title: {
-                        display: true,
+                        display: false,
                         text: "Housing Affordability Index (2017 - 2021)"
                     }
                 },
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: false,
-                            labelString: "Housing Affordability Index"
-                        }
-                    }],
-                    xAxes: [{
-                        scaleLabel: {
-                            display: false,
-                            labelString: "Year-Quarter"
-                        }
-                    }]
-                }
             }
         },
         "lfpr": {
@@ -309,19 +328,21 @@ function getConfig(indicatorName, isDetailView) {
                     data: getData("lfpr", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
-                    label: "Spokane County"
+                    label: "Spokane"
                 }, {
                     data: getData("lfpr", "Washington"),
                     borderColor: washingtonColor,
-                    label: "Washington"
+                    label: "Washington",
                 }, {
                     data: getData("lfpr", "Boise"),
                     borderColor: boiseColor,
-                    label: "Boise"
+                    label: "Boise",
+                    hidden: true
                 }, {
                     data: getData("lfpr", "Salt Lake City"),
                     borderColor: saltLakeColor,
-                    label: "Salt Lake City"
+                    label: "Salt Lake City",
+                    hidden: true
                 }]
             },
             options: {
@@ -331,24 +352,10 @@ function getConfig(indicatorName, isDetailView) {
                 },
                 plugins: {
                     title: {
-                        display: true,
+                        display: false,
                         text: "Labor Force Participation Rate (2000 - 2020)"
                     }
                 },
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: false,
-                            labelString: "Labor Force Participation Rate"
-                        }
-                    }],
-                    xAxes: [{
-                        scaleLabel: {
-                            display: false,
-                            labelString: "Years"
-                        }
-                    }]
-                }
             }
         },
         "mhi": {
@@ -386,7 +393,7 @@ function getConfig(indicatorName, isDetailView) {
                 },
                 plugins: {
                     title: {
-                        display: true,
+                        display: false,
                         text: "Median Household Income (2005 - 2019)"
                     }
                 },
@@ -447,7 +454,7 @@ function getConfig(indicatorName, isDetailView) {
                 },
                 plugins: {
                     title: {
-                        display: true,
+                        display: false,
                         text: "Median Home Resale Value"
                     }
                 },

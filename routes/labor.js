@@ -3,6 +3,7 @@ const createLabor = require('../controllers/laborParticipation/createLaborContro
 const getLabor = require('../controllers/laborParticipation/getLaborController');
 const getManyLabor = require('../controllers/laborParticipation/getManyLaborController');
 const deleteLabor = require('../controllers/laborParticipation/deleteLaborController')
+const serialize = require('../serializers/laborSerializer');
 var router = express.Router();
 
 /*  insert new entry into labor document in db   */
@@ -57,8 +58,8 @@ router.post('/v1/newLabor', async(req, res) => {
 /*  get entry from labor document in db */
 router.get('/v1/getLabor', async(req, res) => {
     if (
-        typeof req.body.county === "undefined" ||
-        typeof req.body.year === "undefined"
+        req.query.county === "undefined" ||
+        req.query.year === "undefined"
     ) {
         //  Check that the year parameter exists
         result = {
@@ -70,7 +71,7 @@ router.get('/v1/getLabor', async(req, res) => {
         return;
     }
 
-    var result = await getLabor(req.body.county, req.body.year)
+    var result = await getLabor(req.query.county, req.query.year)
         .catch((err) => {
             var result = {
                 'result': 'Internal error',
@@ -85,33 +86,28 @@ router.get('/v1/getLabor', async(req, res) => {
 })
 
 /* Get all labor documents in year range from the db */
-router.get('/v1/getManyLabor', async(res, req) => {
+router.get('/v1/getManyLabor', async(req, res) => {
     if (
-        typeof req.body.start_year === "undefined" ||
-        typeof req.body.end_year === "undefined"
+        req.query.county === "undefined" ||
+        req.query.start_year === "undefined" ||
+        req.query.end_year === "undefined"
     ) {
         //  Check that the year range parameters exist
-        result = {
-            'result': 'Parameter error',
-            'cor_id': null
-        };
+        res.status(404).json({
+            'result': 'Parameter error'
+        });
 
-        res.status(404).json(result);
         return;
     }
 
-    var result = await getManyLabor(req.body.start_year, req.body.end_year)
-        .catch((err) => {
-            var result = {
-                'result': 'Internal error',
-                'error': err
-            };
-
-            res.status(404).json(result);
+    var result = await getManyLabor(req.query.county, req.query.start_year, req.query.end_year)
+        .catch(() => {
+            res.status(404).json({ 'result': 'Internal error' });
             return;
         });
 
-    res.status(200).json(result);
+    var serializedResult = await serialize(result);
+    res.status(200).json(serializedResult);
 });
 
 router.delete('/v1/deleteLabor', async(req, res) => {
@@ -120,7 +116,7 @@ router.delete('/v1/deleteLabor', async(req, res) => {
             'result': 'Failure',
             'reason': 'Parameter error',
             'corr_id': null
-        }
+        };
 
         res.status(404).json(result);
         return

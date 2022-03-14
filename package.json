@@ -4,7 +4,7 @@
     "private": true,
     "main": "web.js",
     "scripts": {
-        "start": "nodemon ./bin/www",
+        "start": "node ./bin/www",
         "test": "jest --coverage --runInBand --detectOpenHandles"
     },
     "keywords": [
@@ -12,6 +12,7 @@
     ],
     "dependencies": {
         "chart.js": "^3.5.1",
+        "child_process": "^1.0.2",
         "cookie-parser": "~1.4.4",
         "debug": "~2.6.9",
         "dotenv": "^10.0.0",
@@ -24,6 +25,8 @@
         "morgan": "~1.9.1",
         "node-mocks-http": "^1.11.0",
         "pug": "^3.0.2",
+        "querystring": "^0.2.1",
+        "url-search-params": "^1.1.0",
         "vue": "^3.2.29"
     },
     "engines": {

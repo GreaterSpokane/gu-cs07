@@ -29,7 +29,7 @@ module.exports = async function createMedianHousing(
         });
 
         await newHousing.save();
-        return { newId: newHousing._id };
+        return { corr_id: newHousing._id };
     } catch (err) {
         throw err
     }

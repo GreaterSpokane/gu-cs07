@@ -17,7 +17,7 @@ html(lang="en")
           tr
             th HTTP Methods
             th Indicator
-            th Options
+            th Search Options
             th Execute Query
           tr
             td
@@ -35,11 +35,17 @@ html(lang="en")
                 label(for="delete") DELETE (UNSAFE)
             td
               div#indicator-options
-                input(type="radio", name="indicator-selector", id="labor-participation-rate", val="lpr")
+                input(type="radio", name="indicator-selector", id="labor-participation-rate", value="lpr")
                 label(for="labor-participation-rate") Laborforce Participation Rate
                 br
-                input(type="radio", name="indicator-selector", id="median-housing-cost", val="mhc")
+                input(type="radio", name="indicator-selector", id="median-housing-cost", value="mhc")
                 label(for="median-housing-cost") Median Housing Cost
+                br
+                input(type="radio", name="indicator-selector", id="tbd1", value="tbd1")
+                label(for="tbd1") TBD
+                br
+                input(type="radio", name="indicator-selector", id="tbd2", value="tbd2")
+                label(for="tbd2") TBD
             td
               div#query-options
                 label(for="year") Year
@@ -47,6 +53,9 @@ html(lang="en")
                 br
                 label(for="county") County
                 input#county-input(type="text", name="county")
+                br
+                label(for="cid") Correlation ID
+                input#county-input(type="text", name="cid")
                 br
             td 
               button#execute-query GO! 
