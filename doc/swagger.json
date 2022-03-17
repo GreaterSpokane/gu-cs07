@@ -1,0 +1,267 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "REST API",
+        "description": ""
+    },
+    "tags": [{
+            "name": "lfp",
+            "description": "Labor Force Participation Rate"
+        },
+        {
+            "name": "mhi",
+            "description": "Median Household Income"
+        },
+        {
+            "name": "hai",
+            "description": "Housing affordability Index"
+        },
+        {
+            "name": "mhr",
+            "description": "Median Home Resale Value"
+        }
+    ],
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/v1/newMedianHousing": {
+            "post": {
+                "tags": ["mhi"],
+                "description": "",
+                "parameters": [{
+                    "name": "body",
+                    "in": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "county": {
+                                "example": "any"
+                            },
+                            "state": {
+                                "example": "any"
+                            },
+                            "year": {
+                                "example": "any"
+                            },
+                            "med_housing_cost": {
+                                "example": "any"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/getMedianHousing": {
+            "get": {
+                "tags": ["mhi"],
+                "description": "",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/getManyMedianHousing": {
+            "get": {
+                "tags": ["mhi"],
+                "description": "",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/deleteMedianHousing": {
+            "delete": {
+                "tags": ["mhi"],
+                "description": "",
+                "parameters": [{
+                    "name": "body",
+                    "in": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "corr_id": {
+                                "example": "6216ce1c84dd06e487cbfe4d"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/newLabor": {
+            "post": {
+                "tags": ["lfp"],
+                "description": "",
+                "parameters": [{
+                    "name": "body",
+                    "in": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "county": {
+                                "example": "any"
+                            },
+                            "state": {
+                                "example": "any"
+                            },
+                            "year": {
+                                "example": "any"
+                            },
+                            "labor_force": {
+                                "example": "any"
+                            },
+                            "labor_rate": {
+                                "example": "any"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/getLabor": {
+            "get": {
+                "tags": ["lfp"],
+                "description": "",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/getManyLabor": {
+            "get": {
+                "tags": ["lfp"],
+                "description": "",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/deleteLabor": {
+            "delete": {
+                "tags": ["lfp"],
+                "description": "",
+                "parameters": [{
+                    "name": "body",
+                    "in": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "corr_id": {
+                                "example": "any"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    }
+}

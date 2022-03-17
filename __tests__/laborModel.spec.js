@@ -4,7 +4,6 @@ const getLabor = require('../controllers/laborParticipation/getLaborController')
 const getManyLabor = require('../controllers/laborParticipation/getManyLaborController');
 const deleteLabor = require('../controllers/laborParticipation/deleteLaborController');
 const LaborParticipationRate = require('../models/labor');
-const { assert } = require('@vue/compiler-core');
 
 //  Database mock setup
 beforeAll(async() => await db.connect());
