@@ -1,0 +1,8 @@
+DB_USER=cs07
+DB_PASSWORD=gozags2022
+DB_CLUSTER=cs07-spokane-economic-d.0kwrk
+DB_CONFIG=?retryWrites=true&w=majority
+COLLECTION=indicators
+USER_SECRET=f054aa3d6b0db469ae852109383734cb4bb7e3515cb5ebe5567c863568819107
+AUTH_USER=gsi
+AUTH_PASS=gozags2022!
