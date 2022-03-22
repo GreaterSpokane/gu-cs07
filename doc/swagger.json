@@ -1,0 +1,413 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Spokane Economic Dashboard",
+        "description": "Local API for handling interactions between the MongoDB cluster and the Census Bureau API",
+        "version": "0.3.2",
+        "contact": {
+            "email": "zfoteff@protonmail.com",
+            "name": "CS07 Team"
+        }
+    },
+    "tags": [{
+            "name": "lfp",
+            "description": "Labor Force Participation Rate"
+        },
+        {
+            "name": "mhc",
+            "description": "Median Household Cost"
+        },
+        {
+            "name": "hai",
+            "description": "Housing affordability Index"
+        },
+        {
+            "name": "mhr",
+            "description": "Median Home Resale Value"
+        }
+    ],
+    "host": "spokaneeconomicdashboard.herokuapp.com",
+    "basePath": "/v1",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/v1/newMedianHousing": {
+            "post": {
+                "tags": ["mhc"],
+                "summary": "Create new Median Housing indicator data point",
+                "description": "Endpoint interacts with MongoDB to create new data for the Median Housing Cost indicator in its own collection",
+                "operationId": "createMedianHousing",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "description": "County associated with indicator entry",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State associated with indicator entry",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Year associated with indicator entry",
+                        "type": "string"
+                    },
+                    {
+                        "name": "med_housing_cost",
+                        "in": "query",
+                        "description": "Median Housing Cost associated with indicator entry",
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created new Median Housing Cost indicator data successfully",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6216e1c84dd06e487cbfe4d"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error prevents Median Housing Cost indicator data from being created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error",
+                                "corr_id": "null"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getMedianHousing": {
+            "get": {
+                "tags": ["mhc"],
+                "summary": "Retrieve Median Housing Cost indicator data point",
+                "description": "Endpoint interacts with MongoDB to retrieve multiple data points from the Median Housing Cost collection using a county and year as a query",
+                "operationId": "getMedianHousing",
+                "parameters": [{
+                        "name": "county",
+                        "description": "County to query for in MongoDB",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "description": "Year to query for in MongoDB",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Median Housing Cost data found for that county and year",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6237f150b7c9849ab8b60feb",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2022",
+                                "medianHousingCost": 220000
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Median Housing Cost data not found for that county and year",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyMedianHousing": {
+            "get": {
+                "tags": ["mhc"],
+                "summary": "Retrieve multiple Median Housing Cost indicator data points",
+                "description": "Endpoint interacts with MongoDB to retrieve multiple Median Housing Cost entries",
+                "operationId": "getMultipleMedianHousing",
+                "parameters": [{
+                        "name": "county",
+                        "description": "County to query for in MongoDB",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "description": "Year that makes up the start of the year range in the query",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "description": "Year that makes up the end of the year range in the query",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entries we found for that county and the year range",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Labor Force Participation",
+                                "indicator_id": "mhc",
+                                "years": [
+                                    "2021",
+                                    "2022"
+                                ],
+                                "medianHousingCost": [
+                                    15000,
+                                    22000
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Entries we not found for that county and year range, or a internal error prevented the query",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/deleteMedianHousing": {
+            "delete": {
+                "tags": ["mhc"],
+                "summary": "Delete Median Housing Cost data point",
+                "description": "Delete Median Housing Cost entry from the MongoDB collection",
+                "operationId": "deleteMedianHousing",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Successfully deleted entry from the collection",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not find entry to delete, or another internal error interrupted the process",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newLabor": {
+            "post": {
+                "tags": ["lfp"],
+                "summary": "Create new Labor Force Participation Rate indicator entry",
+                "description": "Endpoint interacts with MongoDB to create new data for the Labor Force Participation Rate indicator in its own collection",
+                "operationId": "createLabor",
+                "parameters": [{
+                        "name": "county",
+                        "description": "County associated with indicator entry",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "description": "State associated with indicator entry",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "description": "Year associated with indicator entry",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "labor_force",
+                        "description": "Labor Force count associated with indicator entry",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "labor_participation_rate",
+                        "description": "Labor participation rate associated with indicator entry",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created new Labor Force Labor Force Participation Rate indicator data successfully",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6216e1c84dd06e487cbfe4d"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error prevents Labor Labor Force Participation Rate indicator data from being created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error",
+                                "corr_id": "null"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getLabor": {
+            "get": {
+                "tags": ["lfp"],
+                "summary": "Retrieve Median Housing Cost indicator data point",
+                "description": "Endpoint interacts with MongoDB to retrieve multiple data points from the Median Housing Cost collection using a county and year as a query",
+                "operationId": "getLabor",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entry was found using the county and year",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2020",
+                                "laborForce": 10083,
+                                "laborParticipationRate": 0.675547
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Entry was not found using the county and year, or an internal error prevented the query",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyLabor": {
+            "get": {
+                "tags": ["lfp"],
+                "summary": "Retrieve multiple Labor Force Participation Rate indicator data points",
+                "description": "Endpoint interacts with MongoDB to retrieve multiple Labor Force Participation Rate entries",
+                "operationId": "getManyLabor",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "description": "County to query for",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "description": "Year that makes up the start year of the year range to query for",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "description": "Year that makes up the end year of the year range to query for",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entries we not found for that county and year range",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Labor Force Participation Rate",
+                                "indicator_id": "lpr",
+                                "years": [
+                                    "2020",
+                                    "2019"
+                                ],
+                                "laborForce": [
+                                    10083,
+                                    258483
+                                ],
+                                "laboParticipationRate": [
+                                    0.675547,
+                                    0.615547
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Entries we not found for that county and year range, or a internal error prevented the query",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/deleteLabor": {
+            "delete": {
+                "tags": ["lfp"],
+                "summary": "Delete Labor Force Participation data point",
+                "description": "Use an object's correlation ID to find it in the database, then delete it from the collection",
+                "operationId": "deleteLabor",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "description": "Correlation ID of the object to delete from collection",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Successfully deleted entry from the collection",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not find entry to delete, or another internal error interrupted the process",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

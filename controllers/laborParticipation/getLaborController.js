@@ -2,10 +2,9 @@
  * Single entry retrieval controller for the Laborforce participation rate model
  */
 
-const { ObjectId } = require("mongodb");
 const LaborParticipationRate = require("../../models/labor");
 
-/* Retrieve documents  */
+/* Retrieve documents using county and year as a composite key  */
 module.exports = async function getLabor(county, year) {
     try {
         var data = await LaborParticipationRate.findOne({ county: county, year: year }).exec();
