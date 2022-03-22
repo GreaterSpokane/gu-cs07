@@ -9,10 +9,7 @@ const laborParticipationRateSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    laborForce: {
-        type: Number
-    },
-    laborParticipationRate: {
+    laborforce: {
         type: Number,
         required: true
     },
