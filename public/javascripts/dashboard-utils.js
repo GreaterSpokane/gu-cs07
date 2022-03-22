@@ -48,22 +48,18 @@ function renderDetailView(indicatorName) {
         }
     }
 
-    // TODO use the built in destroy() method for the chart instead of this 
-    var oldDetailedChartElement = document.getElementById('detailed-chart-canvas'); 
-    if (oldDetailedChartElement) {
-        oldDetailedChartElement.remove()
+    if (window.detailChart) {
+        window.detailChart.destroy()
     }
-    var newDetailedChartElement = document.createElement("canvas");
-    newDetailedChartElement.setAttribute("id", "detailed-chart-canvas");
-    document.getElementById('detail-graph-container').appendChild(newDetailedChartElement);
 
-    let detailChartCtx = document.getElementById("detailed-chart-canvas").getContext("2d");
+    const detailChartCtx = document.getElementById("detailed-chart-canvas").getContext("2d");
     window.detailChart = new Chart(detailChartCtx, getConfig(indicatorName, true));
 
     // range slider
-    var slider = document.getElementById('slider');
+    const slider = document.getElementById('slider');
     if (window.rangeSlider) {
-        slider.noUiSlider.destroy()     // needed because cant update start range after created
+        // needed because cant update start range after created
+        slider.noUiSlider.destroy()     
     }
     
     const range = getData(indicatorName, "years");
@@ -84,7 +80,6 @@ function renderDetailView(indicatorName) {
         ]
     });
 
-
     // set event listner for range slider
     slider.noUiSlider.on('change', function (values) {
         console.log('range slider values:', values);
@@ -92,9 +87,6 @@ function renderDetailView(indicatorName) {
         let endIndex = range.indexOf(Math.trunc(values[1]));
         updateRange(startIndex, endIndex);
     });
-
-
-    console.log("end of renderDetailView");
 }
 
 // updates the chart year/data range based on the range slider
