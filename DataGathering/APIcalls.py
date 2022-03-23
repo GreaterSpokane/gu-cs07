@@ -15,8 +15,13 @@ def MedianIncome(year):
     print(data.iat[0,0])
 
 ##Housing Index API
-def housing(year):
+def housing_month(year):
     data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B25105_001E'])
+
+    print(data.iat[0,0])
+
+def housing(year):
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B25077_001E'])
 
     print(data.iat[0,0])
 
@@ -31,7 +36,7 @@ def labor(year):
     lambda row:  row['Civilians In Labor Force']/row['Civilian Population'], 
         axis = 1)
 
-    print([data.iat[0,1], data.iat[0,2]);
+    return data.iat[0,1], data.iat[0,2];
 
 
 #laborbuerau data
@@ -60,10 +65,3 @@ def laborBuerau(year, indicator):
     val = total/12
     data_set = {"Indicator" : "Employment", "source" : "Bureau of Labor Statistics", "year" : year, "value" : val}
     print(data_set)
-
-if sys.argv[1] == 'MedianIncome': MedianIncome(sys.argv[2])
-elif sys.argv[1] == 'Housing': housing(sys.argv[2])
-elif sys.argv[1] == 'LaborForce': labor(sys.argv[2])
-
-
-sys.stdout.flush()
