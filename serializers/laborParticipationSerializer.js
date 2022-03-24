@@ -12,7 +12,6 @@ module.exports = async function serialize(laborData) {
 
     for (var i = laborData.data.length - 1; i >= 0; i--) {
         serializedYears.push(laborData.data[i]._id);
-        serializedLaborForce.push(laborData.data[i].laborForce);
         serializedLaborParticipationRate.push(laborData.data[i].laborParticipationRate);
     }
 
@@ -20,7 +19,6 @@ module.exports = async function serialize(laborData) {
     serializedResult.indicator = 'Labor Force Participation Rate'
     serializedResult.indicator_id = 'lpr'
     serializedResult.years = serializedYears;
-    serializedResult.laborForce = serializedLaborForce;
     serializedResult.laboParticipationRate = serializedLaborParticipationRate;
     return serializedResult;
 }

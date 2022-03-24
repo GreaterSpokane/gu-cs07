@@ -3,9 +3,9 @@
  */
 
 const { ObjectId } = require('bson');
-const LaborParticipationRate = require('../../models/labor');
+const LaborParticipationRate = require('../../models/laborParticipation');
 
-module.exports = async function deleteLabor(corr_id) {
+module.exports = async function deleteLaborParticipation(corr_id) {
     try {
         await LaborParticipationRate.deleteOne({ _id: ObjectId(corr_id) },
             (err, docs) => {

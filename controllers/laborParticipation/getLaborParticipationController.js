@@ -2,10 +2,10 @@
  * Single entry retrieval controller for the Laborforce participation rate model
  */
 
-const LaborParticipationRate = require("../../models/labor");
+const LaborParticipationRate = require("../../models/laborParticipation");
 
 /* Retrieve documents using county and year as a composite key  */
-module.exports = async function getLabor(county, year) {
+module.exports = async function getLaborParticipation(county, year) {
     try {
         var data = await LaborParticipationRate.findOne({ county: county, year: year }).exec();
         if (data == null) throw new Error('Data not found for given county and year');
@@ -14,7 +14,6 @@ module.exports = async function getLabor(county, year) {
             'county': data.county,
             'state': data.state,
             'year': data.year,
-            'laborForce': data.laborForce,
             'laborParticipationRate': data.laborParticipationRate
         }
 

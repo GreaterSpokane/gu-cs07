@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
-const laborParticipationRateSchema = mongoose.Schema({
+const laborForceSchema = mongoose.Schema({
     county: {
+        type: String,
+        required: true,
+    },
+    category: {
         type: String,
         required: true,
     },
@@ -19,5 +23,5 @@ const laborParticipationRateSchema = mongoose.Schema({
     }
 });
 
-var LaborParticipationRate = mongoose.model('LaborParticipationRate', laborParticipationRateSchema, 'laborparticipationrates');
-module.exports = LaborParticipationRate;
+var LaborForce = mongoose.model('LaborForce', laborForceSchema, 'laborforce');
+module.exports = LaborForce;
