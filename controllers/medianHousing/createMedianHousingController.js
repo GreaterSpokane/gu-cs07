@@ -15,10 +15,6 @@ module.exports = async function createMedianHousing(
      */
 
     try {
-        const existingRecord = await MedianHousingCost.findOne({ year: year });
-        if (existingRecord)
-            throw new Error('A entry with that year already exists');
-
         //  Validation steps
 
         const newHousing = new MedianHousingCost({

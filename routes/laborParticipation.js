@@ -6,9 +6,9 @@ const deleteLaborParticipation = require('../controllers/laborParticipation/dele
 const serialize = require('../serializers/laborParticipationSerializer');
 var router = express.Router();
 
-/*  insert new entry into labor document in db   */
-router.post('/v1/newLabor', async(req, res) => {
-    //  Check that body parms exists 
+/*  insert new document into labor participation rate collection in db   */
+router.post('/v1/newLaborParticipation', async(req, res) => {
+    //  Check that query string exists 
     if (
         //  Check that each parameter exists
         typeof req.query.county === "undefined" ||
@@ -17,52 +17,42 @@ router.post('/v1/newLabor', async(req, res) => {
         typeof req.query.labor_participation === "undefined") {
 
         var result = {
-            'result': 'Parameter error',
-            'body': req.body,
-            'corr_id': null
+            'result': 'Failure',
+            'reason': 'Parameter error'
         };
-
         res.status(404).json(result);
         return;
     }
 
-    //  Create new entry in labor force participation rate document
+    //  Create new document in labor participation rate collection
     var entry = await createLaborParticipation(
         req.query.county,
         req.query.state,
         req.query.year,
         req.query.labor_participation
     ).catch((err) => {
-        var result = {
-            'result': 'Internal error',
-            'error': err
-        };
-
+        var result = { 'result': 'Internal Error', 'error': err };
         res.status(404).json(result);
         return;
     });
 
     //  Compile result object with success message and new object's id
-    console.log(entry)
-    console.log(entry.corr_id)
-    var result = {
+    res.status(201).json({
         'result': 'Success',
         'corr_id': entry.corr_id
-    }
-
-    res.status(201).json(result);
+    });
 });
 
-/*  get entry from labor document in db */
-router.get('/v1/getLabor', async(req, res) => {
+/*  get entry from labor participation rate collection in db  */
+router.get('/v1/getLaborParticipation', async(req, res) => {
     if (
         req.query.county === "undefined" ||
         req.query.year === "undefined"
     ) {
         //  Check that the year parameter exists
-        result = {
-            'result': 'Parameter error',
-            'cor_id': null
+        var result = {
+            'result': 'Failure',
+            'reason': 'Parameter error'
         };
 
         res.status(404).json(result);
@@ -84,7 +74,7 @@ router.get('/v1/getLabor', async(req, res) => {
 })
 
 /* Get all labor documents in year range from the db */
-router.get('/v1/getManyLabor', async(req, res) => {
+router.get('/v1/getManyLaborParticipation', async(req, res) => {
     if (
         req.query.county === "undefined" ||
         req.query.start_year === "undefined" ||
@@ -92,14 +82,18 @@ router.get('/v1/getManyLabor', async(req, res) => {
     ) {
         //  Check that the year range parameters exist
         res.status(404).json({
-            'result': 'Parameter error'
+            'result': 'Failure',
+            'reason': 'Parameter error'
         });
         return;
     }
 
     var result = await getManyLaborParticipation(req.query.county, req.query.start_year, req.query.end_year)
         .catch(() => {
-            res.status(404).json({ 'result': 'Internal error' });
+            res.status(404).json({
+                'result': 'Failure',
+                'reason': 'Parameter error'
+            });
             return;
         });
 
@@ -108,28 +102,21 @@ router.get('/v1/getManyLabor', async(req, res) => {
 });
 
 /* Delete labor document by correlation id */
-router.delete('/v1/deleteLabor', async(req, res) => {
+router.delete('/v1/deleteLaborParticipation', async(req, res) => {
     //  Verification
     if (typeof req.body.corr_id === 'undefined') {
         result = {
             'result': 'Failure',
-            'reason': 'Parameter error',
-            'corr_id': null
+            'reason': 'Parameter error'
         };
 
         res.status(404).json(result);
         return
     }
 
-    //  Call endpoint
     var result = await deleteLaborParticipation(req.body.corr_id)
         .catch(() => {
-            var result = {
-                'result': 'Internal error',
-                'corr_id': null
-            };
-
-            res.status(404).json(result);
+            res.status(404).json({ 'result': 'Internal error' });
             return;
         });
 

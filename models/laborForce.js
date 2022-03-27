@@ -5,15 +5,11 @@ const laborForceSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    category: {
-        type: String,
-        required: true,
-    },
     state: {
         type: String,
         required: true
     },
-    laborforce: {
+    laborForce: {
         type: Number,
         required: true
     },

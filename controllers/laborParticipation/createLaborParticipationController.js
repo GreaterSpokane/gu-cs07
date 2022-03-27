@@ -14,17 +14,13 @@ module.exports = async function createLaborParticipation(
      */
 
     try {
-        const existingEntry = await LaborParticipationRate.findOne({ year: year });
-        if (existingEntry) throw new Error('A entry with that year already exists');
-
         //  TODO: Validation steps
-
         const newLabor = new LaborParticipationRate({
             county: county,
             state: state,
             year: year,
             laborParticipationRate: parseFloat(laborParticipationRate),
-        }, );
+        });
 
         await newLabor.save();
         return { corr_id: newLabor._id };
