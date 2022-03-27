@@ -1,10 +1,10 @@
 /**
- * Multiple entry retrieval controller for the Laborforce participation rate model
+ * Multiple entry retrieval controller for the Labor participation model
  */
 
-const LaborParticipationRate = require("../../models/labor");
+const LaborParticipationRate = require("../../models/laborParticipation");
 
-module.exports = async function getManyLabor(county, start_year, end_year) {
+module.exports = async function getManyLaborParticipation(county, start_year, end_year) {
     try {
         var data = await LaborParticipationRate.aggregate()
             .match({
@@ -13,7 +13,6 @@ module.exports = async function getManyLabor(county, start_year, end_year) {
             })
             .group({
                 _id: '$year',
-                laborForce: { $first: '$laborForce' },
                 laborParticipationRate: { $first: '$laborParticipationRate' }
             });
         var result = { 'county': county, 'data': data };
