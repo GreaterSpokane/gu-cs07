@@ -12,6 +12,13 @@ def LaborForce(year):
     response = requests.post('http://0.0.0.0:3000/v1/newLabor', data = {'county': 'Spokane', 'state' : 'WA', 'year' : year, 'labor_force' : force, 'labor_rate' : participation})
     return response
 
+def Rent(year):
+    average_rent = housing_month(year)
+    response = requests.post()
+
+def Income(year):
+    median_income = MedianIncome(year)
+    response = requests.post()
 
 def main():
     return Housing(2011)
