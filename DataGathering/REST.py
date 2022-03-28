@@ -20,6 +20,10 @@ def Income(year):
     median_income = MedianIncome(year)
     response = requests.post()
 
+def Employment(year):
+    employment, unemployment = LaborBuerau_Employment(year)
+    response = requests.post()
+
 def main():
     return Housing(2011)
 
