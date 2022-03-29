@@ -4,21 +4,20 @@
  * front end visualizations
  */
 
-module.exports = async function serialize(laborData) {
+module.exports = async function serialize(laborParticipationData) {
     var serializedResult = {};
     var serializedYears = [];
-    var serializedLaborForce = [];
     var serializedLaborParticipationRate = [];
 
-    for (var i = laborData.data.length - 1; i >= 0; i--) {
-        serializedYears.push(laborData.data[i]._id);
-        serializedLaborParticipationRate.push(laborData.data[i].laborParticipationRate);
+    for (var i = laborParticipationData.data.length - 1; i >= 0; i--) {
+        serializedYears.push(laborParticipationData.data[i]._id);
+        serializedLaborParticipationRate.push(laborParticipationData.data[i].laborParticipationRate);
     }
 
-    serializedResult.county = laborData.county;
+    serializedResult.county = laborParticipationData.county;
     serializedResult.indicator = 'Labor Force Participation Rate'
     serializedResult.indicator_id = 'lpr'
     serializedResult.years = serializedYears;
-    serializedResult.laboParticipationRate = serializedLaborParticipationRate;
+    serializedResult.laborParticipationRate = serializedLaborParticipationRate;
     return serializedResult;
 }
