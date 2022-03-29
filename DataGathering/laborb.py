@@ -1,46 +1,9 @@
-import pandas as pd
-import censusdata
-from tabulate import tabulate
 import requests
-import sys
-import prettytable
-from flask import Flask, request
 import json
+import prettytable
+import math
 
-##Fetches median income in spokane county in 2019
-
-def MedianIncome(year):
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B19013_001E'])
-
-    print(data.iat[0,0])
-
-##Housing Index API
-def housing_month(year):
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B25105_001E'])
-
-    print(data.iat[0,0])
-
-def housing(year):
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B25077_001E'])
-
-    print(data.iat[0,0])
-
-##LaborForce Participation
-def labor(year):
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B23025_001E', 'B23025_002E'])
-
-    column_names = ['Civilian Population', 'Civilians In Labor Force']
-    data.columns = column_names
-
-    data['Laborforce Participation Rate'] = data.apply(
-    lambda row:  row['Civilians In Labor Force']/row['Civilian Population'], 
-        axis = 1)
-
-    return data.iat[0,1], data.iat[0,2];
-
-
-#laborbuerau data
-def laborBuerau_Employment(year):
+def employment(year):
     headers = {'Content-type': 'application/json'}
     employment = json.dumps({"seriesid": ['LAUMT534406000000005'],"startyear":year, "endyear":year})
     unemployment = json.dumps({"seriesid": ['LAUCN530630000000004'],"startyear":year, "endyear":year})
@@ -85,3 +48,15 @@ def laborBuerau_Employment(year):
     val1 = math.floor(employment_total/12)
 
     return val1, val2
+
+
+if __name__ == "__main__":
+    year = input("Enter year to fetch: ")
+    val1, val2 = employment(year)
+    print(val1)
+    print(val2)
+    employment_data_set = {"indicator" : "Employment", "source" : "Bureau of Labor Statistics", "year" : year, "value" : val1}
+    unemployment_data_set = {"indicator" : "Employment", "source" : "Bureau of Labor Statistics", "year" : year, "value" : val2}
+    print(employment_data_set)
+    print(unemployment_data_set)
+
