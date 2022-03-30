@@ -63,7 +63,7 @@ function renderDetailView(indicatorName) {
         slider.noUiSlider.destroy()
     }
 
-    const range = getData(indicatorName, "years");
+    const range = getTempData(indicatorName, "years");
     let startRange = Number(range[0]);
     let endRange = Number(range[range.length - 1]);
     window.rangeSlider = noUiSlider.create(slider, {
@@ -199,8 +199,8 @@ window.onload = function () {
         console.log("inside short stat fucntion")
         let statId = String(cards[i].id);
         console.log("stat sliced", statId)
-        const spokaneStatData = getData(statId.slice(0, -5), 'Spokane')
-        const yearsData = getData(statId.slice(0, -5), 'years')
+        const spokaneStatData = getTempData(statId.slice(0, -5), 'Spokane')
+        const yearsData = getTempData(statId.slice(0, -5), 'years')
         const dataLen = spokaneStatData.length
         const endData = spokaneStatData[dataLen - 1]
         const startData = spokaneStatData[dataLen - 2]
@@ -233,7 +233,7 @@ window.onload = function () {
 }
 
 // returns the temp data for each indicator
-function getData(indicatorName, key) {
+function getTempData(indicatorName, key) {
     const tempdata = {
         "act": {
             "years": [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
@@ -311,22 +311,22 @@ function getConfig(indicatorName, isDetailView) {
         "hai": {
             type: "line",
             data: {
-                labels: getData("hai", "years"),
+                labels: getTempData("hai", "years"),
                 datasets: [{
-                    data: getData("hai", "Spokane"),
+                    data: getTempData("hai", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
                     label: "Spokane",
                 }, {
-                    data: getData("hai", "Washington"),
+                    data: getTempData("hai", "Washington"),
                     borderColor: washingtonColor,
                     label: "Washington",
                 }, {
-                    data: getData("hai", "Boise"),
+                    data: getTempData("hai", "Boise"),
                     borderColor: boiseColor,
                     label: "Boise",
                 }, {
-                    data: getData("hai", "Salt Lake City"),
+                    data: getTempData("hai", "Salt Lake City"),
                     borderColor: saltLakeColor,
                     label: "Salt Lake City",
                 }],
@@ -347,23 +347,23 @@ function getConfig(indicatorName, isDetailView) {
         "lfpr": {
             type: "line",
             data: {
-                labels: getData("lfpr", "years"),
+                labels: getTempData("lfpr", "years"),
                 datasets: [{
-                    data: getData("lfpr", "Spokane"),
+                    data: getTempData("lfpr", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
                     label: "Spokane"
                 }, {
-                    data: getData("lfpr", "Washington"),
+                    data: getTempData("lfpr", "Washington"),
                     borderColor: washingtonColor,
                     label: "Washington",
                 }, {
-                    data: getData("lfpr", "Boise"),
+                    data: getTempData("lfpr", "Boise"),
                     borderColor: boiseColor,
                     label: "Boise",
                     hidden: true
                 }, {
-                    data: getData("lfpr", "Salt Lake City"),
+                    data: getTempData("lfpr", "Salt Lake City"),
                     borderColor: saltLakeColor,
                     label: "Salt Lake City",
                     hidden: true
@@ -385,25 +385,25 @@ function getConfig(indicatorName, isDetailView) {
         "mhi": {
             type: "line",
             data: {
-                labels: getData("mhi", "years"),
+                labels: getTempData("mhi", "years"),
                 datasets: [{
-                    data: getData("mhi", "Spokane"),
+                    data: getTempData("mhi", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
                     label: "Spokane"
                 }, {
-                    data: getData("mhi", "Washington"),
+                    data: getTempData("mhi", "Washington"),
                     borderColor: washingtonColor,
                     label: "Washington",
                     fill: false,
                 }, {
-                    data: getData("mhi", "Boise"),
+                    data: getTempData("mhi", "Boise"),
                     borderColor: boiseColor,
                     label: "Boise",
                     fill: false,
                     hidden: true
                 }, {
-                    data: getData("mhi", "Salt Lake City"),
+                    data: getTempData("mhi", "Salt Lake City"),
                     borderColor: saltLakeColor,
                     label: "Salt Lake City",
                     fill: false,
@@ -451,22 +451,22 @@ function getConfig(indicatorName, isDetailView) {
         "mhrv": {
             type: "line",
             data: {
-                labels: getData("mhrv", "years"),
+                labels: getTempData("mhrv", "years"),
                 datasets: [{
-                    data: getData("mhrv", "Spokane"),
+                    data: getTempData("mhrv", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
                     label: "Spokane County"
                 }, {
-                    data: getData("mhrv", "Washington"),
+                    data: getTempData("mhrv", "Washington"),
                     borderColor: washingtonColor,
                     label: "Washington"
                 }, {
-                    data: getData("mhrv", "Boise"),
+                    data: getTempData("mhrv", "Boise"),
                     borderColor: boiseColor,
                     label: "Boise"
                 }, {
-                    data: getData("mhrv", "Salt Lake City"),
+                    data: getTempData("mhrv", "Salt Lake City"),
                     borderColor: saltLakeColor,
                     label: "Salt Lake City"
                 }]
