@@ -1,3 +1,4 @@
+import indicatorConfig from './indicator-config.js';
 
 // TODO: fix this, it's not working for some reason
 // hides/shows cards based on what category (eg. housing, income) is selected 
@@ -133,6 +134,7 @@ function toggleLocations(labelText, isChecked) {
 }
 
 window.onload = function () { 
+    console.log(indicatorConfig.lfp)
     console.log("inside window.onload fuction!");
 
     // render each indicator chart
@@ -380,13 +382,13 @@ function getConfig(indicatorName, isDetailView) {
             },
             options: {
                 responsive: true,
-                legend: {
-                    display: true
-                },
                 plugins: {
                     title: {
                         display: false,
                         text: "Median Household Income (2005 - 2019)"
+                    },
+                    legend: {
+                        onClick: function() {}
                     }
                 },
                 scales: {
