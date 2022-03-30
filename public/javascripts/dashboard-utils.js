@@ -41,7 +41,7 @@ function renderDetailView(indicatorName) {
     // reset checkbox checks
     var checkboxes = document.getElementsByClassName("checkboxes");
     for (let i = 0; i < checkboxes.length; i++) {
-        var checkboxID = checkboxes[i].id.slice(0,2);
+        var checkboxID = checkboxes[i].id.slice(0, 2);
         if (checkboxID == "sp" || checkboxID == "wa") {
             checkboxes[i].checked = true;
         } else {
@@ -60,9 +60,9 @@ function renderDetailView(indicatorName) {
     const slider = document.getElementById('slider');
     if (window.rangeSlider) {
         // needed because cant update start range after created
-        slider.noUiSlider.destroy()     
+        slider.noUiSlider.destroy()
     }
-    
+
     const range = getData(indicatorName, "years");
     let startRange = Number(range[0]);
     let endRange = Number(range[range.length - 1]);
@@ -76,8 +76,8 @@ function renderDetailView(indicatorName) {
         },
         margin: 1,
         tooltips: [
-            wNumb({decimals: 0}),
-            wNumb({decimals: 0})
+            wNumb({ decimals: 0 }),
+            wNumb({ decimals: 0 })
         ]
     });
 
@@ -133,16 +133,46 @@ function toggleLocations(labelText, isChecked) {
     slider.noUiSlider.reset();
 }
 
-window.onload = function () { 
-    console.log(indicatorConfig.lfp)
+// makes database call for specified indicator and return data
+async function getData(indicatorName, county) {
+    let data = [];
+    let path = "";
+    let schemaDataName = "";
+    const query = `?county=${county}&start_year=${2001}&end_year=${2022}`;    // TODO: validate the county name and maybe use constants for the start/end years
+    switch (indicatorName) {
+        case 'lfp':
+            path = '/v1/getManyLabor/';  // this will be updated to the correct lfp path after merging into dev
+            schemaDataName = 'laborParticipationRate';  // getting this from the labor model instaed may be better
+            break;
+        case 'mhi':
+            path = '/v1/getManyMedianHousing/';
+            schemaDataName = 'medianHousingCost';
+            break;
+        default:
+            console.error(`No matching endpoint for indicator: ${indicatorName}`);
+    }
+    // TODO: error handeling
+    const res = fetch(path + query, {
+        method: 'GET',
+        headers: {},
+        mode: "same-origin"
+    })
+        .then(res => res.json())
+        // .then(body => console.log(body);
+    return res[schemaDataName];
+
+}
+
+window.onload = function () {
     console.log("inside window.onload fuction!");
+
 
     // render each indicator chart
     let maiChart = new Chart("mhi", getConfig("mhi", false));
     let lfprChart = new Chart("lfpr", getConfig("lfpr", false));
     let haiChart = new Chart("hai", getConfig("hai", false));
     let mhrvChart = new Chart("mhrv", getConfig("mhrv", false));
-    
+
     // adds event listeners to each card
     var cards = document.getElementsByClassName("card");
     for (var i = 0; i < cards.length; i++) {
@@ -388,7 +418,7 @@ function getConfig(indicatorName, isDetailView) {
                         text: "Median Household Income (2005 - 2019)"
                     },
                     legend: {
-                        onClick: function() {}
+                        onClick: function () { }
                     }
                 },
                 scales: {
