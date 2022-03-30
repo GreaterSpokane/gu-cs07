@@ -13,8 +13,9 @@ module.exports = async function getManyLaborForce(county, start_year, end_year) 
             })
             .group({
                 _id: '$year',
-                laborForce: { $first: '$laborForce' }
-            });
+                laborForce: { $first: '$laborForce' },
+            })
+            .sort({ _id: -1 });
         var result = { 'county': county, 'data': data };
         return result;
     } catch (err) {
