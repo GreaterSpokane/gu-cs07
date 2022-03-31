@@ -1,9 +1,9 @@
 const express = require('express');
 const createLaborForce = require('../controllers/laborForce/createLaborForceController');
 const getLaborForce = require('../controllers/laborForce/getLaborForceController');
-//const getManyLaborForce = require('../controllers/laborForce/getManyLaborForceController');
+const getManyLaborForce = require('../controllers/laborForce/getManyLaborForceController');
 //const deleteLaborForce = require('../controllers/laborForce/deleteLaborForceController')
-//const serialize = require('../serializers/laborParticipationSerializer');
+const serialize = require('../serializers/laborForceSerializer');
 var router = express.Router();
 
 /*  insert new entry into the labor force collection in the db   */
@@ -84,6 +84,18 @@ router.get('/v1/getManyLaborForce', async(req, res) => {
         res.status(404).json({ 'result': 'Parameter error' });
         return;
     }
+
+    var result = await getManyLaborForce(req.query.county, req.query.start_year, req.query.end_year)
+        .catch(() => {
+            res.status(404).json({
+                'result': 'Failure',
+                'reason': 'Parameter error'
+            });
+            return;
+        });
+
+    var serializedResult = await serialize(result);
+    res.status(200).json(serializedResult);
 });
 
 /*  delete labor document from the collection by correlation id  */
@@ -97,6 +109,8 @@ router.delete('/v1/deleteLaborForce', async(req, res) => {
         res.status(404).json(result);
         return;
     }
+
+    //  TODO: Delete labor force indicator
 })
 
 module.exports = router;

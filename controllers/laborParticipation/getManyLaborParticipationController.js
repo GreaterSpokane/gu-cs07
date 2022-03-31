@@ -14,7 +14,8 @@ module.exports = async function getManyLaborParticipation(county, start_year, en
             .group({
                 _id: '$year',
                 laborParticipationRate: { $first: '$laborParticipationRate' }
-            });
+            })
+            .sort({ _id: -1 });
         var result = { 'county': county, 'data': data };
         return result;
     } catch (err) {
