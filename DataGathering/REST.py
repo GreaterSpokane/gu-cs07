@@ -4,7 +4,7 @@ from APIcalls import *
 
 def Housing(year):
     cost = housing(year)
-    response = requests.post('http://0.0.0.0:3000/v1/newMedianHousing', data = {'county': 'Spokane', 'state' : 'WA', 'med_housing_cost' : cost, 'year' : year})
+    response = requests.post('http://0.0.0.0:3000/v1/newMedianHousing', data = {'county': 'Spokane', 'state' : 'WA', 'year' : year, 'med_housing_cost' : cost})
     return response
 
 def LaborForce(year):

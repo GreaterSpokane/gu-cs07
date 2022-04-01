@@ -16,7 +16,7 @@ router.get('/login', (req, res, next) => {
         req.body.username == process.env.AUTH_USER ||
         req.body.password == process.env.AUTH_PASS
     ) {
-        res.append('result', "0").render('auth');
+        res.append('result', "0").render('auth_layout');
     } else
         res.status(401).json({ "result": 1, "message": "Unknown error" })
 
@@ -24,7 +24,7 @@ router.get('/login', (req, res, next) => {
 
 /* GET auth page */
 router.get('/auth', (req, res, next) => {
-    res.render('login');
+    res.render('auth');
 })
 
 module.exports = router;
