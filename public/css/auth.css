@@ -73,6 +73,24 @@ body {
     height: 90;
 }
 
+#updateButton {
+    background-color: #a3b490;
+    width: 20%;
+    height: 150%;
+}
+
+#button-container {
+    width: 1250px;
+    height: 250px;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    background-color: aliceblue;
+    margin-bottom: 15px;
+    padding: 1%;
+    border: 5px solid #719a45;
+}
+
 .hide {
     visibility: hidden;
     display: none;
