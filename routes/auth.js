@@ -27,4 +27,8 @@ router.get('/auth', (req, res, next) => {
     res.render('auth');
 })
 
+router.get('/button', (req, res, next) => {
+    res.render('button');
+})
+
 module.exports = router;
