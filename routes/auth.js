@@ -1,9 +1,8 @@
 var express = require("express");
 var router = express.Router();
-var AuthUser = require('../models/authUser');
-var createAuthUser = require("../controllers/auth/createAuthUserController");
-var getAuthUser = require("../controllers/auth/getAuthUserController");
 var crypto = require('crypto');
+var createAuthUser = require("../controllers/auth/createAuthUserController");
+var authorizeUser = require("../controllers/auth/authorizeUserController");
 
 /**
  * generates random string of characters i.e salt
@@ -33,7 +32,7 @@ function sha512(password, salt) {
 };
 
 /**
- * salt and hash password with 
+ * salt and hash password with sha512
  * @param {string} password - password to hash
  * @returns {string} - hashed password
  */
@@ -45,33 +44,33 @@ function saltHashPassword(password) {
 
 /* login page api routes*/
 router
-    .get('/login', async(req, res, next) => {
-        res.render('login');
-    })
+    .get('/login', async(req, res, next) => { res.render('login'); })
+    .get('/auth', async(req, res, next) => { res.render('auth.pug'); })
     .post('/login', async(req, res, next) => {
-
-
         //  If password match -> redirect to /auth
         //  else -> display error on login page
-        var saltPass = saltHashPassword(req.body.password);
-        console.log(JSON.stringify(saltPass));
 
+        //  validate body and params (nonnull, type specific)
+        var username = req.body.username;
+        var password = req.body.password;
+        var authResult = await authorizeUser(username, password);
         res.status(201).redirect("/auth");
-
-    })
-    .get('/auth', async(req, res, next) => {
-        res.render('auth.pug');
     })
     .post("/register/user/", async(req, res, next) => {
         if (req.body != null)
             res.err
 
-        const hashedPassword = saltHashPassword(req.body.password);
-        var createResult = createAuthUser(req.body.username, hashedPassword.password, hashedPassword.salt)
-            .catch(() => {
+        var username = req.body.username;
+        var password = req.body.password;
+        console.log(username);
+        console.log(password)
+        var createResult = await createAuthUser(username, password)
+            .catch((err) => {
                 //  Error in creating the user, redirect to the login page
+                console.log(err);
                 res.redirect('/login');
-            })
-    })
+            });
+        res.status(201).json(createResult);
+    });
 
 module.exports = router;

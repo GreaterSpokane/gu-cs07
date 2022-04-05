@@ -10,7 +10,7 @@ const AuthUser = new mongoose.Schema({
         required: true
     },
     salt: {
-        type: Number,
+        type: String,
         required: true
     }
 });
