@@ -54,16 +54,22 @@ router
         var username = req.body.username;
         var password = req.body.password;
         var authResult = await authorizeUser(username, password);
-        res.status(201).redirect("/auth");
+
+        if (authResult.result == "success") {
+            console.log(authResult);
+            res.redirect(301, "/auth");
+        } else {
+            console.log(authResult);
+            res.redirect(401, "/login");
+        }
+
     })
     .post("/register/user/", async(req, res, next) => {
         if (req.body != null)
-            res.err
+            res.redirect(400, '/login')
 
         var username = req.body.username;
         var password = req.body.password;
-        console.log(username);
-        console.log(password)
         var createResult = await createAuthUser(username, password)
             .catch((err) => {
                 //  Error in creating the user, redirect to the login page
