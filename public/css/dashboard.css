@@ -6,9 +6,9 @@
 
 /* Float four columns side by side */
 .column {
-  float: left;
+  /* float: left;
   width: 25%;
-  padding: 0 10px;
+  padding: 0 10px; */
 }
 
 /* Remove extra left and right margins, due to padding in columns */
@@ -19,19 +19,11 @@
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
+  /* content: "";
   display: table;
-  clear: both;
+  clear: both; */
 }
 
-/* Style the counter cards */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  /* this adds the "card" effect */
-  padding: 16px;
-  text-align: center;
-  background-color: #f1f1f1;
-}
 
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
@@ -78,7 +70,6 @@
   border-top: none;
 }
 
-/* CUSTOM CSS */
 #detailed-view-card {
   /* display: none; */
   padding: 0 10px;
@@ -115,4 +106,47 @@
   text-align: center;
 }
 
-/* End Dashboard Specific CSS */
+.indicator-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* Style the counter cards */
+.card {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  /* max-width: 500px; */
+  /* flex: 30%; */
+  flex: 50%;
+  /* max-width: 500px; */
+  margin: 16px;
+  max-width: 600px;
+  min-width: 350px;
+}
+
+.category-flex-container {
+  /* display: none; */
+  padding: 0 10px;
+  /* margin: 5px; */
+  margin-bottom: 16px;
+  /* max-height: 0; */
+  /* overflow: hidden; */
+  /* transition: max-height 0.2s ease-out; */
+  background-color: #f1f1f1;
+  /* border: 1px solid #ccc; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.two-indicator-container {
+  flex: 50%;
+}
+
+

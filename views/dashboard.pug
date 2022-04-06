@@ -23,6 +23,19 @@ block content
             button.tablinks(onclick="filtercards(event, 'other')") Other
         hr
         .dashboard-body
+            #housing.category-flex-container 
+                #hai-card.card
+                    .card-header
+                        h3 Housing Affordability Index
+                        p#hai-stat.stat Short metric about indicator performance
+                    .chart-container
+                        canvas#hai
+                #mhi-card.card
+                    .card-header
+                        h3 Median Household Income
+                        p#mhi-stat.stat Increased between 2018 and 2019.
+                    .chart-container
+                        canvas#mhi
             #detailed-view-card
                 .detailed-view-half
                     p
@@ -59,34 +72,29 @@ block content
                     canvas#detailed-chart-canvas
                     br
             .indicator-container
-                #row1.row
-                    .column
-                        #mhi-card.card.all.income
-                            .card-header
-                                h3 Median Household Income
-                                p#mhi-stat.stat Increased between 2018 and 2019.
-                            .card-body
-                                canvas#mhi
-                            .card-footer
-                    .column
-                        #lfpr-card.card.all.employment
-                            .card-header
-                                h3 Labor Force Participation Rate
-                                p#lfpr-stat.stat Short metric about indicator performance
-                            .card-body
-                                canvas#lfpr
-                    .column
-                        #hai-card.card.all.housing
-                            .card-header
-                                h3 Housing Affordability Index
-                                p#hai-stat.stat Short metric about indicator performance
-                            .card-body
-                                canvas#hai
-                    .column
-                        #mhrv-card.card.all.housing
-                            .card-header
-                                h3 Median Home Resale Value
-                                p#mhrv-stat.stat Short metric about indicator performance
-                            .card-body
-                                canvas#mhrv
+                //- #mhi-card.card.all.income
+                //-     .card-header
+                //-         h3 Median Household Income
+                //-         p#mhi-stat.stat Increased between 2018 and 2019.
+                //-     .card-body
+                //-         canvas#mhi
+                //-     .card-footer
+                #lfpr-card.card.all.employment
+                    .card-header
+                        h3 Labor Force Participation Rate
+                        p#lfpr-stat.stat Short metric about indicator performance
+                    .card-body
+                        canvas#lfpr
+                //- #hai-card.card.all.housing
+                //-     .card-header
+                //-         h3 Housing Affordability Index
+                //-         p#hai-stat.stat Short metric about indicator performance
+                //-     .card-body
+                //-         canvas#hai
+                #mhrv-card.card.all.housing
+                    .card-header
+                        h3 Median Home Resale Value
+                        p#mhrv-stat.stat Short metric about indicator performance
+                    .card-body
+                        canvas#mhrv
 
