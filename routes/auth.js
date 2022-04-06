@@ -62,7 +62,6 @@ router
             console.log(authResult);
             res.redirect(401, "/login");
         }
-
     })
     .post("/register/user/", async(req, res, next) => {
         if (req.body != null)

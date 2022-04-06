@@ -53,31 +53,32 @@ module.exports = async function createAuthUser(username, password) {
         //  No address sign, cannot sign up user without an email domain
         return {
             'result': "failed to register user",
-            'reason': "User domain does not match host domain",
+            'reason': "domain does not match allowed domains",
             'username': username
         };
     }
 
     //  TODO: Check that email is a real email
     var userDomain = username.substring(addressSignIdx + 1);
-    console.log("User domain " + userDomain);
     if (userDomain !== process.env.GSI_DOMAIN && userDomain !== process.env.DEV_DOMAIN)
         return {
             'result': "failed to register user",
-            'reason': "username not in allowed domain",
+            'reason': "domain does not match allowed domains",
             'username': username
         };
 
     var hashPass = saltHashPassword(password);
     var hashedPassword = hashPass.passwordHash;
     var salt = hashPass.salt;
-    console.log(hashedPassword)
-    console.log(salt)
     const newUser = new AuthUser({
         username: username,
         password: hashedPassword,
         salt: salt
-    })
+    });
+
     await newUser.save();
-    return { 'result': "registered user", "username": username }
+    return {
+        'result': "registered user",
+        "username": username
+    }
 }
