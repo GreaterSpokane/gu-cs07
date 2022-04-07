@@ -90,8 +90,8 @@
 }
 
 .active, .card:hover {
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
-  cursor: pointer;
+  /* box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer; */
 }
 
 
@@ -116,37 +116,58 @@
 .card {
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   /* this adds the "card" effect */
-  padding: 16px;
+  padding: 0px 16px 6px 16px;
   text-align: center;
   background-color: #f1f1f1;
   /* max-width: 500px; */
   /* flex: 30%; */
   flex: 50%;
   /* max-width: 500px; */
-  margin: 16px;
+  margin: 0px 16px;
   max-width: 600px;
   min-width: 350px;
 }
 
 .category-flex-container {
   /* display: none; */
-  padding: 0 10px;
   /* margin: 5px; */
-  margin-bottom: 16px;
   /* max-height: 0; */
   /* overflow: hidden; */
   /* transition: max-height 0.2s ease-out; */
-  background-color: #f1f1f1;
   /* border: 1px solid #ccc; */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   
 }
 
-.two-indicator-container {
-  flex: 50%;
+.category {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f1f1f1;
+  margin-bottom: 16px;
+  padding: 10px;
+  text-align: center;
 }
 
+.category>h2 {
+  margin-bottom: 0px;
+  margin-top: 6px;
+  color: #2f2f2e;
+}
 
+.slider {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.non-line {
+  padding: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.unstyled-button {
+  /* border: none;
+  padding: 0;
+  background: none; */
+}

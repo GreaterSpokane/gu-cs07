@@ -15,86 +15,166 @@ block page-name
     h1 Economic Indicator Dashboard
 block content
     .dashboard
-        .tab
-            button.tablinks.active(onclick="filtercards(event, 'all')") All
-            button.tablinks(onclick="filtercards(event, 'income')") Income
-            button.tablinks(onclick="filtercards(event, 'employment')") Employment
-            button.tablinks(onclick="filtercards(event, 'housing')") Housing
-            button.tablinks(onclick="filtercards(event, 'other')") Other
-        hr
+        //- .tab
+        //-     button.tablinks.active(onclick="filtercards(event, 'all')") All
+        //-     button.tablinks(onclick="filtercards(event, 'income')") Income
+        //-     button.tablinks(onclick="filtercards(event, 'employment')") Employment
+        //-     button.tablinks(onclick="filtercards(event, 'housing')") Housing
+        //-     button.tablinks(onclick="filtercards(event, 'other')") Other
+        //- hr
         .dashboard-body
-            #housing.category-flex-container 
-                #hai-card.card
-                    .card-header
-                        h3 Housing Affordability Index
-                        p#hai-stat.stat Short metric about indicator performance
-                    .chart-container
-                        canvas#hai
-                #mhi-card.card
-                    .card-header
-                        h3 Median Household Income
-                        p#mhi-stat.stat Increased between 2018 and 2019.
-                    .chart-container
-                        canvas#mhi
-            #detailed-view-card
-                .detailed-view-half
-                    p
-                        b Description about the indicator
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing
-                        | elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                        | veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    p
-                        b Notes about the data source
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        span#link 
-                            a(href="https://data.census.gov/cedsci/" style="color:blue;") Data source
-                    p
-                        b Compare data
-                    .compare-data-checkboxes
-                        input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
-                        label#spokane-checkbox-label(for="spokane-checkbox") Spokane
-                        input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
-                        label#wa-checkbox-label(for="wa-checkbox") Washington
-                        input#boise-checkbox.checkboxes(type="checkbox" name="boise-checkbox")
-                        label#boise-checkbox-label(for="boise-checkbox") Boise
-                        input#saltlake-checkbox.checkboxes(type="checkbox" name="saltlake-checkbox")
-                        label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
-                    p
-                        b Time Range
-                    .range-slider
-                        br 
-                        br                            
-                        #slider
-                    p 
-                    br
-                .detailed-view-half#detail-graph-container
-                    canvas#detailed-chart-canvas
-                    br
-            .indicator-container
-                //- #mhi-card.card.all.income
-                //-     .card-header
-                //-         h3 Median Household Income
-                //-         p#mhi-stat.stat Increased between 2018 and 2019.
-                //-     .card-body
-                //-         canvas#mhi
-                //-     .card-footer
-                #lfpr-card.card.all.employment
-                    .card-header
-                        h3 Labor Force Participation Rate
-                        p#lfpr-stat.stat Short metric about indicator performance
-                    .card-body
-                        canvas#lfpr
-                //- #hai-card.card.all.housing
-                //-     .card-header
-                //-         h3 Housing Affordability Index
-                //-         p#hai-stat.stat Short metric about indicator performance
-                //-     .card-body
-                //-         canvas#hai
-                #mhrv-card.card.all.housing
-                    .card-header
-                        h3 Median Home Resale Value
-                        p#mhrv-stat.stat Short metric about indicator performance
-                    .card-body
-                        canvas#mhrv
+            #housing
+                .category
+                    h2 Housing
+                    .category-flex-container 
+                        #mhi-card.card
+                            .card-header
+                                h3 Median Housing Cost
+                                p#mhi-stat.stat Increased between 2018 and 2019.
+                            .chart-container
+                                canvas#mhi
+                            .more-info-button
+                                button.unstyled-button(onclick="toggleDetailView(event, 'mhc')") More info
+                        #hai-card.card
+                            .card-header
+                                h3 Housing Affordability Index
+                                p#hai-stat.stat Short metric about indicator performance
+                            .chart-container
+                                canvas#hai
+                            .more-info-button
+                                button.unstyled-button(onclick="toggleDetailView(event, 'hai')") More info
+                #detailed-view-card
+                    .detailed-view-half
+                        p
+                            b Description about the indicator
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing
+                            | elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                            | veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+                        p
+                            b Notes about the data source
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            span#link 
+                                a(href="https://data.census.gov/cedsci/" style="color:blue;") Data source
+                        p
+                            b Compare data
+                        .compare-data-checkboxes
+                            input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
+                            label#spokane-checkbox-label(for="spokane-checkbox") Spokane
+                            //- input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
+                            //- label#wa-checkbox-label(for="wa-checkbox") Washington
+                            input#boise-checkbox.checkboxes(type="checkbox" name="boise-checkbox")
+                            label#boise-checkbox-label(for="boise-checkbox") Boise
+                            input#saltlake-checkbox.checkboxes(type="checkbox" name="saltlake-checkbox")
+                            label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
+                            input#eugene-checkbox.checkboxes(type="checkbox" name="eugene-checkbox")
+                            label#eugene-checkbox-label(for="eugene-checkbox") Eugene
+                            input#fortcollins-checkbox.checkboxes(type="checkbox" name="fortcollins-checkbox")
+                            label#fortcollins-checkbox-label(for="fortcollins-checkbox") Fort Collins
+                        p
+                            b Time Range
+                        .range-slider
+                            br 
+                            br                            
+                            #slider
+                        p 
+                        br
+                    .detailed-view-half#detail-graph-container
+                        canvas#detailed-chart-canvas
+                        br
+            #labor
+                .category
+                    h2 Labor Force
+                    .category-flex-container 
+                        #lft-card.card
+                            .card-header
+                                h3 Labor Force Total
+                                p#lft-stat.stat Short metric about indicator performance
+                            .chart-container
+                                canvas#lft
+                            .more-info-button
+                                button.unstyled-button(onclick="toggleDetailView(event, 'lft')") More info
+                        #lfs-card.card.non-line
+                            .card-header
+                                //- h3 Labor Force 
+                                //- p#lfs-stat.stat Increased between 2018 and 2019.
+                            .chart-container
+                                canvas#lfs
+                            .more-info-button
+                                //- button(onclick="toggleDetailView(event, 'lfs')") More info
+                        #lfp-card.card
+                            .card-header
+                                h3 Labor Force Participation Rate
+                                p#lfp-stat.stat Increased between 2018 and 2019.
+                            .chart-container
+                                canvas#lfp
+                            .more-info-button
+                                button.unstyled-button(onclick="toggleDetailView(event, 'lfp')") More info
+                        
+                //- .detailed-view-card
+                //-     .detailed-view-half
+                //-         p
+                //-             b Description about the indicator
+                //-             | Lorem ipsum dolor sit amet, consectetur adipiscing
+                //-             | elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                //-             | veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+                //-         p
+                //-             b Notes about the data source
+                //-             | Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                //-             | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                //-             span#link 
+                //-                 a(href="https://data.census.gov/cedsci/" style="color:blue;") Data source
+                //-         p
+                //-             b Compare data
+                //-         .compare-data-checkboxes
+                    //-         input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
+                    //-         label#spokane-checkbox-label(for="spokane-checkbox") Spokane
+                    //-         input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
+                    //-         label#wa-checkbox-label(for="wa-checkbox") Washington
+                    //-         input#boise-checkbox.checkboxes(type="checkbox" name="boise-checkbox")
+                    //-         label#boise-checkbox-label(for="boise-checkbox") Boise
+                    //-         input#saltlake-checkbox.checkboxes(type="checkbox" name="saltlake-checkbox")
+                    //-         label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
+                    //-         input#eugene-checkbox.checkboxes(type="checkbox" name="eugene-checkbox")
+                    //-         label#eugene-checkbox-label(for="eugene-checkbox") Eugene
+                    //-         input#fortcollins-checkbox.checkboxes(type="checkbox" name="fortcollins-checkbox")
+                    //-         label#fortcollins-checkbox-label(for="fortcollins-checkbox") Fort Collins
+                            
+                    //-     p
+                    //-         b Time Range
+                    //-     .range-slider
+                    //-         br 
+                    //-         br                            
+                    //-         #slider
+                    //-     p 
+                    //-     br
+                    //- .detailed-view-half#detail-graph-container
+                    //-     canvas#detailed-chart-canvas1
+                    //-     br
+            //- .indicator-container
+            //-     //- #mhi-card.card.all.income
+            //-     //-     .card-header
+            //-     //-         h3 Median Household Income
+            //-     //-         p#mhi-stat.stat Increased between 2018 and 2019.
+            //-     //-     .card-body
+            //-     //-         canvas#mhi
+            //-     //-     .card-footer
+            //-     #lfpr-card.card.all.employment
+            //-         .card-header
+            //-             h3 Labor Force Participation Rate
+            //-             p#lfpr-stat.stat Short metric about indicator performance
+            //-         .card-body
+            //-             canvas#lfpr
+            //-     //- #hai-card.card.all.housing
+            //-     //-     .card-header
+            //-     //-         h3 Housing Affordability Index
+            //-     //-         p#hai-stat.stat Short metric about indicator performance
+            //-     //-     .card-body
+            //-     //-         canvas#hai
+            //-     #mhrv-card.card.all.housing
+            //-         .card-header
+            //-             h3 Median Home Resale Value
+            //-             p#mhrv-stat.stat Short metric about indicator performance
+            //-         .card-body
+            //-             canvas#mhrv
 
