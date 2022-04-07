@@ -11,7 +11,7 @@ beforeAll(async() => await db.connect());
 afterEach(async() => await db.clearDatabase());
 afterAll(async() => await db.closeDatabase());
 
-describe('Housing affordability index datbase model tests', () => {
+describe('Housing affordability index database model tests', () => {
     const DATA = {
         'county': 'Spokane',
         'state': 'WA',
@@ -93,10 +93,10 @@ describe('Housing affordability index datbase model tests', () => {
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.medianHousingCost
+            DATA.housingAffordabilityIndex
         );
         //  Find new entry in DB with get controller
-        const found = await getMedianHousing(DATA.county, DATA.year);
+        const found = await getHousingAffordability(DATA.county, DATA.year);
         expect(found.county).toEqual(DATA.county);
         expect(found.state).toEqual(DATA.state);
         expect(found.year).toEqual(DATA.year);
@@ -104,7 +104,7 @@ describe('Housing affordability index datbase model tests', () => {
     });
 
     it('should return true if a mass retrieval call to an empty database returns an empty dataset', async() => {
-        const found_data = await getManyHousingAffordability(MASS_DATA_COUNTY, '2001', '2003');
+        const found_data = await getManyHousingAffordability(MASS_DATA_COUNTY, YEAR_1, YEAR_3);
         expect(found_data.data).toEqual([]);
     });
 
@@ -119,7 +119,7 @@ describe('Housing affordability index datbase model tests', () => {
             );
         }
 
-        const found_data = await getManyMedianHousing(MASS_DATA_COUNTY, '2001', '2003');
+        const found_data = await getManyHousingAffordability(MASS_DATA_COUNTY, YEAR_1, YEAR_3);
         expect(found_data.data).not.toEqual([]);
     });
 
@@ -134,7 +134,7 @@ describe('Housing affordability index datbase model tests', () => {
             );
         }
 
-        const found_data = await getHousingAffordability(MASS_DATA_COUNTY, '2001', '2002');
+        const found_data = await getManyHousingAffordability(MASS_DATA_COUNTY, YEAR_1, YEAR_2);
         expect(found_data.data.length).toEqual(2);
     });
 

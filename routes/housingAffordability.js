@@ -89,10 +89,10 @@ router.get('/v1/getManyHousingAffordability', async(req, res) => {
     }
 
     var result = await getManyHousingAffordability(req.query.county, req.query.start_year, req.query.end_year)
-        .catch(() => {
+        .catch((err) => {
             res.status(404).json({
-                'result': 'Failure',
-                'reason': 'Parameter error'
+                'result': 'Internal error',
+                'error': err
             });
             return;
         });
