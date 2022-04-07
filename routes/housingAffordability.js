@@ -104,7 +104,7 @@ router.get('/v1/getManyHousingAffordability', async(req, res) => {
 /* Delete housing affordability index document by correlation id */
 router.delete('/v1/deleteHousingAffordability', async(req, res) => {
     //  Verification
-    if (typeof req.body.corr_id === 'undefined') {
+    if (typeof req.query.corr_id === 'undefined') {
         result = {
             'result': 'Failure',
             'reason': 'Parameter error'
@@ -114,7 +114,7 @@ router.delete('/v1/deleteHousingAffordability', async(req, res) => {
         return
     }
 
-    var result = await deleteHousingAffordability(req.body.corr_id)
+    var result = await deleteHousingAffordability(req.query.corr_id)
         .catch(() => {
             res.status(404).json({ 'result': 'Internal error' });
             return;
