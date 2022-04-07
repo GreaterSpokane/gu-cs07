@@ -85,10 +85,14 @@ describe('Authorize user tests', () => {
     };
 
     it('should assert that a registered user is returned a success message', async() => {
-
+        const createResult = await createAuthUser(AUTHORIZED_USER.username, AUTHORIZED_USER.unhashedPassword);
+        const authResult = await authorizeUser(AUTHORIZED_USER.username, AUTHORIZED_USER.unhashedPassword);
+        expect(authResult.result).toEqual("success");
     });
 
-    it('should assert that an unregistered user is returned a failure message', au)
+    it('should assert that an unregistered user is returned a failure message', async() => {
+        const authResult = await authorizeUser(UNAUTHORIZED_USER.username, UNAUTHORIZED_USER.unhashedPassword)
+    })
 
     it('should assert that a registered user can be successfully authorized and redirected to the auth page', async() => {
 
