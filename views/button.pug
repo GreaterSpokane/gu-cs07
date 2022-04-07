@@ -1,0 +1,14 @@
+extends auth_layout.pug
+block page-title
+  title Spokane Ecomomic Dashboard | Authorized User Page
+block style-sheet
+  link(rel='stylesheet' type="text/css" href="css/auth.css")
+  link(rel='stylesheet', type="text/css", href='../css/style.css')
+block scripts
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+  script(src="javascripts/auth.js")
+block content
+    div#button-container
+        h2 Press to Update Data
+        h3#updateStatus Data is ready to update
+        button#updateButton UPDATE

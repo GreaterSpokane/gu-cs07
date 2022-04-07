@@ -1,64 +1,55 @@
-doctype doctype html
-html(lang="en")
-    head
-      title Spokane Ecomomic Dashboard | Authorized User Page
-      meta(name="description", content="Admin authorization page for economic indicator site")
-      meta(charset="UTF-8")
-      meta(name="viewport" content="width=device-width, initial-scale=1.0")
-      link(rel='stylesheet' type="text/css" href="css/auth.css")
-      link(rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon")
-      script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
-      script(src="javascripts/auth.js")
-    body
-      div#options-container
-        a(href="index") Go Back To Home Page 
-        h1 Options
-        table#http-endpoint-interactions
-          tr
-            th HTTP Methods
-            th Indicator
-            th Search Options
-            th Execute Query
-          tr
-            td
-              div#http-method-options
-                input(type="radio", name="http-method-selector", id="get-single", value="get-single")
-                label(for="get-single") GET (single)
-                br
-                input(type="radio", name="http-method-selector", id="get-multiple", value="get-multiple")
-                label(for="get-multiple") GET (multiple)
-                br
-                input(type="radio", name="http-method-selector", id="post", value="post")
-                label(for="post") POST
-                br
-                input(type="radio", name="http-method-selector", id="delete", value="delete")
-                label(for="delete") DELETE (UNSAFE)
-            td
-              div#indicator-options
-                input(type="radio", name="indicator-selector", id="labor-participation-rate", value="lpr")
-                label(for="labor-participation-rate") Laborforce Participation Rate
-                br
-                input(type="radio", name="indicator-selector", id="median-housing-cost", value="mhc")
-                label(for="median-housing-cost") Median Housing Cost
-                br
-                input(type="radio", name="indicator-selector", id="tbd1", value="tbd1")
-                label(for="tbd1") TBD
-                br
-                input(type="radio", name="indicator-selector", id="tbd2", value="tbd2")
-                label(for="tbd2") TBD
-            td
-              div#query-options
-                label(for="year") Year
-                input#year-input(type="number", name="year")
-                br
-                label(for="county") County
-                input#county-input(type="text", name="county")
-                br
-                label(for="cid") Correlation ID
-                input#county-input(type="text", name="cid")
-                br
-            td 
-              button#execute-query GO! 
-      div#output-container
-        h1 Output
-        textarea#response-window(readonly) 
+extends auth_layout.pug
+block page-title
+  title Spokane Ecomomic Dashboard | Authorized User Page
+block style-sheet
+  link(rel='stylesheet' type="text/css" href="css/auth.css")
+  link(rel='stylesheet', type="text/css", href='../css/style.css')
+block scripts
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+  script(src="javascripts/auth.js")
+block content
+  div#options-container
+    h1 Options
+    table#http-endpoint-interactions
+      td
+        div#http-method-options
+          input(type="radio", name="http-method-selector", id="get-single", value="get-single")
+          label(for="get-single") GET (single)
+          br
+          input(type="radio", name="http-method-selector", id="get-multiple", value="get-multiple")
+          label(for="get-multiple") GET (multiple)
+          br
+          input(type="radio", name="http-method-selector", id="post", value="post")
+          label(for="post") POST
+          br
+          input(type="radio", name="http-method-selector", id="delete", value="delete")
+          label(for="delete") DELETE (UNSAFE)
+      td
+        div#indicator-options
+          input(type="radio", name="indicator-selector", id="labor-participation-rate", value="lpr")
+          label(for="labor-participation-rate") Laborforce Participation Rate
+          br
+          input(type="radio", name="indicator-selector", id="median-housing-cost", value="mhc")
+          label(for="median-housing-cost") Median Housing Cost
+          br
+          input(type="radio", name="indicator-selector", id="tbd1", value="tbd1")
+          label(for="tbd1") TBD
+          br
+          input(type="radio", name="indicator-selector", id="tbd2", value="tbd2")
+          label(for="tbd2") TBD
+      td
+        div#query-options
+          label(for="year") Year
+          input#year-input(type="number", name="year")
+          br
+          label(for="county") County
+          input#county-input(type="text", name="county")
+          br
+          label(for="cid") Correlation ID
+          input#county-input(type="text", name="cid")
+          br
+      td 
+        button#execute-query GO! 
+  div#output-container
+    h1 Output
+    textarea#response-window(readonly) 
