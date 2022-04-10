@@ -68,38 +68,32 @@ describe('Laborforce Participation Rate database model tests', () => {
         expect(doc.county).toEqual(DATA.county);
         expect(doc.state).toEqual(DATA.state);
         expect(doc.year).toEqual(DATA.year);
-        expect(doc.laborForce).toEqual(DATA.laborForce);
-        expect(doc.laborParticipationRate).toEqual(DATA.laborParticipationRate);
+    });
+
+    it('should return true if newly created object is successfully retrieved from the database', async() => {
+        const inserted = await createNaturalChange(
+            DATA.county,
+            DATA.state,
+            DATA.year,
+            DATA.naturalChange
+        );
+        //  Find new entry in DB with get controller
+        const found = await getNaturalChange(DATA.county, DATA.year);
+        expect(found.corr_id).toEqual(inserted.corr_id);
     });
     /*
-        it('should return true if newly created object is successfully retrieved from the database', async() => {
-            const inserted = await createNaturalChange(
-                DATA.county,
-                DATA.state,
-                DATA.year,
-                DATA.laborForce,
-                DATA.laborParticipationRate
-            );
-            //  Find new entry in DB with get controller
-            const found = await getNaturalChange(DATA.county, DATA.year);
-            expect(found.corr_id).toEqual(inserted.corr_id);
-        });
-
         it('should return true if newly created objects\' data matches the inserted objects\' data', async() => {
             const inserted = await createNaturalChange(
                 DATA.county,
                 DATA.state,
                 DATA.year,
-                DATA.laborForce,
-                DATA.laborParticipationRate
+                DATA.naturalChange
             );
             //  Find new entry in DB with get controller
             const found = await getNaturalChange(DATA.county, DATA.year);
             expect(found.county).toEqual(DATA.county);
             expect(found.state).toEqual(DATA.state);
             expect(found.year).toEqual(DATA.year);
-            expect(found.laborForce).toEqual(DATA.laborForce);
-            expect(found.laborParticipationRate).toEqual(DATA.laborParticipationRate);
         });
 
         it('should return true if a mass retrieval call to an empty database returns an empty dataset', async() => {
@@ -114,8 +108,7 @@ describe('Laborforce Participation Rate database model tests', () => {
                     encoded_data.county,
                     encoded_data.state,
                     encoded_data.year,
-                    encoded_data.laborForce,
-                    encoded_data.laborParticipationRate
+                    encoded_data.naturalData
                 );
             }
 
@@ -130,8 +123,7 @@ describe('Laborforce Participation Rate database model tests', () => {
                     encoded_data.county,
                     encoded_data.state,
                     encoded_data.year,
-                    encoded_data.laborForce,
-                    encoded_data.laborParticipationRate
+                    encoded_data.naturalChange
                 );
             }
 
@@ -151,7 +143,6 @@ describe('Laborforce Participation Rate database model tests', () => {
                 DATA.state,
                 DATA.year,
                 Math.random(),
-                Math.random()
             );
             //  Find new entry in DB with get controller
             const found = await getLabor(DATA.county, DATA.year);
