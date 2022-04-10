@@ -19,7 +19,7 @@
         },
         {
             "name": "hai",
-            "description": "Housing affordability Index"
+            "description": "Housing Affordability Index"
         },
         {
             "name": "mhr",
@@ -194,6 +194,189 @@
                     "name": "corr_id",
                     "in": "query",
                     "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Successfully deleted entry from the collection",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not find entry to delete, or another internal error interrupted the process",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newHousingAffordability": {
+            "post": {
+                "tags": ["hai"],
+                "summary": "Create new Housing Affordability Index data point",
+                "description": "Endpoint interacts with MongoDB to create new data for the Housing Affordability Index indicator in its own collection",
+                "operationId": "createHousingAffordability",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "description": "County associated with indicator entry",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State associated with indicator entry",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Year associated with indicator entry",
+                        "type": "string"
+                    },
+                    {
+                        "name": "housing_affordability",
+                        "in": "query",
+                        "description": "Housing Affordability Index associated with indicator entry",
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created new Housing Affordability Index indicator data successfully",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6216e1c84dd06e487cbfe4d"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error prevents Housing Affordability Index indicator data from being created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error",
+                                "error": "<Error message>"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getHousingAffordability": {
+            "get": {
+                "tags": ["hai"],
+                "summary": "Retrieve Housing Affordability Index indicator data point",
+                "description": "Endpoint interacts with MongoDB to retrieve multiple data points from the Housing Affordability Index collection using a county and year as a query",
+                "operationId": "getHousingAffordability",
+                "parameters": [{
+                        "name": "county",
+                        "description": "County to query for in MongoDB",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "description": "Year to query for in MongoDB",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Housing Affordability Index data found for that county and year",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6237f150b7c9849ab8b60feb",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2022",
+                                "housingAffordabilityIndex": 120.2
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Housing Affordability Index data not found for that county and year",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error",
+                                "error": "<Error message>"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyHousingAffordability": {
+            "get": {
+                "tags": ["hai"],
+                "summary": "Retrieve multiple Housing Affordability Index indicator data points",
+                "description": "Endpoint interacts with MongoDB to retrieve multiple Housing Affordability Index entries",
+                "operationId": "getManyHousingAffordability",
+                "parameters": [{
+                        "name": "county",
+                        "description": "County to query for in MongoDB",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "description": "Year that makes up the start of the year range in the query",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "description": "Year that makes up the end of the year range in the query",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entries found for that county and the year range",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Housing Affordability Index",
+                                "indicator_id": "hai",
+                                "years": [
+                                    "2021",
+                                    "2022"
+                                ],
+                                "housingAffordabilityIndex": [
+                                    130.5,
+                                    110.0
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Entries were not found for that county and year range, or a internal error prevented the query",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal Error",
+                                "error": "<Error message>"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/deleteHousingAffordability": {
+            "delete": {
+                "tags": ["hai"],
+                "summary": "Delete Housing Affordability Index data point",
+                "description": "Delete Housing Affordability Index entry from the MongoDB collection",
+                "operationId": "deleteHousingAffordability",
+                "parameters": [{
+                    "name": "corr_id"
                 }],
                 "responses": {
                     "204": {
