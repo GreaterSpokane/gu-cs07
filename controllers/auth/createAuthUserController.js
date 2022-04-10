@@ -9,16 +9,16 @@ const { saltHashPassword } = require('./hashController');
 /* Retrieve documents using county and year as a composite key  */
 module.exports = async function createAuthUser(username, password) {
 
-    //  Check that the username does not already exist
-    var findUserResult = await AuthUser.findOne({ username: username }).exec();
-    if (findUserResult !== undefined) {
-        var result = {
-            'result': "failed to register user",
-            'reason': "username is already registered",
-            'username': username
-        };
-        return result;
-    }
+    // //  Check that the username does not already exist
+    // var findUserResult = await AuthUser.findOne({ username: username }).exec();
+    // if (findUserResult !== undefined) {
+    //     var result = {
+    //         'result': "failed to register user",
+    //         'reason': "username is already registered",
+    //         'username': username
+    //     };
+    //     return result;
+    // }
 
     //  Check that the domain matches allowed email domains
     var addressSignIdx = username.indexOf('@');
