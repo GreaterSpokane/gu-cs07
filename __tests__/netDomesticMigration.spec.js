@@ -1,8 +1,8 @@
 const db = require('./db.spec');
 const createNetDomesticMigration = require('../controllers/netDomesticMigration/createNetDomesticMigrationController');
-const getHousingAffordability = require('../controllers/housingAffordability/getHousingAffordabilityController');
-const getManyHousingAffordability = require('../controllers/housingAffordability/getManyHousingAffordabilityController');
-const deleteHousingAffordability = require('../controllers/housingAffordability/deleteHousingAffordabilityController')
+const getNetDomesticMigration = require('../controllers/netDomesticMigration/getNetDomesticMigrationController');
+const getManyNetDomesticMigration = require('../controllers/netDomesticMigration/getManyNetDomesticMigrationController');
+const deleteNetDomesticMigration = require('../controllers/netDomesticMigration/deleteNetDomesticMigrationController')
 const NetDomesticMigration = require('../models/netDomesticMigration');
 
 //  Database mock setup
@@ -71,17 +71,16 @@ describe('Housing affordability index database model tests', () => {
         expect(doc.housingAffordabilityIndex).toEqual(DATA.housingAffordabilityIndex);
     });
 
-    /*
 
     it('should assert true if newly created object can be successfully retrieved from the database', async() => {
-        const inserted = await createHousingAffordability(
+        const inserted = await createNetDomesticMigration(
             DATA.county,
             DATA.state,
             DATA.year,
             DATA.netDomesticMigration
         );
         //  Find new entry in db
-        const found = await getHousingAffordability(DATA.county, DATA.year);
+        const found = await getNetDomesticMigration(DATA.county, DATA.year);
         expect(inserted.corr_id).toEqual(found.corr_id);
         expect(found.county).toEqual(DATA.county);
         expect(found.state).toEqual(DATA.state);
@@ -90,14 +89,14 @@ describe('Housing affordability index database model tests', () => {
     });
 
     it('should return true if newly created objects\' data matches the inserted objects\' data', async() => {
-        const inserted = await createHousingAffordability(
+        const inserted = await createNetDomesticMigration(
             DATA.county,
             DATA.state,
             DATA.year,
             DATA.netDomesticMigration
         );
         //  Find new entry in DB with get controller
-        const found = await getHousingAffordability(DATA.county, DATA.year);
+        const found = await getNetDomesticMigration(DATA.county, DATA.year);
         expect(found.county).toEqual(DATA.county);
         expect(found.state).toEqual(DATA.state);
         expect(found.year).toEqual(DATA.year);
@@ -105,14 +104,14 @@ describe('Housing affordability index database model tests', () => {
     });
 
     it('should return true if a mass retrieval call to an empty database returns an empty dataset', async() => {
-        const found_data = await getManyHousingAffordability(MASS_DATA_COUNTY, YEAR_1, YEAR_3);
+        const found_data = await getManyNetDomesticMigration(MASS_DATA_COUNTY, YEAR_1, YEAR_3);
         expect(found_data.data).toEqual([]);
     });
 
     it('should return true if a mass retrieval call for a county returns a non-empty data set', async() => {
         for (var i = 0; i < MASS_DATA.length; i++) {
             encoded_data = JSON.parse(MASS_DATA[i])
-            await createHousingAffordability(
+            await createNetDomesticMigration(
                 encoded_data.county,
                 encoded_data.state,
                 encoded_data.year,
@@ -120,14 +119,14 @@ describe('Housing affordability index database model tests', () => {
             );
         }
 
-        const found_data = await getManyHousingAffordability(MASS_DATA_COUNTY, YEAR_1, YEAR_3);
+        const found_data = await getManyNetDomesticMigration(MASS_DATA_COUNTY, YEAR_1, YEAR_3);
         expect(found_data.data).not.toEqual([]);
     });
 
     it('should return true if a mass retrieval call for a county year range excludes the proper number of entries', async() => {
         for (var i = 0; i < MASS_DATA.length; i++) {
             encoded_data = JSON.parse(MASS_DATA[i])
-            await createHousingAffordability(
+            await createNetDomesticMigration(
                 encoded_data.county,
                 encoded_data.state,
                 encoded_data.year,
@@ -135,12 +134,12 @@ describe('Housing affordability index database model tests', () => {
             );
         }
 
-        const found_data = await getManyHousingAffordability(MASS_DATA_COUNTY, YEAR_1, YEAR_2);
+        const found_data = await getManyNetDomesticMigration(MASS_DATA_COUNTY, YEAR_1, YEAR_2);
         expect(found_data.data.length).toEqual(2);
     });
 
     it('should return true if a mass retrieval for a county that does not exist in the database returns nothing', async() => {
-        const found_data = await getManyHousingAffordability("C2", '2001', '2003');
+        const found_data = await getManyNetDomesticMigration("C2", '2001', '2003');
         expect(found_data.data).toEqual([]);
     });
 
@@ -158,5 +157,4 @@ describe('Housing affordability index database model tests', () => {
     //     const result = await deleteHousingAffordability(inserted.corr_id);
     //     expect(result.result).toEqual("Success");
     // });
-    */
 });
