@@ -6,9 +6,11 @@ body {
 }
 
 #options-container {
+    width: 1250px;
+    height: 250px;
     display: flex;
     margin: auto;
-    flex-direction: column;
+    flex-direction: row;
     background-color: aliceblue;
     margin-bottom: 15px;
     padding: 1%;
@@ -25,7 +27,7 @@ body {
     margin: auto;
     height: 80%;
     padding: 1%;
-    flex-direction: column;
+    flex-direction: row;
     background-color: aliceblue;
     border: 5px solid #719a45;
 }
@@ -38,7 +40,7 @@ body {
 #response-window {
     margin: auto;
     width: 95%;
-    height: 1000;
+    height: 1000px;
     font-size: 16px;
     background-color: rgb(236, 243, 219);
     color: black;
@@ -51,7 +53,7 @@ body {
 
 #http-method-options {
     font-size: 18px;
-    width: fit-content;
+    width: 300px;
     padding: 2px;
     border: dotted 5px #719a45;
     border-radius: 8%;
@@ -59,7 +61,7 @@ body {
 
 #indicator-options {
     font-size: 18px;
-    width: fit-content;
+    width: 300px;
     padding: 2px;
     border: dotted 5px #db6140;
     border-radius: 8%;
@@ -69,6 +71,24 @@ body {
     background-color: #a3b490;
     width: 90%;
     height: 90;
+}
+
+#updateButton {
+    background-color: #a3b490;
+    width: 20%;
+    height: 150%;
+}
+
+#button-container {
+    width: 1250px;
+    height: 250px;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    background-color: aliceblue;
+    margin-bottom: 15px;
+    padding: 1%;
+    border: 5px solid #719a45;
 }
 
 .hide {

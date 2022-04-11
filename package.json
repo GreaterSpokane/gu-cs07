@@ -5,6 +5,7 @@
     "main": "web.js",
     "scripts": {
         "start": "node ./bin/www",
+        "docgen": "node ./doc/swagger.js",
         "test": "jest --coverage --runInBand --detectOpenHandles"
     },
     "keywords": [
@@ -21,11 +22,12 @@
         "http-errors": "~1.6.3",
         "mongodb": "^4.1.3",
         "mongodb-memory-server": "^8.1.0",
-        "mongoose": "^6.0.14",
+        "mongoose": "^6.2.9",
         "morgan": "~1.9.1",
         "node-mocks-http": "^1.11.0",
         "pug": "^3.0.2",
         "querystring": "^0.2.1",
+        "swagger-autogen": "^2.19.0",
         "url-search-params": "^1.1.0",
         "vue": "^3.2.29"
     },
@@ -35,6 +37,6 @@
     "devDependencies": {
         "jest": "^27.4.7",
         "nock": "^13.2.2",
-        "nodemon": "^2.0.15"
+        "nodemon": "^1.11.1"
     }
 }

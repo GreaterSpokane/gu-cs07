@@ -1,3 +1,4 @@
+import indicatorConfig from './indicator-config.js';
 
 // TODO: fix this, it's not working for some reason
 // hides/shows cards based on what category (eg. housing, income) is selected 
@@ -40,7 +41,7 @@ function renderDetailView(indicatorName) {
     // reset checkbox checks
     var checkboxes = document.getElementsByClassName("checkboxes");
     for (let i = 0; i < checkboxes.length; i++) {
-        var checkboxID = checkboxes[i].id.slice(0,2);
+        var checkboxID = checkboxes[i].id.slice(0, 2);
         if (checkboxID == "sp" || checkboxID == "wa") {
             checkboxes[i].checked = true;
         } else {
@@ -48,25 +49,21 @@ function renderDetailView(indicatorName) {
         }
     }
 
-    // TODO use the built in destroy() method for the chart instead of this 
-    var oldDetailedChartElement = document.getElementById('detailed-chart-canvas'); 
-    if (oldDetailedChartElement) {
-        oldDetailedChartElement.remove()
+    if (window.detailChart) {
+        window.detailChart.destroy()
     }
-    var newDetailedChartElement = document.createElement("canvas");
-    newDetailedChartElement.setAttribute("id", "detailed-chart-canvas");
-    document.getElementById('detail-graph-container').appendChild(newDetailedChartElement);
 
-    let detailChartCtx = document.getElementById("detailed-chart-canvas").getContext("2d");
+    const detailChartCtx = document.getElementById("detailed-chart-canvas").getContext("2d");
     window.detailChart = new Chart(detailChartCtx, getConfig(indicatorName, true));
 
     // range slider
-    var slider = document.getElementById('slider');
+    const slider = document.getElementById('slider');
     if (window.rangeSlider) {
-        slider.noUiSlider.destroy()     // needed because cant update start range after created
+        // needed because cant update start range after created
+        slider.noUiSlider.destroy()
     }
-    
-    const range = getData(indicatorName, "years");
+
+    const range = getTempData(indicatorName, "years");
     let startRange = Number(range[0]);
     let endRange = Number(range[range.length - 1]);
     window.rangeSlider = noUiSlider.create(slider, {
@@ -79,11 +76,10 @@ function renderDetailView(indicatorName) {
         },
         margin: 1,
         tooltips: [
-            wNumb({decimals: 0}),
-            wNumb({decimals: 0})
+            wNumb({ decimals: 0 }),
+            wNumb({ decimals: 0 })
         ]
     });
-
 
     // set event listner for range slider
     slider.noUiSlider.on('change', function (values) {
@@ -92,9 +88,6 @@ function renderDetailView(indicatorName) {
         let endIndex = range.indexOf(Math.trunc(values[1]));
         updateRange(startIndex, endIndex);
     });
-
-
-    console.log("end of renderDetailView");
 }
 
 // updates the chart year/data range based on the range slider
@@ -140,15 +133,46 @@ function toggleLocations(labelText, isChecked) {
     slider.noUiSlider.reset();
 }
 
-window.onload = function () { 
+// makes database call for specified indicator and return data
+async function getData(indicatorName, county) {
+    let data = [];
+    let path = "";
+    let schemaDataName = "";
+    const query = `?county=${county}&start_year=${2001}&end_year=${2022}`;    // TODO: validate the county name and maybe use constants for the start/end years
+    switch (indicatorName) {
+        case 'lfp':
+            path = '/v1/getManyLabor/';  // this will be updated to the correct lfp path after merging into dev
+            schemaDataName = 'laborParticipationRate';  // getting this from the labor model instaed may be better
+            break;
+        case 'mhi':
+            path = '/v1/getManyMedianHousing/';
+            schemaDataName = 'medianHousingCost';
+            break;
+        default:
+            console.error(`No matching endpoint for indicator: ${indicatorName}`);
+    }
+    // TODO: error handeling
+    const res = fetch(path + query, {
+        method: 'GET',
+        headers: {},
+        mode: "same-origin"
+    })
+        .then(res => res.json())
+        // .then(body => console.log(body);
+    return res[schemaDataName];
+
+}
+
+window.onload = function () {
     console.log("inside window.onload fuction!");
+
 
     // render each indicator chart
     let maiChart = new Chart("mhi", getConfig("mhi", false));
     let lfprChart = new Chart("lfpr", getConfig("lfpr", false));
     let haiChart = new Chart("hai", getConfig("hai", false));
     let mhrvChart = new Chart("mhrv", getConfig("mhrv", false));
-    
+
     // adds event listeners to each card
     var cards = document.getElementsByClassName("card");
     for (var i = 0; i < cards.length; i++) {
@@ -175,8 +199,8 @@ window.onload = function () {
         console.log("inside short stat fucntion")
         let statId = String(cards[i].id);
         console.log("stat sliced", statId)
-        const spokaneStatData = getData(statId.slice(0, -5), 'Spokane')
-        const yearsData = getData(statId.slice(0, -5), 'years')
+        const spokaneStatData = getTempData(statId.slice(0, -5), 'Spokane')
+        const yearsData = getTempData(statId.slice(0, -5), 'years')
         const dataLen = spokaneStatData.length
         const endData = spokaneStatData[dataLen - 1]
         const startData = spokaneStatData[dataLen - 2]
@@ -209,7 +233,7 @@ window.onload = function () {
 }
 
 // returns the temp data for each indicator
-function getData(indicatorName, key) {
+function getTempData(indicatorName, key) {
     const tempdata = {
         "act": {
             "years": [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
@@ -287,22 +311,22 @@ function getConfig(indicatorName, isDetailView) {
         "hai": {
             type: "line",
             data: {
-                labels: getData("hai", "years"),
+                labels: getTempData("hai", "years"),
                 datasets: [{
-                    data: getData("hai", "Spokane"),
+                    data: getTempData("hai", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
                     label: "Spokane",
                 }, {
-                    data: getData("hai", "Washington"),
+                    data: getTempData("hai", "Washington"),
                     borderColor: washingtonColor,
                     label: "Washington",
                 }, {
-                    data: getData("hai", "Boise"),
+                    data: getTempData("hai", "Boise"),
                     borderColor: boiseColor,
                     label: "Boise",
                 }, {
-                    data: getData("hai", "Salt Lake City"),
+                    data: getTempData("hai", "Salt Lake City"),
                     borderColor: saltLakeColor,
                     label: "Salt Lake City",
                 }],
@@ -323,23 +347,23 @@ function getConfig(indicatorName, isDetailView) {
         "lfpr": {
             type: "line",
             data: {
-                labels: getData("lfpr", "years"),
+                labels: getTempData("lfpr", "years"),
                 datasets: [{
-                    data: getData("lfpr", "Spokane"),
+                    data: getTempData("lfpr", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
                     label: "Spokane"
                 }, {
-                    data: getData("lfpr", "Washington"),
+                    data: getTempData("lfpr", "Washington"),
                     borderColor: washingtonColor,
                     label: "Washington",
                 }, {
-                    data: getData("lfpr", "Boise"),
+                    data: getTempData("lfpr", "Boise"),
                     borderColor: boiseColor,
                     label: "Boise",
                     hidden: true
                 }, {
-                    data: getData("lfpr", "Salt Lake City"),
+                    data: getTempData("lfpr", "Salt Lake City"),
                     borderColor: saltLakeColor,
                     label: "Salt Lake City",
                     hidden: true
@@ -361,25 +385,25 @@ function getConfig(indicatorName, isDetailView) {
         "mhi": {
             type: "line",
             data: {
-                labels: getData("mhi", "years"),
+                labels: getTempData("mhi", "years"),
                 datasets: [{
-                    data: getData("mhi", "Spokane"),
+                    data: getTempData("mhi", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
                     label: "Spokane"
                 }, {
-                    data: getData("mhi", "Washington"),
+                    data: getTempData("mhi", "Washington"),
                     borderColor: washingtonColor,
                     label: "Washington",
                     fill: false,
                 }, {
-                    data: getData("mhi", "Boise"),
+                    data: getTempData("mhi", "Boise"),
                     borderColor: boiseColor,
                     label: "Boise",
                     fill: false,
                     hidden: true
                 }, {
-                    data: getData("mhi", "Salt Lake City"),
+                    data: getTempData("mhi", "Salt Lake City"),
                     borderColor: saltLakeColor,
                     label: "Salt Lake City",
                     fill: false,
@@ -388,13 +412,13 @@ function getConfig(indicatorName, isDetailView) {
             },
             options: {
                 responsive: true,
-                legend: {
-                    display: true
-                },
                 plugins: {
                     title: {
                         display: false,
                         text: "Median Household Income (2005 - 2019)"
+                    },
+                    legend: {
+                        onClick: function () { }
                     }
                 },
                 scales: {
@@ -427,22 +451,22 @@ function getConfig(indicatorName, isDetailView) {
         "mhrv": {
             type: "line",
             data: {
-                labels: getData("mhrv", "years"),
+                labels: getTempData("mhrv", "years"),
                 datasets: [{
-                    data: getData("mhrv", "Spokane"),
+                    data: getTempData("mhrv", "Spokane"),
                     borderColor: spokaneColor,
                     fill: true,
                     label: "Spokane County"
                 }, {
-                    data: getData("mhrv", "Washington"),
+                    data: getTempData("mhrv", "Washington"),
                     borderColor: washingtonColor,
                     label: "Washington"
                 }, {
-                    data: getData("mhrv", "Boise"),
+                    data: getTempData("mhrv", "Boise"),
                     borderColor: boiseColor,
                     label: "Boise"
                 }, {
-                    data: getData("mhrv", "Salt Lake City"),
+                    data: getTempData("mhrv", "Salt Lake City"),
                     borderColor: saltLakeColor,
                     label: "Salt Lake City"
                 }]

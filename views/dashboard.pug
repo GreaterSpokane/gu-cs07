@@ -3,9 +3,11 @@ block page-title
     title Spokane Economic Dashboard | Dashboard
 block style-sheet
     link(rel='stylesheet' type="text/css" href='../css/style.css')
+    link(rel='stylesheet' type="text/css" href='../css/theme.css')
     link(rel='stylesheet' type="text/css" href='../css/dashboard.css')
     link(rel='stylesheet' type="text/css" href='../css/rangeslider.css')
 block scripts 
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.js") 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js") 
@@ -13,86 +15,79 @@ block scripts
 block page-name
     h1 Economic Indicator Dashboard
 block content
-    #app.dashboard
-            .tab.w3-bar
-                button.tablinks.active(onclick="filtercards(event, 'all')") All
-                button.tablinks(onclick="filtercards(event, 'income')") Income
-                button.tablinks(onclick="filtercards(event, 'employment')") Employment
-                button.tablinks(onclick="filtercards(event, 'housing')") Housing
-                button.tablinks(onclick="filtercards(event, 'other')") Other
-            hr
-            .dashboard-body
-                #detailed-view-card
-                    .detailed-view-half
-                        p
-                            b Description about the indicator
-                            | Lorem ipsum dolor sit amet, consectetur adipiscing
-                            | elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            | veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                        p
-                            b Notes about the data source
-                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            a(href="https://data.census.gov/cedsci/", style="color:blue;") Data source
-                        p
-                            b Compare data
-                        .compare-data-checkboxes
-                            input#spokane-checkbox.checkboxes(type="checkbox", name="spokane-checkbox", checked)
-                            label#spokane-checkbox-label(for="spokane-checkbox") Spokane
-                            input#wa-checkbox.checkboxes(type="checkbox", name="wa-checkbox", checked)
-                            label#wa-checkbox-label(for="wa-checkbox") Washington
-                            input#boise-checkbox.checkboxes(type="checkbox", name="boise-checkbox")
-                            label#boise-checkbox-label(for="boise-checkbox") Boise
-                            input#saltlake-checkbox.checkboxes(type="checkbox", name="saltlake-checkbox")
-                            label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
-                        p
-                            b Time Range
-                        .range-slider
-                            br 
-                            br                            
-                            #slider
-                        p 
-                        br
-                    .detailed-view-half#detail-graph-container
-                        canvas#detailed-chart-canvas
-                        br
-                .indicator-container
-                    #row1.row
-                        .column
-                            #mhi-card.card.all.income
-                                .card-header
-                                    h3 Median Household Income
-                                    p#mhi-stat.stat Increased between 2018 and 2019.
-                                .card-body
-                                    canvas#mhi
-                                .card-footer
-                        .column
-                            #lfpr-card.card.all.employment
-                                .card-header
-                                    h3 Labor Force Participation Rate
-                                    p#lfpr-stat.stat Short metric about indicator performance
-                                .card-body
-                                    canvas#lfpr
-                        .column
-                            #hai-card.card.all.housing
-                                .card-header
-                                    h3 Housing Affordability Index
-                                    p#hai-stat.stat Short metric about indicator performance
-                                .card-body
-                                    canvas#hai
-                        .column
-                            #mhrv-card.card.all.housing
-                                .card-header
-                                    h3 Median Home Resale Value
-                                    p#mhrv-stat.stat Short metric about indicator performance
-                                .card-body
-                                    canvas#mhrv
-                    //- #row2.row
-                    //-     .column
-                    //-         #zzz-card.card.all.income
-                    //-             .card-header
-                    //-                 h3 New Indicator
-                    //-                 // <p>Short metric about indicator performance</p>
-                    //-             .card-body
-                    //-                 canvas#zzz
-                    //-             .card-footer
+    .dashboard
+        .tab
+            button.tablinks.active(onclick="filtercards(event, 'all')") All
+            button.tablinks(onclick="filtercards(event, 'income')") Income
+            button.tablinks(onclick="filtercards(event, 'employment')") Employment
+            button.tablinks(onclick="filtercards(event, 'housing')") Housing
+            button.tablinks(onclick="filtercards(event, 'other')") Other
+        hr
+        .dashboard-body
+            #detailed-view-card
+                .detailed-view-half
+                    p
+                        b Description about the indicator
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing
+                        | elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                        | veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+                    p
+                        b Notes about the data source
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        span#link 
+                            a(href="https://data.census.gov/cedsci/" style="color:blue;") Data source
+                    p
+                        b Compare data
+                    .compare-data-checkboxes
+                        input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
+                        label#spokane-checkbox-label(for="spokane-checkbox") Spokane
+                        input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
+                        label#wa-checkbox-label(for="wa-checkbox") Washington
+                        input#boise-checkbox.checkboxes(type="checkbox" name="boise-checkbox")
+                        label#boise-checkbox-label(for="boise-checkbox") Boise
+                        input#saltlake-checkbox.checkboxes(type="checkbox" name="saltlake-checkbox")
+                        label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
+                    p
+                        b Time Range
+                    .range-slider
+                        br 
+                        br                            
+                        #slider
+                    p 
+                    br
+                .detailed-view-half#detail-graph-container
+                    canvas#detailed-chart-canvas
+                    br
+            .indicator-container
+                #row1.row
+                    .column
+                        #mhi-card.card.all.income
+                            .card-header
+                                h3 Median Household Income
+                                p#mhi-stat.stat Increased between 2018 and 2019.
+                            .card-body
+                                canvas#mhi
+                            .card-footer
+                    .column
+                        #lfpr-card.card.all.employment
+                            .card-header
+                                h3 Labor Force Participation Rate
+                                p#lfpr-stat.stat Short metric about indicator performance
+                            .card-body
+                                canvas#lfpr
+                    .column
+                        #hai-card.card.all.housing
+                            .card-header
+                                h3 Housing Affordability Index
+                                p#hai-stat.stat Short metric about indicator performance
+                            .card-body
+                                canvas#hai
+                    .column
+                        #mhrv-card.card.all.housing
+                            .card-header
+                                h3 Median Home Resale Value
+                                p#mhrv-stat.stat Short metric about indicator performance
+                            .card-body
+                                canvas#mhrv
+

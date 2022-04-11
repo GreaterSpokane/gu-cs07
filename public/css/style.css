@@ -1,164 +1,102 @@
-header {
-    background-color: #333;
-    color: #FFFFFF;
-    justify-content: center;
-    fill-opacity: 5%;
-    background-image: "\\html\\stockvault-spokane-washington-city-view241358.jpg";
-    padding-bottom: 25px;
+.u-section-1 {
+  background-image: url("../images/spokane2.jpg");
+  background-position: 50% 50%;
+  min-height: 741px;
 }
 
-h1 {
-    text-align: center;
-    color: #db6140;
-    padding: 1%;
+.u-section-1 .u-group-1 {
+  min-height: 626px;
+  background-image: none;
+  margin-top: 115px;
+  margin-bottom: 0;
 }
 
-#navbar h2 {
-    text-align: center;
-    color: #719a45;
+.u-section-1 .u-container-layout-1 {
+  padding: 30px;
 }
 
-h2 {
-    color: #719a45;
+.u-section-1 .u-text-1 {
+  font-size: 3.75rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  margin: 250px 0 0;
 }
 
-body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #eeebea;
-    justify-content: center;
-    color: #2f2f2e;
-    font-size: 100%;
+@media (max-width: 1199px) {
+   .u-section-1 {
+    min-height: 611px;
+  }
 }
 
-main {
-    padding-bottom: 1%;
-    margin-left: 10%;
-    margin-right: 10%;
+@media (max-width: 991px) {
+   .u-section-1 {
+    min-height: 468px;
+  }
 }
 
-footer {
-    background-color: #3B3B39;
-    color: #FFFFFF;
-    height: 150px;
+@media (max-width: 767px) {
+   .u-section-1 {
+    min-height: 351px;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
-.info {
-    margin: auto;
-    color: #FFFFFF;
-    float: center;
+@media (max-width: 575px) {
+   .u-section-1 {
+    min-height: 221px;
+  }
+
+  .u-section-1 .u-text-1 {
+    font-size: 3rem;
+  }
+}.u-section-2 .u-sheet-1 {
+  min-height: 733px;
 }
 
-.info table {
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
+.u-section-2 .u-text-1 {
+  font-size: 3rem;
+  margin: 64px 538px 60px 0;
 }
 
-li {
-    padding-bottom: 8px;
-    text-emphasis-color: #04395E;
+@media (max-width: 1199px) {
+  .u-section-2 .u-sheet-1 {
+    min-height: 657px;
+  }
+
+  .u-section-2 .u-text-1 {
+    width: auto;
+    margin-top: 50px;
+    margin-right: 330px;
+  }
 }
 
-.topnav {
-    overflow: hidden;
-    background-color: #3B3B39;
-    text-align: center;
-    position: relative;
-    padding: 1%;
+@media (max-width: 991px) {
+  .u-section-2 .u-sheet-1 {
+    min-height: 1146px;
+  }
+
+  .u-section-2 .u-text-1 {
+    margin-right: 110px;
+  }
 }
 
+@media (max-width: 767px) {
+  .u-section-2 .u-sheet-1 {
+    min-height: 1310px;
+  }
 
-/* Navbar links */
-
-#navbar a {
-    float: center;
-    font-size: 24px;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 14px 16px;
+  .u-section-2 .u-text-1 {
+    font-size: 1.875rem;
+    margin-right: 0;
+  }
 }
 
-#navbar a:hover {
-    color: #719a45;
-    border: 2px white solid;
+@media (max-width: 575px) {
+  .u-section-2 .u-sheet-1 {
+    min-height: 1159px;
+  }
 }
-
-a:link {
-    color: #FFFFFF;
-    padding: 1%;
-}
-
-a:visited {
-    color: whitesmoke;
-}
-
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #BE5937;
-    color: #031D44;
-    text-align: center;
-}
-
-.footer table {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.column {
-    float: left;
-}
-
-.column.side {
-    width: 25%;
-}
-
-.column.middle {
-    width: 50%;
-}
-
-@media screen and (max-width: 600px) {
-    .column.side,
-    .column.middle {
-        width: 100%;
-    }
-}
-
-#navbar {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.text_visuals>h2 {
-    text-align: center;
-    background-color: #2f2f2e;
-}
-
-.indicator-label {
-    background-color: #2f2f2e;
-}
-
-.indicator-text-section {
-    width: 40%;
-}
-
-.indicator-data-section {
-    width: 60%;
-}
-
-#group-photo {
-    float: left;
-    padding: 0 20px 15px 0;
-    height: 35%;
-    width: 50%;
-}
-
-.visualization-container>* {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-
