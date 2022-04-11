@@ -1,17 +1,17 @@
 doctype doctype html
 html(lang="en")
   head
-    title Spokane Economic Dashboard | Authorized User Sign-in
-    meta(name="description", content="Authorized User Login Page")
+    title Spokane Economic Dashboard | Register Authorized User
+    meta(name="description", content="Register Authorized User")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet' type="text/css" href="css/login.css")
     link(rel="shortcut icon" href="images/favicon.ico" type="image/x-icon")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
-    script(src="javascripts/login.js")
+    script(src="javascripts/register.js")
   body
     div#login-window
-      h1 Authorized User Sign-in
+      h1 Register User
       div#input-container
         table#input-grid
           tr#username
@@ -26,7 +26,5 @@ html(lang="en")
               input.text-field(type="password" id="password" name="password" required)
         p.error-msg.hide
       div#button-container
-        button#login Login
-        button#back Back to Dashboard
-      div#registration-containr 
-        a(href="/register") Register User 
+        button#register Register
+        button#back Back to Login 

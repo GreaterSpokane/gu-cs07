@@ -46,6 +46,11 @@ body {
     margin-bottom: 15px;
 }
 
+#input-grid {
+    justify-content: center;
+    margin: auto;
+}
+
 button {
     font-size: 24px;
     width: 80%;
@@ -55,8 +60,9 @@ button {
 
 .text-field {
     resize: horizontal;
-    font-size: 24px;
-    padding-left: 15%;
+    font-size: 20px;
+    width: 100%;
+    padding-left: 5%;
 }
 
 .hide {

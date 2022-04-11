@@ -1,13 +1,13 @@
 $(document).ready(async() => {
-    console.log("Authorized user login window loaded successfully");
+    console.log("Register authorized user window loaded successfully");
 
     $('#back').on('click', async() => {
         /**
-         * Back button callback for redirecting to index page 
+         * Back button callback for redirecting to login page 
          */
 
-        console.log("Leaving authorized user sign-in page ..");
-        $(window).attr('location', 'index');
+        console.log("Leaving register user page ..");
+        $(window).attr('location', 'login');
     });
 
     $("#login").on('click', async() => {

@@ -1,42 +1,73 @@
+require('dotenv').config();
 var express = require("express");
+var session = require("express-session");
 var router = express.Router();
 var createAuthUser = require("../controllers/auth/createAuthUserController");
 var authorizeUser = require("../controllers/auth/authorizeUserController");
 
+//  Session setup
+router.use(session({
+    secret: process.env.USER_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        // Session expires after 5 min of inactivity.
+        expires: 300000
+    }
+}));
+
 /* login page api routes*/
 router
-    .get('/login', async(req, res, next) => { res.render('login'); })
-    .get('/auth', async(req, res, next) => { res.render('auth.pug'); })
-    .post('/login', async(req, res, next) => {
-        //  If password match -> redirect to /auth
-        //  else -> display error on login page
-
+    .get('/login/', async(req, res) => {
+        req.session.destroy();
+        res.render('login')
+    })
+    .get('/auth/', async(req, res) => {
+        if (req.session.username != (null || undefined))
+            res.render('auth');
+        else
+            res.redirect(403, '/login/');
+    })
+    .post('/login/', async(req, res) => {
         //  validate body and params (nonnull, type specific)
+        if (req.body == null) {
+            res.redirect(400, '/login/');
+            return;
+        }
+
         var username = req.body.username;
         var password = req.body.password;
         var authResult = await authorizeUser(username, password);
 
         if (authResult.result == "success") {
-            console.log(authResult);
-            res.redirect(301, "/auth");
+            req.session.username = username
+            res.redirect(301, "/auth/");
+            return
         } else {
-            console.log(authResult);
-            res.redirect(401, "/login");
+            req.session.destroy();
+            res.redirect(401, "/login/");
+            return
         }
     })
-    .post("/register/user/", async(req, res, next) => {
-        if (req.body != null)
-            res.redirect(400, '/login')
+    .get('/register/', async(req, res) => { res.render('register') })
+    .post("/register/", async(req, res) => {
+        if (req.body == null) {
+            req.session.destroy();
+            res.redirect(400, '/login/');
+            return;
+        }
 
         var username = req.body.username;
         var password = req.body.password;
         var createResult = await createAuthUser(username, password)
             .catch((err) => {
-                //  Error in creating the user, redirect to the login page
-                console.log(err);
-                res.redirect('/login');
+                req.session.destroy();
+                res.redirect('/login/');
+                return;
             });
-        res.status(201).json(createResult);
+
+        req.session.username = username;
+        res.redirect(201, '/auth/');
     });
 
 module.exports = router;
