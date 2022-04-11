@@ -1,22 +1,20 @@
 const db = require('./db.spec');
-const createLabor = require('../controllers/laborParticipation/createLaborController');
-const getLabor = require('../controllers/laborParticipation/getLaborController');
-const getManyLabor = require('../controllers/laborParticipation/getManyLaborController');
-const deleteLabor = require('../controllers/laborParticipation/deleteLaborController');
-const LaborParticipationRate = require('../models/labor');
+const createLabor = require('../controllers/laborForce/createLaborForceController');
+const getLabor = require('../controllers/laborForce/getLaborForceController');
+const getManyLabor = require('../controllers/laborForce/getManyLaborForceController');
+const LaborForce = require('../models/laborForce');
 
 //  Database mock setup
 beforeAll(async() => await db.connect());
 afterEach(async() => await db.clearDatabase());
 afterAll(async() => await db.closeDatabase());
 
-describe('Laborforce Participation Rate database model tests', () => {
+describe('Labor Force database model tests', () => {
     const DATA = {
         'county': 'Spokane County',
         'state': 'WA',
         'year': '2022',
-        'laborForce': 258483,
-        'laborParticipationRate': 0.615547
+        'laborForce': 15547
     };
 
     const MASS_DATA_COUNTY = "C1"
@@ -24,43 +22,37 @@ describe('Laborforce Participation Rate database model tests', () => {
     const YEAR_1 = "2001"
     const YEAR_2 = "2002"
     const YEAR_3 = "2003"
-    const LABOR_FORCE_1 = 258483
-    const LABOR_FORCE_2 = 458483
-    const LABOR_FORCE_3 = 358483
-    const LABOR_RATE_1 = 0.6547
-    const LABOR_RATE_2 = 0.614
-    const LABOR_RATE_3 = 0.6155
-    const MASS_DATA = [JSON.stringify({
+    const LABOR_FORCE_1 = 6547
+    const LABOR_FORCE_2 = 6140
+    const LABOR_FORCE_3 = 6155
+    const MASS_DATA = [
+        JSON.stringify({
             'county': MASS_DATA_COUNTY,
             'state': MASS_DATA_STATE,
             'year': YEAR_1,
-            'laborForce': LABOR_FORCE_1,
-            'laborParticipationRate': LABOR_RATE_3
+            'laborForce': LABOR_FORCE_1
         }),
         JSON.stringify({
             'county': MASS_DATA_COUNTY,
             'state': MASS_DATA_STATE,
             'year': YEAR_2,
-            'laborForce': LABOR_FORCE_2,
-            'laborParticipationRate': LABOR_RATE_2
+            'laborForce': LABOR_FORCE_2
         }), JSON.stringify({
             'county': MASS_DATA_COUNTY,
             'state': MASS_DATA_STATE,
             'year': YEAR_3,
-            'laborForce': LABOR_FORCE_3,
-            'laborParticipationRate': LABOR_RATE_3
+            'laborForce': LABOR_FORCE_3
         })
-    ]
+    ];
 
     it('should return true if the newly created object returns a new id', async() => {
-        const result = createLabor(
+        const result = await createLabor(
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.laborForce,
-            DATA.laborParticipationRate
+            DATA.laborForce
         );
-        expect((await result).corr_id).not.toEqual(null || undefined);
+        expect(result.corr_id).not.toEqual(null || undefined);
     });
 
     it('should return true if new object matches its source obj', async() => {
@@ -68,16 +60,14 @@ describe('Laborforce Participation Rate database model tests', () => {
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.laborForce,
-            DATA.laborParticipationRate
+            DATA.laborForce
         );
         //  Find new entry in db
-        const doc = await LaborParticipationRate.findById(result.corr_id);
+        const doc = await LaborForce.findById(result.corr_id);
         expect(doc.county).toEqual(DATA.county);
         expect(doc.state).toEqual(DATA.state);
         expect(doc.year).toEqual(DATA.year);
         expect(doc.laborForce).toEqual(DATA.laborForce);
-        expect(doc.laborParticipationRate).toEqual(DATA.laborParticipationRate);
     });
 
     it('should return true if newly created object is successfully retrieved from the database', async() => {
@@ -85,8 +75,7 @@ describe('Laborforce Participation Rate database model tests', () => {
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.laborForce,
-            DATA.laborParticipationRate
+            DATA.laborForce
         );
         //  Find new entry in DB with get controller
         const found = await getLabor(DATA.county, DATA.year);
@@ -98,16 +87,15 @@ describe('Laborforce Participation Rate database model tests', () => {
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.laborForce,
-            DATA.laborParticipationRate
+            DATA.laborForce
         );
         //  Find new entry in DB with get controller
         const found = await getLabor(DATA.county, DATA.year);
+        expect(inserted).not.toEqual(null || undefined);
         expect(found.county).toEqual(DATA.county);
         expect(found.state).toEqual(DATA.state);
         expect(found.year).toEqual(DATA.year);
         expect(found.laborForce).toEqual(DATA.laborForce);
-        expect(found.laborParticipationRate).toEqual(DATA.laborParticipationRate);
     });
 
     it('should return true if a mass retrieval call to an empty database returns an empty dataset', async() => {
@@ -122,8 +110,7 @@ describe('Laborforce Participation Rate database model tests', () => {
                 encoded_data.county,
                 encoded_data.state,
                 encoded_data.year,
-                encoded_data.laborForce,
-                encoded_data.laborParticipationRate
+                encoded_data.laborForce
             );
         }
 
@@ -138,8 +125,7 @@ describe('Laborforce Participation Rate database model tests', () => {
                 encoded_data.county,
                 encoded_data.state,
                 encoded_data.year,
-                encoded_data.laborForce,
-                encoded_data.laborParticipationRate
+                encoded_data.laborForce
             );
         }
 

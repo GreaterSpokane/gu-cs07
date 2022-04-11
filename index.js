@@ -1,7 +1,6 @@
 //  Initialize .env files 
 require('dotenv').config();
 
-const { MongoClient } = require('mongodb');
 var session = require('express-session');
 var express = require('express');
 var path = require('path');
