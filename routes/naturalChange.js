@@ -1,19 +1,19 @@
 const express = require('express');
-const createLaborForce = require('../controllers/laborForce/createLaborForceController');
-const getLaborForce = require('../controllers/laborForce/getLaborForceController');
-const getManyLaborForce = require('../controllers/laborForce/getManyLaborForceController');
-//const deleteLaborForce = require('../controllers/laborForce/deleteLaborForceController')
-const serialize = require('../serializers/laborForceSerializer');
+const createNaturalChange = require('../controllers/naturalChange/createNaturalChangeController');
+const getNaturalChange = require('../controllers/naturalChange/getNaturalChangeController');
+const getManyNaturalChange = require('../controllers/naturalChange/getManyNaturalChangeController');
+//const deleteLaborForce = require('../controllers/naturalChange/deleteNaturalChangeController')
+const serialize = require('../serializers/naturalChangeSerializer');
 var router = express.Router();
 
 /*  insert new entry into the labor force collection in the db   */
-router.post('/v1/newLaborForce', async(req, res) => {
+router.post('/v1/newNaturalChange', async(req, res) => {
     //  Check that query string exists
     if (
         typeof req.query.county === "undefined" ||
         typeof req.query.state === "undefined" ||
         typeof req.query.year === "undefined" ||
-        typeof req.query.labor_force === "undefined") {
+        typeof req.query.natural_change === "undefined") {
 
         var result = {
             'result': 'Failure',
@@ -25,11 +25,11 @@ router.post('/v1/newLaborForce', async(req, res) => {
     }
 
     //  Create new entry in labor force collection
-    var entry = await createLaborForce(
+    var entry = await createNaturalChange(
         req.query.county,
         req.query.state,
         req.query.year,
-        req.query.labor_force
+        req.query.natural_change
     ).catch((err) => {
         var result = { 'result': 'Internal Error', 'error': err };
         res.status(404).json(result);
@@ -44,7 +44,7 @@ router.post('/v1/newLaborForce', async(req, res) => {
 });
 
 /*  get entry from labor participation rate collection in db  */
-router.get('/v1/getLaborForce', async(req, res) => {
+router.get('/v1/getNaturalChange', async(req, res) => {
     if (
         req.query.county === "undefined" ||
         req.query.year === "undefined"
@@ -55,11 +55,11 @@ router.get('/v1/getLaborForce', async(req, res) => {
             'reason': 'Parameter error'
         };
 
-        res.status(404).json(result);
+        res.status(400).json(result);
         return;
     }
 
-    var result = await getLaborForce(req.query.county, req.query.year)
+    var result = await getNaturalChange(req.query.county, req.query.year)
         .catch((err) => {
             var result = {
                 'result': 'Internal error',
@@ -74,7 +74,7 @@ router.get('/v1/getLaborForce', async(req, res) => {
 })
 
 /*  get all labor documents in year range from labor force collection in db  */
-router.get('/v1/getManyLaborForce', async(req, res) => {
+router.get('/v1/getManyNaturalChange', async(req, res) => {
     if (
         req.query.county === "undefined" ||
         req.query.start_year === "undefined" ||
@@ -85,7 +85,7 @@ router.get('/v1/getManyLaborForce', async(req, res) => {
         return;
     }
 
-    var result = await getManyLaborForce(req.query.county, req.query.start_year, req.query.end_year)
+    var result = await getManyNaturalChange(req.query.county, req.query.start_year, req.query.end_year)
         .catch(() => {
             res.status(404).json({
                 'result': 'Failure',
@@ -99,7 +99,7 @@ router.get('/v1/getManyLaborForce', async(req, res) => {
 });
 
 /*  delete labor document from the collection by correlation id  */
-router.delete('/v1/deleteLaborForce', async(req, res) => {
+router.delete('/v1/deleteNaturalChange', async(req, res) => {
     if (typeof req.body.corr_id === 'undefined') {
         result = {
             'result': 'Failure',
