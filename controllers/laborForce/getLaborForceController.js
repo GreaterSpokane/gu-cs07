@@ -17,7 +17,7 @@ module.exports = async function getLaborForce(county, year) {
             'laborForce': data.laborForce
         }
 
-        return result
+        return result;
     } catch (err) {
         throw err;
     }
