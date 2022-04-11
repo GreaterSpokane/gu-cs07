@@ -9,10 +9,18 @@ html(lang='en')
     link(rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon")
     block style-sheet
       link(rel='stylesheet', type="text/css", href='../css/style.css')
+      link(rel='stylesheet', type="text/css", href='../css/theme.css')
     block scripts
-      script(src="../javascripts/page_default_template.js") 
-  body
-    header 
+      script(src="../javascripts/page_default_template.js")
+      script.u-script(type='text/javascript' src='../javascripts/jquery-1.9.1.min.js' defer='')
+      script.u-script(type='text/javascript' src='../javascripts/theme.js' defer='')
+
+  body      
+    section#carousel_cd49.u-align-left.u-clearfix.u-image.u-valign-bottom.u-section-1(data-image-width='1400' data-image-height='510')
+      .u-align-left.u-container-style.u-expanded-width.u-group.u-group-1
+        .u-container-layout.u-container-layout-1
+          h1.u-align-center.u-custom-font.u-font-montserrat.u-text.u-text-body-alt-color.u-title.u-text-1 Spokane Economy Dashboard
+    main
       block page-name
           h1 Page Name
       section#navbar
@@ -20,18 +28,33 @@ html(lang='en')
         a(href="index") About
         a(href="dashboard") Dashboard Mockup
         a(href="login") Authorized Area
-    main
       block content
-    footer 
-      section.info
-        hr
-        table 
-          tbody 
-            tr 
-              td #[u Find information for]
-              td #[u Contact Us]
-            tr 
-              td 
-                a(href="https://greaterspokane.org/") Greater Spokane Inc.
-              td 
-                a(href="https://www.gonzaga.edu/school-of-engineering-applied-science/student-experiences/cede/senior-design-projects/cpsc") Gonzaga Senior Design Projects
+    footer#sec-a336.u-align-center.u-clearfix.u-footer.u-grey-80.u-footer
+      .u-clearfix.u-sheet.u-sheet-1
+        .u-clearfix.u-expanded-width.u-gutter-0.u-layout-wrap.u-layout-wrap-1
+          .u-gutter-0.u-layout
+            .u-layout-row
+              .u-size-60
+                .u-layout-col
+                  .u-container-style.u-layout-cell.u-left-cell.u-size-30.u-layout-cell-1
+                    .u-container-layout.u-valign-bottom.u-container-layout-1
+                      p.u-align-center.u-text.u-text-1
+                        | 801 W. Riverside, Suite 100 | Spokane, WA 99201
+                        br
+                        | (509) 624-1393 | (800) 776-5263
+                  .u-align-left.u-container-style.u-layout-cell.u-left-cell.u-size-30.u-layout-cell-2
+                    .u-container-layout.u-container-layout-2
+                      p.u-align-center.u-text.u-text-2
+                        | &copy; 2022 Greater Spokane Inc.&nbsp;
+                        br
+                        | Website Design by Gonzaga University Design Team CS07
+        .u-clearfix.u-expanded-width.u-layout-wrap.u-layout-wrap-2
+          .u-layout
+            .u-layout-row
+              .u-container-style.u-layout-cell.u-size-30.u-layout-cell-3
+                .u-container-layout.u-container-layout-3
+                  a.u-image.u-logo.u-image-1(data-image-width='489' data-image-height='217')
+                    img.u-logo-image.u-logo-image-1(src='images/GSI_Logo.png' data-image-width='489' data-image-height='217')
+              .u-container-style.u-layout-cell.u-size-30.u-layout-cell-4
+                .u-container-layout.u-valign-middle.u-container-layout-4
+                  a.u-btn.u-btn-round.u-button-style.u-hover-palette-1-light-1.u-palette-1-base.u-radius-50.u-btn-1(href='https://advantagespokane.com/' target='_blank') Visit Advantage Spokane
