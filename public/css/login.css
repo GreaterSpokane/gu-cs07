@@ -42,9 +42,13 @@ body {
     background-color: #719a45
 }
 
+#input-container {
+    margin-bottom: 15px;
+}
+
 button {
     font-size: 24px;
-    width: 100%;
+    width: 80%;
     padding: 5px;
     margin-bottom: 10px;
 }
