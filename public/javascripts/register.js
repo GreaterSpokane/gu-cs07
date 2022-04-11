@@ -10,18 +10,16 @@ $(document).ready(async() => {
         $(window).attr('location', 'login');
     });
 
-    $("#login").on('click', async() => {
+    $("#register").on('click', async() => {
         /**
          * Login button callback for authenticating the password
          */
-
         var user = $("#username").val();
         var pass = $("#password").val();
-        var requestOptions = {
-            method: "POST",
-            body: JSON.stringify({ username: user, password: pass })
-        };
-        await fetch("/login/", requestOptions)
+        await fetch("/register", {
+                method: "POST",
+                body: JSON.stringify({ username: user, password: pass })
+            })
             .then(response => response.json())
             .then(json => {
                 //  Display error message if one exists

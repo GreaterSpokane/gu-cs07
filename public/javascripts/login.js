@@ -17,15 +17,10 @@ $(document).ready(async() => {
 
         var user = $("#username").val();
         var pass = $("#password").val();
-        var requestOptions = {
-            method: "POST",
-            body: JSON.stringify({ username: user, password: pass })
-        };
-        await fetch("/login/", requestOptions)
-            .then(response => response.json())
-            .then(json => {
-                //  Display error message if one exists
-                console.log(json);
-            });
+        await fetch("/login", {
+                method: "POST",
+                body: JSON.stringify({ 'username': user, 'password': pass })
+            })
+            .then(response => console.log(response));
     })
 })

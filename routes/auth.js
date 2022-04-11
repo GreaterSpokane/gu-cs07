@@ -18,19 +18,19 @@ router.use(session({
 
 /* login page api routes*/
 router
-    .get('/login/', async(req, res) => {
+    .get('/login', async(req, res) => {
         req.session.destroy();
         res.render('login')
     })
-    .get('/auth/', async(req, res) => {
+    .get('/auth', async(req, res) => {
         if (req.session.username != (null || undefined))
             res.render('auth');
         else
             res.redirect(403, '/login/');
     })
-    .post('/login/', async(req, res) => {
+    .post('/login', async(req, res) => {
         //  validate body and params (nonnull, type specific)
-        if (req.body == null) {
+        if (req.body == {}) {
             res.redirect(400, '/login/');
             return;
         }
@@ -44,13 +44,14 @@ router
             res.redirect(301, "/auth/");
             return
         } else {
-            req.session.destroy();
-            res.redirect(401, "/login/");
+            console.log(authResult);
+            ``
+            res.redirect(401, "/login");
             return
         }
     })
-    .get('/register/', async(req, res) => { res.render('register') })
-    .post("/register/", async(req, res) => {
+    .get('/register', async(req, res) => { res.render('register') })
+    .post("/register", async(req, res) => {
         if (req.body == null) {
             req.session.destroy();
             res.redirect(400, '/login/');

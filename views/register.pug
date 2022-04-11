@@ -1,4 +1,4 @@
-doctype doctype html
+doctype html
 html(lang="en")
   head
     title Spokane Economic Dashboard | Register Authorized User
@@ -14,16 +14,16 @@ html(lang="en")
       h1 Register User
       div#input-container
         table#input-grid
-          tr#username
+          tr
             td.input-grid-label
               label(for="username") Username
             td.input-grid-field
-              input.text-field(type="text" id="username" name="username" required)
-          tr#password
+              input#username.text-field(type="text" name="username" required)
+          tr
             td.input-grid-label
               label(for="password") Password
             td.input-grid-field
-              input.text-field(type="password" id="password" name="password" required)
+              input#password.text-field(type="password" name="password" required)
         p.error-msg.hide
       div#button-container
         button#register Register
