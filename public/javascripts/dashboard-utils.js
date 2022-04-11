@@ -1,38 +1,37 @@
 import indicatorConfig from './indicator-config.js';
 
-// TODO: fix this, it's not working for some reason
 // hides/shows cards based on what category (eg. housing, income) is selected 
-function filtercards(event, tabName) {
-    console.log("filter cards!");
-    //toggle active tab color
-    var cards = document.getElementsByClassName("card")
-    var i;
-    for (i = 0; i < cards.length; i++) {
-        cards[i].style.display = "none";
-    }
-    var tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    var selectedCards = document.getElementsByClassName(tabName)
-    for (i = 0; i < selectedCards.length; i++) {
-        selectedCards[i].style.display = "block";
-    }
+// function filtercards(event, tabName) {
+//     console.log("filter cards!");
+//     //toggle active tab color
+//     var cards = document.getElementsByClassName("card")
+//     var i;
+//     for (i = 0; i < cards.length; i++) {
+//         cards[i].style.display = "none";
+//     }
+//     var tablinks = document.getElementsByClassName("tablinks");
+//     for (i = 0; i < tablinks.length; i++) {
+//         tablinks[i].className = tablinks[i].className.replace(" active", "");
+//     }
+//     var selectedCards = document.getElementsByClassName(tabName)
+//     for (i = 0; i < selectedCards.length; i++) {
+//         selectedCards[i].style.display = "block";
+//     }
 
-    event.currentTarget.className += " active";
+//     event.currentTarget.className += " active";
 
-}
+// }
 
 // returns the full name of the indicator abbreviation
-function getIndicatorName(indicatorAbbrev) {
-    const names = {
-        'mhi': "Median Household Income",
-        'lfpr': "Labor Force Participation Rate",
-        'hai': "Housing Affordability Index",
-        'mhrv': "Median Home Resale Value",
-    }
-    return names[indicatorAbbrev]
-}
+// function getIndicatorName(indicatorAbbrev) {
+//     const names = {
+//         'mhi': "Median Household Income",
+//         'lfpr': "Labor Force Participation Rate",
+//         'hai': "Housing Affordability Index",
+//         'mhrv': "Median Home Resale Value",
+//     }
+//     return names[indicatorAbbrev]
+// }
 
 // creates the chart in the detailed view
 function renderDetailView(indicatorName) {
@@ -141,7 +140,7 @@ async function getData(indicatorName, county) {
     const query = `?county=${county}&start_year=${2001}&end_year=${2022}`;    // TODO: validate the county name and maybe use constants for the start/end years
     switch (indicatorName) {
         case 'lfp':
-            path = '/v1/getManyLabor/';  // this will be updated to the correct lfp path after merging into dev
+            path = '/v1/getManyLaborParticipation/';  // this will be updated to the correct lfp path after merging into dev
             schemaDataName = 'laborParticipationRate';  // getting this from the labor model instaed may be better
             break;
         case 'mhi':
@@ -173,6 +172,8 @@ window.onload = function () {
     let lftChart = new Chart("lft", getConfig("lfpr", false));
     let haiChart = new Chart("hai", getConfig("hai", false));
     let mhrvChart = new Chart("mhrv", getConfig("mhrv", false));
+    let mhr1vChart = new Chart("ntc", getConfig("mhrv", false));
+    let mhrv1Chart = new Chart("ndm", getConfig("mhrv", false));
 
     new Chart("lfs", {
         type: "doughnut",

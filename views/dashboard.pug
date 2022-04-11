@@ -110,6 +110,27 @@ block content
                                 canvas#lfp
                             .more-info-button
                                 button.unstyled-button(onclick="toggleDetailView(event, 'lfp')") More info
+            #population-drivers
+                .category
+                    h2 Population Drivers
+                    .category-flex-container 
+                        #ntc-card.card
+                            .card-header
+                                h3 Natural Change
+                                p#ntc-stat.stat Short metric about indicator performance
+                            .chart-container
+                                canvas#ntc
+                            .more-info-button
+                                button.unstyled-button(onclick="toggleDetailView(event, 'ndc')") More info
+                        #ndm-card.card
+                            .card-header
+                                h3 Net Domestic Migration 
+                                p#ndm-stat.stat Increased between 2018 and 2019.
+                            .chart-container
+                                canvas#ndm
+                            .more-info-button
+                                button(onclick="toggleDetailView(event, 'ndm')") More info
+                        
                         
                 //- .detailed-view-card
                 //-     .detailed-view-half
