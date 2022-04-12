@@ -6,7 +6,9 @@ var authorizeUser = require("../controllers/auth/authorizeUserController");
 /* login page api routes*/
 router
     .get('/login', async(req, res, next) => { res.render('login'); })
-    .get('/auth', async(req, res, next) => { res.render('auth.pug'); })
+    .get('/auth', async(req, res, next) => { res.render('button'); })
+    .get('/button', async(req, res, next) => { res.render('button'); })
+    .get('/endpoints', async(req, res, next) => { res.render('auth'); })
     .post('/login', async(req, res, next) => {
         //  If password match -> redirect to /auth
         //  else -> display error on login page
@@ -18,7 +20,7 @@ router
 
         if (authResult.result == "success") {
             console.log(authResult);
-            res.redirect(301, "/auth");
+            res.redirect(301, "/auth_layout");
         } else {
             console.log(authResult);
             res.redirect(401, "/login");
