@@ -18,6 +18,9 @@ router.use(session({
 }));
 
 router
+
+    .get('/button', async(req, res, next) => { res.render('button'); })
+    .get('/endpoints', async(req, res, next) => { res.render('auth'); })
     .get('/auth', async(req, res) => {
         // if (req.session.username != (null || undefined)) {
         //     res.render('auth');
@@ -34,7 +37,7 @@ router
         var username = req.body.username;
         var password = req.body.password;
         var authResult = await authorizeUser(username, password);
-
+  
         if (authResult.result == "success")
         //req.session.username = username   
             return res.redirect('/auth');
