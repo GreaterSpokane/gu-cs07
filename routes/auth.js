@@ -22,6 +22,9 @@ router
         req.session.destroy();
         res.render('login')
     })
+    .get('/update', async(req, res) => {
+        res.render('button')
+    })
     .get('/auth', async(req, res) => {
         if (req.session.username != (null || undefined))
             res.render('auth');
