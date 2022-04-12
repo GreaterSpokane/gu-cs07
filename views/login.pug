@@ -13,20 +13,21 @@ html(lang="en")
     div#login-window
       h1 Authorized User Sign-in
       div#input-container
-        table#input-grid
-          tr
-            td.input-grid-label
-              label(for="username") Username
-            td.input-grid-field
-              input.text-field(type="text" id="username" name="username" required)
-          tr
-            td.input-grid-label
-              label(for="password") Password
-            td.input-grid-field
-              input.text-field(type="password" id="password" name="password" required)
         p.error-msg.hide
-      div#button-container
-        button#login Login
-        button#back Back to Dashboard
-      div#registration-containr 
-        a(href="/register") Register User 
+        form(action="/login", method="post") 
+          table#input-grid
+            tr
+              td.input-grid-label
+                label(for="username") Username
+              td.input-grid-field
+                input.text-field(type="text" id="username" name="username" required)
+            tr
+              td.input-grid-label
+                label(for="password") Password
+              td.input-grid-field
+                input.text-field(type="password" id="password" name="password" required)
+          div#button-container
+            input(type="submit" id="login" name="login" value="Login")
+            button#back Back to Dashboard
+          div#registration-containr 
+            a(href="/register") Register User 

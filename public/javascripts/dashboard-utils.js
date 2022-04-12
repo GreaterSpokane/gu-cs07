@@ -154,7 +154,8 @@ async function getData(indicatorName, county) {
     // TODO: error handeling
     const res = fetch(path + query, {
         method: 'GET',
-        headers: {},
+        headers: {'
+application/json'},
         mode: "same-origin"
     })
         .then(res => res.json())

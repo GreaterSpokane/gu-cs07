@@ -13,18 +13,19 @@ html(lang="en")
     div#login-window
       h1 Register User
       div#input-container
-        table#input-grid
-          tr
-            td.input-grid-label
-              label(for="username") Username
-            td.input-grid-field
-              input#username.text-field(type="text" name="username" required)
-          tr
-            td.input-grid-label
-              label(for="password") Password
-            td.input-grid-field
-              input#password.text-field(type="password" name="password" required)
         p.error-msg.hide
-      div#button-container
-        button#register Register
-        button#back Back to Login 
+        form(action="/register", method="post")   
+          table#input-grid
+            tr
+              td.input-grid-label
+                label(for="username") Username
+              td.input-grid-field
+                input.text-field(type="text" id="username" name="username" required)
+            tr
+              td.input-grid-label
+                label(for="password") Password
+              td.input-grid-field
+                input.text-field(type="password" id="password" name="password" required)
+          div#button-container
+            input(type="submit" id="register" name="register" value="Register")
+            button#back Back to Login 
