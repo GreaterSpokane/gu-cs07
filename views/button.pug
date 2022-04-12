@@ -2,7 +2,7 @@ extends auth_layout.pug
 block page-title
   title Spokane Ecomomic Dashboard | Authorized User Page
 block style-sheet
-  link(rel='stylesheet' type="text/css" href="css/style.css")
+  link(rel='stylesheet' type="text/css" href="css/auth_style.css")
 block scripts
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
 block content
@@ -10,3 +10,46 @@ block content
         h2 Press to Update Data
         h3#updateStatus Data is ready to update
         button#updateButton UPDATE
+    div#update-table-container
+      h1 Manual Indicator Update
+      table#update-table
+        td
+          div#Median-Household
+            h2 Median Household Income
+            label(for="year") Year
+            input#year-input(type="number", name="year")
+            br
+            label(for="county") County
+            input#county-input(type="text", name="county")
+            br
+            label(for="MHI-value") Value
+            input#county-input(type="number", name="value")
+            br
+            button#Median-Household-Button UPDATE
+        td
+          div#Laborforce
+            h2 Laborforce
+            label(for="year") Year
+            input#year-input(type="number", name="year")
+            br
+            label(for="county") County
+            input#county-input(type="text", name="county")
+            br
+            label(for="laborforce-value") Value
+            input#county-input(type="number", name="value")
+            br
+            button#LaborforceButton UPDATE
+        td 
+          div#Housing-Affordability
+            h2 Housing Affordability
+            label(for="year") Year
+            input#year-input(type="number", name="year")
+            br
+            label(for="county") County
+            input#county-input(type="text", name="county")
+            br
+            label(for="housing-value") Value
+            input#county-input(type="number", name="value")
+            br
+            button#HousingButton UPDATE
+        td 
