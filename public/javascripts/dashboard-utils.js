@@ -1,5 +1,4 @@
 import indicatorConfig from './indicator-config.js';
-
 // hides/shows cards based on what category (eg. housing, income) is selected 
 // function filtercards(event, tabName) {
 //     console.log("filter cards!");
@@ -52,7 +51,15 @@ function renderDetailView(indicatorName) {
         window.detailChart.destroy()
     }
 
-    const detailChartCtx = document.getElementById("detailed-chart-canvas").getContext("2d");
+    let detailedChartId = "";
+
+    switch(indicatorName) {
+        case 'mhi' || 'hai':
+            detailedChartId = 'housing';
+    }
+
+    console.log(detailedChartId + "-detailed-chart-canvas");
+    const detailChartCtx = document.getElementById(detailedChartId + "-detailed-chart-canvas").getContext("2d");
     window.detailChart = new Chart(detailChartCtx, getConfig(indicatorName, true));
 
     // range slider
@@ -197,7 +204,7 @@ window.onload = function () {
             }]
         },
         options: {
-            radius: "80%"
+            radius: "70%"
         }
     });
 
@@ -205,19 +212,27 @@ window.onload = function () {
     var cards = document.getElementsByClassName("card");
     for (var i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", function () {
+            console.log("the detail view has a classlist", )
             // render the detailed view
             let cardId = String(this.id);
             renderDetailView(cardId.slice(0, 3));
 
             // display detailed view
             this.classList.toggle("active");
-            var detailedView = document.getElementById("detailed-view-card")
+            var detailedViews = document.getElementsByClassName("detailed-view-card")
+            // $('detailed-view-card').on
             //add content to detailed view here, identifuing what to put by card[i]
-            if (detailedView.style.maxHeight) {
-                detailedView.style.maxHeight = null;
-            } else {
-                detailedView.style.maxHeight = detailedView.scrollHeight + "px";
+            for(let i=0; i < detailedViews.length; i++){
+                // detailedViews[i].classList.toggle("active");
+                detailedViews[i].style.display = "flex";
+                if (detailedViews[i].style.maxHeight) {
+                    detailedViews[i].style.maxHeight = null;
+                } else {
+                    detailedViews[i].style.maxHeight = detailedViews[i].scrollHeight + "px";
+                }
             }
+
+            
         });
     }
 
@@ -262,6 +277,7 @@ window.onload = function () {
 
 // returns the temp data for each indicator
 function getTempData(indicatorName, key) {
+    // JUST USE TEMPDATA1 AND TEMPDATA2 OR SOMETHING LIKE THAT
     const tempdata = {
         "act": {
             "years": [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],

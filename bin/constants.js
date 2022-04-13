@@ -5,7 +5,7 @@ const CATEGORY_TAGS = {
     'ts': "Target Sector Employment",
     'pd': "Population Drivers",
     'hs': "Housing",
-    'ct': "connectivity"
+    'ct': "Connectivity"
 }
 
 const INDICATOR_TAGS = {

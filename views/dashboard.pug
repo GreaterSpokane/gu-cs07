@@ -15,16 +15,9 @@ block page-name
     h1 Economic Indicator Dashboard
 block content
     .dashboard
-        //- .tab
-        //-     button.tablinks.active(onclick="filtercards(event, 'all')") All
-        //-     button.tablinks(onclick="filtercards(event, 'income')") Income
-        //-     button.tablinks(onclick="filtercards(event, 'employment')") Employment
-        //-     button.tablinks(onclick="filtercards(event, 'housing')") Housing
-        //-     button.tablinks(onclick="filtercards(event, 'other')") Other
-        //- hr
         .dashboard-body
             #housing
-                .category
+                .category-snapshot-view
                     h2 Housing
                     .category-flex-container 
                         #mhi-card.card
@@ -43,34 +36,30 @@ block content
                                 canvas#hai
                             .more-info-button
                                 button.unstyled-button(onclick="toggleDetailView(event, 'hai')") More info
-                #detailed-view-card
+                #mhi-detailed-view.detailed-view-card
                     .detailed-view-half
                         p
                             b Description about the indicator
-                            | Lorem ipsum dolor sit amet, consectetur adipiscing
-                            | elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            | veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
                         p
                             b Notes about the data source
-                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            span#link 
-                                a(href="https://data.census.gov/cedsci/" style="color:blue;") Data source
+                            span.link 
+                                a(style="color:blue;") Data source
                         p
-                            b Compare data
-                        .compare-data-checkboxes
-                            input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
-                            label#spokane-checkbox-label(for="spokane-checkbox") Spokane
-                            //- input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
-                            //- label#wa-checkbox-label(for="wa-checkbox") Washington
-                            input#boise-checkbox.checkboxes(type="checkbox" name="boise-checkbox")
-                            label#boise-checkbox-label(for="boise-checkbox") Boise
-                            input#saltlake-checkbox.checkboxes(type="checkbox" name="saltlake-checkbox")
-                            label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
-                            input#eugene-checkbox.checkboxes(type="checkbox" name="eugene-checkbox")
-                            label#eugene-checkbox-label(for="eugene-checkbox") Eugene
-                            input#fortcollins-checkbox.checkboxes(type="checkbox" name="fortcollins-checkbox")
-                            label#fortcollins-checkbox-label(for="fortcollins-checkbox") Fort Collins
+                            b Comparison Counties
+                        .checkbox-container
+                            
+                            //- input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
+                            //- label#spokane-checkbox-label(for="spokane-checkbox") Spokane
+                            //- //- input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
+                            //- //- label#wa-checkbox-label(for="wa-checkbox") Washington
+                            //- input#boise-checkbox.checkboxes(type="checkbox" name="boise-checkbox")
+                            //- label#boise-checkbox-label(for="boise-checkbox") Boise
+                            //- input#saltlake-checkbox.checkboxes(type="checkbox" name="saltlake-checkbox")
+                            //- label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
+                            //- input#eugene-checkbox.checkboxes(type="checkbox" name="eugene-checkbox")
+                            //- label#eugene-checkbox-label(for="eugene-checkbox") Eugene
+                            //- input#fortcollins-checkbox.checkboxes(type="checkbox" name="fortcollins-checkbox")
+                            //- label#fortcollins-checkbox-label(for="fortcollins-checkbox") Fort Collins
                         p
                             b Time Range
                         .range-slider
@@ -79,8 +68,8 @@ block content
                             #slider
                         p 
                         br
-                    .detailed-view-half#detail-graph-container
-                        canvas#detailed-chart-canvas
+                    .detailed-view-half
+                        canvas#mhi-detailed-chart-canvas
                         br
             #labor
                 .category
@@ -101,7 +90,7 @@ block content
                             .chart-container
                                 canvas#lfs
                             .more-info-button
-                                //- button(onclick="toggleDetailView(event, 'lfs')") More info
+                                button(onclick="toggleDetailView(event, 'lfs')") More info
                         #lfp-card.card
                             .card-header
                                 h3 Labor Force Participation Rate
