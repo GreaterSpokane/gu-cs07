@@ -75,13 +75,13 @@
   padding: 0 10px;
   margin: 5px;
   margin-bottom: 16px;
-  max-height: 0;
+  max-height: 4000;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
   /* border: 1px solid #ccc; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  display: none;
+  display: flex;
 }
 
 /* .detailed-view-card .active {
@@ -187,10 +187,10 @@
 .checkbox-container {
   display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  padding-left: 25px;
+  margin-bottom: 5px;
   cursor: pointer;
-  font-size: 22px;
+  /* font-size: 22px; */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -211,14 +211,14 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
+  height: 1em;
+  width: 1em;
+  background-color: #ccc;
 }
 
 /* On mouse-over, add a grey background color */
 .checkbox-container:hover input ~ .checkmark {
-  background-color: #ccc;
+  background-color: rgb(156, 156, 156);
 }
 
 /* When the checkbox is checked, add a blue background */
@@ -240,10 +240,14 @@
 
 /* Style the checkmark/indicator */
 .checkbox-container .checkmark:after {
-  left: 9px;
+  /* left: 9px;
   top: 5px;
   width: 5px;
-  height: 10px;
+  height: 10px; */
+  left: 0.36em;
+  top: 0.2em;
+  width: 0.2em;
+  height: 0.4em;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);

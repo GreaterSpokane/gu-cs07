@@ -96,7 +96,7 @@ function renderDetailView(indicatorName) {
     });
 }
 
-// updates the chart year/data range based on the range slider
+// updates the charts based on the range slider
 function updateRange(startIndex, endIndex) {
     console.log("inside updateRange function");
     console.log("start/end indexes:", startIndex, endIndex);
@@ -106,7 +106,7 @@ function updateRange(startIndex, endIndex) {
 
     let backupData = []
     window.detailChart.data.datasets.forEach((dataset) => {
-        backupData.push(JSON.parse(JSON.stringify(dataset.data)))
+        backupData.push(JSON.parse(JSON.stringify(dataset.data)));
         dataset.data = dataset.data.slice(startIndex, endIndex + 1);
     });
     window.detailChart.update();
