@@ -54,8 +54,8 @@ function renderDetailView(indicatorName) {
     let detailedChartId = "";
 
     switch(indicatorName) {
-        case 'mhi' || 'hai':
-            detailedChartId = 'housing';
+        case 'mhc' || 'hai':
+            detailedChartId = 'mhc';
     }
 
     console.log(detailedChartId + "-detailed-chart-canvas");
@@ -174,7 +174,7 @@ window.onload = function () {
 
 
     // render each indicator chart
-    let maiChart = new Chart("mhi", getConfig("mhi", false));
+    let maiChart = new Chart("mhc", getConfig("mhi", false));
     let lfpChart = new Chart("lfp", getConfig("lfpr", false));
     let lftChart = new Chart("lft", getConfig("lfpr", false));
     let haiChart = new Chart("hai", getConfig("hai", false));

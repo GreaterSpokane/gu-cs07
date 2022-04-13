@@ -20,12 +20,12 @@ block content
                 .category-snapshot-view
                     h2 Housing
                     .category-flex-container 
-                        #mhi-card.card
+                        #mhc-card.card
                             .card-header
                                 h3 Median Housing Cost
-                                p#mhi-stat.stat Increased between 2018 and 2019.
+                                p#mhc-stat.stat Increased between 2018 and 2019.
                             .chart-container
-                                canvas#mhi
+                                canvas#mhc
                             .more-info-button
                                 button.unstyled-button(onclick="toggleDetailView(event, 'mhc')") More info
                         #hai-card.card
@@ -36,7 +36,7 @@ block content
                                 canvas#hai
                             .more-info-button
                                 button.unstyled-button(onclick="toggleDetailView(event, 'hai')") More info
-                #mhi-detailed-view.detailed-view-card
+                #mhc-detailed-view.detailed-view-card
                     .detailed-view-half
                         p
                             b Description about the indicator
@@ -46,8 +46,15 @@ block content
                                 a(style="color:blue;") Data source
                         p
                             b Comparison Counties
-                        .checkbox-container
-                            
+                        .checkboxs
+                            label.checkbox-container Spokane
+                                span.county-label (Spokane County)
+                                input#mhc-spokane-checkbox(type="checkbox" checked)
+                                span.checkmark
+                            label.checkbox-container Boise
+                                span.county-label (Ada County)
+                                input#mhc-spokane-checkbox(type="checkbox" checked)
+                                span.checkmark
                             //- input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
                             //- label#spokane-checkbox-label(for="spokane-checkbox") Spokane
                             //- //- input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
