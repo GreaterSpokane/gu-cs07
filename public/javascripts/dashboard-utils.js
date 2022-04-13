@@ -1,36 +1,125 @@
 import indicatorConfig from './indicator-config.js';
-// hides/shows cards based on what category (eg. housing, income) is selected 
-// function filtercards(event, tabName) {
-//     console.log("filter cards!");
-//     //toggle active tab color
-//     var cards = document.getElementsByClassName("card")
-//     var i;
-//     for (i = 0; i < cards.length; i++) {
-//         cards[i].style.display = "none";
-//     }
-//     var tablinks = document.getElementsByClassName("tablinks");
-//     for (i = 0; i < tablinks.length; i++) {
-//         tablinks[i].className = tablinks[i].className.replace(" active", "");
-//     }
-//     var selectedCards = document.getElementsByClassName(tabName)
-//     for (i = 0; i < selectedCards.length; i++) {
-//         selectedCards[i].style.display = "block";
-//     }
+// var tags = require("../../bin/constants.js");
 
-//     event.currentTarget.className += " active";
 
-// }
+window.onload = function () {
+    // make data calls
 
-// returns the full name of the indicator abbreviation
-// function getIndicatorName(indicatorAbbrev) {
-//     const names = {
-//         'mhi': "Median Household Income",
-//         'lfpr': "Labor Force Participation Rate",
-//         'hai': "Housing Affordability Index",
-//         'mhrv': "Median Home Resale Value",
-//     }
-//     return names[indicatorAbbrev]
-// }
+    // create short stat and display -now
+
+    // create snapshot charts
+
+    // load descriptions, ect -now
+
+    // create detailed charts -now
+
+    // crate sliders -now
+
+    // event listners -now
+
+
+    console.log("inside window.onload fuction!");
+
+    // render each indicator chart
+    let maiChart = new Chart("mhc", getConfig("mhi", false));
+    let lfpChart = new Chart("lfp", getConfig("lfpr", false));
+    let lftChart = new Chart("lft", getConfig("lfpr", false));
+    let haiChart = new Chart("hai", getConfig("hai", false));
+    let mhrvChart = new Chart("mhrv", getConfig("mhrv", false));
+    let mhr1vChart = new Chart("ntc", getConfig("mhrv", false));
+    let mhrv1Chart = new Chart("ndm", getConfig("mhrv", false));
+
+    new Chart("lfs", {
+        type: "doughnut",
+        data: {
+            labels: [
+                'Not in Labor Force',
+                'Employed',
+                'Armed Forces',
+                'Unemployed'
+            ],
+            datasets: [{
+                //   label: 'My First Dataset',
+                data: [0.2, 0.6, 0.1, 0.1],
+                backgroundColor: [
+                    '#866BAF',
+                    '#00B4ED',
+                    '#D7DC61',
+                    '#6E7277'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            radius: "70%"
+        }
+    });
+
+    // adds event listeners to each button
+    var buttons = document.getElementsByClassName("button");
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function () {
+            let indicatorName = String(this.id).slice(0, 3);
+            console.log(indicatorName)
+            let detailedViews = document.getElementsByClassName("detailed-view-card");
+            for (let i = 0; i < detailedViews.length; i++) {
+                if (detailedViews[i].style.maxHeight) {
+                    detailedViews[i].style.maxHeight = null;
+                    setTimeout(function () {    // waiting for css transition to finish
+                        detailedViews[i].style.display = "none";
+                    }, 200);
+                } else {
+                    if (String(detailedViews[i].id).slice(0, 3) == indicatorName) {
+                        detailedViews[i].style.display = "flex";
+                        detailedViews[i].style.maxHeight = detailedViews[i].scrollHeight + "px";
+                    }
+                }
+            }
+        });
+    }
+
+    // create the short stat percentage for each card
+    const stats = document.getElementsByClassName("stat");
+    for (var i = 0; i < stats.length; i++) {
+        console.log("inside short stat fucntion")
+        let statId = String(buttons[i].id);
+        console.log("stat sliced", statId)
+        const spokaneStatData = getTempData(statId.slice(0, -5), 'Spokane')
+        const yearsData = getTempData(statId.slice(0, -5), 'years')
+        const dataLen = spokaneStatData.length
+        const endData = spokaneStatData[dataLen - 1]
+        const startData = spokaneStatData[dataLen - 2]
+        const statPercent = (((endData - startData) / startData) * 100).toFixed(1)
+        const endYear = yearsData[dataLen - 1]
+        const startYear = yearsData[dataLen - 2]
+        let incOrDec = 'Increased'
+        if (statPercent < 0) {
+            incOrDec = 'Decreased'
+        }
+        stats[i].innerHTML = incOrDec + " " + String(statPercent) + "% between " + startYear + " and " + endYear
+    }
+
+    // add event listeners to checkboxes
+    var checkboxes = document.getElementsByClassName("checkboxes");
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener("change", function () {
+            var labelText = document.getElementById(this.id + "-label").textContent;
+            if (this.checked) {
+                console.log("Checkbox is checked..");
+                toggleLocations(labelText, true);
+
+            } else {
+                console.log("Checkbox is not checked..");
+                toggleLocations(labelText, false);
+            }
+        })
+    }
+
+}
+
+function toggleDetailView(event, indicatorName) {
+
+}
 
 // creates the chart in the detailed view
 function renderDetailView(indicatorName) {
@@ -53,7 +142,7 @@ function renderDetailView(indicatorName) {
 
     let detailedChartId = "";
 
-    switch(indicatorName) {
+    switch (indicatorName) {
         case 'mhc' || 'hai':
             detailedChartId = 'mhc';
     }
@@ -144,13 +233,13 @@ async function getData(indicatorName, county) {
     let data = [];
     let path = "";
     let schemaDataName = "";
-    const query = `?county=${county}&start_year=${2001}&end_year=${2022}`;    // TODO: validate the county name and maybe use constants for the start/end years
+    const query = `?county=${county}&start_year=${2001}&end_year=${2022}`;
     switch (indicatorName) {
         case 'lfp':
             path = '/v1/getManyLaborParticipation/';  // this will be updated to the correct lfp path after merging into dev
             schemaDataName = 'laborParticipationRate';  // getting this from the labor model instaed may be better
             break;
-        case 'mhi':
+        case 'mhc':
             path = '/v1/getManyMedianHousing/';
             schemaDataName = 'medianHousingCost';
             break;
@@ -164,116 +253,12 @@ async function getData(indicatorName, county) {
         mode: "same-origin"
     })
         .then(res => res.json())
-        // .then(body => console.log(body);
+    // .then(body => console.log(body);
     return res[schemaDataName];
 
 }
 
-window.onload = function () {
-    console.log("inside window.onload fuction!");
 
-
-    // render each indicator chart
-    let maiChart = new Chart("mhc", getConfig("mhi", false));
-    let lfpChart = new Chart("lfp", getConfig("lfpr", false));
-    let lftChart = new Chart("lft", getConfig("lfpr", false));
-    let haiChart = new Chart("hai", getConfig("hai", false));
-    let mhrvChart = new Chart("mhrv", getConfig("mhrv", false));
-    let mhr1vChart = new Chart("ntc", getConfig("mhrv", false));
-    let mhrv1Chart = new Chart("ndm", getConfig("mhrv", false));
-
-    new Chart("lfs", {
-        type: "doughnut",
-        data: {
-            labels: [
-              'Not in Labor Force',
-              'Employed',
-              'Armed Forces',
-              'Unemployed'
-            ],
-            datasets: [{
-            //   label: 'My First Dataset',
-              data: [0.2, 0.6, 0.1, 0.1],
-              backgroundColor: [
-                '#866BAF',
-                '#00B4ED',
-                '#D7DC61',
-                '#6E7277'
-              ],
-              hoverOffset: 4
-            }]
-        },
-        options: {
-            radius: "70%"
-        }
-    });
-
-    // adds event listeners to each card
-    var cards = document.getElementsByClassName("card");
-    for (var i = 0; i < cards.length; i++) {
-        cards[i].addEventListener("click", function () {
-            console.log("the detail view has a classlist", )
-            // render the detailed view
-            let cardId = String(this.id);
-            renderDetailView(cardId.slice(0, 3));
-
-            // display detailed view
-            this.classList.toggle("active");
-            var detailedViews = document.getElementsByClassName("detailed-view-card")
-            // $('detailed-view-card').on
-            //add content to detailed view here, identifuing what to put by card[i]
-            for(let i=0; i < detailedViews.length; i++){
-                // detailedViews[i].classList.toggle("active");
-                detailedViews[i].style.display = "flex";
-                if (detailedViews[i].style.maxHeight) {
-                    detailedViews[i].style.maxHeight = null;
-                } else {
-                    detailedViews[i].style.maxHeight = detailedViews[i].scrollHeight + "px";
-                }
-            }
-
-            
-        });
-    }
-
-    // create the short stat percentage for each card
-    const stats = document.getElementsByClassName("stat");
-    for (var i = 0; i < stats.length; i++) {
-        console.log("inside short stat fucntion")
-        let statId = String(cards[i].id);
-        console.log("stat sliced", statId)
-        const spokaneStatData = getTempData(statId.slice(0, -5), 'Spokane')
-        const yearsData = getTempData(statId.slice(0, -5), 'years')
-        const dataLen = spokaneStatData.length
-        const endData = spokaneStatData[dataLen - 1]
-        const startData = spokaneStatData[dataLen - 2]
-        const statPercent = (((endData - startData) / startData) * 100).toFixed(1)
-        const endYear = yearsData[dataLen - 1]
-        const startYear = yearsData[dataLen - 2]
-        let incOrDec = 'Increased'
-        if (statPercent < 0) {
-            incOrDec = 'Decreased'
-        }
-        stats[i].innerHTML = incOrDec + " " + String(statPercent) + "% between " + startYear + " and " + endYear
-    }
-
-    // add event listeners to checkboxes
-    var checkboxes = document.getElementsByClassName("checkboxes");
-    for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener("change", function () {
-            var labelText = document.getElementById(this.id + "-label").textContent;
-            if (this.checked) {
-                console.log("Checkbox is checked..");
-                toggleLocations(labelText, true);
-
-            } else {
-                console.log("Checkbox is not checked..");
-                toggleLocations(labelText, false);
-            }
-        })
-    }
-
-}
 
 // returns the temp data for each indicator
 function getTempData(indicatorName, key) {

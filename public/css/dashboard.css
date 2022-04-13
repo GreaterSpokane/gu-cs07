@@ -75,13 +75,13 @@
   padding: 0 10px;
   margin: 5px;
   margin-bottom: 16px;
-  max-height: 4000;
+  max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
   /* border: 1px solid #ccc; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  display: flex;
+  display: none;
 }
 
 /* .detailed-view-card .active {
@@ -160,7 +160,7 @@
   color: #2f2f2e;
 }
 
-#slider {
+.slider {
   margin-right: 10px;
   margin-left: 10px;
 }
@@ -244,7 +244,7 @@
   top: 5px;
   width: 5px;
   height: 10px; */
-  left: 0.36em;
+  left: 0.3em;
   top: 0.2em;
   width: 0.2em;
   height: 0.4em;

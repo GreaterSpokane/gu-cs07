@@ -15,3 +15,5 @@ const INDICATOR_TAGS = {
     'hai': "Housing Affordability Index",
     'mhc': "Median Housing Cost"
 }
+
+module.exports = {CATEGORY_TAGS, INDICATOR_TAGS};

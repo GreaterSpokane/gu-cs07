@@ -16,182 +16,215 @@ block page-name
 block content
     .dashboard
         .dashboard-body
-            #housing
-                .category-snapshot-view
-                    h2 Housing
-                    .category-flex-container 
-                        #mhc-card.card
-                            .card-header
-                                h3 Median Housing Cost
-                                p#mhc-stat.stat Increased between 2018 and 2019.
-                            .chart-container
-                                canvas#mhc
-                            .more-info-button
-                                button.unstyled-button(onclick="toggleDetailView(event, 'mhc')") More info
-                        #hai-card.card
-                            .card-header
-                                h3 Housing Affordability Index
-                                p#hai-stat.stat Short metric about indicator performance
-                            .chart-container
-                                canvas#hai
-                            .more-info-button
-                                button.unstyled-button(onclick="toggleDetailView(event, 'hai')") More info
-                #mhc-detailed-view.detailed-view-card
-                    .detailed-view-half
-                        p
-                            b Description about the indicator
-                        p
-                            b Notes about the data source
-                            span.link 
-                                a(style="color:blue;") Data source
-                        p
-                            b Comparison Counties
-                        .checkboxs
-                            label.checkbox-container Spokane, WA 
-                                span.county-label (Spokane County)
-                                input#mhc-spokane-checkbox(type="checkbox" checked)
-                                span.checkmark
-                            label.checkbox-container Boise, ID 
-                                span.county-label (Ada County)
-                                input#mhc-spokane-checkbox(type="checkbox" checked)
-                                span.checkmark
-                            label.checkbox-container Salt Lake City, UT 
-                                span.county-label (Salt Lake County)
-                                input#mhc-spokane-checkbox(type="checkbox")
-                                span.checkmark
-                            label.checkbox-container Eugene, OR 
-                                span.county-label (Lane County)
-                                input#mhc-spokane-checkbox(type="checkbox")
-                                span.checkmark
-                            label.checkbox-container Fort Collins, CO   
-                                span.county-label (Larimer County)
-                                input#mhc-spokane-checkbox(type="checkbox")
-                                span.checkmark
-                        p
-                            b Time Range
-                        .range-slider
-                            br 
-                            br                            
-                            #slider
-                        p 
-                        br
-                    .detailed-view-half
-                        canvas#mhi-detailed-chart-canvas
-                        br
-            #labor
-                .category
-                    h2 Labor Force
-                    .category-flex-container 
-                        #lft-card.card
-                            .card-header
-                                h3 Labor Force Total
-                                p#lft-stat.stat Short metric about indicator performance
-                            .chart-container
-                                canvas#lft
-                            .more-info-button
-                                button.unstyled-button(onclick="toggleDetailView(event, 'lft')") More info
-                        #lfs-card.card.non-line
-                            .card-header
-                                //- h3 Labor Force 
-                                //- p#lfs-stat.stat Increased between 2018 and 2019.
-                            .chart-container
-                                canvas#lfs
-                            .more-info-button
-                                button(onclick="toggleDetailView(event, 'lfs')") More info
-                        #lfp-card.card
-                            .card-header
-                                h3 Labor Force Participation Rate
-                                p#lfp-stat.stat Increased between 2018 and 2019.
-                            .chart-container
-                                canvas#lfp
-                            .more-info-button
-                                button.unstyled-button(onclick="toggleDetailView(event, 'lfp')") More info
-            #population-drivers
-                .category
-                    h2 Population Drivers
-                    .category-flex-container 
-                        #ntc-card.card
-                            .card-header
-                                h3 Natural Change
-                                p#ntc-stat.stat Short metric about indicator performance
-                            .chart-container
-                                canvas#ntc
-                            .more-info-button
-                                button.unstyled-button(onclick="toggleDetailView(event, 'ndc')") More info
-                        #ndm-card.card
-                            .card-header
-                                h3 Net Domestic Migration 
-                                p#ndm-stat.stat Increased between 2018 and 2019.
-                            .chart-container
-                                canvas#ndm
-                            .more-info-button
-                                button(onclick="toggleDetailView(event, 'ndm')") More info
-                        
-                        
-                //- .detailed-view-card
-                //-     .detailed-view-half
-                //-         p
-                //-             b Description about the indicator
-                //-             | Lorem ipsum dolor sit amet, consectetur adipiscing
-                //-             | elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                //-             | veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                //-         p
-                //-             b Notes about the data source
-                //-             | Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                //-             | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                //-             span#link 
-                //-                 a(href="https://data.census.gov/cedsci/" style="color:blue;") Data source
-                //-         p
-                //-             b Compare data
-                //-         .compare-data-checkboxes
-                    //-         input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
-                    //-         label#spokane-checkbox-label(for="spokane-checkbox") Spokane
-                    //-         input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
-                    //-         label#wa-checkbox-label(for="wa-checkbox") Washington
-                    //-         input#boise-checkbox.checkboxes(type="checkbox" name="boise-checkbox")
-                    //-         label#boise-checkbox-label(for="boise-checkbox") Boise
-                    //-         input#saltlake-checkbox.checkboxes(type="checkbox" name="saltlake-checkbox")
-                    //-         label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
-                    //-         input#eugene-checkbox.checkboxes(type="checkbox" name="eugene-checkbox")
-                    //-         label#eugene-checkbox-label(for="eugene-checkbox") Eugene
-                    //-         input#fortcollins-checkbox.checkboxes(type="checkbox" name="fortcollins-checkbox")
-                    //-         label#fortcollins-checkbox-label(for="fortcollins-checkbox") Fort Collins
-                            
-                    //-     p
-                    //-         b Time Range
-                    //-     .range-slider
-                    //-         br 
-                    //-         br                            
-                    //-         #slider
-                    //-     p 
-                    //-     br
-                    //- .detailed-view-half#detail-graph-container
-                    //-     canvas#detailed-chart-canvas1
-                    //-     br
-            //- .indicator-container
-            //-     //- #mhi-card.card.all.income
-            //-     //-     .card-header
-            //-     //-         h3 Median Household Income
-            //-     //-         p#mhi-stat.stat Increased between 2018 and 2019.
-            //-     //-     .card-body
-            //-     //-         canvas#mhi
-            //-     //-     .card-footer
-            //-     #lfpr-card.card.all.employment
-            //-         .card-header
-            //-             h3 Labor Force Participation Rate
-            //-             p#lfpr-stat.stat Short metric about indicator performance
-            //-         .card-body
-            //-             canvas#lfpr
-            //-     //- #hai-card.card.all.housing
-            //-     //-     .card-header
-            //-     //-         h3 Housing Affordability Index
-            //-     //-         p#hai-stat.stat Short metric about indicator performance
-            //-     //-     .card-body
-            //-     //-         canvas#hai
-            //-     #mhrv-card.card.all.housing
-            //-         .card-header
-            //-             h3 Median Home Resale Value
-            //-             p#mhrv-stat.stat Short metric about indicator performance
-            //-         .card-body
-            //-             canvas#mhrv
+            #housing.category-snapshot-view
+                h2 Housing
+                .category-flex-container 
+                    #mhc-card.card
+                        .card-header
+                            h3 Median Housing Cost
+                            p#mhc-stat.stat Increased between 2018 and 2019.
+                        .chart-container
+                            canvas#mhc
+                        .more-info-button
+                            button#mhc-button.button More info
+                    #hai-card.card
+                        .card-header
+                            h3 Housing Affordability Index
+                            p#hai-stat.stat Short metric about indicator performance
+                        .chart-container
+                            canvas#hai
+                        .more-info-button
+                            button#hai-button.button More info
+            #mhc-detailed-view.detailed-view-card
+                .detailed-view-half
+                    h4 About
+                    p#mhc-description
+                    h4 Data source notes
+                    p#mhc-about
+                        a#mhc-link(style="color:blue;") Data source
+                    h4 Comparison Counties
+                    .checkboxs
+                        label.checkbox-container Spokane, WA 
+                            span.county-label (Spokane County)
+                            input#mhc-spokane-checkbox(type="checkbox" checked)
+                            span.checkmark
+                        label.checkbox-container Boise, ID 
+                            span.county-label (Ada County)
+                            input#mhc-spokane-checkbox(type="checkbox" checked)
+                            span.checkmark
+                        label.checkbox-container Salt Lake City, UT 
+                            span.county-label (Salt Lake County)
+                            input#mhc-spokane-checkbox(type="checkbox")
+                            span.checkmark
+                        label.checkbox-container Eugene, OR 
+                            span.county-label (Lane County)
+                            input#mhc-spokane-checkbox(type="checkbox")
+                            span.checkmark
+                        label.checkbox-container Fort Collins, CO   
+                            span.county-label (Larimer County)
+                            input#mhc-spokane-checkbox(type="checkbox")
+                            span.checkmark
+                    h4 Time Range
+                    #mhc-range-slider.range-slider
+                        br 
+                        br                            
+                        #mhc-slider.slider
+                    p 
+                    br
+                .detailed-view-half
+                    canvas#mhc-detailed-chart-canvas
+                    br
+            #hai-detailed-view.detailed-view-card
+                .detailed-view-half
+                    h4 About
+                    p#hai-description
+                    h4 Data source notes
+                    p#hai-about
+                        a#hai-link(style="color:blue;") Data source
+                    h4 Comparison Counties
+                    .checkboxs
+                        label.checkbox-container Spokane, WA 
+                            span.county-label (Spokane County)
+                            input#hai-spokane-checkbox(type="checkbox" checked)
+                            span.checkmark
+                        label.checkbox-container Boise, ID 
+                            span.county-label (Ada County)
+                            input#hai-spokane-checkbox(type="checkbox" checked)
+                            span.checkmark
+                        label.checkbox-container Salt Lake City, UT 
+                            span.county-label (Salt Lake County)
+                            input#hai-spokane-checkbox(type="checkbox")
+                            span.checkmark
+                        label.checkbox-container Eugene, OR 
+                            span.county-label (Lane County)
+                            input#hai-spokane-checkbox(type="checkbox")
+                            span.checkmark
+                        label.checkbox-container Fort Collins, CO   
+                            span.county-label (Larimer County)
+                            input#hai-spokane-checkbox(type="checkbox")
+                            span.checkmark
+                    h4 Time Range
+                    #hai-range-slider.range-slider
+                        br 
+                        br                            
+                        #hai-slider.slider
+                    p 
+                    br
+                .detailed-view-half
+                    canvas#hai-detailed-chart-canvas
+                    br
+            #labor.category-snapshot-view
+                h2 Labor Force
+                .category-flex-container 
+                    #lft-card.card
+                        .card-header
+                            h3 Labor Force Total
+                            p#lft-stat.stat Short metric about indicator performance
+                        .chart-container
+                            canvas#lft
+                        .more-info-button
+                            button#lft-button.button More info
+                    #lfs-card.card.non-line
+                        .card-header
+                            //- h3 Labor Force 
+                            //- p#lfs-stat.stat Increased between 2018 and 2019.
+                        .chart-container
+                            canvas#lfs
+                        .more-info-button
+                            button#lfs-button.button More info
+                    #lfp-card.card
+                        .card-header
+                            h3 Labor Force Participation Rate
+                            p#lfp-stat.stat Increased between 2018 and 2019.
+                        .chart-container
+                            canvas#lfp
+                        .more-info-button
+                            button#lfp-button.button More info
+            #population-drivers.category-snapshot-view
+                h2 Population Drivers
+                .category-flex-container 
+                    #ntc-card.card
+                        .card-header
+                            h3 Natural Change
+                            p#ntc-stat.stat Short metric about indicator performance
+                        .chart-container
+                            canvas#ntc
+                        .more-info-button
+                            button#ntc-button.button More info
+                    #ndm-card.card
+                        .card-header
+                            h3 Net Domestic Migration 
+                            p#ndm-stat.stat Increased between 2018 and 2019.
+                        .chart-container
+                            canvas#ndm
+                        .more-info-button
+                            button#ndm-button.button More info
+
+
+    //- .detailed-view-card
+    //-     .detailed-view-half
+    //-         p
+    //-             b Description about the indicator
+    //-             | Lorem ipsum dolor sit amet, consectetur adipiscing
+    //-             | elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+    //-             | veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    //-         p
+    //-             b Notes about the data source
+    //-             | Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    //-             | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    //-             span#link 
+    //-                 a(href="https://data.census.gov/cedsci/" style="color:blue;") Data source
+    //-         p
+    //-             b Compare data
+    //-         .compare-data-checkboxes
+    //-         input#spokane-checkbox.checkboxes(type="checkbox" name="spokane-checkbox", checked)
+    //-         label#spokane-checkbox-label(for="spokane-checkbox") Spokane
+    //-         input#wa-checkbox.checkboxes(type="checkbox" name="wa-checkbox", checked)
+    //-         label#wa-checkbox-label(for="wa-checkbox") Washington
+    //-         input#boise-checkbox.checkboxes(type="checkbox" name="boise-checkbox")
+    //-         label#boise-checkbox-label(for="boise-checkbox") Boise
+    //-         input#saltlake-checkbox.checkboxes(type="checkbox" name="saltlake-checkbox")
+    //-         label#saltlake-checkbox-label(for="saltlake-checkbox") Salt Lake City
+    //-         input#eugene-checkbox.checkboxes(type="checkbox" name="eugene-checkbox")
+    //-         label#eugene-checkbox-label(for="eugene-checkbox") Eugene
+    //-         input#fortcollins-checkbox.checkboxes(type="checkbox" name="fortcollins-checkbox")
+    //-         label#fortcollins-checkbox-label(for="fortcollins-checkbox") Fort Collins
+
+    //-     p
+    //-         b Time Range
+    //-     .range-slider
+    //-         br 
+    //-         br                            
+    //-         #slider
+    //-     p 
+    //-     br
+    //- .detailed-view-half#detail-graph-container
+    //-     canvas#detailed-chart-canvas1
+    //-     br
+    //- .indicator-container
+    //-     //- #mhi-card.card.all.income
+    //-     //-     .card-header
+    //-     //-         h3 Median Household Income
+    //-     //-         p#mhi-stat.stat Increased between 2018 and 2019.
+    //-     //-     .card-body
+    //-     //-         canvas#mhi
+    //-     //-     .card-footer
+    //-     #lfpr-card.card.all.employment
+    //-         .card-header
+    //-             h3 Labor Force Participation Rate
+    //-             p#lfpr-stat.stat Short metric about indicator performance
+    //-         .card-body
+    //-             canvas#lfpr
+    //-     //- #hai-card.card.all.housing
+    //-     //-     .card-header
+    //-     //-         h3 Housing Affordability Index
+    //-     //-         p#hai-stat.stat Short metric about indicator performance
+    //-     //-     .card-body
+    //-     //-         canvas#hai
+    //-     #mhrv-card.card.all.housing
+    //-         .card-header
+    //-             h3 Median Home Resale Value
+    //-             p#mhrv-stat.stat Short metric about indicator performance
+    //-         .card-body
+    //-             canvas#mhrv
 
