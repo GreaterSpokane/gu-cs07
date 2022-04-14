@@ -1,44 +1,90 @@
+require('dotenv').config();
 var express = require("express");
-var router = express.Router();
+var session = require("express-session");
 var createAuthUser = require("../controllers/auth/createAuthUserController");
 var authorizeUser = require("../controllers/auth/authorizeUserController");
+const AuthUser = require('../models/authUser');
+var router = express.Router();
+//  Session setup
+router.use(session({
+    secret: process.env.USER_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        // Session expires after 5 min of inactivity.
+        expires: 300000
+    }
+}));
 
-/* login page api routes*/
+function validateSession(sess) {
+    if (sess) {
+        if (sess.username != ("" || null || undefined)) {
+            var user = AuthUser.findOne({ 'username': sess.username }).exec();
+            if (user != null)
+                return true;
+            else
+                return false;
+        }
+    }
+
+    return false;
+}
+
 router
-    .get('/login', async(req, res, next) => { res.render('login'); })
-    .get('/auth', async(req, res, next) => { res.render('button'); })
-    .get('/button', async(req, res, next) => { res.render('button'); })
-    .get('/endpoints', async(req, res, next) => { res.render('auth'); })
-    .post('/login', async(req, res, next) => {
-        //  If password match -> redirect to /auth
-        //  else -> display error on login page
+    .get('/button', async(req, res, next) => {
+        if (validateSession(req.session))
+            res.render('button')
+        else
+            res.redirect(403, '/login')
+    })
+    .get('/endpoints', async(req, res, next) => {
+        if (validateSession(req.session))
+            res.render('auth');
+        else
+            res.redirect(403, '/login');
+    })
+    .get('/auth', async(req, res) => {
+        if (validateSession(req.session))
+            res.render('auth');
+        else
+            res.redirect(403, '/login');
 
-        //  validate body and params (nonnull, type specific)
+    })
+
+router
+    .get('/login', async(req, res) => {
+        req.session.destroy()
+        res.render('login');
+    })
+    .post('/login', async(req, res) => {
         var username = req.body.username;
         var password = req.body.password;
+        var sess = req.session;
         var authResult = await authorizeUser(username, password);
 
         if (authResult.result == "success") {
-            console.log(authResult);
-            res.redirect(301, "/auth_layout");
-        } else {
-            console.log(authResult);
-            res.redirect(401, "/login");
-        }
-    })
-    .post("/register/user/", async(req, res, next) => {
-        if (req.body != null)
-            res.redirect(400, '/login')
+            sess.username = username;
+            return res.redirect('/auth');
+        } else
+            return res.redirect(403, '/login');
+    });
 
+router
+    .get('/register', async(req, res) => { res.render('register') })
+    .post("/register", async(req, res) => {
+        if (req.body == null)
+            return res.redirect(400, '/register');
+
+        var sess = req.session;
         var username = req.body.username;
         var password = req.body.password;
-        var createResult = await createAuthUser(username, password)
-            .catch((err) => {
-                //  Error in creating the user, redirect to the login page
-                console.log(err);
-                res.redirect('/login');
-            });
-        res.status(201).json(createResult);
+        var registerResult = await createAuthUser(username, password);
+        if (registerResult.result == 'registered user') {
+            sess.username = username
+            return res.redirect('/auth')
+        } else
+            return res.redirect('/register')
     });
+
 
 module.exports = router;

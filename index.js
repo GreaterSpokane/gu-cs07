@@ -44,7 +44,11 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use(session({
     secret: process.env.USER_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        // Session expires after 5 min of inactivity.
+        expires: 300000
+    }
 }));
 
 //  Routers
