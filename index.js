@@ -59,6 +59,7 @@ var laborParticipationRouter = require('./routes/laborParticipation')
 var medianHousingRouter = require('./routes/housing');
 var naturalChangeRouter = require("./routes/naturalChange");
 var netDomesticMigrationRouter = require('./routes/netDomesticMigration');
+var averageRentRouter = require('./routes/averageRent');
 var housingAffordabilityRouter = require('./routes/housingAffordability');
 var testEndpointsRouter = require('./routes/testEndpoints');
 var authRouter = require('./routes/auth');
@@ -72,6 +73,7 @@ app.use(medianHousingRouter);
 app.use(naturalChangeRouter);
 app.use(netDomesticMigrationRouter);
 app.use(housingAffordabilityRouter);
+app.use(averageRentRouter);
 app.use(testEndpointsRouter);
 app.use(authRouter);
 
