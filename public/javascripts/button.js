@@ -1,4 +1,4 @@
-const {spawn} = require('child_process');
+
 
 async function retriveIndicatorAPI(){
     var dataToSend;

@@ -5,6 +5,7 @@ block style-sheet
   link(rel='stylesheet' type="text/css" href="css/auth_style.css")
 block scripts
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+  script(src="javascripts/update.js")
 block content
     div#button-container
         h2 Press to Update Data
@@ -35,8 +36,11 @@ block content
             label(for="county") County
             input#county-input(type="text", name="county")
             br
+            label(for="laborforce-state") State Code
+            input#state-input(type="text", name="state")
+            br
             label(for="laborforce-value") Value
-            input#county-input(type="number", name="value")
+            input#value-input(type="number", name="value")
             br
             button#LaborforceButton UPDATE
         td 
