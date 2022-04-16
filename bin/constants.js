@@ -13,7 +13,10 @@ const INDICATOR_TAGS = {
     'mhi': "Median Household Income",
     'lft': "Labor Force",
     'hai': "Housing Affordability Index",
-    'mhc': "Median Housing Cost"
+    'mhc': "Median Housing Cost",
+    'mmr': "Median Monthly Rent",
+    'ntc': "Natural Change",
+    'ndm': "Net Domestic Migration"
 }
 
-module.exports = {CATEGORY_TAGS, INDICATOR_TAGS};
+// module.exports = {CATEGORY_TAGS, INDICATOR_TAGS};

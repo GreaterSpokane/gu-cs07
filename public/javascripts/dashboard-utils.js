@@ -22,6 +22,8 @@ window.onload = function () {
 
     // render each indicator chart
     let maiChart = new Chart("mhc", getConfig("mhi", false));
+    let maiChart1 = new Chart("mmr", getConfig("mhi", false));
+    let maiChart2 = new Chart("mhi", getConfig("mhi", false));
     let lfpChart = new Chart("lfp", getConfig("lfpr", false));
     let lftChart = new Chart("lft", getConfig("lfpr", false));
     let haiChart = new Chart("hai", getConfig("hai", false));
@@ -82,10 +84,10 @@ window.onload = function () {
     const stats = document.getElementsByClassName("stat");
     for (var i = 0; i < stats.length; i++) {
         console.log("inside short stat fucntion")
-        let statId = String(buttons[i].id);
-        console.log("stat sliced", statId)
-        const spokaneStatData = getTempData(statId.slice(0, -5), 'Spokane')
-        const yearsData = getTempData(statId.slice(0, -5), 'years')
+        let indicatorName = String(stats[i].id).slice(0, 3);
+        console.log("stat sliced", indicatorName)
+        const spokaneStatData = getTempData(indicatorName, 'Spokane')
+        const yearsData = getTempData(indicatorName, 'years')
         const dataLen = spokaneStatData.length
         const endData = spokaneStatData[dataLen - 1]
         const startData = spokaneStatData[dataLen - 2]
@@ -262,7 +264,6 @@ async function getData(indicatorName, county) {
 
 // returns the temp data for each indicator
 function getTempData(indicatorName, key) {
-    // JUST USE TEMPDATA1 AND TEMPDATA2 OR SOMETHING LIKE THAT
     const tempdata = {
         "act": {
             "years": [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],

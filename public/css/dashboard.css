@@ -191,9 +191,6 @@
   margin-bottom: 5px;
   cursor: pointer;
   /* font-size: 22px; */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -240,17 +237,11 @@
 
 /* Style the checkmark/indicator */
 .checkbox-container .checkmark:after {
-  /* left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px; */
-  left: 0.3em;
-  top: 0.2em;
-  width: 0.2em;
-  height: 0.4em;
+  left: 5px;
+  top: 3px;
+  width: 3px;
+  height: 6px;
   border: solid white;
   border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
