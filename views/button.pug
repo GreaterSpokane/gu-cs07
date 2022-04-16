@@ -14,78 +14,86 @@ block content
     div#update-table-container
       h1 Manual Indicator Update
       table#update-table
-        td
-          div#Median-Household
-            h2 Median Household Income
-            label(for="year") Year
-            input#year-input(type="number", name="year")
-            br
-            label(for="county") County
-            input#county-input(type="text", name="county")
-            br
-            label(for="MHI-value") Value
-            input#county-input(type="number", name="value")
-            br
-            button#Median-Household-Button UPDATE
-        td
-          div#Laborforce
-            h2 Laborforce
-            label(for="year") Year
-            input#labor-year-input(type="text", name="year")
-            br
-            label(for="county") County
-            input#labor-county-input(type="text", name="county")
-            br
-            label(for="laborforce-state") State Code
-            input#labor-state-input(type="text", name="state")
-            br
-            label(for="laborforce-value") Value
-            input#labor-value-input(type="number", name="value")
-            br
-            button#LaborforceButton UPDATE
-        td 
-          div#Housing-Affordability
-            h2 Housing Affordability
-            label(for="year") Year
-            input#year-input(type="number", name="year")
-            br
-            label(for="county") County
-            input#county-input(type="text", name="county")
-            br
-            label(for="housing-value") Value
-            input#county-input(type="number", name="value")
-            br
-            button#HousingButton UPDATE
-        td
-          div#Laborforce-Participation
-            h2 Laborforce
-            label(for="year") Year
-            input#year-input(type="number", name="year")
-            br
-            label(for="county") County
-            input#county-input(type="text", name="county")
-            br
-            label(for="laborforce-state") State Code
-            input#state-input(type="text", name="state")
-            br
-            label(for="laborforceParticipation-value") Value
-            input#value-input(type="number", name="value")
-            br
-            button#UpdateButton UPDATE
-        td 
-          div#Laborforce-Participation
-            h2 Laborforce
-            label(for="year") Year
-            input#year-input(type="number", name="year")
-            br
-            label(for="county") County
-            input#county-input(type="text", name="county")
-            br
-            label(for="laborforce-state") State Code
-            input#state-input(type="text", name="state")
-            br
-            label(for="laborforceParticipation-value") Value
-            input#value-input(type="number", name="value")
-            br
-            button#UpdateButton UPDATE
-        td 
+        tr
+          td
+            div#Median-Household
+              h2 Median Household Income
+              label(for="year") Year
+              input#median-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#median-county-input(type="text", name="county")
+              br
+              label(for="median-state") State Code
+              input#median-state-input(type="text", name="state")
+              br
+              label(for="median-value") Value
+              input#median-county-input(type="number", name="value")
+              br
+              button#MedianButton UPDATE
+          td
+            div#Laborforce
+              h2 Laborforce
+              label(for="year") Year
+              input#labor-year-input(type="text", name="year")
+              br
+              label(for="county") County
+              input#labor-county-input(type="text", name="county")
+              br
+              label(for="laborforce-state") State Code
+              input#labor-state-input(type="text", name="state")
+              br
+              label(for="laborforce-value") Value
+              input#labor-value-input(type="number", name="value")
+              br
+              button#LaborforceButton UPDATE
+          td 
+            div#Housing-Affordability
+              h2 Median Housing Cost
+              label(for="year") Year
+              input#price-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#price-county-input(type="text", name="county")
+              br
+              label(for="affordability-state") State Code
+              input#price-state-input(type="text", name="state")
+              br
+              label(for="affordability-value") Value
+              input#price-value-input(type="number", name="value")
+              br
+              button#PriceButton UPDATE
+          td
+            div#Laborforce-Participation
+              h2 Laborforce Participation
+              label(for="year") Year
+              input#participation-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#participation-county-input(type="text", name="county")
+              br
+              label(for="laborforce-state") State Code
+              input#participation-state-input(type="text", name="state")
+              br
+              label(for="laborforceParticipation-value") Value
+              input#participation-value-input(type="number", name="value")
+              br
+              button#ParticipationButton UPDATE
+        tr
+          td
+            div#Housing-Index
+                h2 Housing Index
+                label(for="year") Year
+                input#index-year-input(type="number", name="year")
+                br
+                label(for="county") County
+                input#index-county-input(type="text", name="county")
+                br
+                label(for="index-state") State Code
+                input#index-state-input(type="text", name="state")
+                br
+                label(for="index-value") Value
+                input#index-value-input(type="number", name="value")
+                br
+                button#IndexButton UPDATE
+            td
