@@ -1,22 +1,37 @@
 import indicatorConfig from './indicator-config.js';
 
- window.onload = async function () {
+window.onload = async function () {
     // read data from database for each indicator.
     console.log(indicatorConfig)
     console.log('here')
-    console.log(typeof indicatorConfig)
+    // console.log(typeof indicatorConfig)
 
-    Object.keys(indicatorConfig).forEach(indicatorName => {
+    const counties = ["Spokane", "Boise", "Salt Lake City", "Eugene", "Fort Collins"]
 
-    })
-    console.log("first")
-    // console.log(callData('lfp', "Spokane"))
-    const x = await callData('lfp', "Spokane")
-    console.log("x:", x)
-    console.log("second")
+    for (const indicatorName of Object.keys(indicatorConfig)) {
+        for (const county of counties) {
+            console.log("for", indicatorName, county)
+            const response = await callData(indicatorName, county)
+            console.log(response)
+            indicatorConfig[indicatorName][county.split(' ').join('').toLowerCase()] = response;
+        }
+    }
+    console.log(indicatorConfig)
+    // Object.keys(indicatorConfig).forEach(indicatorName => {
 
-    console.log("years:", x[0])
-    console.log("data:", x[1])
+    //     // counties.forEach(county => {
+
+
+    //     // })
+    // })
+    // console.log("first")
+    // // console.log(callData('lfp', "Spokane"))
+    // const x = await callData('lfp', "Spokane")
+    // console.log("x:", x)
+    // console.log("second")
+
+    // console.log("years:", x[0])
+    // console.log("data:", x[1])
 
     // create short stat and display -now
 
@@ -266,6 +281,10 @@ async function callData(indicatorName, county) {
             path = '/v1/getManyLaborParticipation/';
             schemaDataName = 'laborParticipationRate';
             break;
+        case 'lff':
+            path = '/v1/getManyLaborForce/';
+            schemaDataName = 'laborForce';
+            break;
         case 'ntc':
             path = '/v1/getManyNaturalChange/';
             schemaDataName = 'naturalChange';
@@ -282,6 +301,7 @@ async function callData(indicatorName, county) {
         default:
             console.error(`No matching endpoint for indicator: ${indicatorName}`);
     }
+    //const res = await 
     const res = await fetch(path + query, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -289,7 +309,7 @@ async function callData(indicatorName, county) {
     })
         .then(res => {
             if (!res.ok) {
-                throw new Error("Network response was not OK!");
+                throw new Error("Network response was not OK");
             }
             return res.json();
         })
@@ -301,7 +321,6 @@ async function callData(indicatorName, county) {
         .catch(error => {
             console.error("Error with fetch operation for " + indicatorName, error);
         });
-
     return [res["years"], res[schemaDataName]]
 }
 
