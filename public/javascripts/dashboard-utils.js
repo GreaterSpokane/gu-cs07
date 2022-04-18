@@ -2,36 +2,21 @@ import indicatorConfig from './indicator-config.js';
 
 window.onload = async function () {
     // read data from database for each indicator.
-    console.log(indicatorConfig)
-    console.log('here')
+    // console.log(indicatorConfig)
+    // console.log('here')
     // console.log(typeof indicatorConfig)
 
     const counties = ["Spokane", "Boise", "Salt Lake City", "Eugene", "Fort Collins"]
 
     for (const indicatorName of Object.keys(indicatorConfig)) {
         for (const county of counties) {
-            console.log("for", indicatorName, county)
+            console.log("calling", indicatorName, county)
             const response = await callData(indicatorName, county)
-            console.log(response)
+            console.log("response:", response)
             indicatorConfig[indicatorName][county.split(' ').join('').toLowerCase()] = response;
         }
     }
     console.log(indicatorConfig)
-    // Object.keys(indicatorConfig).forEach(indicatorName => {
-
-    //     // counties.forEach(county => {
-
-
-    //     // })
-    // })
-    // console.log("first")
-    // // console.log(callData('lfp', "Spokane"))
-    // const x = await callData('lfp', "Spokane")
-    // console.log("x:", x)
-    // console.log("second")
-
-    // console.log("years:", x[0])
-    // console.log("data:", x[1])
 
     // create short stat and display -now
 
@@ -293,15 +278,14 @@ async function callData(indicatorName, county) {
             path = '/v1/getManyNetDomesticMigration/';
             schemaDataName = 'netDomesticMigration';
             break;
+        // TODO: mhi, employment/unemployment
         // case 'mhi':
         //     path = '/v1/getManyNetDomesticMigration/';
         //     schemaDataName = 'netDomesticMigration';
         //     break;
-        // TODO: mhi, employment/unemployment
         default:
             console.error(`No matching endpoint for indicator: ${indicatorName}`);
     }
-    //const res = await 
     const res = await fetch(path + query, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -314,14 +298,26 @@ async function callData(indicatorName, county) {
             return res.json();
         })
         .then(body => {
-            console.log("success for", indicatorName)
-            console.log(body)
+            console.log("success for", indicatorName, county)
+            // console.log(body)
             return body;
         })
         .catch(error => {
             console.error("Error with fetch operation for " + indicatorName, error);
         });
-    return [res["years"], res[schemaDataName]]
+
+    // validation
+    try {
+        // TODO maybe also validate that the arrays aren't null?
+        return [res["years"], res[schemaDataName]];
+    } catch (error) {
+        try {
+            console.log("no data in database for", indicatorName, county + ", trying tempData...")
+            return [getTempData(indicatorName, "years"), getTempData(indicatorName, county)];
+        } catch (error) {
+            console.error("No data in database or tempdata for", indicatorName, county, error);
+        }
+    }
 }
 
 
@@ -417,7 +413,9 @@ function getTempData(indicatorName, key) {
             "Spokane": [41667, 42408, 46382, 48395, 44719, 47039, 49078, 47642, 47576, 50249, 48525, 53043, 53360, 59783, 59974],
             "Washington": [49262, 52583, 55591, 58078, 56548, 55631, 56835, 58890, 58405, 61366, 64129, 67106, 70979, 74073, 78687],
             "Salt Lake City": [50262, 54583, 58837, 61837, 65837, 64329, 63645, 63641, 65703, 65854, 67889, 70289, 71293, 72708, 75780],
-            "Boise": [44583, 48583, 50591, 52078, 53664, 51105, 49374, 50745, 51427, 51736, 52094, 55193, 54467, 56590, 60999]
+            "Boise": [44583, 48583, 50591, 52078, 53664, 51105, 49374, 50745, 51427, 51736, 52094, 55193, 54467, 56590, 60999],
+            "Fort Collins": [46728, 50485, 53139, 55639, 57163, 53264, 50990, 51817, 54857, 55057, 55298, 57994, 55634, 60260, 63432],
+            "Eugene": [45989, 50167, 52673, 53613, 55353, 52317, 50469, 52807, 52966, 54127, 53294, 57147, 56678, 60421, 63419],
         },
         "mhrv": {
             "years": ["2018-Q1", "2018-Q2", "2018-Q3", "2018-Q4", "2019-Q1", "2019-Q2", "2019-Q3", "2019-Q4",
@@ -433,9 +431,13 @@ function getTempData(indicatorName, key) {
         }
     }
 
-    const data = tempdata[indicatorName][key];
     // console.log("getting data for " + indicatorName + "-" + key);
-    return data;
+    try {
+        return tempdata[indicatorName][key];
+    } catch (error) {
+        return tempdata["mhc"][key];
+    }
+    
 }
 
 // returns the chartjs config for each indicator
