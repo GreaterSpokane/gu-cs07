@@ -1,9 +1,16 @@
 import indicatorConfig from './indicator-config.js';
-// var tags = require("../../bin/constants.js");
+// import INDICATOR_TAGS from '../../constants.js';
+
+// const INDICATOR_TAGS = require("../../bin/constants.js");
 
 
 window.onload = function () {
-    // make data calls
+    // read data from database for each indicator.
+    console.log(indicatorConfig)
+    console.log('here')
+    console.log(typeof indicatorConfig)
+    
+
 
     // create short stat and display -now
 

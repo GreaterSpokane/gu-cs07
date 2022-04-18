@@ -18,5 +18,3 @@ const INDICATOR_TAGS = {
     'ntc': "Natural Change",
     'ndm': "Net Domestic Migration"
 }
-
-// module.exports = {CATEGORY_TAGS, INDICATOR_TAGS};
