@@ -1,16 +1,22 @@
 import indicatorConfig from './indicator-config.js';
-// import INDICATOR_TAGS from '../../constants.js';
 
-// const INDICATOR_TAGS = require("../../bin/constants.js");
-
-
-window.onload = function () {
+ window.onload = async function () {
     // read data from database for each indicator.
     console.log(indicatorConfig)
     console.log('here')
     console.log(typeof indicatorConfig)
-    
 
+    Object.keys(indicatorConfig).forEach(indicatorName => {
+
+    })
+    console.log("first")
+    // console.log(callData('lfp', "Spokane"))
+    const x = await callData('lfp', "Spokane")
+    console.log("x:", x)
+    console.log("second")
+
+    console.log("years:", x[0])
+    console.log("data:", x[1])
 
     // create short stat and display -now
 
@@ -237,34 +243,66 @@ function toggleLocations(labelText, isChecked) {
     slider.noUiSlider.reset();
 }
 
-// makes database call for specified indicator and return data
-async function getData(indicatorName, county) {
-    let data = [];
+// makes database call for specified indicator and return data and years
+async function callData(indicatorName, county) {
     let path = "";
     let schemaDataName = "";
-    const query = `?county=${county}&start_year=${2001}&end_year=${2022}`;
+    const currentYear = new Date().getFullYear();
+    const query = `?county=${county}&start_year=${currentYear - 15}&end_year=${currentYear}`;
     switch (indicatorName) {
-        case 'lfp':
-            path = '/v1/getManyLaborParticipation/';  // this will be updated to the correct lfp path after merging into dev
-            schemaDataName = 'laborParticipationRate';  // getting this from the labor model instaed may be better
-            break;
         case 'mhc':
             path = '/v1/getManyMedianHousing/';
             schemaDataName = 'medianHousingCost';
             break;
+        case 'mmr':
+            path = '/v1/getManyAverageRent/';
+            schemaDataName = 'averageRent';
+            break;
+        case 'hai':
+            path = '/v1/getManyHousingAffordability/';
+            schemaDataName = 'averageRent';
+            break;
+        case 'lfp':
+            path = '/v1/getManyLaborParticipation/';
+            schemaDataName = 'laborParticipationRate';
+            break;
+        case 'ntc':
+            path = '/v1/getManyNaturalChange/';
+            schemaDataName = 'naturalChange';
+            break;
+        case 'ndm':
+            path = '/v1/getManyNetDomesticMigration/';
+            schemaDataName = 'netDomesticMigration';
+            break;
+        // case 'mhi':
+        //     path = '/v1/getManyNetDomesticMigration/';
+        //     schemaDataName = 'netDomesticMigration';
+        //     break;
+        // TODO: mhi, employment/unemployment
         default:
             console.error(`No matching endpoint for indicator: ${indicatorName}`);
     }
-    // TODO: error handeling
-    const res = fetch(path + query, {
+    const res = await fetch(path + query, {
         method: 'GET',
-        headers: {},
+        headers: { 'Content-Type': 'application/json' },
         mode: "same-origin"
     })
-        .then(res => res.json())
-    // .then(body => console.log(body);
-    return res[schemaDataName];
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Network response was not OK!");
+            }
+            return res.json();
+        })
+        .then(body => {
+            console.log("success for", indicatorName)
+            console.log(body)
+            return body;
+        })
+        .catch(error => {
+            console.error("Error with fetch operation for " + indicatorName, error);
+        });
 
+    return [res["years"], res[schemaDataName]]
 }
 
 
