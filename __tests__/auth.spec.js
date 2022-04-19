@@ -52,13 +52,18 @@ describe('Auth user model tests', () => {
 
 describe('Register user tests', () => {
 
-    const DOMAIN_USER_1 = {
+    const DEV_DOMAIN_USER_1 = {
         "username": "zfoteff@zagmail.gonzaga.edu",
         "unhashedPassword": "testpass"
     }
 
-    const DOMAIN_USER_2 = {
-        "username": "zfoteff1@zagmail.gonzaga.edu",
+    const DEV_DOMAIN_USER_2 = {
+        "username": "labeln@zagmail.gonzaga.edu",
+        "unhashedPassword": "testpass"
+    }
+
+    const PROD_DOMAIN_USER = {
+        "username": "GBallew@greaterspokane.org",
         "unhashedPassword": "testpass"
     }
 
@@ -68,17 +73,19 @@ describe('Register user tests', () => {
     }
 
     it('should assert that only users in the proper domains can register an account', async() => {
-        const createDomainUser = await createAuthUser(DOMAIN_USER_1.username, DOMAIN_USER_1.unhashedPassword);
+        const createDevDomainUser = await createAuthUser(DEV_DOMAIN_USER_1.username, DEV_DOMAIN_USER_1.unhashedPassword);
+        const createProdDomainUser = await createAuthUser(PROD_DOMAIN_USER.username, PROD_DOMAIN_USER.unhashedPassword);
         const createNonDomainUser = await createAuthUser(NON_DOMAIN_USER.username, NON_DOMAIN_USER.unhashedPassword);
-        expect(createDomainUser.result).toEqual('registered user');
+        expect(createDevDomainUser.result).toEqual('registered user');
+        expect(createProdDomainUser.result).toEqual('registered user');
         expect(createNonDomainUser.result).toEqual('failed to register user');
     })
 
     it('should assert that two users with equal passwords have different hashes stored in the db because of the salt', async() => {
-        const createUser1 = await createAuthUser(DOMAIN_USER_1.username, DOMAIN_USER_1.unhashedPassword);
-        const createUser2 = await createAuthUser(DOMAIN_USER_2.username, DOMAIN_USER_2.unhashedPassword);
-        const dbUser1 = await AuthUser.findOne({ 'username': DOMAIN_USER_1.username });
-        const dbUser2 = await AuthUser.findOne({ 'username': DOMAIN_USER_2.username });
+        const createUser1 = await createAuthUser(DEV_DOMAIN_USER_1.username, DEV_DOMAIN_USER_1.unhashedPassword);
+        const createUser2 = await createAuthUser(DEV_DOMAIN_USER_2.username, DEV_DOMAIN_USER_2.unhashedPassword);
+        const dbUser1 = await AuthUser.findOne({ 'username': DEV_DOMAIN_USER_1.username });
+        const dbUser2 = await AuthUser.findOne({ 'username': DEV_DOMAIN_USER_2.username });
         expect(dbUser1.username).toEqual(createUser1.username);
         expect(dbUser2.username).toEqual(createUser2.username);
         expect(dbUser1.username).not.toEqual(dbUser2.username);

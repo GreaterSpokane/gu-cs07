@@ -5,6 +5,11 @@
 require('dotenv').config();
 const AuthUser = require("../../models/authUser");
 const { saltHashPassword } = require('./hashController');
+const emailValidator = require('deep-email-validator');
+
+async function isEmailValid(email) {
+    return emailValidator.validate(email)
+}
 
 /* Retrieve documents using county and year as a composite key  */
 module.exports = async function createAuthUser(username, password) {
@@ -39,6 +44,16 @@ module.exports = async function createAuthUser(username, password) {
         var result = {
             'result': "failed to register user",
             'reason': "domain does not match allowed domains",
+            'username': username
+        };
+        return result;
+    }
+
+    const { valid, reason, validators } = await isEmailValid(username);
+    if (!valid) {
+        var result = {
+            'result': "failed to register user",
+            'reason': "email is not a real email: " + reason,
             'username': username
         };
         return result;
