@@ -1,8 +1,8 @@
 doctype html
 html(lang="en")
   head
-    title Spokane Economic Dashboard | Authorized User Sign-in
-    meta(name="description", content="Authorized User Login Page")
+    title Spokane Economic Dashboard | Change Password
+    meta(name="description", content="Password Change Page")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet' type="text/css" href="css/login.css")
@@ -21,7 +21,7 @@ html(lang="en")
                 label(for="username") Username
               td.input-grid-field
                 input.text-field(type="text" id="username" name="username" required)
-            tr
+            tr.hide
               td.input-grid-label
                 label(for="password") Password
               td.input-grid-field
@@ -29,6 +29,5 @@ html(lang="en")
           div#button-container
             input(type="submit" id="login" name="login" value="Login")
             button#back Back to Dashboard
-          div#navigation-container 
-            a(href="/register") Register User
-            a(href="/change/password") Forgot Password? 
+          div#registration-containr 
+            a(href="/register") Register User 
