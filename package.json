@@ -4,7 +4,7 @@
     "private": true,
     "main": "web.js",
     "scripts": {
-        "start": "node ./bin/www",
+        "start": "nodemon ./bin/www",
         "docgen": "node ./doc/swagger.js",
         "test": "jest --coverage --runInBand --detectOpenHandles"
     },

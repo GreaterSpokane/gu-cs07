@@ -56,6 +56,14 @@ function generateRandomPIN() {
     return Number(pin);
 }
 
+function secondsSinceEpoch() {
+    /**
+     * Return current date and time
+     */
+    var date = new Date();
+    return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
+}
+
 router
     .get('/button', async(req, res, next) => {
         if (validateSession(req.session))
@@ -116,8 +124,8 @@ router
 
 //  Change Password routers
 router
-    .get('/change/password', async(req, res) => { res.render('changePassLogin') })
-    .post('/change/password', async(req, res) => {
+    .get('/change', async(req, res) => { res.render('changePassLogin') })
+    .post('/change', async(req, res) => {
         if (req.body == null)
             return res.redirect(401, '/login');
 
@@ -128,6 +136,10 @@ router
 
         //  Generate pin and store it as a session variable w/ its creation time
         var userPin = generateRandomPIN();
+        sess.pin = userPin;
+        sess.pinTime = Date.UTC(Date.now());
+        console.log(sess);
+
         var message = `Enter this code to verify your identity: ${userPin}`
         var mailOptions = {
             from: process.env.CHANGE_EMAIL,
@@ -149,8 +161,9 @@ router
 
 //  Pin entry routers
 router
-    .get('/verify/pin/', async(req, res) => { res.render('verifyPin') })
-    .post('/verify/pin/', async(req, res) => {
+    .get('/pin', async(req, res) => { res.render('verifyPin') })
+    .post('/pin', async(req, res) => {
+        var sess = req.session;
 
     })
 

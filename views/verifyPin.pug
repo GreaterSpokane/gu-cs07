@@ -10,17 +10,20 @@ html(lang="en")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
   body
     div#login-window
-      h1 Change Password
+      h1 Enter the PIN sent to your email
       div#input-container
         p.error-msg.hide
-        form(action="/change", method="post") 
+        form(action="/pin" method="post") 
           table#input-grid
             tr
               td.input-grid-label
-                label(for="email") Email
+                label(for="pin") Pin
               td.input-grid-field
-                input.text-field(type="text" id="email" name="email" required)
+                input.text-field(type="text" id="pin" name="pin" required)
+            tr
+              td.input-grid-label
+                label(for="password") New Password
+              td.input-grid-field
+                input.text-field(type="password" id="password" name="password" required)
           div#button-container
-            input(type="submit" id="change" name="change" value="Change")
-            br
-            a(href="/login") Back to Login
+            input(type="submit" id="updatedpass" name="updatedpass" value="Change Password")
