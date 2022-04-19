@@ -20,12 +20,14 @@ def Income(year):
     median_income = MedianIncome(year)
     response = requests.post()
 
-def Employment(year):
-    employment, unemployment = LaborBuerau_Employment(year)
-    response = requests.post()
+def Employment(countyVal, yearVal, stateVal):
+    newEmployment, unemployment = employment(countyVal, yearVal)
+    response = requests.post(f'http://0.0.0.0:3000/v1/newEmployed?county={countyVal}&state={stateVal}&year={yearVal}&employed={newEmployment}')
+    response2 = requests.post(f'http://0.0.0.0:3000/v1/newUnemployed?county={countyVal}&state={stateVal}&year={yearVal}&unemployed={unemployment}')
+    return response
 
 def main():
-    LaborForce(2018)
+    Employment('Spokane', 2017, 'WA')
 
 if __name__ == "__main__":
     code = main()
