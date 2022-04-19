@@ -1,7 +1,6 @@
 //  Initialize .env files 
 require('dotenv').config();
 
-const { MongoClient } = require('mongodb');
 var session = require('express-session');
 var express = require('express');
 var path = require('path');
@@ -45,7 +44,11 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use(session({
     secret: process.env.USER_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        // Session expires after 5 min of inactivity.
+        expires: 300000
+    }
 }));
 
 //  Routers
@@ -54,6 +57,12 @@ var dashboardRouter = require('./routes/dashboard');
 var laborForceRouter = require('./routes/laborForce');
 var laborParticipationRouter = require('./routes/laborParticipation')
 var medianHousingRouter = require('./routes/housing');
+var employedRouter = require("./routes/employed");
+var unemployedRouter = require('./routes/unemployed');
+var naturalChangeRouter = require("./routes/naturalChange");
+var netDomesticMigrationRouter = require('./routes/netDomesticMigration');
+var averageRentRouter = require('./routes/averageRent');
+var housingAffordabilityRouter = require('./routes/housingAffordability');
 var testEndpointsRouter = require('./routes/testEndpoints');
 var authRouter = require('./routes/auth');
 
@@ -63,6 +72,12 @@ app.use(dashboardRouter);
 app.use(laborForceRouter);
 app.use(laborParticipationRouter);
 app.use(medianHousingRouter);
+app.use(unemployedRouter);
+app.use(naturalChangeRouter);
+app.use(employedRouter);
+app.use(netDomesticMigrationRouter);
+app.use(housingAffordabilityRouter);
+app.use(averageRentRouter);
 app.use(testEndpointsRouter);
 app.use(authRouter);
 

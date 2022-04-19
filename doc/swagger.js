@@ -5,7 +5,9 @@ const ENDPOINTS = [
     "./routes/index.js",
     "./routes/dashboard.js",
     "./routes/housing.js",
-    "./routes/labor.js"
+    "./routes/housingAffordability.js",
+    "./routes/laborForce.js",
+    "./routes/laborParticipation.js"
 ]
 
 swaggerAutogen(OUTPUT_FILE, ENDPOINTS);

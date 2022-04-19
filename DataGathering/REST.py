@@ -9,7 +9,7 @@ def Housing(year):
 
 def LaborForce(year):
     force, participation = labor(year)
-    response = requests.post('http://0.0.0.0:3000/v1/newLabor', data = {'county': 'Spokane', 'state' : 'WA', 'year' : year, 'labor_force' : force, 'labor_rate' : participation})
+    response = requests.post('http://0.0.0.0:3000/v1/newLaborForce', data = {'county': 'Spokane', 'state' : 'WA', 'year' : year, 'labor_force' : force})
     return response
 
 def Rent(year):
@@ -25,7 +25,7 @@ def Employment(year):
     response = requests.post()
 
 def main():
-    return Housing(2011)
+    LaborForce(2018)
 
 if __name__ == "__main__":
     code = main()

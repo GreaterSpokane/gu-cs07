@@ -18,6 +18,17 @@ async function getSingleLaborEntry(year, county) {
         .then(body => $("#response-window").val(JSON.stringify(body, null, 2)));
 }
 
+async function postLaborEntry(year, county) {
+
+    //  Placeholder to remember how to do post methods properly
+    var reqBody = JSON.stringify({ description: "query params go here" })
+    await fetch("/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: reqBody
+    })
+}
+
 function clearStaleInput() {
     $('#year-input').val("")
     $('#county-input').val("")

@@ -20,7 +20,7 @@ body {
     min-height: 45%;
     min-width: 45%;
     max-height: 50%;
-    max-width: 65%;
+    max-width: 75%;
     border: 5px solid #719a45;
 }
 
@@ -37,22 +37,34 @@ body {
 
 #button-container input {
     font-size: 24px;
-    margin-top: 10px;
-    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    width: 80%;
     background-color: #719a45
+}
+
+#input-container {
+    margin-bottom: 15px;
+}
+
+#input-grid {
+    justify-content: center;
+    margin: auto;
 }
 
 button {
     font-size: 24px;
-    width: 100%;
+    width: 80%;
     padding: 5px;
     margin-bottom: 10px;
 }
 
 .text-field {
     resize: horizontal;
-    font-size: 24px;
-    padding-left: 15%;
+    font-size: 20px;
+    width: 100%;
+    padding-left: 5%;
 }
 
 .hide {

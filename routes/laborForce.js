@@ -20,7 +20,7 @@ router.post('/v1/newLaborForce', async(req, res) => {
             'reason': 'Parameter Error'
         };
 
-        res.status(404).json(result);
+        res.status(400).json(result);
         return;
     }
 

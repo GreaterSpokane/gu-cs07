@@ -4,12 +4,12 @@ from tabulate import tabulate
 import requests
 
 
-data = censusdata.download('acs1', 2019, censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B23025_001E', 'B23025_002E'])
+data = censusdata.download('acs1', 2018, censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B23025_001E', 'B23025_002E'])
 
 column_names = ['Civilian Population', 'Civilians In Labor Force']
 data.columns = column_names
 
-data2 = censusdata.download('acs1', 2019, censusdata.censusgeo([('state', '16'), ('county', '055')]), ['B23025_001E', 'B23025_002E'])
+data2 = censusdata.download('acs1', 2018, censusdata.censusgeo([('state', '16'), ('county', '055')]), ['B23025_001E', 'B23025_002E'])
 
 column_names = ['Civilian Population', 'Civilians In Labor Force']
 data2.columns = column_names
@@ -26,7 +26,7 @@ df = pd.concat([data, data2], ignore_index = True, axis = 0)
 indexes = ['Spokane County, WA', 'Kootenai County, ID']
 df.index = indexes
 
-df['Year'] = '2019'
+df['Year'] = '2018'
 
 print(tabulate(df, headers='keys', tablefmt='psql'))
 
