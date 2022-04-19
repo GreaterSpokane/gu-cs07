@@ -6,9 +6,9 @@
 
 /* Float four columns side by side */
 .column {
-  float: left;
+  /* float: left;
   width: 25%;
-  padding: 0 10px;
+  padding: 0 10px; */
 }
 
 /* Remove extra left and right margins, due to padding in columns */
@@ -19,19 +19,11 @@
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
+  /* content: "";
   display: table;
-  clear: both;
+  clear: both; */
 }
 
-/* Style the counter cards */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  /* this adds the "card" effect */
-  padding: 16px;
-  text-align: center;
-  background-color: #f1f1f1;
-}
 
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
@@ -78,8 +70,7 @@
   border-top: none;
 }
 
-/* CUSTOM CSS */
-#detailed-view-card {
+.detailed-view-card {
   /* display: none; */
   padding: 0 10px;
   margin: 5px;
@@ -90,17 +81,22 @@
   background-color: #f1f1f1;
   /* border: 1px solid #ccc; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  display: flex;
+  display: none;
 }
+
+/* .detailed-view-card .active {
+  display: flex;
+} */
 
 .detailed-view-half {
   flex: 50%;
   padding: 10px;
+  align-items: center;
 }
 
 .active, .card:hover {
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
-  cursor: pointer;
+  /* box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer; */
 }
 
 
@@ -115,4 +111,137 @@
   text-align: center;
 }
 
-/* End Dashboard Specific CSS */
+.indicator-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* Style the counter cards */
+.card {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  /* this adds the "card" effect */
+  padding: 0px 16px 6px 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  /* max-width: 500px; */
+  /* flex: 30%; */
+  flex: 50%;
+  /* max-width: 500px; */
+  margin: 0px 16px;
+  max-width: 600px;
+  min-width: 350px;
+}
+
+.category-flex-container {
+  /* display: none; */
+  /* margin: 5px; */
+  /* max-height: 0; */
+  /* overflow: hidden; */
+  /* transition: max-height 0.2s ease-out; */
+  /* border: 1px solid #ccc; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.category-snapshot-view {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f1f1f1;
+  margin-bottom: 16px;
+  padding: 10px;
+  text-align: center;
+}
+
+.category-snapshot-view>h2 {
+  margin-bottom: 0px;
+  margin-top: 6px;
+  color: #2f2f2e;
+}
+
+.slider {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.rangeslider {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+.non-line {
+  padding: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.unstyled-button {
+  /* border: none;
+  padding: 0;
+  background: none; */
+}
+
+/* custom checkboxes */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  /* font-size: 22px; */
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1em;
+  width: 1em;
+  background-color: #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: rgb(156, 156, 156);
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #00B4ED;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 5px;
+  top: 3px;
+  width: 3px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
