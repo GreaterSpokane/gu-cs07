@@ -1,3 +1,4 @@
+// const Chart = require('chart.js');
 import indicatorConfig from './indicator-config.js';
 
 window.onload = async function () {
@@ -15,60 +16,82 @@ window.onload = async function () {
             console.log("response:", response)
             indicatorConfig[indicatorName][county.split(' ').join('').toLowerCase()] = response;
         }
+        // snapshot view charts
+        console.log("CREATING CHART FOR:", indicatorName)
+        console.log("WITH CONFIG:", getConfig(indicatorName, false))
+        new Chart(indicatorName, getConfig(indicatorName, false));
+
+        // descriptions, ect.
+        document.getElementById(indicatorName + "-description").innerText = indicatorConfig[indicatorName]["description"];
+        document.getElementById(indicatorName + "-about").innerText = indicatorConfig[indicatorName]["note"];
+        document.getElementById(indicatorName + "-link").setAttribute("href", indicatorConfig[indicatorName]["link"]);
+
+        // detailed charts
+        indicatorConfig[indicatorName]["detailedchart"] = new Chart(indicatorName + "-detailed-chart-canvas", getConfig(indicatorName, true))
+
+        // range sliders
+        const yearRange = getData(indicatorName, "spokane", true)
+        const startYear = Number(yearRange[yearRange.length - indicatorConfig[indicatorName]["initialNumIntervals"] - 1]);
+        const endYear = Number(yearRange[yearRange.length - 1]);
+        const sliderElement = document.getElementById(indicatorName + "-slider")
+        indicatorConfig[indicatorName]["rangeslider"] = noUiSlider.create(sliderElement, {
+            start: [startYear, endYear],
+            connect: true,
+            step: 1,
+            range: {
+                'min': startYear,
+                'max': endYear
+            },
+            margin: 1,
+            tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })]
+        });
+        indicatorConfig[indicatorName]["rangeslider"].on("change", function (values) {
+            console.log('range slider values:', values);
+            let startIndex = yearRange.indexOf(Math.trunc(values[0]));
+            let endIndex = yearRange.indexOf(Math.trunc(values[1]));
+
+            updateRange(indicatorName, startIndex, endIndex);
+        });
     }
     console.log(indicatorConfig)
 
-    // create short stat and display -now
-
-    // create snapshot charts
-
-    // load descriptions, ect -now
-
-    // create detailed charts -now
-
-    // crate sliders -now
-
-    // event listners -now
+    // create short stat and display 
 
 
-    console.log("inside window.onload fuction!");
+
+    // load descriptions, ect 
+
+
+    // create detailed charts 
+
+
+    // crate sliders 
+
+    // event listners
+    // const rangeSliders = document.getElementsByClassName("slider");
+    // for (var i = 0; i < rangeSliders.length; i++) {
+    //     const indicatorID = String(this.id).slice(0, 3);
+    //     indicatorConfig[indicatorID].noUiSlider.on("change", function (values) {
+    //         console.log('range slider values:', values);
+    //         let startIndex = range.indexOf(Math.trunc(values[0]));
+    //         let endIndex = range.indexOf(Math.trunc(values[1]));
+
+    //         updateRange(indicatorID, startIndex, endIndex);
+    //     });
+    // }
 
     // render each indicator chart
-    let maiChart = new Chart("mhc", getConfig("mhi", false));
-    let maiChart1 = new Chart("mmr", getConfig("mhi", false));
-    let maiChart2 = new Chart("mhi", getConfig("mhi", false));
-    let lfpChart = new Chart("lfp", getConfig("lfpr", false));
-    let lftChart = new Chart("lft", getConfig("lfpr", false));
-    let haiChart = new Chart("hai", getConfig("hai", false));
-    let mhrvChart = new Chart("mhrv", getConfig("mhrv", false));
-    let mhr1vChart = new Chart("ntc", getConfig("mhrv", false));
-    let mhrv1Chart = new Chart("ndm", getConfig("mhrv", false));
+    // let maiChart = new Chart("mhc", getConfig("mhi", false));
+    // let maiChart1 = new Chart("mmr", getConfig("mhi", false));
+    // let maiChart2 = new Chart("mhi", getConfig("mhi", false));
+    // let lfpChart = new Chart("lfp", getConfig("lfpr", false));
+    // let lftChart = new Chart("lft", getConfig("lfpr", false));
+    // let haiChart = new Chart("hai", getConfig("hai", false));
+    // let mhrvChart = new Chart("mhrv", getConfig("mhrv", false));
+    // let mhr1vChart = new Chart("ntc", getConfig("mhrv", false));
+    // let mhrv1Chart = new Chart("ndm", getConfig("mhrv", false));
 
-    new Chart("lfs", {
-        type: "doughnut",
-        data: {
-            labels: [
-                'Not in Labor Force',
-                'Employed',
-                'Armed Forces',
-                'Unemployed'
-            ],
-            datasets: [{
-                //   label: 'My First Dataset',
-                data: [0.2, 0.6, 0.1, 0.1],
-                backgroundColor: [
-                    '#866BAF',
-                    '#00B4ED',
-                    '#D7DC61',
-                    '#6E7277'
-                ],
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            radius: "70%"
-        }
-    });
+    new Chart("lfs", getConfig("lfs", true));
 
     // adds event listeners to each button
     var buttons = document.getElementsByClassName("button");
@@ -131,6 +154,7 @@ window.onload = async function () {
     }
 
 }
+
 
 function toggleDetailView(event, indicatorName) {
 
@@ -201,32 +225,32 @@ function renderDetailView(indicatorName) {
 }
 
 // updates the charts based on the range slider
-function updateRange(startIndex, endIndex) {
+function updateRange(indicatorName, startIndex, endIndex) {
     console.log("inside updateRange function");
     console.log("start/end indexes:", startIndex, endIndex);
 
-    let backupLabels = JSON.parse(JSON.stringify(window.detailChart.data.labels)); // deep copy
-    window.detailChart.data.labels = backupLabels.slice(startIndex, endIndex + 1);
+    let backupLabels = JSON.parse(JSON.stringify(indicatorConfig[indicatorName].detailchart.data.labels)); // deep copy
+    indicatorConfig[indicatorName].detailchart.data.labels = backupLabels.slice(startIndex, endIndex + 1);
 
     let backupData = []
-    window.detailChart.data.datasets.forEach((dataset) => {
+    indicatorConfig[indicatorName].detailchart.data.datasets.forEach((dataset) => {
         backupData.push(JSON.parse(JSON.stringify(dataset.data)));
         dataset.data = dataset.data.slice(startIndex, endIndex + 1);
     });
-    window.detailChart.update();
+    indicatorConfig[indicatorName].detailchart.update();
 
     // reset values
-    window.detailChart.data.labels = JSON.parse(JSON.stringify(backupLabels));
+    indicatorConfig[indicatorName].detailchart.data.labels = JSON.parse(JSON.stringify(backupLabels));
     backupData.reverse();
-    window.detailChart.data.datasets.forEach((dataset) => {
+    indicatorConfig[indicatorName].detailchart.data.datasets.forEach((dataset) => {
         dataset.data = JSON.parse(JSON.stringify(backupData.pop()));
     });
 }
 
 // updates the locations shown in the detailed view based on the checkboxs
-function toggleLocations(labelText, isChecked) {
+function toggleLocations(indicatorName, labelText, isChecked) {
     console.log("inside toggleLocations function");
-    window.detailChart.data.datasets.forEach((dataset) => {
+    indicatorConfig[indicatorName].detailchart.data.datasets.forEach((dataset) => {
         if (dataset.label == labelText) {
             if (isChecked) {
                 console.log("adding data: " + labelText);
@@ -239,8 +263,8 @@ function toggleLocations(labelText, isChecked) {
 
         }
     });
-    window.detailChart.update();
-    slider.noUiSlider.reset();
+    indicatorConfig[indicatorName].detailchart.update();
+    indicatorConfig[indicatorName].rangeslider.noUiSlider.reset();
 }
 
 // makes database call for specified indicator and return data and years
@@ -308,7 +332,9 @@ async function callData(indicatorName, county) {
 
     // validation
     try {
-        // TODO maybe also validate that the arrays aren't null?
+        if (res["years"].length < 3) {
+            throw "Not enough data in database, trying tempData..."
+        }
         return [res["years"], res[schemaDataName]];
     } catch (error) {
         try {
@@ -320,7 +346,19 @@ async function callData(indicatorName, county) {
     }
 }
 
-
+function getData(indicatorName, county, isYearsData) {
+    try {
+        const dataArray = indicatorConfig[indicatorName][county];
+        if (isYearsData) {
+            return dataArray[0];
+        } else {
+            return dataArray[1];
+        }
+    } catch (error) {
+        console.error("cant find data for", indicatorName, county, "in getData")
+        return [];
+    }
+}
 
 // returns the temp data for each indicator
 function getTempData(indicatorName, key) {
@@ -430,14 +468,22 @@ function getTempData(indicatorName, key) {
                 452900, 460300, 491900, 570800],
         }
     }
-
     // console.log("getting data for " + indicatorName + "-" + key);
-    try {
-        return tempdata[indicatorName][key];
-    } catch (error) {
-        return tempdata["mhc"][key];
+    // try {
+    //     return tempdata[indicatorName][key];
+    // } catch (error) {
+    //     return tempdata["mhc"][key];
+    // }
+    const defaultTempData = {
+        "years": [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
+        "Spokane": [41667, 42408, 46382, 48395, 44719, 47039, 49078, 47642, 47576, 50249, 48525, 53043, 53360, 59783, 59974],
+        "Washington": [49262, 52583, 55591, 58078, 56548, 55631, 56835, 58890, 58405, 61366, 64129, 67106, 70979, 74073, 78687],
+        "Salt Lake City": [50262, 54583, 58837, 61837, 65837, 64329, 63645, 63641, 65703, 65854, 67889, 70289, 71293, 72708, 75780],
+        "Boise": [44583, 48583, 50591, 52078, 53664, 51105, 49374, 50745, 51427, 51736, 52094, 55193, 54467, 56590, 60999],
+        "Fort Collins": [46728, 50485, 53139, 55639, 57163, 53264, 50990, 51817, 54857, 55057, 55298, 57994, 55634, 60260, 63432],
+        "Eugene": [45989, 50167, 52673, 53613, 55353, 52317, 50469, 52807, 52966, 54127, 53294, 57147, 56678, 60421, 63419]
     }
-    
+    return defaultTempData[key]
 }
 
 // returns the chartjs config for each indicator
@@ -448,6 +494,31 @@ function getConfig(indicatorName, isDetailView) {
     const boiseColor = "#6E7277";
 
     let configData = {
+        "lfs": {
+            type: "doughnut",
+            data: {
+                labels: [
+                    'Not in Labor Force',
+                    'Employed',
+                    'Armed Forces',
+                    'Unemployed'
+                ],
+                datasets: [{
+                    //   label: 'My First Dataset',
+                    data: [0.2, 0.6, 0.1, 0.1],
+                    backgroundColor: [
+                        '#866BAF',
+                        '#00B4ED',
+                        '#D7DC61',
+                        '#6E7277'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                radius: "70%"
+            }
+        },
         "act": {},
         "hai": {
             type: "line",
@@ -645,12 +716,44 @@ function getConfig(indicatorName, isDetailView) {
             }
         }
     }
+    // let indicatorConfig = configData[indicatorName];
+    // // console.log("getting data for " + indicatorName)
+    // if (!isDetailView) {
+    //     let shortIndicator = indicatorConfig.data.datasets;
+    //     indicatorConfig.data.datasets = shortIndicator.slice(0, 2);
+    // }
+    // return indicatorConfig;
 
-    let indicatorConfig = configData[indicatorName];
-    // console.log("getting data for " + indicatorName)
-    if (!isDetailView) {
-        let shortIndicator = indicatorConfig.data.datasets;
-        indicatorConfig.data.datasets = shortIndicator.slice(0, 2);
+    const defaultLineConfig = {
+        type: "line",
+        data: {
+            labels: getData(indicatorName, "spokane", true),
+            datasets: [{
+                data: getData(indicatorName, "spokane", false),
+                borderColor: spokaneColor,
+                fill: true,
+                label: "Spokane",
+            }, {
+                data: getData(indicatorName, "boise", false),
+                borderColor: boiseColor,
+                label: "Boise",
+            }, {
+                data: getData(indicatorName, "saltlakecity", false),
+                borderColor: boiseColor,
+                label: "Salt Lake City",
+            }, {
+                data: getData(indicatorName, "eugene", false),
+                borderColor: boiseColor,
+                label: "Eugene",
+            }, {
+                data: getData(indicatorName, "fortcollins", false),
+                borderColor: boiseColor,
+                label: "Fort Collins",
+            }],
+        },
     }
-    return indicatorConfig;
+
+    return defaultLineConfig;
+
+
 }
