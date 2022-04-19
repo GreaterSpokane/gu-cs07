@@ -5,10 +5,25 @@ const getUserSalt = require('../controllers/auth/getUserSaltController');
 const authorizeUser = require("../controllers/auth/authorizeUserController");
 const createAuthUser = require('../controllers/auth/createAuthUserController');
 
+
 //  Database mock setup
 beforeAll(async() => await db.connect());
 afterEach(async() => await db.clearDatabase());
 afterAll(async() => await db.closeDatabase());
+
+function generateRandomPIN() {
+    /** 
+     * Return a randomly generated 6-digit pin that the user will enter into the change password screen 
+     * to verify the user's identity
+     */
+    var pin = "";
+    var counter = 0;
+    while (counter < 6) {
+        pin += String(Math.floor(Math.random() * 9) + 1);
+        counter++;
+    }
+    return Number(pin);
+}
 
 describe('Auth user model tests', () => {
     const USER_DATA = {
@@ -91,14 +106,17 @@ describe('Authorize user tests', () => {
     });
 
     it('should assert that an unregistered user is returned a failure message', async() => {
-        const authResult = await authorizeUser(UNAUTHORIZED_USER.username, UNAUTHORIZED_USER.unhashedPassword)
+        const authResult = await authorizeUser(UNAUTHORIZED_USER.username, UNAUTHORIZED_USER.unhashedPassword);
+        expect(authResult.result).toEqual("failure");
     })
-
-    it('should assert that a registered user can be successfully authorized and redirected to the auth page', async() => {
-
-    });
-
-    it('should assert that an unregistered user will be redirected back to the login page', async() => {
-
-    });
 });
+
+describe('Randomly generated PIN tests', () => {
+    it('should return a 6 digit randomly generated integer', async() => {
+        const generatedPin = generateRandomPIN();
+        var pinString = String(generatedPin);
+        expect(generatedPin).not.toEqual(null);
+        expect(pinString).not.toEqual("");
+        expect(pinString.length).toEqual(6);
+    })
+})

@@ -8,26 +8,18 @@ html(lang="en")
     link(rel='stylesheet' type="text/css" href="css/login.css")
     link(rel="shortcut icon" href="images/favicon.ico" type="image/x-icon")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
-    script(src="javascripts/login.js")
   body
     div#login-window
-      h1 Authorized User Sign-in
+      h1 Change Password
       div#input-container
         p.error-msg.hide
-        form(action="/login", method="post") 
+        form(action="/change/password", method="post") 
           table#input-grid
             tr
               td.input-grid-label
-                label(for="username") Username
+                label(for="email") Email
               td.input-grid-field
-                input.text-field(type="text" id="username" name="username" required)
-            tr.hide
-              td.input-grid-label
-                label(for="password") Password
-              td.input-grid-field
-                input.text-field(type="password" id="password" name="password" required)
+                input.text-field(type="text" id="email" name="email" required)
           div#button-container
-            input(type="submit" id="login" name="login" value="Login")
-            button#back Back to Dashboard
-          div#registration-containr 
-            a(href="/register") Register User 
+            input(type="submit" id="change" name="change" value="change")
+            button#back Back to Login

@@ -1,6 +1,7 @@
 require('dotenv').config();
 var express = require("express");
 var session = require("express-session");
+var nodemailer = require('nodemailer');
 var createAuthUser = require("../controllers/auth/createAuthUserController");
 var authorizeUser = require("../controllers/auth/authorizeUserController");
 const AuthUser = require('../models/authUser');
@@ -16,7 +17,18 @@ router.use(session({
     }
 }));
 
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.CHANGE_EMAIL,
+        pass: process.env.CHANGE_EMAIL_PASSWORD
+    }
+});
+
 function validateSession(sess) {
+    /**
+     * Validate that the user has a valid session active when trying to login and access authorized pages
+     */
     if (sess) {
         if (sess.username != ("" || null || undefined)) {
             var user = AuthUser.findOne({ 'username': sess.username }).exec();
@@ -28,6 +40,20 @@ function validateSession(sess) {
     }
 
     return false;
+}
+
+function generateRandomPIN() {
+    /** 
+     * Return a randomly generated 6-digit pin that the user will enter into the change password screen 
+     * to verify the user's identity
+     */
+    var pin = "";
+    var counter = 0;
+    while (counter < 6) {
+        pin += String(Math.floor(Math.random() * 10) + 1);
+        counter++;
+    }
+    return Number(pin);
 }
 
 router
@@ -51,6 +77,7 @@ router
 
     })
 
+//  login routers
 router
     .get('/login', async(req, res) => {
         req.session.destroy()
@@ -69,6 +96,7 @@ router
             return res.redirect(403, '/login');
     });
 
+//  User registration routers
 router
     .get('/register', async(req, res) => { res.render('register') })
     .post("/register", async(req, res) => {
@@ -86,5 +114,44 @@ router
             return res.redirect('/register')
     });
 
+//  Change Password routers
+router
+    .get('/change/password', async(req, res) => { res.render('changePassLogin') })
+    .post('/change/password', async(req, res) => {
+        if (req.body == null)
+            return res.redirect(401, '/login');
+
+        //  Check that email is registered first
+
+        var sess = req.session;
+        var email = req.body.email;
+
+        //  Generate pin and store it as a session variable w/ its creation time
+        var userPin = generateRandomPIN();
+        var message = `Enter this code to verify your identity: ${userPin}`
+        var mailOptions = {
+            from: process.env.CHANGE_EMAIL,
+            to: req.body.email,
+            subject: 'Temporary PIN For Spokane Economic Recovery Dashboard',
+            text: message
+        };
+
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.log(error);
+                res.redirect(400, '/change/password');
+            } else {
+                console.log('Password reset email sent: ' + info.response);
+                res.redirect('pinEntry')
+            }
+        });
+    });
+
+//  Pin entry routers
+router
+    .get('/verify/pin/', async(req, res) => { res.render('verifyPin') })
+    .post('/verify/pin/', async(req, res) => {
+
+    })
 
 module.exports = router;
