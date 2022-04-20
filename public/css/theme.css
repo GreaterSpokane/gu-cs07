@@ -7733,7 +7733,6 @@ blockquote .small:before {
     text-transform: uppercase;
     font-size: 0.875rem;
     letter-spacing: 1px;
-    margin: 0 auto;
 }
 
 @media (max-width: 1199px) {
@@ -7768,12 +7767,53 @@ blockquote .small:before {
     }
 }
 
-
-/*begin-variables base-font-size*/
-
 html {
     font-size: 16px;
 }
 
+main {
+    margin-left: 20px;
+    margin-right: 20px;
+}
 
-/*end-variables base-font-size*/
+#about-image {}
+
+.header-text {
+    color: white;
+    filter: drop-shadow(0 0 20px #9161a9);
+    -webkit-text-stroke: 1px grey;
+}
+
+.advantage-spokane-button {
+    background-color: #9161a9;
+    color: white;
+    border-radius: 20px;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 10px
+}
+
+.footer {
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+
+.page-name {
+    margin-top: 5px;
+    font-size: 64px;
+    color: #db6140;
+}
+
+#navbar {
+    margin-left: 15px;
+}
+
+#navbar>h2 {
+    font-size: 48px;
+    color: #719a45;
+}
+
+#navbar>a {
+    padding-right: 15px;
+}
