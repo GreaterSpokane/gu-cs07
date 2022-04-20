@@ -5,7 +5,6 @@ const getUserSalt = require('../controllers/auth/getUserSaltController');
 const authorizeUser = require("../controllers/auth/authorizeUserController");
 const createAuthUser = require('../controllers/auth/createAuthUserController');
 
-
 //  Database mock setup
 beforeAll(async() => await db.connect());
 afterEach(async() => await db.clearDatabase());

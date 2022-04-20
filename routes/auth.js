@@ -6,6 +6,15 @@ var createAuthUser = require("../controllers/auth/createAuthUserController");
 var authorizeUser = require("../controllers/auth/authorizeUserController");
 const AuthUser = require('../models/authUser');
 var { saltHashPassword } = require("../controllers/auth/hashController");
+const { ServerSession } = require('mongodb');
+
+var transporter = nodemailer.createTransport({
+    service: process.env.MAIL_SERVICE,
+    auth: {
+        user: process.env.CHANGE_EMAIL,
+        pass: process.env.CHANGE_EMAIL_PASSWORD
+    }
+});
 
 function validateSession(sess) {
     /**
@@ -39,10 +48,12 @@ function validatePinSession(sess, enteredPin) {
             sess.pin != ("" || null || undefined) &&
             sess.pinTime != ("" || null || undefined)) {
 
-            if (secondsSinceEpoch() - sess.pinTime >= 240)
+            var currTime = secondsSinceEpoch();
+            console.log(currTime - sess.pinTime);
+            if (currTime - sess.pinTime >= 240000)
             //  If the time difference is >= 4 minutes, invalidate the session    
                 return false;
-            if (sess.pin !== enteredPin)
+            if (sess.pin !== Number(enteredPin))
                 return false;
 
             return true;
@@ -60,7 +71,7 @@ function generateRandomPIN() {
     var pin = "";
     var counter = 0;
     while (counter < 6) {
-        pin += String(Math.floor(Math.random() * 10) + 1);
+        pin += String(Math.floor(Math.random() * 9) + 1);
         counter++;
     }
     return Number(pin);
@@ -112,7 +123,7 @@ router
 //  login routers
 router
     .get('/login', async(req, res) => {
-        req.session.destroy()
+        req.session.destroy();
         res.render('login');
     })
     .post('/login', async(req, res) => {
@@ -130,7 +141,10 @@ router
 
 //  User registration routers
 router
-    .get('/register', async(req, res) => { res.render('register') })
+    .get('/register', async(req, res) => {
+        req.session.destroy()
+        res.render('register')
+    })
     .post("/register", async(req, res) => {
         if (req.body == null)
             return res.redirect(400, '/register');
@@ -151,7 +165,10 @@ router
 
 //  Change Password routers
 router
-    .get('/change', async(req, res) => { res.render('changePassLogin') })
+    .get('/change', async(req, res) => {
+        req.session.destroy();
+        res.render('changePassLogin')
+    })
     .post('/change', async(req, res) => {
         if (req.body == null)
             return res.redirect(401, '/login');
@@ -162,17 +179,13 @@ router
         //  Check that email is registered first
         var user = AuthUser.findOne({ username: req.body.email }).exec();
         if (user == (null || undefined)) {
-
-            return res.redirect(401, )
+            sess.destroy();
+            return res.redirect(401, '/login')
         }
 
-
-        //  Generate pin and store it as a session variable w/ its creation time
-        sess.pin = generateRandomPIN();
-        sess.pinTime = secondsSinceEpoch();
-
-        var message = `Enter this code to verify your identity: ${userPin}`
-
+        var email = req.body.email;
+        var pin = generateRandomPIN()
+        var message = `Enter this code to verify your identity: ${pin}`
         var mailOptions = {
             from: process.env.CHANGE_EMAIL,
             to: req.body.email,
@@ -180,23 +193,19 @@ router
             text: message
         };
 
-        var transporter = nodemailer.createTransport({
-            service: process.env.MAIL_SERVICE,
-            auth: {
-                user: process.env.CHANGE_EMAIL,
-                pass: process.env.CHANGE_EMAIL_PASSWORD
-            }
-        });
-
         transporter.sendMail(mailOptions, function(error, info) {
             if (error) {
                 console.log(error);
-                res.redirect(400, '/change/password');
+                res.redirect(400, '/change');
             } else {
                 console.log('Password reset email sent: ' + info.response);
-                res.redirect('pin')
+                sess.email = email;
+                sess.pin = pin;
+                sess.pinTime = secondsSinceEpoch();
+                res.redirect(302, '/pin');
             }
         });
+
     });
 
 //  Pin entry routers
@@ -212,7 +221,14 @@ router
         if (validatePinSession(sess, enteredPin)) {
             var password = req.body.updatedpass;
             var passwordHash = saltHashPassword(password);
-            var user = AuthUser.findOneAndUpdate({ 'username': sess.email }, { $set: { password: passwordHash } }).exec();
+            var user = AuthUser.findOneAndUpdate({ 'username': sess.email }, {
+                $set: {
+                    password: passwordHash.passwordHash,
+                    salt: passwordHash.salt
+                }
+            }).exec();
+            sess.username = user;
+            return res.render('auth');
         } else {
             return res.redirect(401, '/change');
         }

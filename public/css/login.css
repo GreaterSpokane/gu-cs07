@@ -51,6 +51,7 @@ body {
 #input-grid {
     justify-content: center;
     margin: auto;
+    width: 80%;
 }
 
 button {
@@ -60,11 +61,18 @@ button {
     margin-bottom: 10px;
 }
 
+.input-grid-label {
+    width: 70%;
+}
+
+.input-grid-label {
+    width: 30%;
+}
+
 .text-field {
     resize: horizontal;
-    font-size: 20px;
-    width: 100%;
-    padding-left: 5%;
+    font-size: 18px;
+    width: 95%;
 }
 
 .hide {
