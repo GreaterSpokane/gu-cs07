@@ -5,7 +5,7 @@ const CATEGORY_TAGS = {
     'ts': "Target Sector Employment",
     'pd': "Population Drivers",
     'hs': "Housing",
-    'ct': "connectivity"
+    'ct': "Connectivity"
 }
 
 const INDICATOR_TAGS = {
@@ -13,5 +13,8 @@ const INDICATOR_TAGS = {
     'mhi': "Median Household Income",
     'lft': "Labor Force",
     'hai': "Housing Affordability Index",
-    'mhc': "Median Housing Cost"
+    'mhc': "Median Housing Cost",
+    'mmr': "Median Monthly Rent",
+    'ntc': "Natural Change",
+    'ndm': "Net Domestic Migration"
 }
