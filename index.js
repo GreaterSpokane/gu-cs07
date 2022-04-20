@@ -53,7 +53,6 @@ app.use(session({
 
 //  Routers
 var indexRouter = require('./routes/index');
-var dashboardRouter = require('./routes/dashboard');
 var laborForceRouter = require('./routes/laborForce');
 var laborParticipationRouter = require('./routes/laborParticipation')
 var medianHousingRouter = require('./routes/housing');
@@ -68,7 +67,6 @@ var authRouter = require('./routes/auth');
 
 // API Endpoints
 app.use(indexRouter);
-app.use(dashboardRouter);
 app.use(laborForceRouter);
 app.use(laborParticipationRouter);
 app.use(medianHousingRouter);
