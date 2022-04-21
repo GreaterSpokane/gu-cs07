@@ -113,7 +113,7 @@ router.delete('/v1/deleteAverageRent', async(req, res) => {
         return
     }
 
-    var result = await deleteGetAverageRent(req.query.corr_id)
+    var result = await deleteAverageRent(req.query.corr_id)
         .catch(() => {
             res.status(404).json({ 'result': 'Internal error' });
             return;
