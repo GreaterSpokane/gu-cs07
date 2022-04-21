@@ -2,7 +2,7 @@ const express = require('express');
 const createEmployed = require('../controllers/employed/createEmployedController');
 const getEmployed = require('../controllers/employed/getEmployedController');
 const getManyEmployed = require('../controllers/employed/getManyEmployedController');
-//const deleteLaborForce = require('../controllers/laborForce/deleteLaborForceController')
+const deleteEmployed = require('../controllers/employed/deleteEmployedController');
 const serialize = require('../serializers/employedSerializer');
 var router = express.Router();
 
@@ -100,17 +100,25 @@ router.get('/v1/getManyEmployed', async(req, res) => {
 
 /*  delete labor document from the collection by correlation id  */
 router.delete('/v1/deleteEmployed', async(req, res) => {
-    if (typeof req.body.corr_id === 'undefined') {
+    var corr_id = req.query.corr_id;
+    if (corr_id === (null || undefined)) {
         result = {
             'result': 'Failure',
             'reason': 'Parameter error'
         };
 
-        res.status(404).json(result);
-        return;
+        return res.status(404).json(result);
     }
 
-    //  TODO: Delete labor force indicator
+    var result = await deleteEmployed(corr_id)
+        .catch((err) => {
+            return res.status(404).json({
+                'result': 'Failure',
+                'error': err
+            });
+        });
+
+    res.status(200).json(result);
 })
 
 module.exports = router;
