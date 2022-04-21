@@ -96,4 +96,82 @@ block content
                 input#index-value-input(type="number", name="value")
                 br
                 button#IndexButton UPDATE
-            td
+          td
+            div#Employed
+              h2 Employed Persons
+              label(for="year") Year
+              input#employed-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#employed-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#employed-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#employed-value-input(type="number", name="value")
+              br
+              button#EmployedButton UPDATE
+          td
+            div#Unemployed 
+              h2 Unemployed Persons
+              label(for="year") Year
+              input#unemployed-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#unemployed-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#unemployed-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#unemployed-value-input(type="number", name="value")
+              br
+              button#UnemployedButton UPDATE
+          td
+            div#NaturalChange 
+              h2 Natural Change
+              input#change-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#change-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#change-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#change-value-input(type="number", name="value")
+              br
+              button#ChangeButton UPDATE
+        tr
+          td
+            div#netDomesticMigration 
+              h2 Net Domestic Migration
+              input#migration-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#migration-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#migration-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#migration-value-input(type="number", name="value")
+              br
+              button#MigrationButton UPDATE
+          td
+            div#averageRent 
+              h2 Average Rent
+              input#rent-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#rent-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#rent-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#rent-value-input(type="number", name="value")
+              br
+              button#RentButton UPDATE
+          td

@@ -3,10 +3,13 @@ import json
 import prettytable
 import math
 
-def employment(year):
+
+def employment(county, year):
+    employmentIDs = {'Spokane': 'LAUCN530630000000005', 'Boise': 'LAUCN160010000000005', 'Salt Lake': 'LAUCN490350000000005', 'Eugene': 'LAUCN410390000000005', 'Fort Collins': 'LAUCN080690000000005'}
+    unemploymentIDs = {'Spokane': 'LAUCN530630000000004', 'Boise': 'LAUCN160010000000004', 'Salt Lake': 'LAUCN490350000000004', 'Eugene': 'LAUCN410390000000004', 'Fort Collins': 'LAUCN080690000000004'}
     headers = {'Content-type': 'application/json'}
-    employment = json.dumps({"seriesid": ['LAUMT534406000000005'],"startyear":year, "endyear":year})
-    unemployment = json.dumps({"seriesid": ['LAUCN530630000000004'],"startyear":year, "endyear":year})
+    employment = json.dumps({"seriesid": [employmentIDs[county]],"startyear":year, "endyear":year})
+    unemployment = json.dumps({"seriesid": [unemploymentIDs[county]],"startyear":year, "endyear":year})
     employment_data = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=employment, headers=headers)
     unemployment_data = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=unemployment, headers=headers)
     employment_json_data = json.loads(employment_data.text)
