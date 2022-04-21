@@ -143,7 +143,6 @@ describe('Median housing cost datbase model tests', () => {
         expect(found_data.data).toEqual([]);
     });
 
-    /*
     it('should successfully delete element from database', async() => {
         const inserted = await createMedianHousing(
             DATA.county,
@@ -155,6 +154,13 @@ describe('Median housing cost datbase model tests', () => {
         const found = await getMedianHousing(DATA.county, DATA.year);
         expect(found.corr_id).toEqual(inserted.corr_id);
         const result = await deleteMedianHousing(inserted.corr_id);
+        expect(result.result).toEqual('Success');
+        const does_exist = await getMedianHousing(DATA.county, DATA.year);
+        expect(does_exist.corr_id).toEqual(null);
     });
-    */
+
+    it('should not delete element from database if it does not exist', async() => {
+        const result = await deleteMedianHousing(1);
+        expect(result.result).toEqual('Failure');
+    });
 });
