@@ -103,7 +103,6 @@ router.get('/v1/getManyLaborParticipation', async(req, res) => {
 
 /* Delete labor document by correlation id */
 router.delete('/v1/deleteLaborParticipation', async(req, res) => {
-    //  Verification
     if (typeof req.body.corr_id === 'undefined') {
         result = {
             'result': 'Failure',

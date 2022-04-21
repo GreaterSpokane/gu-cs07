@@ -100,7 +100,7 @@ router.get('/v1/getManyLaborForce', async(req, res) => {
 
 /*  delete labor document from the collection by correlation id  */
 router.delete('/v1/deleteLaborForce', async(req, res) => {
-    if (typeof req.body.corr_id === 'undefined') {
+    if (typeof req.query.corr_id === 'undefined') {
         result = {
             'result': 'Failure',
             'reason': 'Parameter error'
@@ -109,7 +109,7 @@ router.delete('/v1/deleteLaborForce', async(req, res) => {
         return res.status(404).json(result);
     }
 
-    var result = await deleteLaborForce(req.body.corr_id)
+    var result = await deleteLaborForce(req.query.corr_id)
         .catch(() => {
             return res.status(404).json({ 'result': 'Internal error' });
         });

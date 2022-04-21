@@ -20,7 +20,7 @@ router.post('/v1/newMedianHousing', async(req, res) => {
 
         var result = {
             'result': 'Parameter error',
-            'body': req.body,
+            'body': req.query,
             'corr_id': null
         };
 
@@ -124,7 +124,7 @@ router.delete('/v1/deleteMedianHousing', async(req, res) => {
         return
     }
 
-    var result = await deleteMedianHousing(req.body.corr_id)
+    var result = await deleteMedianHousing(req.query.corr_id)
         .catch(() => {
             return res.status(404).json({ 'result': 'Internal error' });
         });

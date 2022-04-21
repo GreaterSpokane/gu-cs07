@@ -100,7 +100,7 @@ router.get('/v1/getManyNaturalChange', async(req, res) => {
 
 /*  delete labor document from the collection by correlation id  */
 router.delete('/v1/deleteNaturalChange', async(req, res) => {
-    if (typeof req.body.corr_id === 'undefined') {
+    if (typeof req.query.corr_id === 'undefined') {
         result = {
             'result': 'Failure',
             'reason': 'Parameter error'
@@ -110,7 +110,7 @@ router.delete('/v1/deleteNaturalChange', async(req, res) => {
         return;
     }
 
-    var result = await deleteNaturalChange(req.body.corr_id)
+    var result = await deleteNaturalChange(req.query.corr_id)
         .catch(() => {
             return res.status(404).json({ 'result': 'Internal error' });
         });
