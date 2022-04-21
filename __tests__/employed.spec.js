@@ -100,7 +100,7 @@ describe('Employed database model tests', () => {
     });
 
     it('should return true if a mass retrieval call to an empty database returns an empty dataset', async() => {
-        const found_data = await getEmployed(MASS_DATA_COUNTY, '2001', '2003');
+        const found_data = await getManyEmployed(MASS_DATA_COUNTY, '2001', '2003');
         expect(found_data.data).toEqual([]);
     });
 
@@ -115,7 +115,7 @@ describe('Employed database model tests', () => {
             );
         }
 
-        const found_data = await getEmployed(MASS_DATA_COUNTY, '2001', '2003');
+        const found_data = await getManyEmployed(MASS_DATA_COUNTY, '2001', '2003');
         expect(found_data.data).not.toEqual([]);
     });
 
@@ -130,12 +130,12 @@ describe('Employed database model tests', () => {
             );
         }
 
-        const found_data = await getEmployed(MASS_DATA_COUNTY, '2001', '2002');
+        const found_data = await getManyEmployed(MASS_DATA_COUNTY, '2001', '2002');
         expect(found_data.data.length).toEqual(2);
     });
 
     it('should return true if a mass retrieval for a county that does not exist in the database returns nothing', async() => {
-        const found_data = await getEmployed("C2", '2001', '2003');
+        const found_data = await getManyEmployed("C2", '2001', '2003');
         expect(found_data.data).toEqual([]);
     });
 
@@ -152,7 +152,7 @@ describe('Employed database model tests', () => {
         const result = await deleteEmployed(inserted.corr_id);
         expect(result.result).toEqual('Success');
         const does_exist = await getEmployed(DATA.county, DATA.year);
-        assert(does_exist.corr_id).toEqual(null);
+        expect(does_exist.corr_id).toEqual(null);
     });
 
     it('should not delete element from database if it does not exist', async() => {
@@ -168,6 +168,6 @@ describe('Employed database model tests', () => {
         const result = await deleteEmployed(inserted.corr_id);
         expect(result.result).toEqual('Success');
         const does_exist = await getEmployed(DATA.county, DATA.year);
-        assert(does_exist.corr_id).toEqual(null);
+        expect(does_exist.corr_id).toEqual(null);
     });
 });
