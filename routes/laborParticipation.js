@@ -118,7 +118,7 @@ router.delete('/v1/deleteLaborParticipation', async(req, res) => {
             return res.status(404).json({ 'result': 'Internal error' });
         });
 
-    res.status(204).json(result);
+    res.status(200).json(result);
 })
 
 module.exports = router;
