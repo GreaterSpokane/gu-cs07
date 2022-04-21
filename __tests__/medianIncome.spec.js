@@ -2,7 +2,7 @@ const db = require('./db.spec');
 const createMedianIncome = require('../controllers/medianIncome/createMedianIncomeController');
 const getMedianIncome = require('../controllers/medianIncome/getMedianIncomeController');
 const getManyMedianIncome = require('../controllers/medianIncome/getManyMedianIncomeController');
-// const deleteMedianIncome = require('../controllers/medianIncome/deleteMedianIncomeController')
+const deleteMedianIncome = require('../controllers/medianIncome/deleteMedianIncomeController')
 const MedianIncome = require('../models/medianIncome');
 
 //  Database mock setup
@@ -139,22 +139,24 @@ describe('Median income database model tests', () => {
         expect(found_data.data).toEqual([]);
     });
 
-    /*
     it('should successfully delete element from database', async() => {
-        const inserted = await createLabor(
+        const inserted = await createMedianIncome(
             DATA.county,
             DATA.state,
             DATA.year,
-            Math.random(),
             Math.random()
         );
         //  Find new entry in DB with get controller
-        const found = await getLabor(DATA.county, DATA.year);
+        const found = await getMedianIncome(DATA.county, DATA.year);
         expect(found.corr_id).toEqual(inserted.corr_id);
-        const result = await deleteLabor(inserted.corr_id);
+        const result = await deleteMedianIncome(inserted.corr_id);
         expect(result.result).toEqual('Success');
-        const does_exist = await getLabor(DATA.county, DATA.year);
-        assert(does_exist.corr_id).toEqual(null);
+        const does_exist = await getMedianIncome(DATA.county, DATA.year);
+        expect(does_exist.corr_id).toEqual(null);
     });
-    */
+
+    it('should not delete element from database if it does not exist', async() => {
+        const result = await deleteMedianIncome(1);
+        expect(result.result).toEqual('Failure');
+    });
 });
