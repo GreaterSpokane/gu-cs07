@@ -135,21 +135,24 @@ describe('Laborforce Participation Rate database model tests', () => {
         expect(found_data.data).toEqual([]);
     });
 
-    /*
     it('should successfully delete element from database', async() => {
-        const inserted = await createLabor(
+        const inserted = await createNaturalChange(
             DATA.county,
             DATA.state,
             DATA.year,
-            Math.random(),
+            Math.random()
         );
         //  Find new entry in DB with get controller
-        const found = await getLabor(DATA.county, DATA.year);
+        const found = await getNaturalChange(DATA.county, DATA.year);
         expect(found.corr_id).toEqual(inserted.corr_id);
-        const result = await deleteLabor(inserted.corr_id);
+        const result = await deleteNaturalChange(inserted.corr_id);
         expect(result.result).toEqual('Success');
-        const does_exist = await getLabor(DATA.county, DATA.year);
-        assert(does_exist.corr_id).toEqual(null);
+        const does_exist = await getNaturalChange(DATA.county, DATA.year);
+        expect(does_exist.corr_id).toEqual(null);
     });
-    */
+
+    it('should not delete element from database if it does not exist', async() => {
+        const result = await deleteNaturalChange(1);
+        expect(result.result).toEqual('Failure');
+    });
 });
