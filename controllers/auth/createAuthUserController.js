@@ -1,18 +1,27 @@
-/**
- * Single entry retrieval controller for the AuthUser model
- */
-
 require('dotenv').config();
 const AuthUser = require("../../models/authUser");
-const { saltHashPassword, sha512, genRandomString } = require('./hashController');
+const { saltHashPassword } = require('./hashController');
 const emailValidator = require('deep-email-validator');
 
 async function isEmailValid(email) {
+    /**
+     * Assert that the inputted email is a real email address
+     * @param {string} email Email to check the validity of
+     * @return {boolean} True if the email is real, false otherwise
+     */
     return emailValidator.validate(email)
 }
 
-/* Retrieve documents using county and year as a composite key  */
 module.exports = async function createAuthUser(username, password) {
+    /**
+     * Try to register the inputted username and password as authorized users. Inputs are only valid
+     * if
+     * - The username/email is from the whitelisted domain list
+     * - The username/email is a real email
+     * @param {string} username Username to register
+     * @param {string} password Password to register
+     * @return {object} JSON response indicating the result of creating the user
+     */
 
     //  Check that the domain matches allowed email domains
     var addressSignIdx = username.indexOf('@');

@@ -16,7 +16,7 @@ module.exports = async function serialize(laborForceData) {
 
     serializedResult.county = laborForceData.county;
     serializedResult.indicator = "Labor Force";
-    serializedResult.indicator_id = 'lpr';
+    serializedResult.indicator_id = 'lbf';
     serializedResult.years = serializedYears;
     serializedResult.laborForce = serializedLaborForce;
     return serializedResult;

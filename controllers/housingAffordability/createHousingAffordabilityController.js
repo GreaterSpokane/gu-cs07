@@ -1,7 +1,3 @@
-/**
- * Creation controller for the Housing Affordability Index model
- */
-
 const HousingAffordabilityIndex = require("../../models/housingAffordability");
 
 module.exports = async function createHousingAffordability(
@@ -10,11 +6,15 @@ module.exports = async function createHousingAffordability(
     year,
     housingAffordabilityIndex) {
     /**
-     * Should return id code of newly created Housing Affordability Index representation object
+     * Creates new housing affordability index indicator and insert it into the database
+     * @param {string} county County for the data point
+     * @param {string} state State for the data point
+     * @param {string} year Year for the data point
+     * @param {string} housingAffordabilityIndex Housing affordability index data for the indicator
+     * @returns {object} JSON object with the result of the insertion into the database
      */
 
     try {
-        //  TODO: Validation steps
         const newHousingAffordability = new HousingAffordabilityIndex({
             county: county,
             state: state,
