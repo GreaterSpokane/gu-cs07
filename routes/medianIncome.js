@@ -113,10 +113,9 @@ router.delete('/v1/deleteMedianIncome', async(req, res) => {
         return
     }
 
-    var result = await deleteGetMedianIncome(req.query.corr_id)
+    var result = await deleteMedianIncome(req.query.corr_id)
         .catch(() => {
-            res.status(404).json({ 'result': 'Internal error' });
-            return;
+            return res.status(404).json({ 'result': 'Internal error' });
         });
 
     res.status(204).json(result);

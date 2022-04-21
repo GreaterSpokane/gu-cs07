@@ -111,11 +111,8 @@ router.delete('/v1/deleteEmployed', async(req, res) => {
     }
 
     var result = await deleteEmployed(corr_id)
-        .catch((err) => {
-            return res.status(404).json({
-                'result': 'Failure',
-                'error': err
-            });
+        .catch(() => {
+            return res.status(404).json({ 'result': 'Failure', });
         });
 
     res.status(200).json(result);

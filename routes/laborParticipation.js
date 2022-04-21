@@ -116,8 +116,7 @@ router.delete('/v1/deleteLaborParticipation', async(req, res) => {
 
     var result = await deleteLaborParticipation(req.body.corr_id)
         .catch(() => {
-            res.status(404).json({ 'result': 'Internal error' });
-            return;
+            return res.status(404).json({ 'result': 'Internal error' });
         });
 
     res.status(204).json(result);

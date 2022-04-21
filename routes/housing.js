@@ -117,8 +117,7 @@ router.delete('/v1/deleteMedianHousing', async(req, res) => {
     if (typeof req.query.corr_id === 'undefined') {
         result = {
             'result': 'Failure',
-            'reason': 'Parameter error',
-            'corr_id': null
+            'reason': 'Parameter error'
         }
 
         res.status(404).json(result);
@@ -126,14 +125,8 @@ router.delete('/v1/deleteMedianHousing', async(req, res) => {
     }
 
     var result = await deleteMedianHousing(req.body.corr_id)
-        .catch((err) => {
-            var result = {
-                'result': 'Internal error',
-                'corr_id': null
-            };
-
-            res.status(404).json(result);
-            return;
+        .catch(() => {
+            return res.status(404).json({ 'result': 'Internal error' });
         });
 
     res.status(204).json(result);

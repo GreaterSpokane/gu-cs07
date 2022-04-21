@@ -2,7 +2,7 @@ const express = require('express');
 const createLaborForce = require('../controllers/laborForce/createLaborForceController');
 const getLaborForce = require('../controllers/laborForce/getLaborForceController');
 const getManyLaborForce = require('../controllers/laborForce/getManyLaborForceController');
-//const deleteLaborForce = require('../controllers/laborForce/deleteLaborForceController')
+const deleteLaborForce = require('../controllers/laborForce/deleteLaborForceController')
 const serialize = require('../serializers/laborForceSerializer');
 var router = express.Router();
 
@@ -106,11 +106,15 @@ router.delete('/v1/deleteLaborForce', async(req, res) => {
             'reason': 'Parameter error'
         };
 
-        res.status(404).json(result);
-        return;
+        return res.status(404).json(result);
     }
 
-    //  TODO: Delete labor force indicator
+    var result = await deleteLaborForce(req.body.corr_id)
+        .catch(() => {
+            return res.status(404).json({ 'result': 'Internal error' });
+        });
+
+    res.status(204).json(result);
 })
 
 module.exports = router;

@@ -110,7 +110,12 @@ router.delete('/v1/deleteUnemployed', async(req, res) => {
         return;
     }
 
-    //  TODO: Delete labor force indicator
+    var result = await deleteUnemployed(req.body.corr_id)
+        .catch((err) => {
+            return res.status(404).json({ 'result': 'Internal error' });
+        });
+
+    res.status(204).json(result);
 })
 
 module.exports = router;

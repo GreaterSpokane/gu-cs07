@@ -2,7 +2,7 @@ const express = require('express');
 const createNetDomesticMigration = require('../controllers/netDomesticMigration/createNetDomesticMigrationController');
 const getNetDomesticMigration = require('../controllers/netDomesticMigration/getNetDomesticMigrationController');
 const getManyNetDomesticMigration = require('../controllers/netDomesticMigration/getManyNetDomesticMigrationController');
-//const deleteNetDomesticMigration = require('../controllers/netDomesticMigration/deleteNetDomesticMigrationController')
+const deleteNetDomesticMigration = require('../controllers/netDomesticMigration/deleteNetDomesticMigrationController');
 const serialize = require('../serializers/netDomesticMigrationSerializer');
 var router = express.Router();
 
@@ -108,7 +108,12 @@ router
             return;
         }
 
-        //  TODO: Delete labor force indicator
+        var result = await deleteNetDomesticMigration(req.body.corr_id)
+            .catch(() => {
+                return res.status(404).json({ 'result': 'Internal error' });
+            });
+
+        res.status(204).json(result);
     })
 
 module.exports = router;
