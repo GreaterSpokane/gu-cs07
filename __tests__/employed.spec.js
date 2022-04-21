@@ -156,18 +156,7 @@ describe('Employed database model tests', () => {
     });
 
     it('should not delete element from database if it does not exist', async() => {
-        const inserted = await createEmployed(
-            DATA.county,
-            DATA.state,
-            DATA.year,
-            Math.random()
-        );
-        //  Find new entry in DB with get controller
-        const found = await getEmployed(DATA.county, DATA.year);
-        expect(found.corr_id).toEqual(inserted.corr_id);
-        const result = await deleteEmployed(inserted.corr_id);
-        expect(result.result).toEqual('Success');
-        const does_exist = await getEmployed(DATA.county, DATA.year);
-        expect(does_exist.corr_id).toEqual(null);
+        const result = await deleteEmployed(1);
+        expect(result.result).toEqual('Failure');
     });
 });

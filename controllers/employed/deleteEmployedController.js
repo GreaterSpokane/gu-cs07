@@ -24,9 +24,6 @@ module.exports = async function deleteEmployed(corr_id) {
                 reason: "Could not delete element from the database"
             }
     } catch {
-        return {
-            result: "Failure",
-            error: err
-        }
+        return { result: "Failure" }
     }
 }
