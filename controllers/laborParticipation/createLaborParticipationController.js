@@ -1,7 +1,3 @@
-/**
- * Creation controller for the Laborforce participation rate model
- */
-
 const LaborParticipationRate = require("../../models/laborParticipation");
 
 module.exports = async function createLaborParticipation(
@@ -10,7 +6,12 @@ module.exports = async function createLaborParticipation(
     year,
     laborParticipationRate) {
     /**
-     * Should return id code of newly created Labor Participation Rate representation object
+     * Creates new labor force participation rate indicator and insert it into the database
+     * @param {string} county County for the data point
+     * @param {string} state State for the data point
+     * @param {string} year Year for the data point
+     * @param {string} laborParticipationRate Labor force participation rate data for the indicator
+     * @returns {object} JSON object with the result of the insertion into the database
      */
 
     try {

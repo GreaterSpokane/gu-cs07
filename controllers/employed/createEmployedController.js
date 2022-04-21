@@ -1,7 +1,3 @@
-/**
- * Creation controller for the Employed indicator model
- */
-
 const Employed = require("../../models/employed");
 
 module.exports = async function createEmployed(
@@ -10,7 +6,12 @@ module.exports = async function createEmployed(
     year,
     employed) {
     /**
-     * Should return id code of newly created employed indicator object
+     * Creates new employed indicator and insert it into the database
+     * @param {string} county County for the data point
+     * @param {string} state State for the data point
+     * @param {string} year Year for the data point
+     * @param {string} employed Employed data for the indicator
+     * @returns {object} JSON object with the result of the insertion into the database
      */
 
     try {

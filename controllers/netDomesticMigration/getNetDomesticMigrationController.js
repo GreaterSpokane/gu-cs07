@@ -1,11 +1,13 @@
-/**
- * Single entry retrieval controller for the net domestic migration model
- */
-
 const NetDomesticMigration = require("../../models/netDomesticMigration");
 
-/* Retrieve documents using county and year as a composite key  */
 module.exports = async function getNetDomesticMigration(county, year) {
+    /**
+     * Retrieve a single net domestic migration indicator from the database
+     * @param {string} county County for the data point
+     * @param {string} year Year for the data point
+     * @return {object} JSON object containing the requested indicator's data
+     */
+
     try {
         var data = await NetDomesticMigration.findOne({ county: county, year: year }).exec();
         if (data == null) throw new Error('Data not found for given county and year');
@@ -16,7 +18,6 @@ module.exports = async function getNetDomesticMigration(county, year) {
             'year': data.year,
             'netDomesticMigration': data.netDomesticMigration
         }
-
         return result
     } catch (err) {
         throw err;

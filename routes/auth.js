@@ -134,7 +134,7 @@ router
 
         if (authResult.result == "success") {
             sess.username = username;
-            return res.redirect('/auth');
+            return res.redirect(302, '/auth');
         } else
             return res.redirect(403, '/login');
     });
@@ -156,7 +156,7 @@ router
         var registerResult = await createAuthUser(username, password);
         if (registerResult.result == 'registered user') {
             sess.username = username
-            return res.redirect(301, '/auth')
+            return res.redirect(302, '/auth')
         } else {
             console.log(registerResult)
             return res.redirect(400, '/register')
@@ -228,7 +228,7 @@ router
                 }
             }).exec();
             sess.username = user;
-            return res.render('auth');
+            return res.render(302, 'auth');
         } else {
             return res.redirect(401, '/change');
         }

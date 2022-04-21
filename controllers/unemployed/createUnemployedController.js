@@ -1,7 +1,3 @@
-/**
- * Creation controller for the Unemployed indicator model
- */
-
 const Unemployed = require("../../models/unemployed");
 
 module.exports = async function createUnemployed(
@@ -10,11 +6,15 @@ module.exports = async function createUnemployed(
     year,
     unemployed) {
     /**
-     * Should return id code of newly created unemployed indicator object
+     * Creates new unemployed indicator and insert it into the database
+     * @param {string} county County for the data point
+     * @param {string} state State for the data point
+     * @param {string} year Year for the data point
+     * @param {string} unemployed Unemployed data for the indicator
+     * @returns {object} JSON object with the result of the insertion into the database
      */
 
     try {
-        //  TODO: Validation steps
         const newUnemployed = new Unemployed({
             county: county,
             state: state,

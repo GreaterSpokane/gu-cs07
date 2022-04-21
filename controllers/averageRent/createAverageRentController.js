@@ -1,7 +1,3 @@
-/**
- * Creation controller for the Average Rent model
- */
-
 const AverageRent = require("../../models/averageRent");
 
 module.exports = async function createAverageRent(
@@ -10,7 +6,12 @@ module.exports = async function createAverageRent(
     year,
     averageRent) {
     /**
-     * Should return id code of newly created Average Rent indicator object
+     * Creates new average rent indicator and insert it into the database
+     * @param {string} county County for the data point
+     * @param {string} state State for the data point
+     * @param {string} year Year for the data point
+     * @param {string} averageRent Average rent data for the indicator
+     * @returns {object} JSON object with the result of the insertion into the database
      */
 
     try {

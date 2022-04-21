@@ -1,7 +1,3 @@
-/**
- * Creation controller for the Labor force model
- */
-
 const LaborForce = require("../../models/laborForce");
 
 module.exports = async function createLaborForce(
@@ -10,11 +6,15 @@ module.exports = async function createLaborForce(
     year,
     laborForce) {
     /**
-     * Should return id code of newly created Labor Force representation object
+     * Creates new labor force indicator and insert it into the database
+     * @param {string} county County for the data point
+     * @param {string} state State for the data point
+     * @param {string} year Year for the data point
+     * @param {string} laborForce Labor force data for the indicator
+     * @returns {object} JSON object with the result of the insertion into the database
      */
 
     try {
-        //  TODO: Validation steps
         const newLabor = new LaborForce({
             county: county,
             state: state,
