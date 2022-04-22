@@ -2,6 +2,7 @@ const db = require('./db.spec');
 const createLabor = require('../controllers/laborForce/createLaborForceController');
 const getLabor = require('../controllers/laborForce/getLaborForceController');
 const getManyLabor = require('../controllers/laborForce/getManyLaborForceController');
+const deleteLabor = require('../controllers/laborForce/deleteLaborForceController');
 const LaborForce = require('../models/laborForce');
 
 //  Database mock setup
@@ -138,13 +139,11 @@ describe('Labor Force database model tests', () => {
         expect(found_data.data).toEqual([]);
     });
 
-    /*
     it('should successfully delete element from database', async() => {
         const inserted = await createLabor(
             DATA.county,
             DATA.state,
             DATA.year,
-            Math.random(),
             Math.random()
         );
         //  Find new entry in DB with get controller
@@ -153,7 +152,11 @@ describe('Labor Force database model tests', () => {
         const result = await deleteLabor(inserted.corr_id);
         expect(result.result).toEqual('Success');
         const does_exist = await getLabor(DATA.county, DATA.year);
-        assert(does_exist.corr_id).toEqual(null);
+        expect(does_exist.corr_id).toEqual(null);
     });
-    */
+
+    it('should not delete element from database if it does not exist', async() => {
+        const result = await deleteLabor(1);
+        expect(result.result).toEqual('Failure');
+    });
 });

@@ -116,11 +116,10 @@ router.delete('/v1/deleteHousingAffordability', async(req, res) => {
 
     var result = await deleteHousingAffordability(req.query.corr_id)
         .catch(() => {
-            res.status(404).json({ 'result': 'Internal error' });
-            return;
+            return res.status(404).json({ 'result': 'Internal error' });
         });
 
-    res.status(204).json(result);
+    res.status(200).json(result);
 })
 
 module.exports = router;

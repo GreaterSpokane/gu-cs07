@@ -2,7 +2,7 @@ const express = require('express');
 const createNaturalChange = require('../controllers/naturalChange/createNaturalChangeController');
 const getNaturalChange = require('../controllers/naturalChange/getNaturalChangeController');
 const getManyNaturalChange = require('../controllers/naturalChange/getManyNaturalChangeController');
-//const deleteLaborForce = require('../controllers/naturalChange/deleteNaturalChangeController')
+const deleteNaturalChange = require('../controllers/naturalChange/deleteNaturalChangeController')
 const serialize = require('../serializers/naturalChangeSerializer');
 var router = express.Router();
 
@@ -100,7 +100,7 @@ router.get('/v1/getManyNaturalChange', async(req, res) => {
 
 /*  delete labor document from the collection by correlation id  */
 router.delete('/v1/deleteNaturalChange', async(req, res) => {
-    if (typeof req.body.corr_id === 'undefined') {
+    if (typeof req.query.corr_id === 'undefined') {
         result = {
             'result': 'Failure',
             'reason': 'Parameter error'
@@ -110,7 +110,12 @@ router.delete('/v1/deleteNaturalChange', async(req, res) => {
         return;
     }
 
-    //  TODO: Delete labor force indicator
+    var result = await deleteNaturalChange(req.query.corr_id)
+        .catch(() => {
+            return res.status(404).json({ 'result': 'Internal error' });
+        });
+
+    res.status(200).json(result);
 })
 
 module.exports = router;

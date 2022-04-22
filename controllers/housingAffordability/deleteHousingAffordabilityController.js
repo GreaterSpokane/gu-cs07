@@ -1,4 +1,3 @@
-const { ObjectId } = require('bson');
 const HousingAffordabilityIndex = require('../../models/housingAffordability');
 
 module.exports = async function deleteHousingAffordability(corr_id) {
@@ -9,15 +8,22 @@ module.exports = async function deleteHousingAffordability(corr_id) {
      */
 
     try {
-        await HousingAffordabilityIndex.deleteOne({ _id: ObjectId(corr_id) },
-            (err, docs) => {
-                if (err) throw err;
-                return { result: "Success" }
-            })
-    } catch (err) {
-        return {
-            result: "Failure",
-            error: err
-        }
+        var findResult = await HousingAffordabilityIndex.findById(corr_id).exec();
+        if (findResult == (null || undefined))
+            return {
+                result: "Failure",
+                reason: "Could not find the data associated with that correlation id"
+            }
+
+        var deleteResult = await HousingAffordabilityIndex.deleteOne({ _id: findResult._id }).exec();
+        if (deleteResult.deletedCount == 1)
+            return { result: "Success" };
+        else
+            return {
+                result: "Failure",
+                reason: "Could not delete element from the database"
+            }
+    } catch {
+        return { result: "Failure" };
     }
 }
