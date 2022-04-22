@@ -1,4 +1,5 @@
 import requests
+import sys
 from laborb import *
 from APIcalls import *
 
@@ -14,12 +15,14 @@ def LaborForce(countyVal, yearVal, stateVal):
     return response
 
 def Rent(countyVal, yearVal, stateVal):
-    average_rent = housing_month(countyVal, year)
+    average_rent = housing_month(countyVal, yearVal)
     response = requests.post(f'http://0.0.0.0:3000/v1/newAverageRent?county={countyVal}&state={stateVal}&year={yearVal}&average_rent={average_rent}')
+    return response
 
-def Income(year):
-    median_income = MedianIncome(year)
-    response = requests.post(f'http://0.0.0.0:3000/v1/newAverageRent?county={countyVal}&state={stateVal}&year={yearVal}&average_rent={average_rent}')
+def Income(countyVal, yearVal, stateVal):
+    median_income = MedianIncome(countyVal, yearVal)
+    response = requests.post(f'http://0.0.0.0:3000/v1/newMedianIncome?county={countyVal}&state={stateVal}&year={yearVal}&median_income={median_income}')
+    return response
 
 def Employment(countyVal, yearVal, stateVal):
     newEmployment, unemployment = employment(countyVal, yearVal)
@@ -28,7 +31,31 @@ def Employment(countyVal, yearVal, stateVal):
     return response
 
 def main():
-    LaborForce('Boise', 2017, 'ID')
+    code = LaborForce('Spokane', sys.argv[1], 'WA')
+    LaborForce('Boise', sys.argv[1], 'ID')
+    LaborForce('Fort Collins', sys.argv[1], 'CO')
+    LaborForce('Eugene', sys.argv[1], 'OR')
+    LaborForce('Salt Lake', sys.argv[1], 'UT')
+    Housing('Spokane', sys.argv[1], 'WA')
+    Housing('Boise', sys.argv[1], 'ID')
+    Housing('Fort Collins', sys.argv[1], 'CO')
+    Housing('Eugene', sys.argv[1], 'OR')
+    Housing('Salt Lake', sys.argv[1], 'UT')
+    Rent('Spokane', sys.argv[1], 'WA')
+    Rent('Boise', sys.argv[1], 'ID')
+    Rent('Fort Collins', sys.argv[1], 'CO')
+    Rent('Eugene', sys.argv[1], 'OR')
+    Rent('Salt Lake', sys.argv[1], 'UT')
+    Income('Spokane', sys.argv[1], 'WA')
+    Income('Boise', sys.argv[1], 'ID')
+    Income('Fort Collins', sys.argv[1], 'CO')
+    Income('Eugene', sys.argv[1], 'OR')
+    Income('Salt Lake', sys.argv[1], 'UT')
+    #Employment('Spokane', sys.argv[0], 'WA')
+    #Employment('Boise', sys.argv[0], 'ID')
+    #Employment('Fort Collins', sys.argv[0], 'CO')
+    #Employment('Eugene', sys.argv[0], 'OR')
+    #Employment('Salt Lake', sys.argv[0], 'UT')
 
 if __name__ == "__main__":
     code = main()
