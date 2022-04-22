@@ -1,3 +1,15 @@
+async function postPythonData(year) {
+    var query = `?year=${year}`
+    const res = await fetch('/v1/newPythonData' + query, {
+        method: 'POST',
+        headers: {},
+        mode: "same-origin"
+    })
+}
+
+
+
+
 async function postLaborforce(yearVal, stateVal, countyVal, value) {
     var query = `?county=${countyVal}&state=${stateVal}&year=${yearVal}&labor_force=${value}`
     const res = await fetch('/v1/newLaborForce' + query, {
@@ -19,7 +31,7 @@ async function postLaborforceParticipation(yearVal, stateVal, countyVal, value) 
 }
 
 async function postMedian(yearVal, stateVal, countyVal, value) {
-    var query = `?county=${countyVal}&state=${stateVal}&year=${yearVal}&labor_force=${value}`
+    var query = `?county=${countyVal}&state=${stateVal}&year=${yearVal}&median_income=${value}`
     const res = await fetch('/v1/newMedianIncome' + query, {
         method: 'POST',
         headers: {},
@@ -134,6 +146,7 @@ function clearStaleInput() {
     $('#rent-county-input').val("");
     $('#rent-value-input').val("");
     $('#rent-state-input').val("");
+    $('#API-year-input').val("");
 }
 
 $(document).ready(async() => {
@@ -147,7 +160,7 @@ $(document).ready(async() => {
         value = $('#labor-value-input').val();
         await postLaborforce(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#ParticipationButton").on('click', async() => {
@@ -158,7 +171,7 @@ $(document).ready(async() => {
         value = $('#participation-value-input').val();
         await postLaborforceParticipation(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#MedianButton").on('click', async() => {
@@ -169,7 +182,7 @@ $(document).ready(async() => {
         value = $('#median-value-input').val();
         await postMedian(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#IndexButton").on('click', async() => {
@@ -180,7 +193,7 @@ $(document).ready(async() => {
         value = $('#index-value-input').val();
         await postIndex(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#PriceButton").on('click', async() => {
@@ -191,7 +204,7 @@ $(document).ready(async() => {
         value = $('#price-value-input').val();
         await postPrice(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#EmployedButton").on('click', async() => {
@@ -202,7 +215,7 @@ $(document).ready(async() => {
         value = $('#employed-value-input').val();
         await postEmployed(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#UnemployedButton").on('click', async() => {
@@ -213,7 +226,7 @@ $(document).ready(async() => {
         value = $('#unemployed-value-input').val();
         await postUnemployed(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#ChangeButton").on('click', async() => {
@@ -224,7 +237,7 @@ $(document).ready(async() => {
         value = $('#change-value-input').val();
         await postChange(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#MigrationButton").on('click', async() => {
@@ -235,7 +248,7 @@ $(document).ready(async() => {
         value = $('#migration-value-input').val();
         await postMigration(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
     })
 
     $("#RentButton").on('click', async() => {
@@ -246,7 +259,16 @@ $(document).ready(async() => {
         value = $('#rent-value-input').val();
         await postRent(year, state, county, value);
 
-        clearStaleInput()
+        clearStaleInput();
+    })
+
+    $("#updateButton").on('click', async() =>{
+        var year;
+        year = $('#API-year-input').val();
+        console.log(year);
+        await postPythonData(year);
+
+        clearStaleInput();
     })
 
 });

@@ -55,7 +55,7 @@ def employment(county, year):
 
 if __name__ == "__main__":
     year = input("Enter year to fetch: ")
-    val1, val2 = employment(year)
+    val1, val2 = employment('Spokane', year)
     print(val1)
     print(val2)
     employment_data_set = {"indicator" : "Employment", "source" : "Bureau of Labor Statistics", "year" : year, "value" : val1}

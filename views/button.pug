@@ -8,9 +8,11 @@ block scripts
   script(src="javascripts/update.js")
 block content
     div#button-container
-        h2 Press to Update Data
-        h3#updateStatus Data is ready to update
-        button#updateButton UPDATE
+      h2 Press to Update Data
+      h3#updateStatus Data is ready to update
+      label(for="year") Year
+      input#API-year-input(type="number", name="year")
+      button#updateButton UPDATE
     div#update-table-container
       h1 Manual Indicator Update
       table#update-table
@@ -28,7 +30,7 @@ block content
               input#median-state-input(type="text", name="state")
               br
               label(for="median-value") Value
-              input#median-county-input(type="number", name="value")
+              input#median-value-input(type="number", name="value")
               br
               button#MedianButton UPDATE
           td
@@ -131,6 +133,7 @@ block content
           td
             div#NaturalChange 
               h2 Natural Change
+              label(for="year") Year
               input#change-year-input(type="number", name="year")
               br
               label(for="county") County
@@ -147,6 +150,7 @@ block content
           td
             div#netDomesticMigration 
               h2 Net Domestic Migration
+              label(for="year") Year
               input#migration-year-input(type="number", name="year")
               br
               label(for="county") County
@@ -162,6 +166,7 @@ block content
           td
             div#averageRent 
               h2 Average Rent
+              label(for="year") Year
               input#rent-year-input(type="number", name="year")
               br
               label(for="county") County

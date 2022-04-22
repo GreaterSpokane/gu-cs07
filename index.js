@@ -65,6 +65,7 @@ var medianIncomeRouter = require('./routes/medianIncome');
 var housingAffordabilityRouter = require('./routes/housingAffordability');
 var testEndpointsRouter = require('./routes/testEndpoints');
 var authRouter = require('./routes/auth');
+var pythonRouter = require('./routes/python');
 
 // API Endpoints
 app.use(indexRouter);
@@ -80,6 +81,7 @@ app.use(averageRentRouter);
 app.use(medianIncomeRouter);
 app.use(testEndpointsRouter);
 app.use(authRouter);
+app.use(pythonRouter);
 
 // error handler
 app.use(function(err, req, res, next) {
