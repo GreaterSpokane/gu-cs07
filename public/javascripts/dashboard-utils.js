@@ -122,8 +122,8 @@ window.onload = async function () {
         console.log("inside short stat fucntion")
         let indicatorName = String(stats[i].id).slice(0, 3);
         console.log("stat sliced", indicatorName)
-        const spokaneStatData = getTempData(indicatorName, 'Spokane')
-        const yearsData = getTempData(indicatorName, 'years')
+        const spokaneStatData = getData(indicatorName, 'spokane', false)
+        const yearsData = getData(indicatorName, 'spokane', true)
         const dataLen = spokaneStatData.length
         const endData = spokaneStatData[dataLen - 1]
         const startData = spokaneStatData[dataLen - 2]
@@ -488,10 +488,13 @@ function getTempData(indicatorName, key) {
 
 // returns the chartjs config for each indicator
 function getConfig(indicatorName, isDetailView) {
-    const spokaneColor = "#00B4ED";
-    const washingtonColor = "#866BAF";
-    const saltLakeColor = "#D7DC61";
-    const boiseColor = "#6E7277";
+    const spokaneColor = "#00B4ED"; //gsi blue
+    const washingtonColor = "#866BAF"; // gsi purple
+    const saltLakeColor = "#D7DC61";    // gsi yellow
+    const boiseColor = "#6E7277";   //gsi gray
+    const orangeColor = '#db6140';  // orange from initial syling
+    const greenColor = '#719a45'    // green from initial stying
+
 
     let configData = {
         "lfs": {
@@ -735,7 +738,7 @@ function getConfig(indicatorName, isDetailView) {
                 label: "Spokane",
             }, {
                 data: getData(indicatorName, "boise", false),
-                borderColor: boiseColor,
+                borderColor: washingtonColor,
                 label: "Boise",
             }, {
                 data: getData(indicatorName, "saltlakecity", false),
@@ -753,6 +756,39 @@ function getConfig(indicatorName, isDetailView) {
         },
     }
 
+    if (indicatorName == "lfs") {
+        return {
+            type: "doughnut",
+            data: {
+                labels: [
+                    'Employed',
+                    'Unemployed',
+                    'Not in Labor Force'
+                ],
+                datasets: [{
+                    data: [0.5, 0.1, 0.4,],
+                    backgroundColor: [
+                        '#866BAF',
+                        '#00B4ED',
+                        '#6E7277',
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                radius: "80%"
+            }
+        }
+    }
+
+    if (!isDetailView) {
+        const shortIndicator = defaultLineConfig.data.datasets;
+        if(indicatorName == "lfp") {
+            defaultLineConfig.data.datasets = shortIndicator.slice(0, 1);
+        } else {
+            defaultLineConfig.data.datasets = shortIndicator.slice(0, 3);
+        }
+    }
     return defaultLineConfig;
 
 

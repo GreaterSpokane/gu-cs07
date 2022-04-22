@@ -10,6 +10,9 @@ html(lang='en')
     block style-sheet
       link(rel='stylesheet', type="text/css", href='../css/style.css')
       link(rel='stylesheet', type="text/css", href='../css/theme.css')
+      link(rel="preconnect" href="https://fonts.googleapis.com")
+      link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+      link(href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet")
     block scripts
       script(src="../javascripts/page_default_template.js")
       script.u-script(type='text/javascript' src='../javascripts/jquery-1.9.1.min.js' defer='')
@@ -24,11 +27,12 @@ html(lang='en')
       block page-name
           h1.page-name Page Name
       section#navbar
-        h2 Navigation 
-        a(href="index") About
-        a(href="dashboard") Dashboard Mockup
-        a(href="login") Authorized Area
-      block content
+      
+        //- h2 Navigation 
+        //- a(href="index") About
+        //- a(href="dashboard") Dashboard 
+        //- a(href="login") Authorized Area
+      block content 
     footer#sec-a336.u-align-center.u-clearfix.u-footer.u-grey-80.u-footer.footer
       .u-clearfix.u-sheet.u-sheet-1
         .u-clearfix.u-expanded-width.u-gutter-0.u-layout-wrap.u-layout-wrap-1

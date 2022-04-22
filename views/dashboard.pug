@@ -13,14 +13,15 @@ block scripts
     script(src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js") 
     script(type="module" src="../javascripts/dashboard-utils.js" defer)
 block page-name
-    h1.page-name Economic Indicator Dashboard
+    //- h1.page-name Economic Indicator Dashboard
 block content
+    br 
     .dashboard
         .dashboard-body
             #housing.category-snapshot-view
                 h2 Housing
-                .category-flex-container 
-                    #mhc-card.card
+                .category-flex-container.flex-container-third
+                    #mhc-card.card.flex-item-third-first
                         .card-header
                             h3 Median Housing Cost
                             p#mhc-stat.stat Increased between 2018 and 2019.
@@ -81,7 +82,8 @@ block content
                     p 
                     br
                 .detailed-view-half
-                    canvas#mhc-detailed-chart-canvas
+                    .detail-chart-container
+                        canvas#mhc-detailed-chart-canvas
                     br
             #mmr-detailed-view.detailed-view-card
                 .detailed-view-half

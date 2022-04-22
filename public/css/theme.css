@@ -7780,7 +7780,7 @@ main {
 
 .header-text {
     color: white;
-    filter: drop-shadow(0 0 20px #9161a9);
+    filter: drop-shadow(0 0 20px #313233);
     -webkit-text-stroke: 1px grey;
 }
 
