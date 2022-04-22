@@ -1,24 +1,27 @@
-/**
- * Single entry retrieval controller for the AuthUser model
- */
-
 require('dotenv').config();
 const AuthUser = require("../../models/authUser");
 const { saltHashPassword } = require('./hashController');
+const emailValidator = require('deep-email-validator');
 
-/* Retrieve documents using county and year as a composite key  */
+async function isEmailValid(email) {
+    /**
+     * Assert that the inputted email is a real email address
+     * @param {string} email Email to check the validity of
+     * @return {boolean} True if the email is real, false otherwise
+     */
+    return emailValidator.validate(email)
+}
+
 module.exports = async function createAuthUser(username, password) {
-
-    // //  Check that the username does not already exist
-    // var findUserResult = await AuthUser.findOne({ username: username }).exec();
-    // if (findUserResult !== undefined) {
-    //     var result = {
-    //         'result': "failed to register user",
-    //         'reason': "username is already registered",
-    //         'username': username
-    //     };
-    //     return result;
-    // }
+    /**
+     * Try to register the inputted username and password as authorized users. Inputs are only valid
+     * if
+     * - The username/email is from the whitelisted domain list
+     * - The username/email is a real email
+     * @param {string} username Username to register
+     * @param {string} password Password to register
+     * @return {object} JSON response indicating the result of creating the user
+     */
 
     //  Check that the domain matches allowed email domains
     var addressSignIdx = username.indexOf('@');
@@ -32,8 +35,7 @@ module.exports = async function createAuthUser(username, password) {
         return result;
     }
 
-    //  TODO: Check that email is a real email
-
+    //  Check the email domain
     var userDomain = username.substring(addressSignIdx + 1);
     if (userDomain !== process.env.GSI_DOMAIN && userDomain !== process.env.DEV_DOMAIN) {
         var result = {
@@ -44,10 +46,19 @@ module.exports = async function createAuthUser(username, password) {
         return result;
     }
 
+    // //  assert that the email is a real email
+    // var { valid, reason, validators } = await isEmailValid(username);
+    // if (!valid)
+    //     return {
+    //         'result': "failed to register user",
+    //         'reason': "email is not a real email: " + reason,
+    //         'username': username
+    //     };
+
     var hashPass = saltHashPassword(password);
     var hashedPassword = hashPass.passwordHash;
     var salt = hashPass.salt;
-    const newUser = new AuthUser({
+    var newUser = new AuthUser({
         username: username,
         password: hashedPassword,
         salt: salt

@@ -13,14 +13,14 @@ router.post('/v1/newMedianHousing', async(req, res) => {
     //  Check that body params exist
     if (
         //   check each parameter exists
-        typeof req.body.county === "undefined" ||
-        typeof req.body.state === "undefined" ||
-        typeof req.body.year === "undefined" ||
-        typeof req.body.med_housing_cost === "undefined") {
+        typeof req.query.county === "undefined" ||
+        typeof req.query.state === "undefined" ||
+        typeof req.query.year === "undefined" ||
+        typeof req.query.med_housing_cost === "undefined") {
 
         var result = {
             'result': 'Parameter error',
-            'body': req.body,
+            'body': req.query,
             'corr_id': null
         };
 
@@ -30,10 +30,10 @@ router.post('/v1/newMedianHousing', async(req, res) => {
 
     //  Create new entry in median housing cost document
     var entry = await createMedianHousing(
-        req.body.county,
-        req.body.state,
-        req.body.year,
-        req.body.med_housing_cost
+        req.query.county,
+        req.query.state,
+        req.query.year,
+        req.query.med_housing_cost
     ).catch(() => {
         var result = {
             'result': 'Internal error',
@@ -114,29 +114,22 @@ router.get('/v1/getManyMedianHousing', async(req, res) => {
 
 /* Delete a document from the database using a corr_id */
 router.delete('/v1/deleteMedianHousing', async(req, res) => {
-    if (typeof req.body.corr_id === 'undefined') {
+    if (typeof req.query.corr_id === 'undefined') {
         result = {
             'result': 'Failure',
-            'reason': 'Parameter error',
-            'corr_id': null
+            'reason': 'Parameter error'
         }
 
         res.status(404).json(result);
         return
     }
 
-    var result = await deleteMedianHousing(req.body.corr_id)
-        .catch((err) => {
-            var result = {
-                'result': 'Internal error',
-                'corr_id': null
-            };
-
-            res.status(404).json(result);
-            return;
+    var result = await deleteMedianHousing(req.query.corr_id)
+        .catch(() => {
+            return res.status(404).json({ 'result': 'Internal error' });
         });
 
-    res.status(204).json(result);
+    res.status(200).json(result);
 });
 
 module.exports = router;

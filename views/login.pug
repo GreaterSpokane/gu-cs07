@@ -1,4 +1,4 @@
-doctype doctype html
+doctype html
 html(lang="en")
   head
     title Spokane Economic Dashboard | Authorized User Sign-in
@@ -8,20 +8,28 @@ html(lang="en")
     link(rel='stylesheet' type="text/css" href="css/login.css")
     link(rel="shortcut icon" href="images/favicon.ico" type="image/x-icon")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
-    script(src="javascripts/authPassHash.js" type="module")
+    script(src="javascripts/login.js")
   body
     div#login-window
       h1 Authorized User Sign-in
       div#input-container
-        section.entry
-        label(for="username") Username
-        input.text-field( type="text" id="username" name="username" required)
-        section.entry
-        label(for="password") Password
-        input.text-field( type="password" id="password" name="password" required)
         p.error-msg.hide
-      div#button-container
-        button#login Login
-        button#back Back to Dashboard
-      div#registration-containr 
-        a(href="") Register User 
+        form(action="/login", method="post") 
+          table#input-grid
+            tr
+              td.input-grid-label
+                label(for="username") Username
+              td.input-grid-field
+                input.text-field(type="text" id="username" name="username" required)
+            tr
+              td.input-grid-label
+                label(for="password") Password
+              td.input-grid-field
+                input.text-field(type="password" id="password" name="password" required)
+          div#button-container
+            input(type="submit" id="login" name="login" value="Login")
+            button#back Back to Dashboard
+          div#navigation-container 
+            a(href="/register") Register User
+            br
+            a(href="/change") Forgot Password? 

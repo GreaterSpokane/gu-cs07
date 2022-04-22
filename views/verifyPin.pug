@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+  head
+    title Spokane Economic Dashboard | Change Password
+    meta(name="description", content="Password Change Page")
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel='stylesheet' type="text/css" href="css/login.css")
+    link(rel="shortcut icon" href="images/favicon.ico" type="image/x-icon")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+  body
+    div#login-window
+      h1 Enter the PIN sent to your email
+      div#input-container
+        p.error-msg.hide
+        form(action="/pin" method="post") 
+          table#input-grid
+            tr
+              td.input-grid-label
+                label(for="pin") Pin
+              td.input-grid-field
+                input.text-field(type="text" id="pin" name="pin" required)
+            tr
+              td.input-grid-label
+                label(for="password") New Password
+              td.input-grid-field
+                input.text-field(type="password" id="updatedpass" name="updatedpass" required)
+          div#button-container
+            input(type="submit" id="send-updated-pass" name="send-updated-pass" value="Change Password")
+            br
+            a(href="/register") Back To Register

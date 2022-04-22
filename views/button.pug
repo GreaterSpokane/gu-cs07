@@ -2,13 +2,181 @@ extends auth_layout.pug
 block page-title
   title Spokane Ecomomic Dashboard | Authorized User Page
 block style-sheet
-  link(rel='stylesheet' type="text/css" href="css/auth.css")
-  link(rel='stylesheet', type="text/css", href='../css/style.css')
+  link(rel='stylesheet' type="text/css" href="css/auth_style.css")
 block scripts
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
-  script(src="javascripts/button.js")
+  script(src="javascripts/update.js")
 block content
     div#button-container
-        h2 Press to Update Data
-        h3#updateStatus Data is ready to update
-        button#updateButton UPDATE
+      h2 Press to Update Data
+      h3#updateStatus Data is ready to update
+      label(for="year") Year
+      input#API-year-input(type="number", name="year")
+      button#updateButton UPDATE
+    div#update-table-container
+      h1 Manual Indicator Update
+      table#update-table
+        tr
+          td
+            div#Median-Household
+              h2 Median Household Income
+              label(for="year") Year
+              input#median-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#median-county-input(type="text", name="county")
+              br
+              label(for="median-state") State Code
+              input#median-state-input(type="text", name="state")
+              br
+              label(for="median-value") Value
+              input#median-value-input(type="number", name="value")
+              br
+              button#MedianButton UPDATE
+          td
+            div#Laborforce
+              h2 Laborforce
+              label(for="year") Year
+              input#labor-year-input(type="text", name="year")
+              br
+              label(for="county") County
+              input#labor-county-input(type="text", name="county")
+              br
+              label(for="laborforce-state") State Code
+              input#labor-state-input(type="text", name="state")
+              br
+              label(for="laborforce-value") Value
+              input#labor-value-input(type="number", name="value")
+              br
+              button#LaborforceButton UPDATE
+          td 
+            div#Housing-Affordability
+              h2 Median Housing Cost
+              label(for="year") Year
+              input#price-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#price-county-input(type="text", name="county")
+              br
+              label(for="affordability-state") State Code
+              input#price-state-input(type="text", name="state")
+              br
+              label(for="affordability-value") Value
+              input#price-value-input(type="number", name="value")
+              br
+              button#PriceButton UPDATE
+          td
+            div#Laborforce-Participation
+              h2 Laborforce Participation
+              label(for="year") Year
+              input#participation-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#participation-county-input(type="text", name="county")
+              br
+              label(for="laborforce-state") State Code
+              input#participation-state-input(type="text", name="state")
+              br
+              label(for="laborforceParticipation-value") Value
+              input#participation-value-input(type="number", name="value")
+              br
+              button#ParticipationButton UPDATE
+        tr
+          td
+            div#Housing-Index
+                h2 Housing Index
+                label(for="year") Year
+                input#index-year-input(type="number", name="year")
+                br
+                label(for="county") County
+                input#index-county-input(type="text", name="county")
+                br
+                label(for="index-state") State Code
+                input#index-state-input(type="text", name="state")
+                br
+                label(for="index-value") Value
+                input#index-value-input(type="number", name="value")
+                br
+                button#IndexButton UPDATE
+          td
+            div#Employed
+              h2 Employed Persons
+              label(for="year") Year
+              input#employed-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#employed-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#employed-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#employed-value-input(type="number", name="value")
+              br
+              button#EmployedButton UPDATE
+          td
+            div#Unemployed 
+              h2 Unemployed Persons
+              label(for="year") Year
+              input#unemployed-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#unemployed-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#unemployed-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#unemployed-value-input(type="number", name="value")
+              br
+              button#UnemployedButton UPDATE
+          td
+            div#NaturalChange 
+              h2 Natural Change
+              label(for="year") Year
+              input#change-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#change-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#change-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#change-value-input(type="number", name="value")
+              br
+              button#ChangeButton UPDATE
+        tr
+          td
+            div#netDomesticMigration 
+              h2 Net Domestic Migration
+              label(for="year") Year
+              input#migration-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#migration-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#migration-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#migration-value-input(type="number", name="value")
+              br
+              button#MigrationButton UPDATE
+          td
+            div#averageRent 
+              h2 Average Rent
+              label(for="year") Year
+              input#rent-year-input(type="number", name="year")
+              br
+              label(for="county") County
+              input#rent-county-input(type="text", name="county")
+              br
+              label(for="state") State Code
+              input#rent-state-input(type="text", name="state")
+              br
+              label(for="value") Value
+              input#rent-value-input(type="number", name="value")
+              br
+              button#RentButton UPDATE
+          td

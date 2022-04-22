@@ -144,17 +144,24 @@ describe('Housing affordability index database model tests', () => {
     });
 
 
-    // it('should successfully delete element from database', async() => {
-    //     const inserted = await createHousingAffordability(
-    //         DATA.county,
-    //         DATA.state,
-    //         DATA.year,
-    //         DATA.netDomesticMigration
-    //     );
-    //     //  Find new entry in DB with get controller
-    //     const found = await getHousingAffordability(DATA.county, DATA.year);
-    //     expect(found.corr_id).toEqual(inserted.corr_id);
-    //     const result = await deleteHousingAffordability(inserted.corr_id);
-    //     expect(result.result).toEqual("Success");
-    // });
+    it('should successfully delete element from database', async() => {
+        const inserted = await createNetDomesticMigration(
+            DATA.county,
+            DATA.state,
+            DATA.year,
+            Math.random()
+        );
+        //  Find new entry in DB with get controller
+        const found = await getNetDomesticMigration(DATA.county, DATA.year);
+        expect(found.corr_id).toEqual(inserted.corr_id);
+        const result = await deleteNetDomesticMigration(inserted.corr_id);
+        expect(result.result).toEqual('Success');
+        const does_exist = await getNetDomesticMigration(DATA.county, DATA.year);
+        expect(does_exist.corr_id).toEqual(null);
+    });
+
+    it('should not delete element from database if it does not exist', async() => {
+        const result = await deleteNetDomesticMigration(1);
+        expect(result.result).toEqual('Failure');
+    });
 });

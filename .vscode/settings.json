@@ -1,3 +1,6 @@
 {
-    "jest.jestCommandLine": "npm test --"
+    "jest.jestCommandLine": "npm test --",
+    "cSpell.words": [
+        "updatedpass"
+    ]
 }

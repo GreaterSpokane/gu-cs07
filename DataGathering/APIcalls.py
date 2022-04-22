@@ -9,25 +9,33 @@ import json
 
 ##Fetches median income in spokane county in 2019
 
-def MedianIncome(year):
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B19013_001E'])
+def MedianIncome(county, year):
+    countyDict = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake': '035'}
+    stateDict = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake': '49'}
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', stateDict[county]), ('county', countyDict[county])]), ['B19013_001E'])
 
-    print(data.iat[0,0])
+    return data.iat[0,0]
 
 ##Housing Index API
-def housing_month(year):
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B25105_001E'])
+def housing_month(county, year):
+    countyDict = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake': '035'}
+    stateDict = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake': '49'}
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', stateDict[county]), ('county', countyDict[county])]), ['B25105_001E'])
 
-    print(data.iat[0,0])
+    return data.iat[0,0]
 
-def housing(year):
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B25077_001E'])
+def housing(county, year):
+    countyDict = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake': '035'}
+    stateDict = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake': '49'}
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', stateDict[county]), ('county', countyDict[county])]), ['B25077_001E'])
 
-    print(data.iat[0,0])
+    return data.iat[0,0]
 
 ##LaborForce Participation
-def labor(year):
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', '53'), ('county', '063')]), ['B23025_001E', 'B23025_002E'])
+def labor(county, year):
+    countyDict = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake': '035'}
+    stateDict = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake': '49'}
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', stateDict[county]), ('county', countyDict[county])]), ['B23025_001E', 'B23025_002E'])
 
     column_names = ['Civilian Population', 'Civilians In Labor Force']
     data.columns = column_names
@@ -36,7 +44,7 @@ def labor(year):
     lambda row:  row['Civilians In Labor Force']/row['Civilian Population'], 
         axis = 1)
 
-    return data.iat[0,1], data.iat[0,2];
+    return data.iat[0,1], data.iat[0,2]
 
 
 #laborbuerau data

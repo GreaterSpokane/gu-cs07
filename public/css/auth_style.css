@@ -1,0 +1,161 @@
+header {
+    background-color: #333;
+    color: #FFFFFF;
+    justify-content: center;
+    fill-opacity: 5%;
+    background-image: "\\html\\stockvault-spokane-washington-city-view241358.jpg";
+    padding-bottom: 25px;
+}
+
+h1 {
+    text-align: center;
+    color: #db6140;
+    padding: 1%;
+}
+
+#navbar h2 {
+    text-align: center;
+    color: #719a45;
+}
+
+h2 {
+    color: #719a45;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #eeebea;
+    justify-content: center;
+    color: #2f2f2e;
+    font-size: 100%;
+}
+
+main {
+    padding-bottom: 1%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+footer {
+    background-color: #3B3B39;
+    color: #FFFFFF;
+    height: 150px;
+}
+
+.info {
+    margin: auto;
+    color: #FFFFFF;
+    float: center;
+}
+
+.info table {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+li {
+    padding-bottom: 8px;
+    text-emphasis-color: #04395E;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #3B3B39;
+    text-align: center;
+    position: relative;
+    padding: 1%;
+}
+
+
+/* Navbar links */
+
+#navbar a {
+    float: center;
+    font-size: 24px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+#navbar a:hover {
+    color: #719a45;
+    border: 2px white solid;
+}
+
+a:link {
+    color: #FFFFFF;
+    padding: 1%;
+}
+
+a:visited {
+    color: whitesmoke;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #BE5937;
+    color: #031D44;
+    text-align: center;
+}
+
+.footer table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.column {
+    float: left;
+}
+
+.column.side {
+    width: 25%;
+}
+
+.column.middle {
+    width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+    .column.side,
+    .column.middle {
+        width: 100%;
+    }
+}
+
+#navbar {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.text_visuals>h2 {
+    text-align: center;
+    background-color: #2f2f2e;
+}
+
+.indicator-label {
+    background-color: #2f2f2e;
+}
+
+.indicator-text-section {
+    width: 40%;
+}
+
+.indicator-data-section {
+    width: 60%;
+}
+
+#group-photo {
+    float: left;
+    padding: 0 20px 15px 0;
+    height: 35%;
+    width: 50%;
+}
+
+.visualization-container>* {
+    margin-left: auto;
+    margin-right: auto;
+}

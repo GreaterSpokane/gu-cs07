@@ -1,13 +1,14 @@
-/**
- * Single entry retrieval controller for the AuthUser model
- */
-
 const AuthUser = require("../../models/authUser");
 const getUserSalt = require("./getUserSaltController");
 const { sha512 } = require('./hashController');
 
-/* Retrieve documents using county and year as a composite key  */
 module.exports = async function authorizeUser(username, password) {
+    /**
+     * Check if the username and the password correspond to a registered authorized user
+     * @param {string} username Username to check against the database
+     * @param {string} password Password to check against the database
+     * @returns {object} JSON response with the registration status
+     */
     var salt = await getUserSalt(username);
 
     if (salt.salt == undefined)

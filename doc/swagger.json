@@ -2,84 +2,752 @@
     "swagger": "2.0",
     "info": {
         "title": "Spokane Economic Dashboard",
-        "description": "Local API for handling interactions between the MongoDB cluster and the Census Bureau API",
-        "version": "0.3.2",
+        "description": "API Endpoints for interactions between the MongoDB cluster and the Census Bureau API",
+        "version": "1.0.0",
         "contact": {
             "email": "zfoteff@protonmail.com",
             "name": "CS07 Team"
         }
     },
     "tags": [{
-            "name": "lfp",
-            "description": "Labor Force Participation Rate"
-        },
-        {
-            "name": "mhc",
-            "description": "Median Household Cost"
-        },
-        {
-            "name": "hai",
-            "description": "Housing Affordability Index"
-        },
-        {
-            "name": "mhr",
-            "description": "Median Home Resale Value"
-        }
-    ],
+        "name": "nav",
+        "description": "Navigation links for the website"
+    }, {
+        "name": "Auth",
+        "description": "Authorized endpoints for logging into the admin page, as well as registering a new user or changing their password"
+    }, {
+        "name": "lbf",
+        "description": "Labor Force"
+    }, {
+        "name": "lpr",
+        "description": "Labor Force Participation Rate"
+    }, {
+        "name": "mhc",
+        "description": "Median Housing Cost"
+    }, {
+        "name": "hai",
+        "description": "Housing Affordability Index"
+    }, {
+        "name": "avr",
+        "description": "Average Rent"
+    }, {
+        "name": "mhi",
+        "description": "Median Income"
+    }, {
+        "name": "emp",
+        "description": "Employed"
+    }, {
+        "name": "uep",
+        "description": "Unemployed"
+    }, {
+        "name": "ntc",
+        "description": "Natural Change"
+    }, {
+        "name": "ndm",
+        "description": "Net Domestic Migration"
+    }],
     "host": "spokaneeconomicdashboard.herokuapp.com",
     "basePath": "/v1",
     "schemes": [
         "http"
     ],
     "paths": {
-        "/v1/newMedianHousing": {
+        "/button": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Render 'The Button' page for the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the button page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/endpoints": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Render the manual input indicator update page for the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the button page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Render the admin page for the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the admin page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Render the login page for the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the login page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
-                "tags": ["mhc"],
-                "summary": "Create new Median Housing indicator data point",
-                "description": "Endpoint interacts with MongoDB to create new data for the Median Housing Cost indicator in its own collection",
-                "operationId": "createMedianHousing",
+                "tags": ["Auth"],
+                "summary": "Submit a username and password to be verified by the application",
+                "description": "Endpoint interacts with MongoDb to retrieve a user and it's stored password and match it to the inputted values. If there is a match, redirect the user to the ",
+                "parameters": [{
+                    "name": "body",
+                    "in": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "username": {
+                                "example": "USERNAME@ALLOWED_DOMAIN.com"
+                            },
+                            "password": {
+                                "example": "password"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "302": {
+                        "description": "Successful login. Redirect to admin page"
+                    },
+                    "403": {
+                        "description": "Bad login. Reload login page and try again"
+                    }
+                }
+            }
+        },
+        "/register": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Render the register page for the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the register page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Register new authorized email to access the admin page",
+                "description": "Endpoint checks if the user's email is valid, then it saves the user's username and redirects them to the admin page",
+                "parameters": [{
+                    "name": "body",
+                    "in": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "username": {
+                                "example": "USERNAME@ALLOWED_DOMAIN.com"
+                            },
+                            "password": {
+                                "example": "password"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "302": {
+                        "description": "Successfully registered user. Redirect to admin page"
+                    },
+                    "400": {
+                        "description": "Failed to register user"
+                    }
+                }
+            }
+        },
+        "/change": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Render the change password page for the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the login page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Submit the user's email to the change password service",
+                "description": "Checks if the user is a registered user of the application, then it emails the user a pin code and redirects them to the pin verification page",
+                "parameters": [{
+                    "name": "body",
+                    "in": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "email": {
+                                "example": "any"
+                            }
+                        }
+                    }
+                }],
+                "responses": {}
+            }
+        },
+        "/pin": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Render the verify pin page for the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the verify pin page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Submit a pin and new password.",
+                "description": "The endpoint verifies that the submitted pin matches the pin sent to the user and that it was submitted in the proper amount of time. Then it will update the requesting user's password with the new value",
+                "parameters": [{
+                    "name": "body",
+                    "in": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "pin": {
+                                "example": "123456"
+                            },
+                            "updatedpass": {
+                                "example": "new password"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "302": {
+                        "description": "Successfully verified pin and changed password. Redirect to admin page"
+                    },
+                    "401": {
+                        "description": "Failed to verify pin. Redirect to change password page"
+                    }
+                }
+            }
+        },
+        "/v1/newAverageRent": {
+            "post": {
+                "tags": ["avr"],
+                "summary": "Create new average rent indicator data",
+                "description": "Insert new average rent indicator data into the database",
                 "parameters": [{
                         "name": "county",
                         "in": "query",
-                        "description": "County associated with indicator entry",
                         "type": "string"
                     },
                     {
                         "name": "state",
                         "in": "query",
-                        "description": "State associated with indicator entry",
                         "type": "string"
                     },
                     {
                         "name": "year",
                         "in": "query",
-                        "description": "Year associated with indicator entry",
+                        "type": "string"
+                    },
+                    {
+                        "name": "average_rent",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6237f150b7c9849ab8b60feb"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getAverageRent": {
+            "get": {
+                "tags": ["avr"],
+                "summary": "Get average rent indicator data point",
+                "description": "Return an average rent data point using a county and year as keys",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2020",
+                                "laborParticipationRate": 0.675547
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyAverageRent": {
+            "get": {
+                "tags": ["avr"],
+                "summary": "Get a range of indicator data from the average rent indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Average Rent",
+                                "indicator_id": "avr",
+                                "years": [
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
+                                ],
+                                "averageRent": [
+                                    59000,
+                                    67000,
+                                    47537,
+                                    66676,
+                                    252551,
+                                    826414,
+                                    684184,
+                                    666699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/deleteAverageRent": {
+            "delete": {
+                "tags": ["avr"],
+                "summary": "Delete average rent object from database",
+                "description": "Delete an average rent datapoint from the database using the object's correlation id",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newEmployed": {
+            "post": {
+                "tags": ["emp"],
+                "summary": "Create new Employed indicator data point",
+                "description": "Insert new Employed indicator data into the database",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "employed",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6237f150b7c9849ab8b60feb"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getEmployed": {
+            "get": {
+                "tags": ["emp"],
+                "summary": "Get Employed indicator data",
+                "description": "Get Employed indicator data point using the county and the year",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2020",
+                                "employed": 5547
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyEmployed": {
+            "get": {
+                "tags": ["emp"],
+                "summary": "Get a range of indicator data from the employed indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Employed",
+                                "indicator_id": "emp",
+                                "years": [
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
+                                ],
+                                "employed": [
+                                    59000,
+                                    67000,
+                                    47537,
+                                    66676,
+                                    252551,
+                                    826414,
+                                    684184,
+                                    666699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/deleteEmployed": {
+            "delete": {
+                "tags": ["emp"],
+                "summary": "Delete employed object from database",
+                "description": "Delete an employed datapoint from the database using the object's correlation id",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newMedianHousing": {
+            "post": {
+                "tags": ["mhc"],
+                "summary": "Create new Median Housing Cost indicator data point",
+                "description": "",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "med_housing_cost",
                         "in": "query",
-                        "description": "Median Housing Cost associated with indicator entry",
                         "type": "string"
                     }
-
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created new Median Housing Cost indicator data successfully",
+                        "description": "Created",
                         "examples": {
                             "application/json": {
                                 "result": "Success",
-                                "corr_id": "6216e1c84dd06e487cbfe4d"
+                                "corr_id": "6237f150b7c9849ab8b60feb"
                             }
                         }
                     },
                     "404": {
-                        "description": "Error prevents Median Housing Cost indicator data from being created",
+                        "description": "Not Found",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error",
-                                "corr_id": "null"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
@@ -89,40 +757,38 @@
         "/v1/getMedianHousing": {
             "get": {
                 "tags": ["mhc"],
-                "summary": "Retrieve Median Housing Cost indicator data point",
-                "description": "Endpoint interacts with MongoDB to retrieve multiple data points from the Median Housing Cost collection using a county and year as a query",
-                "operationId": "getMedianHousing",
+                "summary": "Get median housing cost indicator data point",
+                "description": "Return an median housing cost data point using a county and year as keys",
                 "parameters": [{
                         "name": "county",
-                        "description": "County to query for in MongoDB",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "year",
-                        "description": "Year to query for in MongoDB",
                         "in": "query",
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Median Housing Cost data found for that county and year",
+                        "description": "OK",
                         "examples": {
                             "application/json": {
-                                "corr_id": "6237f150b7c9849ab8b60feb",
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
                                 "county": "Spokane",
                                 "state": "WA",
-                                "year": "2022",
-                                "medianHousingCost": 220000
+                                "year": "2020",
+                                "medianHousingCost": 75547
                             }
                         }
                     },
                     "404": {
-                        "description": "Median Housing Cost data not found for that county and year",
+                        "description": "Not Found",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
@@ -132,52 +798,69 @@
         "/v1/getManyMedianHousing": {
             "get": {
                 "tags": ["mhc"],
-                "summary": "Retrieve multiple Median Housing Cost indicator data points",
-                "description": "Endpoint interacts with MongoDB to retrieve multiple Median Housing Cost entries",
-                "operationId": "getMultipleMedianHousing",
+                "summary": "Get a range of indicator data from the median housing cost indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
                 "parameters": [{
                         "name": "county",
-                        "description": "County to query for in MongoDB",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "start_year",
-                        "description": "Year that makes up the start of the year range in the query",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "end_year",
-                        "description": "Year that makes up the end of the year range in the query",
                         "in": "query",
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Entries we found for that county and the year range",
+                        "description": "OK",
                         "examples": {
                             "application/json": {
                                 "county": "Spokane",
-                                "indicator": "Labor Force Participation",
+                                "indicator": "Median Housing Cost",
                                 "indicator_id": "mhc",
                                 "years": [
-                                    "2021",
-                                    "2022"
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
                                 ],
                                 "medianHousingCost": [
-                                    15000,
-                                    22000
+                                    59000,
+                                    67000,
+                                    47537,
+                                    66676,
+                                    252551,
+                                    826414,
+                                    684184,
+                                    666699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
                                 ]
                             }
                         }
                     },
                     "404": {
-                        "description": "Entries we not found for that county and year range, or a internal error prevented the query",
+                        "description": "Not Found",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
@@ -187,17 +870,16 @@
         "/v1/deleteMedianHousing": {
             "delete": {
                 "tags": ["mhc"],
-                "summary": "Delete Median Housing Cost data point",
-                "description": "Delete Median Housing Cost entry from the MongoDB collection",
-                "operationId": "deleteMedianHousing",
+                "summary": "Delete median housing cost object from database",
+                "description": "Delete an median housing cost datapoint from the database using the object's correlation id",
                 "parameters": [{
                     "name": "corr_id",
                     "in": "query",
                     "type": "string"
                 }],
                 "responses": {
-                    "204": {
-                        "description": "Successfully deleted entry from the collection",
+                    "200": {
+                        "description": "Deleted item",
                         "examples": {
                             "application/json": {
                                 "result": "Success"
@@ -205,10 +887,11 @@
                         }
                     },
                     "404": {
-                        "description": "Could not find entry to delete, or another internal error interrupted the process",
+                        "description": "Could not delete item",
                         "examples": {
                             "application/json": {
-                                "result": "Failure"
+                                "result": "Failure",
+                                "reason": "Error reason"
                             }
                         }
                     }
@@ -218,51 +901,45 @@
         "/v1/newHousingAffordability": {
             "post": {
                 "tags": ["hai"],
-                "summary": "Create new Housing Affordability Index data point",
-                "description": "Endpoint interacts with MongoDB to create new data for the Housing Affordability Index indicator in its own collection",
-                "operationId": "createHousingAffordability",
+                "summary": "Create new housing affordability index indicator data point",
+                "description": "Insert new housing affordability index indicator data into the database",
                 "parameters": [{
                         "name": "county",
                         "in": "query",
-                        "description": "County associated with indicator entry",
                         "type": "string"
                     },
                     {
                         "name": "state",
                         "in": "query",
-                        "description": "State associated with indicator entry",
                         "type": "string"
                     },
                     {
                         "name": "year",
                         "in": "query",
-                        "description": "Year associated with indicator entry",
                         "type": "string"
                     },
                     {
                         "name": "housing_affordability",
                         "in": "query",
-                        "description": "Housing Affordability Index associated with indicator entry",
                         "type": "string"
                     }
-
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created new Housing Affordability Index indicator data successfully",
+                        "description": "Created",
                         "examples": {
                             "application/json": {
                                 "result": "Success",
-                                "corr_id": "6216e1c84dd06e487cbfe4d"
+                                "corr_id": "6237f150b7c9849ab8b60feb"
                             }
                         }
                     },
-                    "404": {
-                        "description": "Error prevents Housing Affordability Index indicator data from being created",
+                    "400": {
+                        "description": "Bad Request",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error",
-                                "error": "<Error message>"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
@@ -272,41 +949,38 @@
         "/v1/getHousingAffordability": {
             "get": {
                 "tags": ["hai"],
-                "summary": "Retrieve Housing Affordability Index indicator data point",
-                "description": "Endpoint interacts with MongoDB to retrieve multiple data points from the Housing Affordability Index collection using a county and year as a query",
-                "operationId": "getHousingAffordability",
+                "summary": "Get housing affordability index indicator data point",
+                "description": "Return an housing affordability index data point using a county and year as keys",
                 "parameters": [{
                         "name": "county",
-                        "description": "County to query for in MongoDB",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "year",
-                        "description": "Year to query for in MongoDB",
                         "in": "query",
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Housing Affordability Index data found for that county and year",
+                        "description": "OK",
                         "examples": {
                             "application/json": {
-                                "corr_id": "6237f150b7c9849ab8b60feb",
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
                                 "county": "Spokane",
                                 "state": "WA",
-                                "year": "2022",
-                                "housingAffordabilityIndex": 120.2
+                                "year": "2020",
+                                "housingAffordabilityIndex": 0.67
                             }
                         }
                     },
                     "404": {
-                        "description": "Housing Affordability Index data not found for that county and year",
+                        "description": "Not Found",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error",
-                                "error": "<Error message>"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
@@ -316,53 +990,69 @@
         "/v1/getManyHousingAffordability": {
             "get": {
                 "tags": ["hai"],
-                "summary": "Retrieve multiple Housing Affordability Index indicator data points",
-                "description": "Endpoint interacts with MongoDB to retrieve multiple Housing Affordability Index entries",
-                "operationId": "getManyHousingAffordability",
+                "summary": "Get a range of indicator data from the housing affordability index indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
                 "parameters": [{
                         "name": "county",
-                        "description": "County to query for in MongoDB",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "start_year",
-                        "description": "Year that makes up the start of the year range in the query",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "end_year",
-                        "description": "Year that makes up the end of the year range in the query",
                         "in": "query",
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Entries found for that county and the year range",
+                        "description": "OK",
                         "examples": {
                             "application/json": {
                                 "county": "Spokane",
                                 "indicator": "Housing Affordability Index",
                                 "indicator_id": "hai",
                                 "years": [
-                                    "2021",
-                                    "2022"
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
                                 ],
                                 "housingAffordabilityIndex": [
-                                    130.5,
-                                    110.0
+                                    59000,
+                                    67000,
+                                    47537,
+                                    66676,
+                                    252551,
+                                    826414,
+                                    684184,
+                                    666699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
                                 ]
                             }
                         }
                     },
                     "404": {
-                        "description": "Entries were not found for that county and year range, or a internal error prevented the query",
+                        "description": "Not Found",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error",
-                                "error": "<Error message>"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
@@ -372,15 +1062,16 @@
         "/v1/deleteHousingAffordability": {
             "delete": {
                 "tags": ["hai"],
-                "summary": "Delete Housing Affordability Index data point",
-                "description": "Delete Housing Affordability Index entry from the MongoDB collection",
-                "operationId": "deleteHousingAffordability",
+                "summary": "Delete housing affordability index object from database",
+                "description": "Delete an housing affordability index datapoint from the database using the object's correlation id",
                 "parameters": [{
-                    "name": "corr_id"
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
                 }],
                 "responses": {
-                    "204": {
-                        "description": "Successfully deleted entry from the collection",
+                    "200": {
+                        "description": "Deleted item",
                         "examples": {
                             "application/json": {
                                 "result": "Success"
@@ -388,193 +1079,291 @@
                         }
                     },
                     "404": {
-                        "description": "Could not find entry to delete, or another internal error interrupted the process",
+                        "description": "Could not delete item",
                         "examples": {
                             "application/json": {
-                                "result": "Failure"
+                                "result": "Failure",
+                                "reason": "Error reason"
                             }
                         }
                     }
                 }
             }
         },
-        "/v1/newLabor": {
+        "/": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Default link to the page",
+                "description": "Render the dashboard page by default",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the dashboard page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/index": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Index link for the page",
+                "description": "Render the dashboard page by default",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the admin page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboard": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Link to the dashboard page",
+                "description": "Renders the dashboard page to the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the admin page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/about": {
+            "get": {
+                "tags": ["nav"],
+                "summary": "Link to the about page",
+                "description": "Renders the about page to the user",
+                "responses": {
+                    "200": {
+                        "description": "Success. Render the admin page",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "examples": {
+                            "text/html": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newLaborForce": {
             "post": {
-                "tags": ["lfp"],
-                "summary": "Create new Labor Force Participation Rate indicator entry",
-                "description": "Endpoint interacts with MongoDB to create new data for the Labor Force Participation Rate indicator in its own collection",
-                "operationId": "createLabor",
+                "tags": ["lbf"],
+                "summary": "Create new Labor Force indicator data point",
+                "description": "",
                 "parameters": [{
                         "name": "county",
-                        "description": "County associated with indicator entry",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "state",
-                        "description": "State associated with indicator entry",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "year",
-                        "description": "Year associated with indicator entry",
                         "in": "query",
                         "type": "string"
                     },
                     {
                         "name": "labor_force",
-                        "description": "Labor Force count associated with indicator entry",
-                        "in": "query",
-                        "type": "string"
-                    },
-                    {
-                        "name": "labor_participation_rate",
-                        "description": "Labor participation rate associated with indicator entry",
                         "in": "query",
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created new Labor Force Labor Force Participation Rate indicator data successfully",
+                        "description": "Created",
                         "examples": {
                             "application/json": {
                                 "result": "Success",
-                                "corr_id": "6216e1c84dd06e487cbfe4d"
+                                "corr_id": "6237f150b7c9849ab8b60feb"
                             }
                         }
                     },
                     "404": {
-                        "description": "Error prevents Labor Labor Force Participation Rate indicator data from being created",
+                        "description": "Not Found",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error",
-                                "corr_id": "null"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
                 }
             }
         },
-        "/v1/getLabor": {
+        "/v1/getLaborForce": {
             "get": {
-                "tags": ["lfp"],
-                "summary": "Retrieve Median Housing Cost indicator data point",
-                "description": "Endpoint interacts with MongoDB to retrieve multiple data points from the Median Housing Cost collection using a county and year as a query",
-                "operationId": "getLabor",
+                "tags": ["lbf"],
+                "summary": "Get labor force indicator data point",
+                "description": "Return a labor force data point using a county and year as keys",
                 "parameters": [{
                         "name": "county",
                         "in": "query",
-                        "description": "",
                         "type": "string"
                     },
                     {
                         "name": "year",
                         "in": "query",
-                        "description": "",
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Entry was found using the county and year",
+                        "description": "OK",
                         "examples": {
                             "application/json": {
                                 "corr_id": "6216ce1c84dd06e487cbfe4d",
                                 "county": "Spokane",
                                 "state": "WA",
                                 "year": "2020",
-                                "laborForce": 10083,
-                                "laborParticipationRate": 0.675547
+                                "laborForce": 5547
                             }
                         }
                     },
                     "404": {
-                        "description": "Entry was not found using the county and year, or an internal error prevented the query",
+                        "description": "Not Found",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
                 }
             }
         },
-        "/v1/getManyLabor": {
+        "/v1/getManyLaborForce": {
             "get": {
-                "tags": ["lfp"],
-                "summary": "Retrieve multiple Labor Force Participation Rate indicator data points",
-                "description": "Endpoint interacts with MongoDB to retrieve multiple Labor Force Participation Rate entries",
-                "operationId": "getManyLabor",
+                "tags": ["lbf"],
+                "summary": "Get a range of indicator data from the labor force indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
                 "parameters": [{
                         "name": "county",
                         "in": "query",
-                        "description": "County to query for",
                         "type": "string"
                     },
                     {
                         "name": "start_year",
                         "in": "query",
-                        "description": "Year that makes up the start year of the year range to query for",
                         "type": "string"
                     },
                     {
                         "name": "end_year",
                         "in": "query",
-                        "description": "Year that makes up the end year of the year range to query for",
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Entries we not found for that county and year range",
+                        "description": "OK",
                         "examples": {
                             "application/json": {
                                 "county": "Spokane",
-                                "indicator": "Labor Force Participation Rate",
-                                "indicator_id": "lpr",
+                                "indicator": "Labor Force",
+                                "indicator_id": "lbf",
                                 "years": [
-                                    "2020",
-                                    "2019"
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
                                 ],
                                 "laborForce": [
-                                    10083,
-                                    258483
-                                ],
-                                "laboParticipationRate": [
-                                    0.675547,
-                                    0.615547
+                                    59000,
+                                    67000,
+                                    47537,
+                                    66676,
+                                    252551,
+                                    826414,
+                                    684184,
+                                    666699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
                                 ]
                             }
                         }
                     },
                     "404": {
-                        "description": "Entries we not found for that county and year range, or a internal error prevented the query",
+                        "description": "Not Found",
                         "examples": {
                             "application/json": {
-                                "result": "Internal Error"
+                                "result": "Internal error",
+                                "error": {}
                             }
                         }
                     }
                 }
             }
         },
-        "/v1/deleteLabor": {
+        "/v1/deleteLaborForce": {
             "delete": {
-                "tags": ["lfp"],
-                "summary": "Delete Labor Force Participation data point",
-                "description": "Use an object's correlation ID to find it in the database, then delete it from the collection",
-                "operationId": "deleteLabor",
+                "tags": ["lbf"],
+                "summary": "Delete labor force object from database",
+                "description": "Delete an Labor force datapoint from the database using the object's correlation id",
                 "parameters": [{
                     "name": "corr_id",
                     "in": "query",
-                    "description": "Correlation ID of the object to delete from collection",
                     "type": "string"
                 }],
                 "responses": {
-                    "204": {
-                        "description": "Successfully deleted entry from the collection",
+                    "200": {
+                        "description": "Deleted item",
                         "examples": {
                             "application/json": {
                                 "result": "Success"
@@ -582,10 +1371,941 @@
                         }
                     },
                     "404": {
-                        "description": "Could not find entry to delete, or another internal error interrupted the process",
+                        "description": "Could not delete item",
                         "examples": {
                             "application/json": {
-                                "result": "Failure"
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newLaborParticipation": {
+            "post": {
+                "tags": ["lpr"],
+                "summary": "Create new Labor Participation Rate indicator data point",
+                "description": "Insert new Labor Participation Rate indicator data into the database",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "labor_participation",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6237f150b7c9849ab8b60feb"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getLaborParticipation": {
+            "get": {
+                "tags": ["lpr"],
+                "summary": "Get labor force participation rate indicator data point",
+                "description": "Return a labor force participation rate data point using a county and year as keys",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2020",
+                                "laborParticipationRate": 5547
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyLaborParticipation": {
+            "get": {
+                "tags": ["lpr"],
+                "summary": "Get a range of indicator data from the labor force participation rate indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Labor Force Participation Rate",
+                                "indicator_id": "lpr",
+                                "years": [
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
+                                ],
+                                "laborParticipationRate": [
+                                    0.59,
+                                    0.67,
+                                    0.6309388286747537,
+                                    0.6182611685666676,
+                                    0.5958708239252551,
+                                    0.5962932473826414,
+                                    0.5901258573684184,
+                                    0.6150125004066699,
+                                    0.622844360887454,
+                                    0.6144727803953058,
+                                    0.615547,
+                                    0.675547
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/deleteLaborParticipation": {
+            "delete": {
+                "tags": ["lpr"],
+                "summary": "Delete labor force participation rate object from database",
+                "description": "Delete an Labor force participation rate datapoint from the database using the object's correlation id",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newMedianIncome": {
+            "post": {
+                "tags": ["mhi"],
+                "summary": "Create new Median Income indicator data point",
+                "description": "Insert new Median Income indicator data into the database",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "median_income",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6237f150b7c9849ab8b60feb"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getMedianIncome": {
+            "get": {
+                "tags": ["mhi"],
+                "summary": "Get median income indicator data point",
+                "description": "Return a median income data point using a county and year as keys",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2020",
+                                "medianIncome": 55047
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyMedianIncome": {
+            "get": {
+                "tags": ["mhi"],
+                "summary": "Get a range of indicator data from the median income indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Median Income",
+                                "indicator_id": "mhi",
+                                "years": [
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
+                                ],
+                                "medianIncome": [
+                                    590000,
+                                    670000,
+                                    747537,
+                                    666676,
+                                    252551,
+                                    206414,
+                                    684184,
+                                    766699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/deleteMedianIncome": {
+            "delete": {
+                "tags": ["mhi"],
+                "summary": "Delete median income object from database",
+                "description": "Delete an median income datapoint from the database using the object's correlation id",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newNaturalChange": {
+            "post": {
+                "tags": ["ntc"],
+                "summary": "Create new natural change indicator data point",
+                "description": "Insert new natural change indicator data into the database",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "natural_change",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6237f150b7c9849ab8b60feb"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getNaturalChange": {
+            "get": {
+                "tags": ["ntc"],
+                "summary": "Get natural change indicator data point",
+                "description": "Return a natural change data point using a county and year as keys",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2020",
+                                "naturalChange": 55047
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyNaturalChange": {
+            "get": {
+                "tags": ["ntc"],
+                "summary": "Get a range of indicator data from the natural change indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Natural Change",
+                                "indicator_id": "ntc",
+                                "years": [
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
+                                ],
+                                "naturalChange": [
+                                    590000,
+                                    670000,
+                                    747537,
+                                    666676,
+                                    252551,
+                                    206414,
+                                    684184,
+                                    766699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/deleteNaturalChange": {
+            "delete": {
+                "tags": ["ntc"],
+                "summary": "Delete natural change object from database",
+                "description": "Delete an natural change datapoint from the database using the object's correlation id",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newNetDomesticMigration": {
+            "post": {
+                "tags": ["ndm"],
+                "summary": "Create new net domestic migration indicator data point",
+                "description": "",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "net_domestic_migration",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6237f150b7c9849ab8b60feb"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getNetDomesticMigration": {
+            "get": {
+                "tags": ["ndm"],
+                "summary": "Get net domestic migration indicator data point",
+                "description": "Return a net domestic migration data point using a county and year as keys",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2020",
+                                "netDomesticMigration": 55047
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyNetDomesticMigration": {
+            "get": {
+                "tags": ["ndm"],
+                "summary": "Get a range of indicator data from the net domestic migration indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Net Domestic Migration",
+                                "indicator_id": "ndm",
+                                "years": [
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
+                                ],
+                                "netDomesticMigration": [
+                                    590000,
+                                    670000,
+                                    747537,
+                                    666676,
+                                    252551,
+                                    206414,
+                                    684184,
+                                    766699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/deleteNetDomesticMigration": {
+            "delete": {
+                "tags": ["ndm"],
+                "summary": "Delete net domestic migration object from database",
+                "description": "Delete an net domestic migration datapoint from the database using the object's correlation id",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/newUnemployed": {
+            "post": {
+                "tags": ["uep"],
+                "summary": "Create new unemployed indicator data point",
+                "description": "Insert new natural change indicator data into the database",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "unemployed",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success",
+                                "corr_id": "6237f150b7c9849ab8b60feb"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getUnemployed": {
+            "get": {
+                "tags": ["uep"],
+                "summary": "Get unemployed indicator data point",
+                "description": "Return a unemployed data point using a county and year as keys",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "corr_id": "6216ce1c84dd06e487cbfe4d",
+                                "county": "Spokane",
+                                "state": "WA",
+                                "year": "2020",
+                                "unemployed": 55047
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "result": "Internal error",
+                                "error": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getManyUnemployed": {
+            "get": {
+                "tags": ["uep"],
+                "summary": "Get a range of indicator data from the unemployed indicator",
+                "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
+                "parameters": [{
+                        "name": "county",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "county": "Spokane",
+                                "indicator": "Unemployed",
+                                "indicator_id": "uep",
+                                "years": [
+                                    "2009",
+                                    "2010",
+                                    "2011",
+                                    "2012",
+                                    "2013",
+                                    "2014",
+                                    "2015",
+                                    "2016",
+                                    "2017",
+                                    "2018",
+                                    "2019",
+                                    "2020"
+                                ],
+                                "unemployed": [
+                                    590000,
+                                    670000,
+                                    747537,
+                                    666676,
+                                    252551,
+                                    206414,
+                                    684184,
+                                    766699,
+                                    887454,
+                                    953058,
+                                    615547,
+                                    675547
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/deleteUnemployed": {
+            "delete": {
+                "tags": ["uep"],
+                "summary": "Delete unemployed object from database",
+                "description": "Delete an unemployed datapoint from the database using the object's correlation id",
+                "parameters": [{
+                    "name": "corr_id",
+                    "in": "query",
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
                             }
                         }
                     }

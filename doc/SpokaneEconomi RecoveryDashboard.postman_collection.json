@@ -1,0 +1,1492 @@
+{
+	"info": {
+		"_postman_id": "f179bbd2-781e-402b-90fa-dd55577ee3df",
+		"name": "Spokane Economic Recovery Dashboard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"zfoteff@zagmail.gonzaga.edu\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/register/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Emails",
+			"item": [
+				{
+					"name": "Send Password Reset Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{username}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/change",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"change"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/v1/",
+			"item": [
+				{
+					"name": "Average Rent",
+					"item": [
+						{
+							"name": "Create Average Rent",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newAverageRent/?county=test&state=WA&year=2019&average_rent=.69",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newAverageRent",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "state",
+											"value": "WA"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										},
+										{
+											"key": "average_rent",
+											"value": ".69"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Average Rent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getAverageRent/?county=Spokane&year=2000",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getAverageRent",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "Spokane"
+										},
+										{
+											"key": "year",
+											"value": "2000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Average Rent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyAverageRent/?county=Spokane&start_year=2010&end_year=2022",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyAverageRent",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "Spokane"
+										},
+										{
+											"key": "start_year",
+											"value": "2010"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Average Rent",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/deleteAverageRent?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteAverageRent"
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Employed",
+					"item": [
+						{
+							"name": "Create Employed",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newEmployed/?county=test&year=2014&state=OR&employed=19",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newEmployed",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "year",
+											"value": "2014"
+										},
+										{
+											"key": "state",
+											"value": "OR"
+										},
+										{
+											"key": "employed",
+											"value": "19"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Employed",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getEmployed/?county=test&year=2018",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getEmployed",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "year",
+											"value": "2018"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Employed",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyEmployed/?county=test&start_year=2000&end_year=2022",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyEmployed",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "start_year",
+											"value": "2000"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Employed",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/deleteEmployed?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteEmployed"
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Housing Affordability Index",
+					"item": [
+						{
+							"name": "Create Housing Affordability Index",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newHousingAffordability/?county=test&state=OR&year=2019&housing_affordability=1.0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newHousingAffordability",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "state",
+											"value": "OR"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										},
+										{
+											"key": "housing_affordability",
+											"value": "1.0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Housing Affordability Index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getHousingAffordability/?county=test&year=2019",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getHousingAffordability",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Housing Affordability Index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyHousingAffordability?start_year=2000&end_year=2022&county=test",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyHousingAffordability"
+									],
+									"query": [
+										{
+											"key": "start_year",
+											"value": "2000"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										},
+										{
+											"key": "county",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Housing Affordability Index",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/deleteHousingAffordability?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteHousingAffordability"
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Labor Force",
+					"item": [
+						{
+							"name": "Create Labor Force",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newLaborForce/?county=test&state=OR&year=2019&labor_force=1.0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newLaborForce",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "state",
+											"value": "OR"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										},
+										{
+											"key": "labor_force",
+											"value": "1.0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Labor Force",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getLaborForce/?county=test&year=2019",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getLaborForce",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Labor Force",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyLaborForce?start_year=2000&end_year=2022&county=test",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyLaborForce"
+									],
+									"query": [
+										{
+											"key": "start_year",
+											"value": "2000"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										},
+										{
+											"key": "county",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Labor Force",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/deleteLaborForce?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteLaborForce"
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Labor Participation Rate",
+					"item": [
+						{
+							"name": "Create Labor Participation",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/v1/newLaborParticipation/?county=Spokane&state=WA&year=2009&labor_participation=0.59",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newLaborParticipation",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "Spokane"
+										},
+										{
+											"key": "state",
+											"value": "WA"
+										},
+										{
+											"key": "year",
+											"value": "2009"
+										},
+										{
+											"key": "labor_participation",
+											"value": "0.59"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Labor Participation",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/v1/getLaborParticipation?county=Spokane&year=2020",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getLaborParticipation"
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "Spokane"
+										},
+										{
+											"key": "year",
+											"value": "2020"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Labor Participation",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"corr_id\": \"{{cid}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/v1/deleteLaborParticipation?corr_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteLaborParticipation"
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Labor Participation",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyLaborParticipation?start_year=2000&end_year=2022&county=Spokane",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyLaborParticipation"
+									],
+									"query": [
+										{
+											"key": "start_year",
+											"value": "2000"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										},
+										{
+											"key": "county",
+											"value": "Spokane"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Median Income",
+					"item": [
+						{
+							"name": "Create Median Income",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newMedianIncome/?county=test&state=OR&year=2009&median_income=15",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newMedianIncome",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "state",
+											"value": "OR"
+										},
+										{
+											"key": "year",
+											"value": "2009"
+										},
+										{
+											"key": "median_income",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Median Income",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"county\": \"Spokane\",\r\n    \"year\": \"2020\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/v1/getMedianIncome?county=Spokane&year=2020",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getMedianIncome"
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "Spokane"
+										},
+										{
+											"key": "year",
+											"value": "2020"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Median Income",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/v1/deleteMedianIncome/?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteMedianIncome",
+										""
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Median Income",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyMedianincome?start_year=2001&end_year=2022&county=test",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyMedianincome"
+									],
+									"query": [
+										{
+											"key": "start_year",
+											"value": "2001"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										},
+										{
+											"key": "county",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Median Housing Cost",
+					"item": [
+						{
+							"name": "Create Median Housing Cost",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newMedianHousing/?county=test&state=OR&year=2009&med_housing_cost=15",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newMedianHousing",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "state",
+											"value": "OR"
+										},
+										{
+											"key": "year",
+											"value": "2009"
+										},
+										{
+											"key": "med_housing_cost",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Median Housing Cost",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"county\": \"Spokane\",\r\n    \"year\": \"2020\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/v1/getMedianHousing?county=Spokane&year=2020",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getMedianHousing"
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "Spokane"
+										},
+										{
+											"key": "year",
+											"value": "2020"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Median Housing Cost",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/v1/deleteMedianHousing/?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteMedianHousing",
+										""
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Median Housing Cost",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyMedianHousing?start_year=2001&end_year=2022&county=test",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyMedianHousing"
+									],
+									"query": [
+										{
+											"key": "start_year",
+											"value": "2001"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										},
+										{
+											"key": "county",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Natural Change",
+					"item": [
+						{
+							"name": "Get Natural Change",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getNaturalChange/?county=test&year=2019",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getNaturalChange",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Natural Change",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newNaturalChange/?county=test&state=WA&year=2019&natural_change=25",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newNaturalChange",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "state",
+											"value": "WA"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										},
+										{
+											"key": "natural_change",
+											"value": "25"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Natural Change",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyNaturalChange/?county=test&start_year=2000&end_year=2022",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyNaturalChange",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "start_year",
+											"value": "2000"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Natural Change",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/deleteNaturalChange?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteNaturalChange"
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Net Domestic Migration",
+					"item": [
+						{
+							"name": "Get Net Domestic Migration",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getNetDomesticMigration/?county=test&year=2019",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getNetDomesticMigration",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Net Domestic Migration",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newNetDomesticMigration/?county=test&state=OR&year=2019&net_domestic_migration=25",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newNetDomesticMigration",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "state",
+											"value": "OR"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										},
+										{
+											"key": "net_domestic_migration",
+											"value": "25"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Net Domestic Migration",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyNetDomesticMigration/?county=test&start_year=2000&end_year=2022",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyNetDomesticMigration",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "start_year",
+											"value": "2000"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Net Domestic Migration",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/deleteNetDomesticMigration?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteNetDomesticMigration"
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Unemployed",
+					"item": [
+						{
+							"name": "Create Unmployed",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/newUnemployed/?county=test&year=2019&state=OR&unemployed=19",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"newUnemployed",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										},
+										{
+											"key": "state",
+											"value": "OR"
+										},
+										{
+											"key": "unemployed",
+											"value": "19"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Unemployed",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getUnemployed/?county=test&year=2019",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getUnemployed",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "year",
+											"value": "2019"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Many Unemployed",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/getManyUnemployed/?county=test&start_year=2000&end_year=2022",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"getManyUnemployed",
+										""
+									],
+									"query": [
+										{
+											"key": "county",
+											"value": "test"
+										},
+										{
+											"key": "start_year",
+											"value": "2000"
+										},
+										{
+											"key": "end_year",
+											"value": "2022"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Unemployed",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/v1/deleteUnemployed?corr_id={{corr_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"deleteUnemployed"
+									],
+									"query": [
+										{
+											"key": "corr_id",
+											"value": "{{corr_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Heartbeat",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-length": true,
+					"host": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/health",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

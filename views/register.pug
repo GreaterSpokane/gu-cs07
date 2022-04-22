@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+  head
+    title Spokane Economic Dashboard | Register Authorized User
+    meta(name="description", content="Register Authorized User")
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel='stylesheet' type="text/css" href="css/login.css")
+    link(rel="shortcut icon" href="images/favicon.ico" type="image/x-icon")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="javascripts/register.js")
+  body
+    div#login-window
+      h1 Register User
+      div#input-container
+        p.error-msg.hide
+        form(action="/register", method="post")   
+          table#input-grid
+            tr
+              td.input-grid-label
+                label(for="username") Username
+              td.input-grid-field
+                input.text-field(type="text" id="username" name="username" required)
+            tr
+              td.input-grid-label
+                label(for="password") Password
+              td.input-grid-field
+                input.text-field(type="password" id="password" name="password" required)
+          div#button-container
+            input(type="submit" id="register" name="register" value="Register")
+            button#back Back to Login 
