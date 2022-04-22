@@ -3,7 +3,7 @@ html(lang='en')
   head
     block page-title 
       title Spokane Economic Dashboard | #{title}
-    meta(name="description", content="Prototype website for CS07 Economic Recovery Dashboard")
+    meta(name="description", content="Admin page for Spokane Economic Recovery Dashboard")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon")
@@ -16,8 +16,9 @@ html(lang='en')
           h1 Authorized User Page
       section#navbar
         h2 Navigation 
-        a(href="auth") Endpoints
+        a(href="endpoints") Endpoints
         a(href="button") Update
+        a(href="/") Back to Dashboard
     main
       block content
     footer 
