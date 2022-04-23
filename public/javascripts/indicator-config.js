@@ -68,31 +68,31 @@ indicatorConfig.lft.chartConfig = {
     options: {}
 }
 
-// Employed
-indicatorConfig.emp = {};
-indicatorConfig.emp.description = "Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment.Description for Employment and Unemployment.";
-indicatorConfig.emp.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
-indicatorConfig.emp.link = "https://data.census.gov/cedsci/";
-indicatorConfig.emp.initialNumIntervals = 5;
-indicatorConfig.emp.statNumIntervals = 2;
-indicatorConfig.emp.isIncreaseGood = 1;
-indicatorConfig.lfp.chartConfig = {
-    type: "doughnut",
-    options: {}
-}
+// // Employed
+// indicatorConfig.emp = {};
+// indicatorConfig.emp.description = "Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment.Description for Employment and Unemployment.";
+// indicatorConfig.emp.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
+// indicatorConfig.emp.link = "https://data.census.gov/cedsci/";
+// indicatorConfig.emp.initialNumIntervals = 5;
+// indicatorConfig.emp.statNumIntervals = 2;
+// indicatorConfig.emp.isIncreaseGood = 1;
+// indicatorConfig.lfp.chartConfig = {
+//     type: "doughnut",
+//     options: {}
+// }
 
-// Unemployed
-indicatorConfig.uem = {};
-indicatorConfig.uem.description = "Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment.Description for Employment and Unemployment.";
-indicatorConfig.uem.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
-indicatorConfig.uem.link = "https://data.census.gov/cedsci/";
-indicatorConfig.uem.initialNumIntervals = 5;
-indicatorConfig.uem.statNumIntervals = 2;
-indicatorConfig.uem.isIncreaseGood = 1;
-indicatorConfig.lfp.chartConfig = {
-    type: "doughnut",
-    options: {}
-}
+// // Unemployed
+// indicatorConfig.uem = {};
+// indicatorConfig.uem.description = "Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment.Description for Employment and Unemployment.";
+// indicatorConfig.uem.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
+// indicatorConfig.uem.link = "https://data.census.gov/cedsci/";
+// indicatorConfig.uem.initialNumIntervals = 5;
+// indicatorConfig.uem.statNumIntervals = 2;
+// indicatorConfig.uem.isIncreaseGood = 1;
+// indicatorConfig.lfp.chartConfig = {
+//     type: "doughnut",
+//     options: {}
+// }
 
 // POPULATION DRIVERS
 // natural change
