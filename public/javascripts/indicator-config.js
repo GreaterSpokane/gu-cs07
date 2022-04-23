@@ -9,6 +9,7 @@ indicatorConfig.mhc.link = "https://data.census.gov/cedsci/";
 indicatorConfig.mhc.initialNumIntervals = 5;    // Initial number of time intervals shown on the graph (starting from most recent)
 indicatorConfig.mhc.statNumIntervals = 2;   // Number of intervals used to calcuate the short stat
 indicatorConfig.mhc.isIncreaseGood = 3;     // 1 = Increase is good; 2 = Increase is Bad; 3 = Neutral
+indicatorConfig.mhc.countiesFirstVisible = []
 indicatorConfig.mhc.chartConfig = {
     type: "line",
     options: {}
