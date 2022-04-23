@@ -159,3 +159,40 @@ a:visited {
     margin-left: auto;
     margin-right: auto;
 }
+
+table, th, td {
+    text-align: center;
+    padding: 20px
+  }
+
+.input{
+    width: 60%;
+    padding: 12px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.update{
+    background-color: #719a45;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.inputLabels{
+    padding: 5px 5px;
+}
+
+.title{
+    font-size: 130%
+}
+
+#response-window{
+    width: 100%;
+}
