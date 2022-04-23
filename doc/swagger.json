@@ -494,11 +494,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Could not delete item"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -675,11 +686,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Not Found"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -856,11 +878,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Not Found"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -1037,11 +1070,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Could not delete item"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -1318,11 +1362,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Could not delete item"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -1493,11 +1548,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Could not delete item"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -1668,11 +1734,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Could not delete item"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -1843,11 +1920,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Could not delete item"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -2018,11 +2106,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Could not delete item"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }
@@ -2193,11 +2292,22 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
-                        "description": "Deleted item"
+                    "200": {
+                        "description": "Deleted item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Success"
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Could not delete item"
+                        "description": "Could not delete item",
+                        "examples": {
+                            "application/json": {
+                                "result": "Failure",
+                                "reason": "Error reason"
+                            }
+                        }
                     }
                 }
             }

@@ -1,7 +1,8 @@
 const db = require('./db.spec');
 const createEmployed = require('../controllers/employed/createEmployedController');
 const getEmployed = require('../controllers/employed/getEmployedController');
-const getManyLabor = require('../controllers/employed/getManyEmployedController');
+const getManyEmployed = require('../controllers/employed/getManyEmployedController');
+const deleteEmployed = require('../controllers/employed/deleteEmployedController');
 const Employed = require('../models/employed');
 
 //  Database mock setup
@@ -9,7 +10,7 @@ beforeAll(async() => await db.connect());
 afterEach(async() => await db.clearDatabase());
 afterAll(async() => await db.closeDatabase());
 
-describe('Labor Force database model tests', () => {
+describe('Employed database model tests', () => {
     const DATA = {
         'county': 'Spokane County',
         'state': 'WA',
@@ -99,7 +100,7 @@ describe('Labor Force database model tests', () => {
     });
 
     it('should return true if a mass retrieval call to an empty database returns an empty dataset', async() => {
-        const found_data = await getManyLabor(MASS_DATA_COUNTY, '2001', '2003');
+        const found_data = await getManyEmployed(MASS_DATA_COUNTY, '2001', '2003');
         expect(found_data.data).toEqual([]);
     });
 
@@ -114,7 +115,7 @@ describe('Labor Force database model tests', () => {
             );
         }
 
-        const found_data = await getManyLabor(MASS_DATA_COUNTY, '2001', '2003');
+        const found_data = await getManyEmployed(MASS_DATA_COUNTY, '2001', '2003');
         expect(found_data.data).not.toEqual([]);
     });
 
@@ -129,31 +130,33 @@ describe('Labor Force database model tests', () => {
             );
         }
 
-        const found_data = await getManyLabor(MASS_DATA_COUNTY, '2001', '2002');
+        const found_data = await getManyEmployed(MASS_DATA_COUNTY, '2001', '2002');
         expect(found_data.data.length).toEqual(2);
     });
 
     it('should return true if a mass retrieval for a county that does not exist in the database returns nothing', async() => {
-        const found_data = await getManyLabor("C2", '2001', '2003');
+        const found_data = await getManyEmployed("C2", '2001', '2003');
         expect(found_data.data).toEqual([]);
     });
 
-    /*
     it('should successfully delete element from database', async() => {
-        const inserted = await createLabor(
+        const inserted = await createEmployed(
             DATA.county,
             DATA.state,
             DATA.year,
-            Math.random(),
             Math.random()
         );
         //  Find new entry in DB with get controller
-        const found = await getLabor(DATA.county, DATA.year);
+        const found = await getEmployed(DATA.county, DATA.year);
         expect(found.corr_id).toEqual(inserted.corr_id);
-        const result = await deleteLabor(inserted.corr_id);
+        const result = await deleteEmployed(inserted.corr_id);
         expect(result.result).toEqual('Success');
-        const does_exist = await getLabor(DATA.county, DATA.year);
-        assert(does_exist.corr_id).toEqual(null);
+        const does_exist = await getEmployed(DATA.county, DATA.year);
+        expect(does_exist.corr_id).toEqual(null);
     });
-    */
+
+    it('should not delete element from database if it does not exist', async() => {
+        const result = await deleteEmployed(1);
+        expect(result.result).toEqual('Failure');
+    });
 });

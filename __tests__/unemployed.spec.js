@@ -2,6 +2,7 @@ const db = require('./db.spec');
 const createUnemployed = require('../controllers/unemployed/createUnemployedController');
 const getUnemployed = require('../controllers/unemployed/getUnemployedController');
 const getManyUnemployed = require('../controllers/unemployed/getManyUnemployedController');
+const deleteUnemployed = require('../controllers/unemployed/deleteUnemployedController');
 const Unemployed = require('../models/unemployed');
 
 //  Database mock setup
@@ -138,22 +139,24 @@ describe('Labor Force database model tests', () => {
         expect(found_data.data).toEqual([]);
     });
 
-    /*
     it('should successfully delete element from database', async() => {
-        const inserted = await createLabor(
+        const inserted = await createUnemployed(
             DATA.county,
             DATA.state,
             DATA.year,
-            Math.random(),
             Math.random()
         );
         //  Find new entry in DB with get controller
-        const found = await getLabor(DATA.county, DATA.year);
+        const found = await getUnemployed(DATA.county, DATA.year);
         expect(found.corr_id).toEqual(inserted.corr_id);
-        const result = await deleteLabor(inserted.corr_id);
+        const result = await deleteUnemployed(inserted.corr_id);
         expect(result.result).toEqual('Success');
-        const does_exist = await getLabor(DATA.county, DATA.year);
-        assert(does_exist.corr_id).toEqual(null);
+        const does_exist = await getUnemployed(DATA.county, DATA.year);
+        expect(does_exist.corr_id).toEqual(null);
     });
-    */
+
+    it('should not delete element from database if it does not exist', async() => {
+        const result = await deleteUnemployed(1);
+        expect(result.result).toEqual('Failure');
+    });
 });
