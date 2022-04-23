@@ -8,175 +8,216 @@ block scripts
   script(src="javascripts/update.js")
 block content
     div#button-container
-      h2 Press to Update Data
-      h3#updateStatus Data is ready to update
-      label(for="year") Year
+      h2(class="title") Update API Data
+      label(for="year", class="inputLabels") Year
       input#API-year-input(type="number", name="year")
-      button#updateButton UPDATE
+      br
+      button#updateButton(class="update") UPDATE
     div#update-table-container
       h1 Manual Indicator Update
       table#update-table
         tr
           td
             div#Median-Household
-              h2 Median Household Income
-              label(for="year") Year
-              input#median-year-input(type="number", name="year")
+              h2(class="title") Median Household Income
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#median-county-input(type="text", name="county")
+              input#median-year-input(type="number", name="year", class="input")
               br
-              label(for="median-state") State Code
-              input#median-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="median-value") Value
-              input#median-value-input(type="number", name="value")
+              input#median-county-input(type="text", name="county", class="input")
               br
-              button#MedianButton UPDATE
+              label(for="median-state", class="inputLabels") State Code
+              br
+              input#median-state-input(type="text", name="state", class="input")
+              br
+              label(for="median-value", class="inputLabels") Value
+              br
+              input#median-value-input(type="number", name="value", class="input")
+              br
+              button#MedianButton(class="update", class="inputLabels") UPDATE
           td
             div#Laborforce
-              h2 Laborforce
-              label(for="year") Year
-              input#labor-year-input(type="text", name="year")
+              h2(class="title") Laborforce
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#labor-county-input(type="text", name="county")
+              input#labor-year-input(type="text", name="year", class="input")
               br
-              label(for="laborforce-state") State Code
-              input#labor-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="laborforce-value") Value
-              input#labor-value-input(type="number", name="value")
+              input#labor-county-input(type="text", name="county", class="input")
               br
-              button#LaborforceButton UPDATE
+              label(for="laborforce-state", class="inputLabels") State Code
+              br
+              input#labor-state-input(type="text", name="state", class="input")
+              br
+              label(for="laborforce-value", class="inputLabels") Value
+              br
+              input#labor-value-input(type="number", name="value", class="input")
+              br
+              button#LaborforceButton(class="update") UPDATE
           td 
             div#Housing-Affordability
-              h2 Median Housing Cost
-              label(for="year") Year
-              input#price-year-input(type="number", name="year")
+              h2(class="title") Median Housing Cost
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#price-county-input(type="text", name="county")
+              input#price-year-input(type="number", name="year", class="input")
               br
-              label(for="affordability-state") State Code
-              input#price-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="affordability-value") Value
-              input#price-value-input(type="number", name="value")
+              input#price-county-input(type="text", name="county", class="input")
               br
-              button#PriceButton UPDATE
+              label(for="affordability-state", class="inputLabels") State Code
+              br
+              input#price-state-input(type="text", name="state", class="input")
+              br
+              label(for="affordability-value", class="inputLabels") Value
+              br
+              input#price-value-input(type="number", name="value", class="input")
+              br
+              button#PriceButton(class="update", class="inputLabels") UPDATE
           td
             div#Laborforce-Participation
-              h2 Laborforce Participation
-              label(for="year") Year
-              input#participation-year-input(type="number", name="year")
+              h2(class="title") Laborforce Participation
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#participation-county-input(type="text", name="county")
+              input#participation-year-input(type="number", name="year", class="input")
               br
-              label(for="laborforce-state") State Code
-              input#participation-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="laborforceParticipation-value") Value
-              input#participation-value-input(type="number", name="value")
+              input#participation-county-input(type="text", name="county", class="input")
               br
-              button#ParticipationButton UPDATE
+              label(for="laborforce-state", class="inputLabels") State Code
+              br
+              input#participation-state-input(type="text", name="state", class="input")
+              br
+              label(for="laborforceParticipation-value", class="inputLabels") Value
+              br
+              input#participation-value-input(type="number", name="value", class="input")
+              br
+              button#ParticipationButton(class="update") UPDATE
         tr
           td
             div#Housing-Index
-                h2 Housing Index
-                label(for="year") Year
-                input#index-year-input(type="number", name="year")
+                h2(class="title") Housing Index
+                label(for="year", class="inputLabels") Year
                 br
-                label(for="county") County
-                input#index-county-input(type="text", name="county")
+                input#index-year-input(type="number", name="year", class="input")
                 br
-                label(for="index-state") State Code
-                input#index-state-input(type="text", name="state")
+                label(for="county", class="inputLabels") County
                 br
-                label(for="index-value") Value
-                input#index-value-input(type="number", name="value")
+                input#index-county-input(type="text", name="county", class="input")
                 br
-                button#IndexButton UPDATE
+                label(for="index-state", class="inputLabels") State Code
+                br
+                input#index-state-input(type="text", name="state", class="input")
+                br
+                label(for="index-value", class="inputLabels") Value
+                br
+                input#index-value-input(type="number", name="value", class="input")
+                br
+                button#IndexButton(class="update") UPDATE
           td
             div#Employed
-              h2 Employed Persons
-              label(for="year") Year
-              input#employed-year-input(type="number", name="year")
+              h2(class="title") Employed Persons
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#employed-county-input(type="text", name="county")
+              input#employed-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#employed-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#employed-value-input(type="number", name="value")
+              input#employed-county-input(type="text", name="county", class="input")
               br
-              button#EmployedButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              input#employed-state-input(type="text", name="state", class="input")
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#employed-value-input(type="number", name="value", class="input")
+              br
+              button#EmployedButton(class="update") UPDATE
           td
             div#Unemployed 
-              h2 Unemployed Persons
-              label(for="year") Year
-              input#unemployed-year-input(type="number", name="year")
+              h2(class="title") Unemployed Persons
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#unemployed-county-input(type="text", name="county")
+              input#unemployed-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#unemployed-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#unemployed-value-input(type="number", name="value")
+              input#unemployed-county-input(type="text", name="county", class="input")
               br
-              button#UnemployedButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              input#unemployed-state-input(type="text", name="state", class="input")
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#unemployed-value-input(type="number", name="value", class="input")
+              br
+              button#UnemployedButton(class="update") UPDATE
           td
             div#NaturalChange 
-              h2 Natural Change
-              label(for="year") Year
-              input#change-year-input(type="number", name="year")
+              h2(class="title") Natural Change
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#change-county-input(type="text", name="county")
+              input#change-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#change-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#change-value-input(type="number", name="value")
+              input#change-county-input(type="text", name="county", class="input")
               br
-              button#ChangeButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              input#change-state-input(type="text", name="state", class="input")
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#change-value-input(type="number", name="value", class="input")
+              br
+              button#ChangeButton(class="update") UPDATE
         tr
           td
+          td
             div#netDomesticMigration 
-              h2 Net Domestic Migration
-              label(for="year") Year
-              input#migration-year-input(type="number", name="year")
+              h2(class="title") Net Domestic Migration
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#migration-county-input(type="text", name="county")
+              input#migration-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#migration-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#migration-value-input(type="number", name="value")
+              input#migration-county-input(type="text", name="county", class="input")
               br
-              button#MigrationButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              input#migration-state-input(type="text", name="state", class="input")
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#migration-value-input(type="number", name="value", class="input")
+              br
+              button#MigrationButton(class="update") UPDATE
           td
             div#averageRent 
-              h2 Average Rent
-              label(for="year") Year
-              input#rent-year-input(type="number", name="year")
+              h2(class="title") Average Rent
+              label(for="year", class="inputLabelss") Year
               br
-              label(for="county") County
-              input#rent-county-input(type="text", name="county")
+              input#rent-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#rent-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#rent-value-input(type="number", name="value")
+              input#rent-county-input(type="text", name="county", class="input")
               br
-              button#RentButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              input#rent-state-input(type="text", name="state", class="input")
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#rent-value-input(type="number", name="value", class="input")
+              br
+              button#RentButton(class="update") UPDATE
           td
