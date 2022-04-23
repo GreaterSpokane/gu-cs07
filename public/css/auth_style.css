@@ -192,3 +192,7 @@ table, th, td {
 .title{
     font-size: 130%
 }
+
+#response-window{
+    width: 100%;
+}

@@ -5,9 +5,9 @@ async function postPythonData(year) {
         headers: {},
         mode: "same-origin"
     })
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));
 }
-
-
 
 
 async function postLaborforce(yearVal, stateVal, countyVal, value) {
@@ -16,8 +16,9 @@ async function postLaborforce(yearVal, stateVal, countyVal, value) {
         method: 'POST',
         headers: {},
         mode: "same-origin"
-    })
-    
+    }) 
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));
 }
 
 async function postLaborforceParticipation(yearVal, stateVal, countyVal, value) {
@@ -27,7 +28,8 @@ async function postLaborforceParticipation(yearVal, stateVal, countyVal, value) 
         headers: {},
         mode: "same-origin"
     })
-    
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));
 }
 
 async function postMedian(yearVal, stateVal, countyVal, value) {
@@ -37,7 +39,8 @@ async function postMedian(yearVal, stateVal, countyVal, value) {
         headers: {},
         mode: "same-origin"
     })
-    
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));
 }
 
 async function postIndex(yearVal, stateVal, countyVal, value) {
@@ -47,7 +50,8 @@ async function postIndex(yearVal, stateVal, countyVal, value) {
         headers: {},
         mode: "same-origin"
     })
-    
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));
 }
 
 async function postPrice(yearVal, stateVal, countyVal, value) {
@@ -57,6 +61,8 @@ async function postPrice(yearVal, stateVal, countyVal, value) {
         headers: {},
         mode: "same-origin"
     })
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));
 }
     
 async function postEmployed(yearVal, stateVal, countyVal, value) {
@@ -65,7 +71,9 @@ async function postEmployed(yearVal, stateVal, countyVal, value) {
         method: 'POST',
         headers: {},
         mode: "same-origin"
-    })   
+    }) 
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));  
 }
 
 async function postUnemployed(yearVal, stateVal, countyVal, value) {
@@ -74,7 +82,9 @@ async function postUnemployed(yearVal, stateVal, countyVal, value) {
         method: 'POST',
         headers: {},
         mode: "same-origin"
-    })   
+    })
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));   
 }
 
 async function postChange(yearVal, stateVal, countyVal, value) {
@@ -83,7 +93,9 @@ async function postChange(yearVal, stateVal, countyVal, value) {
         method: 'POST',
         headers: {},
         mode: "same-origin"
-    })   
+    })
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));   
 }
 
 async function postMigration(yearVal, stateVal, countyVal, value) {
@@ -92,7 +104,9 @@ async function postMigration(yearVal, stateVal, countyVal, value) {
         method: 'POST',
         headers: {},
         mode: "same-origin"
-    })   
+    })
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));   
 }
 
 async function postRent(yearVal, stateVal, countyVal, value) {
@@ -101,7 +115,9 @@ async function postRent(yearVal, stateVal, countyVal, value) {
         method: 'POST',
         headers: {},
         mode: "same-origin"
-    })   
+    })
+    .then(res => res.json())
+    $("#response-window").val(JSON.stringify(res));   
 }
 
 
