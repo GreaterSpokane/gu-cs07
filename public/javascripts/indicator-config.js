@@ -63,12 +63,36 @@ indicatorConfig.lft.link = "https://data.census.gov/cedsci/";
 indicatorConfig.lft.initialNumIntervals = 5;
 indicatorConfig.lft.statNumIntervals = 2;
 indicatorConfig.lft.isIncreaseGood = 1;
-indicatorConfig.lfp.chartConfig = {
+indicatorConfig.lft.chartConfig = {
     type: "line",
     options: {}
 }
 
-// add employment/unemployement here later, going to combined it into a pie chart?
+// Employed
+indicatorConfig.emp = {};
+indicatorConfig.emp.description = "Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment.Description for Employment and Unemployment.";
+indicatorConfig.emp.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
+indicatorConfig.emp.link = "https://data.census.gov/cedsci/";
+indicatorConfig.emp.initialNumIntervals = 5;
+indicatorConfig.emp.statNumIntervals = 2;
+indicatorConfig.emp.isIncreaseGood = 1;
+indicatorConfig.lfp.chartConfig = {
+    type: "doughnut",
+    options: {}
+}
+
+// Unemployed
+indicatorConfig.uem = {};
+indicatorConfig.uem.description = "Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment.Description for Employment and Unemployment.";
+indicatorConfig.uem.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
+indicatorConfig.uem.link = "https://data.census.gov/cedsci/";
+indicatorConfig.uem.initialNumIntervals = 5;
+indicatorConfig.uem.statNumIntervals = 2;
+indicatorConfig.uem.isIncreaseGood = 1;
+indicatorConfig.lfp.chartConfig = {
+    type: "doughnut",
+    options: {}
+}
 
 // POPULATION DRIVERS
 // natural change

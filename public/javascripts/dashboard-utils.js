@@ -52,7 +52,7 @@ window.onload = async function () {
 
     }
     console.log(indicatorConfig)
-    
+
     // temp for employment/unemployement
     new Chart("lfs", getConfig("lfs", true));
 
@@ -207,7 +207,14 @@ async function callData(indicatorName, county) {
             path = '/v1/getManyMedianIncome/';
             schemaDataName = 'medianIncome';
             break;
-        // TODO: employment/unemployment
+        case 'emp':
+            path = '/v1/getManyEmployed/'
+            schemaDataName = 'employed';
+            break;
+        case 'uem':
+            path = '/v1/getManyUnemployed/'
+            schemaDataName = 'unemployed';
+            break;
         default:
             console.error(`No matching endpoint for indicator: ${indicatorName}`);
             return [[], []];
