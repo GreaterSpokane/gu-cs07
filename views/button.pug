@@ -26,11 +26,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#median-county-input(type="text", name="county", class="input")
+              select#median-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="median-state", class="inputLabels") State Code
               br
-              input#median-state-input(type="text", name="state", class="input")
+              select#median-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="median-value", class="inputLabels") Value
               br
@@ -46,11 +56,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#labor-county-input(type="text", name="county", class="input")
+              select#labor-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="laborforce-state", class="inputLabels") State Code
               br
-              input#labor-state-input(type="text", name="state", class="input")
+              select#labor-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="laborforce-value", class="inputLabels") Value
               br
@@ -66,11 +86,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#price-county-input(type="text", name="county", class="input")
+              select#price-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="affordability-state", class="inputLabels") State Code
               br
-              input#price-state-input(type="text", name="state", class="input")
+              select#price-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="affordability-value", class="inputLabels") Value
               br
@@ -86,11 +116,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#participation-county-input(type="text", name="county", class="input")
+              select#participation-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="laborforce-state", class="inputLabels") State Code
               br
-              input#participation-state-input(type="text", name="state", class="input")
+              select#participation-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="laborforceParticipation-value", class="inputLabels") Value
               br
@@ -100,24 +140,34 @@ block content
         tr
           td
             div#Housing-Index
-                h2(class="title") Housing Index
-                label(for="year", class="inputLabels") Year
-                br
-                input#index-year-input(type="number", name="year", class="input")
-                br
-                label(for="county", class="inputLabels") County
-                br
-                input#index-county-input(type="text", name="county", class="input")
-                br
-                label(for="index-state", class="inputLabels") State Code
-                br
-                input#index-state-input(type="text", name="state", class="input")
-                br
-                label(for="index-value", class="inputLabels") Value
-                br
-                input#index-value-input(type="number", name="value", class="input")
-                br
-                button#IndexButton(class="update") UPDATE
+              h2(class="title") Housing Index
+              label(for="year", class="inputLabels") Year
+              br
+              input#index-year-input(type="number", name="year", class="input")
+              br
+              label(for="county", class="inputLabels") County
+              br
+              select#index-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
+              br
+              label(for="index-state", class="inputLabels") State Code
+              br
+              select#index-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="index-value", class="inputLabels") Value
+              br
+              input#index-value-input(type="number", name="value", class="input")
+              br
+              button#IndexButton(class="update") UPDATE
           td
             div#Employed
               h2(class="title") Employed Persons
@@ -127,11 +177,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#employed-county-input(type="text", name="county", class="input")
+              select#employed-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="state", class="inputLabels") State Code
               br
-              input#employed-state-input(type="text", name="state", class="input")
+              select#employed-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="value", class="inputLabels") Value
               br
@@ -147,11 +207,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#unemployed-county-input(type="text", name="county", class="input")
+              select#unemployed-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="state", class="inputLabels") State Code
               br
-              input#unemployed-state-input(type="text", name="state", class="input")
+              select#unemployed-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="value", class="inputLabels") Value
               br
@@ -167,11 +237,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#change-county-input(type="text", name="county", class="input")
+              select#change-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="state", class="inputLabels") State Code
               br
-              input#change-state-input(type="text", name="state", class="input")
+              select#migration-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="value", class="inputLabels") Value
               br
@@ -189,11 +269,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#migration-county-input(type="text", name="county", class="input")
+              select#migration-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="state", class="inputLabels") State Code
               br
-              input#migration-state-input(type="text", name="state", class="input")
+              select#migration-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="value", class="inputLabels") Value
               br
@@ -209,11 +299,21 @@ block content
               br
               label(for="county", class="inputLabels") County
               br
-              input#rent-county-input(type="text", name="county", class="input")
+              select#rent-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
               label(for="state", class="inputLabels") State Code
               br
-              input#rent-state-input(type="text", name="state", class="input")
+              select#rent-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
               br
               label(for="value", class="inputLabels") Value
               br

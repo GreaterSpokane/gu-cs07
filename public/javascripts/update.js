@@ -123,45 +123,25 @@ async function postRent(yearVal, stateVal, countyVal, value) {
 
 function clearStaleInput() {
     $('#labor-year-input').val("");
-    $('#labor-county-input').val("");
     $('#labor-value-input').val("");
-    $('#labor-state-input').val("");
     $('#participation-year-input').val("");
-    $('#participation-county-input').val("");
     $('#participation-value-input').val("");
-    $('#participation-state-input').val("");
     $('#index-year-input').val("");
-    $('#index-county-input').val("");
     $('#index-value-input').val("");
-    $('#index-state-input').val("");
     $('#median-year-input').val("");
-    $('#median-county-input').val("");
     $('#median-value-input').val("");
-    $('#median-state-input').val("");
     $('#price-year-input').val("");
-    $('#price-county-input').val("");
     $('#price-value-input').val("");
-    $('#price-state-input').val("");
     $('#employed-year-input').val("");
-    $('#employed-county-input').val("");
     $('#employed-value-input').val("");
-    $('#employed-state-input').val("");
     $('#unemployed-year-input').val("");
-    $('#unemployed-county-input').val("");
     $('#unemployed-value-input').val("");
-    $('#unemployed-state-input').val("");
     $('#change-year-input').val("");
-    $('#change-county-input').val("");
     $('#change-value-input').val("");
-    $('#change-state-input').val("");
     $('#migration-year-input').val("");
-    $('#migration-county-input').val("");
     $('#migration-value-input').val("");
-    $('#migration-state-input').val("");
     $('#rent-year-input').val("");
-    $('#rent-county-input').val("");
     $('#rent-value-input').val("");
-    $('#rent-state-input').val("");
     $('#API-year-input').val("");
 }
 
