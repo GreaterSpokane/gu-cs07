@@ -34,6 +34,15 @@
 
 .detail-chart-container {
   align-items: center;
+  /* height: 250px; */
+}
+
+.chart-container {
+  /* height: 200px; */
+  max-height: 225px;
+  /* width: 500px; */
+  max-width: 550px;
+  position: relative;
 }
 
 .active, .card:hover {
@@ -74,7 +83,6 @@
   flex-wrap: wrap;
 }
 
-/* Style the counter cards */
 .card {
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   /* this adds the "card" effect */
@@ -83,14 +91,14 @@
   background-color: #f1f1f1;
   /* max-width: 500px; */
   /* flex: 30%; */
-  flex: auto;
+  /* flex: auto; */
   /* max-width: 500px; */
   margin: 10px 6px;
   width: 600px;
   max-width: 600px;
   min-width: 200px;
   height: 300px;
-  max-height: 300;
+  max-height: 300px;
   flex: 33.3%;
 }
 
@@ -102,8 +110,8 @@
   /* transition: max-height 0.2s ease-out; */
   /* border: 1px solid #ccc; */
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
+  justify-content: center;
+  align-items: center;
   /* flex: 33.3%; */
   /* flex-wrap: wrap; */
 }
