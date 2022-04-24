@@ -39,7 +39,7 @@ main {
 footer {
     background-color: #3B3B39;
     color: #FFFFFF;
-    height: 150px;
+    height: 200px;
 }
 
 .info {
@@ -179,9 +179,10 @@ table, th, td {
     background-color: #719a45;
     border: none;
     color: white;
-    padding: 8px 16px;
+    width: 80px;
+    height: 30px;
     text-decoration: none;
-    margin: 4px 2px;
+    
     cursor: pointer;
 }
 
@@ -195,4 +196,8 @@ table, th, td {
 
 #response-window{
     width: 100%;
+}
+
+#button-container{
+    text-align: center;
 }

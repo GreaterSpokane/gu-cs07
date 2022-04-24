@@ -8,35 +8,37 @@ import prettytable
 from flask import Flask, request
 import json
 
-##Fetches median income in spokane county in 2019
 
+COUNTY_DICT = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake City': '035'}
+STATE_DICT = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake City': '49'}
+
+##Fetches median income in spokane county in 2019
 def MedianIncome(county, year):
-    countyDict = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake City': '035'}
-    stateDict = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake City': '49'}
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', stateDict[county]), ('county', countyDict[county])]), ['B19013_001E'])
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', STATE_DICT[county]), ('county', COUNTY_DICT[county])]), ['B19013_001E'])
 
     return data.iat[0,0]
 
 ##Housing Index API
 def housing_month(county, year):
-    countyDict = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake City': '035'}
-    stateDict = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake City': '49'}
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', stateDict[county]), ('county', countyDict[county])]), ['B25105_001E'])
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', STATE_DICT[county]), ('county', COUNTY_DICT[county])]), ['B25105_001E'])
 
     return data.iat[0,0]
 
 def housing(county, year):
-    countyDict = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake City': '035'}
-    stateDict = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake City': '49'}
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', stateDict[county]), ('county', countyDict[county])]), ['B25077_001E'])
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', STATE_DICT[county]), ('county', COUNTY_DICT[county])]), ['B25077_001E'])
 
     return data.iat[0,0]
 
+def education(county, year):
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', STATE_DICT[county]), ('county', COUNTY_DICT[county])]), ['B06009_001E', 'B06009_005E', 'B06009_006E'])
+    rate = (data.iat[0,2] + data.iat[0,1])/data.iat[0,0]
+    print(rate)
+
+    return rate
+
 ##LaborForce Participation
 def labor(county, year):
-    countyDict = {'Spokane': '063', 'Boise': '001', 'Fort Collins': '069', 'Eugene': '039', 'Salt Lake City': '035'}
-    stateDict = {'Spokane': '53', 'Boise': '16', 'Fort Collins': '08', 'Eugene': '41', 'Salt Lake City': '49'}
-    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', stateDict[county]), ('county', countyDict[county])]), ['B23025_001E', 'B23025_002E'])
+    data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', STATE_DICT[county]), ('county', COUNTY_DICT[county])]), ['B23025_001E', 'B23025_002E'])
 
     column_names = ['Civilian Population', 'Civilians In Labor Force']
     data.columns = column_names
