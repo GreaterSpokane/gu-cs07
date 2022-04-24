@@ -28,19 +28,6 @@ indicatorConfig.mmr.chartConfig = {
     options: {}
 }
 
-// housing affordability index
-indicatorConfig.hai = {};
-indicatorConfig.hai.description = "Description for housing affordability index. Description for housing affordability index. Description for housing affordability index. Description for housing affordability index.Description for housing affordability index.";
-indicatorConfig.hai.note = "Note for data for housing affordability index. Note for data for housing affordability index.";
-indicatorConfig.hai.link = "https://data.census.gov/cedsci/";
-indicatorConfig.hai.initialNumIntervals = 5;
-indicatorConfig.hai.statNumIntervals = 2;
-indicatorConfig.hai.isIncreaseGood = 2;
-indicatorConfig.hai.chartConfig = {
-    type: "line",
-    options: {}
-}
-
 // LABOR
 // labor force participation rate
 indicatorConfig.lfp = {};

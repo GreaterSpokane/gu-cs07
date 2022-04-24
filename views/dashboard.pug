@@ -7,7 +7,7 @@ block style-sheet
     link(rel='stylesheet' type="text/css" href='../css/dashboard.css')
     link(rel='stylesheet' type="text/css" href='../css/rangeslider.css')
 block scripts 
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    //- script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.js") 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js") 
@@ -24,7 +24,7 @@ block content
                     #mhc-card.card
                         .card-header
                             h3 Median Housing Cost
-                            p#mhc-stat.stat Short metric about indicator performance
+                            p#mhc-stat.stat   
                         .chart-container
                             canvas#mhc.chart-canvas
                         .more-info-button
@@ -32,19 +32,11 @@ block content
                     #mmr-card.card
                         .card-header
                             h3 Median Monthly Rent
-                            p#mmr-stat.stat Short metric about indicator performance
+                            p#mmr-stat.stat   
                         .chart-container
                             canvas#mmr
                         .more-info-button
                             button#mmr-button.button More info
-                    #hai-card.card
-                        .card-header
-                            h3 Housing Affordability Index
-                            p#hai-stat.stat Short metric about indicator performance
-                        .chart-container
-                            canvas#hai
-                        .more-info-button
-                            button#hai-button.button More info
             #mhc-detailed-view.detailed-view-card
                 .detailed-view-half
                     h4 About
@@ -124,52 +116,13 @@ block content
                 .detailed-view-half
                     canvas#mmr-detailed-chart-canvas
                     br
-            #hai-detailed-view.detailed-view-card
-                .detailed-view-half
-                    h4 About
-                    p#hai-description
-                    h4 Data source notes
-                    p#hai-about
-                    a#hai-link(style="color:blue;") Data source
-                    h4 Comparison Counties
-                    .checkboxs
-                        label.checkbox-container Spokane, WA 
-                            span.county-label (Spokane County)
-                            input#hai-spokane-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
-                        label.checkbox-container Boise, ID 
-                            span.county-label (Ada County)
-                            input#hai-spokane-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
-                        label.checkbox-container Salt Lake City, UT 
-                            span.county-label (Salt Lake County)
-                            input#hai-spokane-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                        label.checkbox-container Eugene, OR 
-                            span.county-label (Lane County)
-                            input#hai-spokane-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                        label.checkbox-container Fort Collins, CO   
-                            span.county-label (Larimer County)
-                            input#hai-spokane-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
-                    #hai-range-slider.range-slider
-                        br 
-                        br                            
-                        #hai-slider.slider
-                    p 
-                    br
-                .detailed-view-half
-                    canvas#hai-detailed-chart-canvas
-                    br
             #labor.category-snapshot-view
                 h2 Labor Force
                 .category-flex-container 
                     #lft-card.card
                         .card-header
                             h3 Labor Force Total
-                            p#lft-stat.stat Short metric about indicator performance
+                            p#lft-stat.stat   
                         .chart-container
                             canvas#lft
                         .more-info-button
@@ -177,7 +130,7 @@ block content
                     #lfs-card.card.non-line
                         .card-header
                             h3 Employment and Unemployment 
-                            p#lfs-stat.stat Short metric about indicator performance
+                            p#lfs-stat.stat   
                         .chart-container
                             canvas#lfs.lfs-container
                         .more-info-button
@@ -185,7 +138,7 @@ block content
                     #lfp-card.card
                         .card-header
                             h3 Labor Force Participation Rate
-                            p#lfp-stat.stat Short metric about indicator performance
+                            p#lfp-stat.stat   
                         .chart-container
                             canvas#lfp
                         .more-info-button
@@ -313,7 +266,7 @@ block content
                     #ntc-card.card
                         .card-header
                             h3 Natural Change
-                            p#ntc-stat.stat Short metric about indicator performance
+                            p#ntc-stat.stat   
                         .chart-container
                             canvas#ntc
                         .more-info-button
@@ -321,7 +274,7 @@ block content
                     #ndm-card.card
                         .card-header
                             h3 Net Domestic Migration 
-                            p#ndm-stat.stat Short metric about indicator performance
+                            p#ndm-stat.stat   
                         .chart-container
                             canvas#ndm
                         .more-info-button
@@ -411,7 +364,7 @@ block content
                     #mhi-card.card
                         .card-header
                             h3 Median Household Income
-                            p#mhi-stat.stat Short metric about indicator performance
+                            p#mhi-stat.stat   
                         .chart-container
                             canvas#mhi
                         .more-info-button
