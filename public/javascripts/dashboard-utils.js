@@ -149,7 +149,8 @@ function updateRange(indicatorName, startIndex, endIndex) {
 // updates the locations shown in the detailed view based on the checkboxs
 function toggleLocations(indicatorName, labelText, isChecked) {
     indicatorConfig[indicatorName]["detailchart"]["data"]["datasets"].forEach((dataset) => {
-        if (dataset.label == labelText) {
+        console.log("dataset:", dataset)
+        if (dataset.label.includes(labelText)) {
             if (isChecked) {
                 console.log("adding data: " + labelText);
                 dataset.hidden = false;
@@ -267,7 +268,7 @@ function getConfig(indicatorName, isDetailView) {
     const purpleColor = "#866BAF"; // gsi purple
     const yellowColor = "#D7DC61";    // gsi yellow
     const greyColor = "#6E7277";   //gsi gray
-    const darkerGreyColor = '#55585c'
+    const darkerGreyColor = '#515f70'
     const orangeColor = '#db6140';  // orange from initial syling
     const greenColor = '#719a45'    // green from initial stying
     const blackColor = '#000000'
@@ -309,31 +310,36 @@ function getConfig(indicatorName, isDetailView) {
                 fill: true,
                 label: "Spokane County",
                 borderWidth: 4,
-                pointRadius: 2
+                pointRadius: 2,
+                hidden: false
             }, {
                 data: getData(indicatorName, "boise", false),
                 borderColor: purpleColor,
                 label: "Boise, ID (Ada County)",
                 borderWidth: 2,
-                pointRadius: 2
+                pointRadius: 2,
+                hidden: false,
             }, {
                 data: getData(indicatorName, "saltlakecity", false),
                 borderColor: greyColor,
                 label: "Salt Lake City, UT (Salt Lake County)",
                 borderWidth: 2,
-                pointRadius: 2
+                pointRadius: 2,
+                hidden: true,
             }, {
                 data: getData(indicatorName, "eugene", false),
                 borderColor: yellowColor,
                 label: "Eugene, OR (Lane County)",
                 borderWidth: 2,
-                pointRadius: 2
+                pointRadius: 2,
+                hidden: true,
             }, {
                 data: getData(indicatorName, "fortcollins", false),
                 borderColor: darkerGreyColor,
                 label: "Fort Collins, CO (Larimer County)",
                 borderWidth: 2,
-                pointRadius: 2
+                pointRadius: 2,
+                hidden: true,
             }],
         },
         options: {
@@ -356,7 +362,7 @@ function getConfig(indicatorName, isDetailView) {
 
         });
     } else {
-        lineChartTemplate.data.datasets = templateDatasets.slice(0, 3);
+        lineChartTemplate.data.datasets = templateDatasets.slice(0, 2);
     }
     return lineChartTemplate;
 
