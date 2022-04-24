@@ -1,6 +1,5 @@
 #navbar {
     text-align: center;
-    /* font-family: 'Montserrat', sans-serif; */
     font-weight: 800;
 }
 
@@ -12,9 +11,8 @@
 
 #group-photo {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
+    margin: auto;
+    width: 60%;
 }
 
 #back-button-container {
@@ -24,7 +22,7 @@
 .u-section-1 {
     background-image: url("../images/spokane2.jpg");
     background-position: 50% 50%;
-    min-height: 741px;
+    min-height: 341px;
 }
 
 .u-section-1 .u-group-1 {

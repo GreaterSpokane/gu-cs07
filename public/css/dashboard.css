@@ -116,10 +116,6 @@
     /* flex-wrap: wrap; */
 }
 
-.flex-container-third {
-    /* flex: 33.3%; */
-}
-
 #lfs {
     height: 270px;
     max-height: 270px;
@@ -128,6 +124,7 @@
 .category-snapshot-view {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: #f1f1f1;
+    border-radius: 5px;
     margin-bottom: 16px;
     padding: 10px;
     padding-bottom: 20px;
