@@ -24,7 +24,8 @@ window.onload = async function () {
 
         // range sliders
         const yearRange = getData(indicatorName, "spokane", true)
-        const startYear = Number(yearRange[yearRange.length - indicatorConfig[indicatorName]["initialNumIntervals"] - 1]);
+        // const startYear = Number(yearRange[yearRange.length - indicatorConfig[indicatorName]["initialNumIntervals"] - 1]);
+        const startYear = Number(yearRange[0]);
         const endYear = Number(yearRange[yearRange.length - 1]);
         const sliderElement = document.getElementById(indicatorName + "-slider")
         try {
@@ -40,10 +41,8 @@ window.onload = async function () {
                 tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })]
             });
             indicatorConfig[indicatorName]["rangeslider"].on("change", function (values) {
-                console.log('range slider values:', values);
-                let startIndex = yearRange.indexOf(Math.trunc(values[0]));
-                let endIndex = yearRange.indexOf(Math.trunc(values[1]));
-
+                let startIndex = yearRange.indexOf(String(Math.trunc(values[0])));
+                let endIndex = yearRange.indexOf(String(Math.trunc(values[1])));
                 updateRange(indicatorName, startIndex, endIndex);
             });
         } catch (error) {
@@ -128,7 +127,6 @@ window.onload = async function () {
 
 // updates the charts based on the range slider
 function updateRange(indicatorName, startIndex, endIndex) {
-    console.log("inside updateRange function");
     console.log("start/end indexes:", startIndex, endIndex);
 
     let backupLabels = JSON.parse(JSON.stringify(indicatorConfig[indicatorName].detailchart.data.labels)); // deep copy
