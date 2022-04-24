@@ -42,14 +42,6 @@
   /* box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer; */
 }
-  
-.chart-container {
-    /* height: 200px; */
-    max-height: 225px;
-    /* width: 500px; */
-    max-width: 550px;
-    position: relative;
-}
 
 .dashboard {
     /* border: 1px solid #2f2f2e; */
@@ -83,10 +75,10 @@
 }
 
 .chart-container {
-  /* height: 200px;
-  max-height: 225px;
-  width: 500px;
-  max-width: 550px; */
+  /* height: 200px; */
+  /* max-height: 225px; */
+  /* width: 500px; */
+  /* max-width: 550px; */
   position: relative;
 }
 
@@ -105,7 +97,7 @@
   max-width: 450px;
   /* min-width: 200px; */
   /* height: 300px; */
-  /* max-height: 300px; */
+  max-height: 300px;
   flex: 33.3%;
 }
 
@@ -125,8 +117,8 @@
 }
 
 #lfs {
-    height: 270px;
-    max-height: 270px;
+    /* height: 225px; */
+    max-height: 225px;
 }
 
 .category-snapshot-view {

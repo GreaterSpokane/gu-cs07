@@ -294,7 +294,7 @@ function getConfig(indicatorName, isDetailView) {
                 }]
             },
             options: {
-                radius: "80%"
+                radius: "90%"
             }
         }
     }
