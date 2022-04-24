@@ -1,7 +1,7 @@
 import indicatorConfig from './indicator-config.js';
 
 window.onload = async function () {
-    const counties = ["Spokane", "Boise", "Salt Lake", "Eugene", "Fort Collins"]
+    const counties = ["Spokane", "Boise", "Salt Lake City", "Eugene", "Fort Collins"]
     for (const indicatorName of Object.keys(indicatorConfig)) {
         for (const county of counties) {
             console.log("calling", indicatorName, county)
@@ -128,11 +128,10 @@ window.onload = async function () {
 // updates the charts based on the range slider
 function updateRange(indicatorName, startIndex, endIndex) {
     console.log("start/end indexes:", startIndex, endIndex);
-
-    let backupLabels = JSON.parse(JSON.stringify(indicatorConfig[indicatorName].detailchart.data.labels)); // deep copy
+    let backupData = []
+    const backupLabels = JSON.parse(JSON.stringify(indicatorConfig[indicatorName].detailchart.data.labels)); // deep copy
     indicatorConfig[indicatorName].detailchart.data.labels = backupLabels.slice(startIndex, endIndex + 1);
 
-    let backupData = []
     indicatorConfig[indicatorName].detailchart.data.datasets.forEach((dataset) => {
         backupData.push(JSON.parse(JSON.stringify(dataset.data)));
         dataset.data = dataset.data.slice(startIndex, endIndex + 1);
@@ -268,8 +267,10 @@ function getConfig(indicatorName, isDetailView) {
     const purpleColor = "#866BAF"; // gsi purple
     const yellowColor = "#D7DC61";    // gsi yellow
     const greyColor = "#6E7277";   //gsi gray
+    const darkerGreyColor = '#55585c'
     const orangeColor = '#db6140';  // orange from initial syling
     const greenColor = '#719a45'    // green from initial stying
+    const blackColor = '#000000'
 
     // temp until add employment/unemployment
     if (indicatorName == "lfs") {
@@ -279,7 +280,7 @@ function getConfig(indicatorName, isDetailView) {
                 labels: [
                     'Employed',
                     'Unemployed',
-                    'Not in Labor Force'
+                    'Not in Labor Force / Other'
                 ],
                 datasets: [{
                     data: [0.5, 0.1, 0.4,],
@@ -306,23 +307,33 @@ function getConfig(indicatorName, isDetailView) {
                 data: getData(indicatorName, "spokane", false),
                 borderColor: blueColor,
                 fill: true,
-                label: "Spokane",
+                label: "Spokane County",
+                borderWidth: 4,
+                pointRadius: 2
             }, {
                 data: getData(indicatorName, "boise", false),
                 borderColor: purpleColor,
-                label: "Boise",
+                label: "Boise, ID (Ada County)",
+                borderWidth: 2,
+                pointRadius: 2
             }, {
-                data: getData(indicatorName, "saltlake", false),
+                data: getData(indicatorName, "saltlakecity", false),
                 borderColor: greyColor,
-                label: "Salt Lake City",
+                label: "Salt Lake City, UT (Salt Lake County)",
+                borderWidth: 2,
+                pointRadius: 2
             }, {
                 data: getData(indicatorName, "eugene", false),
-                borderColor: greyColor,
-                label: "Eugene",
+                borderColor: yellowColor,
+                label: "Eugene, OR (Lane County)",
+                borderWidth: 2,
+                pointRadius: 2
             }, {
                 data: getData(indicatorName, "fortcollins", false),
-                borderColor: greyColor,
-                label: "Fort Collins",
+                borderColor: darkerGreyColor,
+                label: "Fort Collins, CO (Larimer County)",
+                borderWidth: 2,
+                pointRadius: 2
             }],
         },
         options: {

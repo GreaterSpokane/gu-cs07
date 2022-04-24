@@ -37,15 +37,10 @@
   /* height: 250px; */
 }
 
-.chart-container {
-  /* height: 200px; */
-  max-height: 225px;
-  /* width: 500px; */
-  max-width: 550px;
-  position: relative;
-}
 
-.active, .card:hover {
+
+.active,
+.card:hover {
   /* box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer; */
 }
@@ -83,6 +78,14 @@
   flex-wrap: wrap;
 }
 
+.chart-container {
+  /* height: 200px;
+  max-height: 225px;
+  width: 500px;
+  max-width: 550px; */
+  position: relative;
+}
+
 .card {
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   /* this adds the "card" effect */
@@ -94,11 +97,11 @@
   /* flex: auto; */
   /* max-width: 500px; */
   margin: 10px 6px;
-  width: 600px;
-  max-width: 600px;
-  min-width: 200px;
-  height: 300px;
-  max-height: 300px;
+  /* width: 600px; */
+  max-width: 450px;
+  /* min-width: 200px; */
+  /* height: 300px; */
+  /* max-height: 300px; */
   flex: 33.3%;
 }
 
@@ -113,12 +116,9 @@
   justify-content: center;
   align-items: center;
   /* flex: 33.3%; */
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 
-.flex-container-third {
-  /* flex: 33.3%; */
-}
 
 #lfs {
   height: 270px;
@@ -195,12 +195,12 @@
 }
 
 /* On mouse-over, add a grey background color */
-.checkbox-container:hover input ~ .checkmark {
+.checkbox-container:hover input~.checkmark {
   background-color: rgb(156, 156, 156);
 }
 
 /* When the checkbox is checked, add a blue background */
-.checkbox-container input:checked ~ .checkmark {
+.checkbox-container input:checked~.checkmark {
   background-color: #00B4ED;
 }
 
@@ -212,7 +212,7 @@
 }
 
 /* Show the checkmark when checked */
-.checkbox-container input:checked ~ .checkmark:after {
+.checkbox-container input:checked~.checkmark:after {
   display: block;
 }
 
