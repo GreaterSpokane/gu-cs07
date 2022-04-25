@@ -1,20 +1,20 @@
 const express = require('express');
-const createHousingAffordability = require('../controllers/housingAffordability/createHousingAffordabilityController');
-const getHousingAffordability = require('../controllers/housingAffordability/getHousingAffordabilityController');
-const getManyHousingAffordability = require('../controllers/housingAffordability/getManyHousingAffordabilityController');
-const deleteHousingAffordability = require('../controllers/housingAffordability/deleteHousingAffordabilityController')
-const serialize = require('../serializers/housingAffordabilitySerializer');
+const createHighSchoolGraduates = require('../controllers/highschoolGraduates/createHighSchoolGraduatesController');
+const getHighSchoolGraduates = require('../controllers/highschoolGraduates/getHighSchoolGraduatesController');
+const getManyHighSchoolGraduates = require('../controllers/highschoolGraduates/getManyHighSchoolGraduatesController');
+const deleteHighSchoolGraduates = require('../controllers/highschoolGraduates/deleteHighSchoolGraduatesController')
+const serialize = require('../serializers/highschoolGraduatesSerializer');
 var router = express.Router();
 
 /*  Insert new document into housing affordability index collection in db   */
-router.post('/v1/newHousingAffordability', async(req, res) => {
+router.post('/v1/newHighSchoolGraduates', async(req, res) => {
     //  Check that query string exists 
     if (
         //  Check that each parameter exists
         typeof req.query.county === "undefined" ||
         typeof req.query.state === "undefined" ||
         typeof req.query.year === "undefined" ||
-        typeof req.query.housing_affordability === "undefined") {
+        typeof req.query.high_school_graduates === "undefined") {
 
         var result = {
             'result': 'Failure',
@@ -25,11 +25,11 @@ router.post('/v1/newHousingAffordability', async(req, res) => {
     }
 
     //  Create new document in housing affordability index collection
-    var entry = await createHousingAffordability(
+    var entry = await createHighSchoolGraduates(
         req.query.county,
         req.query.state,
         req.query.year,
-        req.query.housing_affordability
+        req.query.high_school_graduates
     ).catch((err) => {
         var result = { 'result': 'Internal Error', 'error': err };
         res.status(404).json(result);
@@ -44,7 +44,7 @@ router.post('/v1/newHousingAffordability', async(req, res) => {
 });
 
 /*  get entry from housing affordability index collection in db  */
-router.get('/v1/getHousingAffordability', async(req, res) => {
+router.get('/v1/getHighSchoolGraduates', async(req, res) => {
     if (
         req.query.county === "undefined" ||
         req.query.year === "undefined"
@@ -59,7 +59,7 @@ router.get('/v1/getHousingAffordability', async(req, res) => {
         return;
     }
 
-    var result = await getHousingAffordability(req.query.county, req.query.year)
+    var result = await getHighSchoolGraduates(req.query.county, req.query.year)
         .catch((err) => {
             var result = {
                 'result': 'Internal error',
@@ -74,7 +74,7 @@ router.get('/v1/getHousingAffordability', async(req, res) => {
 })
 
 /* Get all housing affordability index documents in year range from the db */
-router.get('/v1/getManyHousingAffordability', async(req, res) => {
+router.get('/v1/getManyHighSchoolGraduates', async(req, res) => {
     if (
         req.query.county === "undefined" ||
         req.query.start_year === "undefined" ||
@@ -88,7 +88,7 @@ router.get('/v1/getManyHousingAffordability', async(req, res) => {
         return;
     }
 
-    var result = await getManyHousingAffordability(req.query.county, req.query.start_year, req.query.end_year)
+    var result = await getManyHighSchoolGraduates(req.query.county, req.query.start_year, req.query.end_year)
         .catch((err) => {
             res.status(404).json({
                 'result': 'Internal error',
@@ -102,7 +102,7 @@ router.get('/v1/getManyHousingAffordability', async(req, res) => {
 });
 
 /* Delete housing affordability index document by correlation id */
-router.delete('/v1/deleteHousingAffordability', async(req, res) => {
+router.delete('/v1/deleteHighSchoolGraduates', async(req, res) => {
     //  Verification
     if (typeof req.query.corr_id === 'undefined') {
         result = {
@@ -114,7 +114,7 @@ router.delete('/v1/deleteHousingAffordability', async(req, res) => {
         return
     }
 
-    var result = await deleteHousingAffordability(req.query.corr_id)
+    var result = await deleteHighSchoolGraduates(req.query.corr_id)
         .catch(() => {
             return res.status(404).json({ 'result': 'Internal error' });
         });

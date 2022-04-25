@@ -19,7 +19,8 @@ module.exports = async function getManyMedianHousing(county, start_year, end_yea
             .group({
                 _id: '$year',
                 medianHousingCost: { $first: '$medianHousingCost' }
-            });
+            })
+            .sort({ _id: -1 });
         var result = { 'county': county, 'data': data }
         return result
     } catch (err) {
