@@ -24,6 +24,11 @@ def Income(countyVal, yearVal, stateVal):
     response = requests.post(f'http://0.0.0.0:3000/v1/newMedianIncome?county={countyVal}&state={stateVal}&year={yearVal}&median_income={median_income}')
     return response
 
+def Education(countyVal, yearVal, stateVal):
+    rate = education(countyVal, yearVal)
+    response = requests.post(f'http://0.0.0.0:3000/v1/newHighSchoolGraduates?county={countyVal}&state={stateVal}&year={yearVal}&high_school_graduates={rate}')
+    return response
+
 def Employment(countyVal, yearVal, stateVal):
     newEmployment, unemployment = laborBuerau_Employment(countyVal, yearVal)
     response = requests.post(f'http://0.0.0.0:3000/v1/newEmployed?county={countyVal}&state={stateVal}&year={yearVal}&employed={newEmployment}')
@@ -51,6 +56,11 @@ def main():
     Income('Fort Collins', sys.argv[1], 'CO')
     Income('Eugene', sys.argv[1], 'OR')
     Income('Salt Lake City', sys.argv[1], 'UT')
+    Education('Spokane', sys.argv[1], 'WA')
+    Education('Boise', sys.argv[1], 'ID')
+    Education('Fort Collins', sys.argv[1], 'CO')
+    Education('Eugene', sys.argv[1], 'OR')
+    Education('Salt Lake City', sys.argv[1], 'UT')
     Employment('Spokane', sys.argv[1], 'WA')
     Employment('Boise', sys.argv[1], 'ID')
     Employment('Fort Collins', sys.argv[1], 'CO')
