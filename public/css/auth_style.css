@@ -201,3 +201,7 @@ table, th, td {
 #button-container{
     text-align: center;
 }
+
+#update-table{
+    margin: auto;
+}
