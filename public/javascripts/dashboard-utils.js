@@ -181,10 +181,6 @@ async function callData(indicatorName, county) {
             path = '/v1/getManyAverageRent/';
             schemaDataName = 'averageRent';
             break;
-        case 'hai':
-            path = '/v1/getManyHousingAffordability/';
-            schemaDataName = 'averageRent';
-            break;
         case 'lfp':
             path = '/v1/getManyLaborParticipation/';
             schemaDataName = 'laborParticipationRate';
@@ -213,6 +209,10 @@ async function callData(indicatorName, county) {
             path = '/v1/getManyUnemployed/'
             schemaDataName = 'unemployed';
             break;
+        case 'hsg':
+            path = '/v1/getManyHighSchoolGraduates/'
+            schemaDataName = 'highschoolGraduates';
+            break;
         default:
             console.error(`No matching endpoint for indicator: ${indicatorName}`);
             return [[], []];
@@ -238,7 +238,7 @@ async function callData(indicatorName, county) {
         });
 
     try {
-        if (res["years"].length < 3) {
+        if (res["years"].length < 3 || res[schemaDataName].length < 3) {
             throw "Not enough data in database, returning empty list..."
         }
         return [res["years"], res[schemaDataName]];
