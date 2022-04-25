@@ -43,9 +43,9 @@ async function postMedian(yearVal, stateVal, countyVal, value) {
     $("#response-window").val(JSON.stringify(res));
 }
 
-async function postIndex(yearVal, stateVal, countyVal, value) {
-    var query = `?county=${countyVal}&state=${stateVal}&year=${yearVal}&housing_affordability=${value}`
-    const res = await fetch('/v1/newHousingAffordability' + query, {
+async function postEducation(yearVal, stateVal, countyVal, value) {
+    var query = `?county=${countyVal}&state=${stateVal}&year=${yearVal}&high_school_graduates=${value}`
+    const res = await fetch('/v1/newHighSchoolGraduates' + query, {
         method: 'POST',
         headers: {},
         mode: "same-origin"
@@ -126,8 +126,8 @@ function clearStaleInput() {
     $('#labor-value-input').val("");
     $('#participation-year-input').val("");
     $('#participation-value-input').val("");
-    $('#index-year-input').val("");
-    $('#index-value-input').val("");
+    $('#education-year-input').val("");
+    $('#education-value-input').val("");
     $('#median-year-input').val("");
     $('#median-value-input').val("");
     $('#price-year-input').val("");
@@ -184,16 +184,16 @@ $(document).ready(async() => {
         clearStaleInput();
     })
 
-    $("#IndexButton").on('click', async() => {
+    $("#EducationButton").on('click', async() => {
         var year, state, county, value;
-        year = $('#index-year-input').val();
-        state = $('#index-state-input').val();
-        county = $('#index-county-input').val();
-        value = $('#index-value-input').val();
+        year = $('#education-year-input').val();
+        state = $('#education-state-input').val();
+        county = $('#education-county-input').val();
+        value = $('#education-value-input').val();
         if(year == '' || value == ''){
             $('#response-window').val("Error: Empty Parameter in Request.");
         }
-        else await postIndex(year, state, county, value);
+        else await postEducation(year, state, county, value);
 
         clearStaleInput();
     })

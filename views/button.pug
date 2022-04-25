@@ -145,15 +145,15 @@ block content
               button#ParticipationButton(class="update") UPDATE
         tr
           td
-            div#Housing-Index
-              h2(class="title") Housing Index
+            div#Education
+              h2(class="title") High School or Higher
               label(for="year", class="inputLabels") Year
               br
-              input#index-year-input(type="number", name="year", class="input")
+              input#education-year-input(type="number", name="year", class="input")
               br
               label(for="county", class="inputLabels") County
               br
-              select#index-county-input(name= "county", class="input")
+              select#education-county-input(name= "county", class="input")
                 option(value="Spokane") Spokane
                 option(value="Boise") Boise
                 option(value="Salt Lake City") Salt Lake City
@@ -162,7 +162,7 @@ block content
               br
               label(for="index-state", class="inputLabels") State Code
               br
-              select#index-state-input(name= "state", class="input")
+              select#education-state-input(name= "state", class="input")
                 option(value="WA") WA
                 option(value="ID") ID
                 option(value="UT") UT
@@ -171,9 +171,9 @@ block content
               br
               label(for="index-value", class="inputLabels") Value
               br
-              input#index-value-input(type="number", name="value", class="input")
+              input#education-value-input(type="number", name="value", class="input")
               br
-              button#IndexButton(class="update") UPDATE
+              button#EducationButton(class="update") UPDATE
           td
             div#Employed
               h2(class="title") Employed Persons
