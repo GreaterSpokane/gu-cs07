@@ -10,9 +10,16 @@ indicatorConfig.mhc.initialNumIntervals = 5; // Initial number of time intervals
 indicatorConfig.mhc.statNumIntervals = 2; // Number of intervals used to calcuate the short stat
 indicatorConfig.mhc.isIncreaseGood = 3; // 1 = Increase is good; 2 = Increase is Bad; 3 = Neutral
 indicatorConfig.mhc.countiesFirstVisible = []
-indicatorConfig.mhc.chartConfig = {
-    type: "line",
-    options: {}
+indicatorConfig.mhc.chartOptions = {
+    scales: {
+        y: {
+            ticks: {
+                callback: function (value) {
+                    return '$' + String(value).slice(0, -3) + "K";
+                }
+            }
+        }
+    }
 }
 
 // median monthly rent (average rent)
@@ -23,9 +30,16 @@ indicatorConfig.mmr.link = "https://data.census.gov/cedsci/";
 indicatorConfig.mmr.initialNumIntervals = 5;
 indicatorConfig.mmr.statNumIntervals = 2;
 indicatorConfig.mmr.isIncreaseGood = 3;
-indicatorConfig.mmr.chartConfig = {
-    type: "line",
-    options: {}
+indicatorConfig.mmr.chartOptions = {
+    scales: {
+        y: {
+            ticks: {
+                callback: function (value) {
+                    return '$' + value;
+                }
+            }
+        }
+    }
 }
 
 // LABOR
@@ -37,9 +51,16 @@ indicatorConfig.lfp.link = "https://data.census.gov/cedsci/";
 indicatorConfig.lfp.initialNumIntervals = 5;
 indicatorConfig.lfp.statNumIntervals = 2;
 indicatorConfig.lfp.isIncreaseGood = 1;
-indicatorConfig.lfp.chartConfig = {
-    type: "line",
-    options: {}
+indicatorConfig.lfp.chartOptions = {
+    scales: {
+        y: {
+            ticks: {
+                callback: function (value) {
+                    return value * 100 + '%';
+                }
+            }
+        }
+    }
 }
 
 // labor force total
@@ -50,9 +71,20 @@ indicatorConfig.lft.link = "https://data.census.gov/cedsci/";
 indicatorConfig.lft.initialNumIntervals = 5;
 indicatorConfig.lft.statNumIntervals = 2;
 indicatorConfig.lft.isIncreaseGood = 1;
-indicatorConfig.lft.chartConfig = {
-    type: "line",
-    options: {}
+indicatorConfig.lft.chartOptions = {
+    scales: {
+        y: {
+            title: {
+                text: "# of People",
+                display: true
+            },
+            ticks: {
+                callback: function (value) {
+                    return String(value).slice(0, -3) + "K";
+                }
+            }
+        }
+    }
 }
 
 // // Employed
@@ -63,7 +95,7 @@ indicatorConfig.lft.chartConfig = {
 // indicatorConfig.emp.initialNumIntervals = 5;
 // indicatorConfig.emp.statNumIntervals = 2;
 // indicatorConfig.emp.isIncreaseGood = 1;
-// indicatorConfig.lfp.chartConfig = {
+// indicatorConfig.lfp.chartOptions = {
 //     type: "doughnut",
 //     options: {}
 // }
@@ -76,7 +108,7 @@ indicatorConfig.lft.chartConfig = {
 // indicatorConfig.uem.initialNumIntervals = 5;
 // indicatorConfig.uem.statNumIntervals = 2;
 // indicatorConfig.uem.isIncreaseGood = 1;
-// indicatorConfig.lfp.chartConfig = {
+// indicatorConfig.lfp.chartOptions = {
 //     type: "doughnut",
 //     options: {}
 // }
@@ -90,8 +122,7 @@ indicatorConfig.ntc.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ntc.initialNumIntervals = 5;
 indicatorConfig.ntc.statNumIntervals = 2;
 indicatorConfig.ntc.isIncreaseGood = 1;
-indicatorConfig.ntc.chartConfig = {
-    type: "line",
+indicatorConfig.ntc.chartOptions = {
     options: {}
 }
 
@@ -103,8 +134,7 @@ indicatorConfig.ndm.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ndm.initialNumIntervals = 5;
 indicatorConfig.ndm.statNumIntervals = 2;
 indicatorConfig.ndm.isIncreaseGood = 1;
-indicatorConfig.ndm.chartConfig = {
-    type: "line",
+indicatorConfig.ndm.chartOptions = {
     options: {}
 }
 
@@ -117,9 +147,16 @@ indicatorConfig.mhi.link = "https://data.census.gov/cedsci/";
 indicatorConfig.mhi.initialNumIntervals = 5;
 indicatorConfig.mhi.statNumIntervals = 2;
 indicatorConfig.mhi.isIncreaseGood = 1;
-indicatorConfig.mhi.chartConfig = {
-    type: "line",
-    options: {}
+indicatorConfig.mhi.chartOptions = {
+    scales: {
+        y: {
+            ticks: {
+                callback: function (value) {
+                    return '$' + String(value).slice(0, -3) + "K";
+                }
+            }
+        }
+    }
 }
 
 export default indicatorConfig;
