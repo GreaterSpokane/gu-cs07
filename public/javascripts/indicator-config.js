@@ -17,7 +17,7 @@ indicatorConfig.mhc.chartConfig = {
 
 // median monthly rent (average rent)
 indicatorConfig.mmr = {};
-indicatorConfig.mmr.description = "Description for median monthly rent. Description for median monthly rent. Description for median monthly rent. Description for median monthly rent.Description for median monthly rent.";
+indicatorConfig.mmr.description = "The average rent is the measurement of the most usual or ordinary amount of money one can expect to pay in rent in a given county. While many factors like square footage, geographic location, and quality of living can influence the cost of rent, this measurement focuses entirely on the dollar value with little consideration to the material context of these buildings.";
 indicatorConfig.mmr.note = "Note for data for median monthly rent. Note for data for median monthly rent.";
 indicatorConfig.mmr.link = "https://data.census.gov/cedsci/";
 indicatorConfig.mmr.initialNumIntervals = 5;
@@ -31,7 +31,7 @@ indicatorConfig.mmr.chartConfig = {
 // LABOR
 // labor force participation rate
 indicatorConfig.lfp = {};
-indicatorConfig.lfp.description = "Description for labor force participation rate. Description for labor force participation rate. Description for labor force participation rate. Description for labor force participation rate.Description for labor force participation rate.";
+indicatorConfig.lfp.description = "Labor force participation rate is the percentage of the population that is actively in the labor force. This indicator is a great way to understand the demographic makeup of a county as counties with lower participation rates are likely to have more citizens in retirement.";
 indicatorConfig.lfp.note = "Note for data for labor force participation rate. Note for data for labor force participation rate.";
 indicatorConfig.lfp.link = "https://data.census.gov/cedsci/";
 indicatorConfig.lfp.initialNumIntervals = 5;
@@ -44,7 +44,7 @@ indicatorConfig.lfp.chartConfig = {
 
 // labor force total
 indicatorConfig.lft = {};
-indicatorConfig.lft.description = "Description for labor force total. Description for labor force total. Description for labor force total. Description for labor force total.Description for labor force total.";
+indicatorConfig.lft.description = "The labor force of a county represents the total number of people over the age of 16 who are either employed or unemployed and looking for work.";
 indicatorConfig.lft.note = "Note for data for labor force total. Note for data for labor force total.";
 indicatorConfig.lft.link = "https://data.census.gov/cedsci/";
 indicatorConfig.lft.initialNumIntervals = 5;
