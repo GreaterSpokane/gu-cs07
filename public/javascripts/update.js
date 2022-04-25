@@ -123,45 +123,25 @@ async function postRent(yearVal, stateVal, countyVal, value) {
 
 function clearStaleInput() {
     $('#labor-year-input').val("");
-    $('#labor-county-input').val("");
     $('#labor-value-input').val("");
-    $('#labor-state-input').val("");
     $('#participation-year-input').val("");
-    $('#participation-county-input').val("");
     $('#participation-value-input').val("");
-    $('#participation-state-input').val("");
     $('#index-year-input').val("");
-    $('#index-county-input').val("");
     $('#index-value-input').val("");
-    $('#index-state-input').val("");
     $('#median-year-input').val("");
-    $('#median-county-input').val("");
     $('#median-value-input').val("");
-    $('#median-state-input').val("");
     $('#price-year-input').val("");
-    $('#price-county-input').val("");
     $('#price-value-input').val("");
-    $('#price-state-input').val("");
     $('#employed-year-input').val("");
-    $('#employed-county-input').val("");
     $('#employed-value-input').val("");
-    $('#employed-state-input').val("");
     $('#unemployed-year-input').val("");
-    $('#unemployed-county-input').val("");
     $('#unemployed-value-input').val("");
-    $('#unemployed-state-input').val("");
     $('#change-year-input').val("");
-    $('#change-county-input').val("");
     $('#change-value-input').val("");
-    $('#change-state-input').val("");
     $('#migration-year-input').val("");
-    $('#migration-county-input').val("");
     $('#migration-value-input').val("");
-    $('#migration-state-input').val("");
     $('#rent-year-input').val("");
-    $('#rent-county-input').val("");
     $('#rent-value-input').val("");
-    $('#rent-state-input').val("");
     $('#API-year-input').val("");
 }
 
@@ -174,7 +154,8 @@ $(document).ready(async() => {
         state = $('#labor-state-input').val();
         county = $('#labor-county-input').val();
         value = $('#labor-value-input').val();
-        await postLaborforce(year, state, county, value);
+        if(year == '' || value == '') $('#response-window').val("Error: Empty Parameter in Request.")
+        else await postLaborforce(year, state, county, value);
 
         clearStaleInput();
     })
@@ -185,7 +166,8 @@ $(document).ready(async() => {
         state = $('#participation-state-input').val();
         county = $('#participation-county-input').val();
         value = $('#participation-value-input').val();
-        await postLaborforceParticipation(year, state, county, value);
+        if(year == '' || value == '') $('#response-window').val("Error: Empty Parameter in Request.")
+        else await postLaborforceParticipation(year, state, county, value);
 
         clearStaleInput();
     })
@@ -196,7 +178,8 @@ $(document).ready(async() => {
         state = $('#median-state-input').val();
         county = $('#median-county-input').val();
         value = $('#median-value-input').val();
-        await postMedian(year, state, county, value);
+        if(year == '' || value == '') $('#response-window').val("Error: Empty Parameter in Request.")
+        else await postMedian(year, state, county, value);
 
         clearStaleInput();
     })
@@ -207,7 +190,10 @@ $(document).ready(async() => {
         state = $('#index-state-input').val();
         county = $('#index-county-input').val();
         value = $('#index-value-input').val();
-        await postIndex(year, state, county, value);
+        if(year == '' || value == ''){
+            $('#response-window').val("Error: Empty Parameter in Request.");
+        }
+        else await postIndex(year, state, county, value);
 
         clearStaleInput();
     })
@@ -218,7 +204,10 @@ $(document).ready(async() => {
         state = $('#price-state-input').val();
         county = $('#price-county-input').val();
         value = $('#price-value-input').val();
-        await postPrice(year, state, county, value);
+        if(year == '' || value == ''){
+            $('#response-window').val("Error: Empty Parameter in Request.");
+        }
+        else await postPrice(year, state, county, value);
 
         clearStaleInput();
     })
@@ -229,7 +218,8 @@ $(document).ready(async() => {
         state = $('#employed-state-input').val();
         county = $('#employed-county-input').val();
         value = $('#employed-value-input').val();
-        await postEmployed(year, state, county, value);
+        if(year == '' || value == '') $('#response-window').val("Error: Empty Parameter in Request.")
+        else await postEmployed(year, state, county, value);
 
         clearStaleInput();
     })
@@ -240,7 +230,8 @@ $(document).ready(async() => {
         state = $('#unemployed-state-input').val();
         county = $('#unemployed-county-input').val();
         value = $('#unemployed-value-input').val();
-        await postUnemployed(year, state, county, value);
+        if(year == '' || value == '') $('#response-window').val("Error: Empty Parameter in Request.")
+        else await postUnemployed(year, state, county, value);
 
         clearStaleInput();
     })
@@ -251,7 +242,8 @@ $(document).ready(async() => {
         state = $('#change-state-input').val();
         county = $('#change-county-input').val();
         value = $('#change-value-input').val();
-        await postChange(year, state, county, value);
+        if(year == '' || value == '') $('#response-window').val("Error: Empty Parameter in Request.")
+        else await postChange(year, state, county, value);
 
         clearStaleInput();
     })
@@ -262,7 +254,8 @@ $(document).ready(async() => {
         state = $('#migration-state-input').val();
         county = $('#migration-county-input').val();
         value = $('#migration-value-input').val();
-        await postMigration(year, state, county, value);
+        if(year == '' || value == '') $('#response-window').val("Error: Empty Parameter in Request.")
+        else await postMigration(year, state, county, value);
 
         clearStaleInput();
     })
@@ -273,7 +266,8 @@ $(document).ready(async() => {
         state = $('#rent-state-input').val();
         county = $('#rent-county-input').val();
         value = $('#rent-value-input').val();
-        await postRent(year, state, county, value);
+        if(year == '' || value == '') $('#response-window').val("Error: Empty Parameter in Request.")
+        else await postRent(year, state, county, value);
 
         clearStaleInput();
     })
@@ -281,8 +275,8 @@ $(document).ready(async() => {
     $("#updateButton").on('click', async() =>{
         var year;
         year = $('#API-year-input').val();
-        console.log(year);
-        await postPythonData(year);
+        if(year == '') $('#response-window').val("Error: Empty Parameter in Request.");
+        else await postPythonData(year);
 
         clearStaleInput();
     })
