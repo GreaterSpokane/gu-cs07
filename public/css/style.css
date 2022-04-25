@@ -1,102 +1,122 @@
+#navbar {
+    text-align: center;
+    font-weight: 800;
+}
+
+#about-page {
+    margin-left: 10%;
+    margin-right: 10%;
+    overflow: hidden;
+}
+
+#group-photo {
+    display: block;
+    margin: auto;
+    width: 60%;
+}
+
+#back-button-container {
+    text-align: center;
+}
+
 .u-section-1 {
-  background-image: url("../images/spokane2.jpg");
-  background-position: 50% 50%;
-  min-height: 741px;
+    background-image: url("../images/spokane2.jpg");
+    background-position: 50% 50%;
+    min-height: 341px;
 }
 
 .u-section-1 .u-group-1 {
-  min-height: 626px;
-  background-image: none;
-  margin-top: 115px;
-  margin-bottom: 0;
+    min-height: 626px;
+    background-image: none;
+    margin-top: 115px;
+    margin-bottom: 0;
 }
 
 .u-section-1 .u-container-layout-1 {
-  padding: 30px;
+    padding: 30px;
 }
 
 .u-section-1 .u-text-1 {
-  font-size: 3.75rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
-  margin: 250px 0 0;
+    font-size: 3.75rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    margin: 250px 0 0;
+    color: #fff;
+    /* font-family: 'Montserrat', sans-serif; */
 }
 
 @media (max-width: 1199px) {
-   .u-section-1 {
-    min-height: 611px;
-  }
+    .u-section-1 {
+        min-height: 611px;
+    }
 }
 
 @media (max-width: 991px) {
-   .u-section-1 {
-    min-height: 468px;
-  }
+    .u-section-1 {
+        min-height: 468px;
+    }
 }
 
 @media (max-width: 767px) {
-   .u-section-1 {
-    min-height: 351px;
-  }
-
-  .u-section-1 .u-container-layout-1 {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+    .u-section-1 {
+        min-height: 351px;
+    }
+    .u-section-1 .u-container-layout-1 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 
 @media (max-width: 575px) {
-   .u-section-1 {
-    min-height: 221px;
-  }
+    .u-section-1 {
+        min-height: 221px;
+    }
+    .u-section-1 .u-text-1 {
+        font-size: 3rem;
+    }
+}
 
-  .u-section-1 .u-text-1 {
-    font-size: 3rem;
-  }
-}.u-section-2 .u-sheet-1 {
-  min-height: 733px;
+.u-section-2 .u-sheet-1 {
+    min-height: 733px;
 }
 
 .u-section-2 .u-text-1 {
-  font-size: 3rem;
-  margin: 64px 538px 60px 0;
+    font-size: 3rem;
+    margin: 64px 538px 60px 0;
 }
 
 @media (max-width: 1199px) {
-  .u-section-2 .u-sheet-1 {
-    min-height: 657px;
-  }
-
-  .u-section-2 .u-text-1 {
-    width: auto;
-    margin-top: 50px;
-    margin-right: 330px;
-  }
+    .u-section-2 .u-sheet-1 {
+        min-height: 657px;
+    }
+    .u-section-2 .u-text-1 {
+        width: auto;
+        margin-top: 50px;
+        margin-right: 330px;
+    }
 }
 
 @media (max-width: 991px) {
-  .u-section-2 .u-sheet-1 {
-    min-height: 1146px;
-  }
-
-  .u-section-2 .u-text-1 {
-    margin-right: 110px;
-  }
+    .u-section-2 .u-sheet-1 {
+        min-height: 1146px;
+    }
+    .u-section-2 .u-text-1 {
+        margin-right: 110px;
+    }
 }
 
 @media (max-width: 767px) {
-  .u-section-2 .u-sheet-1 {
-    min-height: 1310px;
-  }
-
-  .u-section-2 .u-text-1 {
-    font-size: 1.875rem;
-    margin-right: 0;
-  }
+    .u-section-2 .u-sheet-1 {
+        min-height: 1310px;
+    }
+    .u-section-2 .u-text-1 {
+        font-size: 1.875rem;
+        margin-right: 0;
+    }
 }
 
 @media (max-width: 575px) {
-  .u-section-2 .u-sheet-1 {
-    min-height: 1159px;
-  }
+    .u-section-2 .u-sheet-1 {
+        min-height: 1159px;
+    }
 }

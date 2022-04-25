@@ -8,175 +8,324 @@ block scripts
   script(src="javascripts/update.js")
 block content
     div#button-container
-      h2 Press to Update Data
-      h3#updateStatus Data is ready to update
-      label(for="year") Year
+      h2(class="title") Update API Data
+      label(for="year", class="inputLabels") Year
+      br
       input#API-year-input(type="number", name="year")
-      button#updateButton UPDATE
+      br
+      br
+      button#updateButton(class="update") UPDATE
+      br
+      p This will update Median Housing Cost, Median Rent, LaborForce, LaborForce Participation Rate, Education, Employment and Unemployment.
+      br
+
     div#update-table-container
       h1 Manual Indicator Update
       table#update-table
         tr
           td
             div#Median-Household
-              h2 Median Household Income
-              label(for="year") Year
-              input#median-year-input(type="number", name="year")
+              h2(class="title") Median Household Income
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#median-county-input(type="text", name="county")
+              input#median-year-input(type="number", name="year", class="input")
               br
-              label(for="median-state") State Code
-              input#median-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="median-value") Value
-              input#median-value-input(type="number", name="value")
+              select#median-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#MedianButton UPDATE
+              label(for="median-state", class="inputLabels") State Code
+              br
+              select#median-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="median-value", class="inputLabels") Value
+              br
+              input#median-value-input(type="number", name="value", class="input")
+              br
+              button#MedianButton(class="update", class="inputLabels") UPDATE
           td
             div#Laborforce
-              h2 Laborforce
-              label(for="year") Year
-              input#labor-year-input(type="text", name="year")
+              h2(class="title") Laborforce
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#labor-county-input(type="text", name="county")
+              input#labor-year-input(type="text", name="year", class="input")
               br
-              label(for="laborforce-state") State Code
-              input#labor-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="laborforce-value") Value
-              input#labor-value-input(type="number", name="value")
+              select#labor-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#LaborforceButton UPDATE
+              label(for="laborforce-state", class="inputLabels") State Code
+              br
+              select#labor-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="laborforce-value", class="inputLabels") Value
+              br
+              input#labor-value-input(type="number", name="value", class="input")
+              br
+              button#LaborforceButton(class="update") UPDATE
           td 
             div#Housing-Affordability
-              h2 Median Housing Cost
-              label(for="year") Year
-              input#price-year-input(type="number", name="year")
+              h2(class="title") Median Housing Cost
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#price-county-input(type="text", name="county")
+              input#price-year-input(type="number", name="year", class="input")
               br
-              label(for="affordability-state") State Code
-              input#price-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="affordability-value") Value
-              input#price-value-input(type="number", name="value")
+              select#price-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#PriceButton UPDATE
+              label(for="affordability-state", class="inputLabels") State Code
+              br
+              select#price-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="affordability-value", class="inputLabels") Value
+              br
+              input#price-value-input(type="number", name="value", class="input")
+              br
+              button#PriceButton(class="update", class="inputLabels") UPDATE
           td
             div#Laborforce-Participation
-              h2 Laborforce Participation
-              label(for="year") Year
-              input#participation-year-input(type="number", name="year")
+              h2(class="title") Laborforce Participation
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#participation-county-input(type="text", name="county")
+              input#participation-year-input(type="number", name="year", class="input")
               br
-              label(for="laborforce-state") State Code
-              input#participation-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="laborforceParticipation-value") Value
-              input#participation-value-input(type="number", name="value")
+              select#participation-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#ParticipationButton UPDATE
+              label(for="laborforce-state", class="inputLabels") State Code
+              br
+              select#participation-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="laborforceParticipation-value", class="inputLabels") Value
+              br
+              input#participation-value-input(type="number", name="value", class="input")
+              br
+              button#ParticipationButton(class="update") UPDATE
         tr
           td
-            div#Housing-Index
-                h2 Housing Index
-                label(for="year") Year
-                input#index-year-input(type="number", name="year")
-                br
-                label(for="county") County
-                input#index-county-input(type="text", name="county")
-                br
-                label(for="index-state") State Code
-                input#index-state-input(type="text", name="state")
-                br
-                label(for="index-value") Value
-                input#index-value-input(type="number", name="value")
-                br
-                button#IndexButton UPDATE
+            div#Education
+              h2(class="title") High School or Higher
+              label(for="year", class="inputLabels") Year
+              br
+              input#education-year-input(type="number", name="year", class="input")
+              br
+              label(for="county", class="inputLabels") County
+              br
+              select#education-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
+              br
+              label(for="index-state", class="inputLabels") State Code
+              br
+              select#education-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="index-value", class="inputLabels") Value
+              br
+              input#education-value-input(type="number", name="value", class="input")
+              br
+              button#EducationButton(class="update") UPDATE
           td
             div#Employed
-              h2 Employed Persons
-              label(for="year") Year
-              input#employed-year-input(type="number", name="year")
+              h2(class="title") Employed Persons
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#employed-county-input(type="text", name="county")
+              input#employed-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#employed-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#employed-value-input(type="number", name="value")
+              select#employed-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#EmployedButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              select#employed-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#employed-value-input(type="number", name="value", class="input")
+              br
+              button#EmployedButton(class="update") UPDATE
           td
             div#Unemployed 
-              h2 Unemployed Persons
-              label(for="year") Year
-              input#unemployed-year-input(type="number", name="year")
+              h2(class="title") Unemployed Persons
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#unemployed-county-input(type="text", name="county")
+              input#unemployed-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#unemployed-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#unemployed-value-input(type="number", name="value")
+              select#unemployed-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#UnemployedButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              select#unemployed-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#unemployed-value-input(type="number", name="value", class="input")
+              br
+              button#UnemployedButton(class="update") UPDATE
           td
             div#NaturalChange 
-              h2 Natural Change
-              label(for="year") Year
-              input#change-year-input(type="number", name="year")
+              h2(class="title") Natural Change
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#change-county-input(type="text", name="county")
+              input#change-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#change-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#change-value-input(type="number", name="value")
+              select#change-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#ChangeButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              select#migration-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#change-value-input(type="number", name="value", class="input")
+              br
+              button#ChangeButton(class="update") UPDATE
         tr
           td
+          td
             div#netDomesticMigration 
-              h2 Net Domestic Migration
-              label(for="year") Year
-              input#migration-year-input(type="number", name="year")
+              h2(class="title") Net Domestic Migration
+              label(for="year", class="inputLabels") Year
               br
-              label(for="county") County
-              input#migration-county-input(type="text", name="county")
+              input#migration-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#migration-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#migration-value-input(type="number", name="value")
+              select#migration-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#MigrationButton UPDATE
+              label(for="state", class="inputLabels") State Code
+              br
+              select#migration-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#migration-value-input(type="number", name="value", class="input")
+              br
+              button#MigrationButton(class="update") UPDATE
           td
             div#averageRent 
-              h2 Average Rent
-              label(for="year") Year
-              input#rent-year-input(type="number", name="year")
+              h2(class="title") Average Rent
+              label(for="year", class="inputLabelss") Year
               br
-              label(for="county") County
-              input#rent-county-input(type="text", name="county")
+              input#rent-year-input(type="number", name="year", class="input")
               br
-              label(for="state") State Code
-              input#rent-state-input(type="text", name="state")
+              label(for="county", class="inputLabels") County
               br
-              label(for="value") Value
-              input#rent-value-input(type="number", name="value")
+              select#rent-county-input(name= "county", class="input")
+                option(value="Spokane") Spokane
+                option(value="Boise") Boise
+                option(value="Salt Lake City") Salt Lake City
+                option(value="Eugene") Eugene
+                option(value="Fort Collins") Fort Collins
               br
-              button#RentButton UPDATE
-          td
+              label(for="state", class="inputLabels") State Code
+              br
+              select#rent-state-input(name= "state", class="input")
+                option(value="WA") WA
+                option(value="ID") ID
+                option(value="UT") UT
+                option(value="OR") OR
+                option(value="CO") CO
+              br
+              label(for="value", class="inputLabels") Value
+              br
+              input#rent-value-input(type="number", name="value", class="input")
+              br
+              button#RentButton(class="update") UPDATE
+      div#output-container
+      h1 Output
+      textarea#response-window(readonly) 

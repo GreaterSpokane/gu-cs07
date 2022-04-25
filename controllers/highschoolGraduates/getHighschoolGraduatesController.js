@@ -1,15 +1,15 @@
-const HousingAffordabilityIndex = require('../../models/housingAffordability');
+const HighschoolGraduates = require('../../models/highschoolGraduates');
 
-module.exports = async function getHousingAffordability(county, year) {
+module.exports = async function getHighschoolGraduates(county, year) {
     /**
-     * Retrieve a single housing affordability index indicator from the database
+     * Retrieve a single high school graduates indicator from the database
      * @param {string} county County for the data point
      * @param {string} year Year for the data point
      * @return {object} JSON object containing the requested indicator's data
      */
 
     try {
-        var data = await HousingAffordabilityIndex.findOne({ county: county, year: year }).exec();
+        var data = await HighschoolGraduates.findOne({ county: county, year: year }).exec();
         if (data == null)
             return { 'corr_id': null };
         var result = {
@@ -17,7 +17,7 @@ module.exports = async function getHousingAffordability(county, year) {
             'county': data.county,
             'state': data.state,
             'year': data.year,
-            'housingAffordabilityIndex': data.housingAffordabilityIndex
+            'highschoolGraduates': data.highschoolGraduates
         }
         return result
     } catch (err) {

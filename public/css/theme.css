@@ -969,6 +969,7 @@ a:focus {
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    max-height: 120px;
 }
 
 img.u-image,
@@ -7776,11 +7777,13 @@ main {
     margin-right: 20px;
 }
 
-#about-image {}
+header-image {
+    max-height: 150px;
+}
 
 .header-text {
     color: white;
-    filter: drop-shadow(0 0 20px #9161a9);
+    filter: drop-shadow(0 0 20px #313233);
     -webkit-text-stroke: 1px grey;
 }
 

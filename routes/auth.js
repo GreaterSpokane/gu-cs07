@@ -112,13 +112,6 @@ router
         else
             res.redirect(403, '/login');
     })
-    .get('/auth', async(req, res) => {
-        if (validateSession(req.session))
-            res.render('auth');
-        else
-            res.redirect(403, '/login');
-
-    })
 
 //  login routers
 router
@@ -134,7 +127,7 @@ router
 
         if (authResult.result == "success") {
             sess.username = username;
-            return res.redirect(302, '/auth');
+            return res.redirect(302, '/button');
         } else
             return res.redirect(403, '/login');
     });
@@ -228,7 +221,7 @@ router
                 }
             }).exec();
             sess.username = user;
-            return res.render(302, 'auth');
+            return res.redirect(302, '/button');
         } else {
             return res.redirect(401, '/change');
         }
