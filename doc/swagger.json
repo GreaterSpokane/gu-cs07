@@ -25,8 +25,8 @@
         "name": "mhc",
         "description": "Median Housing Cost"
     }, {
-        "name": "hai",
-        "description": "Housing Affordability Index"
+        "name": "hsg",
+        "description": "High School Graduates"
     }, {
         "name": "avr",
         "description": "Average Rent"
@@ -898,11 +898,11 @@
                 }
             }
         },
-        "/v1/newHousingAffordability": {
+        "/v1/newHighSchoolGraduates": {
             "post": {
-                "tags": ["hai"],
-                "summary": "Create new housing affordability index indicator data point",
-                "description": "Insert new housing affordability index indicator data into the database",
+                "tags": ["hsg"],
+                "summary": "Create new high school graduates indicator data point",
+                "description": "Insert new high school graduates indicator data into the database",
                 "parameters": [{
                         "name": "county",
                         "in": "query",
@@ -919,7 +919,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "housing_affordability",
+                        "name": "high_school_graduates",
                         "in": "query",
                         "type": "string"
                     }
@@ -946,11 +946,11 @@
                 }
             }
         },
-        "/v1/getHousingAffordability": {
+        "/v1/getHighSchoolGraduates": {
             "get": {
-                "tags": ["hai"],
-                "summary": "Get housing affordability index indicator data point",
-                "description": "Return an housing affordability index data point using a county and year as keys",
+                "tags": ["hsg"],
+                "summary": "Get high school graduates indicator data point",
+                "description": "Return an high school graduates data point using a county and year as keys",
                 "parameters": [{
                         "name": "county",
                         "in": "query",
@@ -971,7 +971,7 @@
                                 "county": "Spokane",
                                 "state": "WA",
                                 "year": "2020",
-                                "housingAffordabilityIndex": 0.67
+                                "highschoolGraduates": 0.67
                             }
                         }
                     },
@@ -987,10 +987,10 @@
                 }
             }
         },
-        "/v1/getManyHousingAffordability": {
+        "/v1/getManyHighSchoolGraduates": {
             "get": {
-                "tags": ["hai"],
-                "summary": "Get a range of indicator data from the housing affordability index indicator",
+                "tags": ["hsg"],
+                "summary": "Get a range of indicator data from the high school graduates indicator",
                 "description": "Using the year range provided in the query string, return a list of years, and a matching list of datapoints for the indicator",
                 "parameters": [{
                         "name": "county",
@@ -1014,8 +1014,8 @@
                         "examples": {
                             "application/json": {
                                 "county": "Spokane",
-                                "indicator": "Housing Affordability Index",
-                                "indicator_id": "hai",
+                                "indicator": "High School Graduates",
+                                "indicator_id": "hsg",
                                 "years": [
                                     "2009",
                                     "2010",
@@ -1030,7 +1030,7 @@
                                     "2019",
                                     "2020"
                                 ],
-                                "housingAffordabilityIndex": [
+                                "highschoolGraduates": [
                                     59000,
                                     67000,
                                     47537,
@@ -1059,11 +1059,11 @@
                 }
             }
         },
-        "/v1/deleteHousingAffordability": {
+        "/v1/deleteHighSchoolGraduates": {
             "delete": {
-                "tags": ["hai"],
-                "summary": "Delete housing affordability index object from database",
-                "description": "Delete an housing affordability index datapoint from the database using the object's correlation id",
+                "tags": ["hsg"],
+                "summary": "Delete high school graduates object from database",
+                "description": "Delete an high school graduates datapoint from the database using the object's correlation id",
                 "parameters": [{
                     "name": "corr_id",
                     "in": "query",
