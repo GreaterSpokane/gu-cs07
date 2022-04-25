@@ -6,9 +6,9 @@ indicatorConfig.mhc = {};
 indicatorConfig.mhc.description = "Description for median housing cost. Description for median housing cost. Description for median housing cost. Description for median housing cost.Description for median housing cost.";
 indicatorConfig.mhc.note = "Note for data for median housing cost. Note for data for median housing cost.";
 indicatorConfig.mhc.link = "https://data.census.gov/cedsci/";
-indicatorConfig.mhc.initialNumIntervals = 5;    // Initial number of time intervals shown on the graph (starting from most recent)
-indicatorConfig.mhc.statNumIntervals = 2;   // Number of intervals used to calcuate the short stat
-indicatorConfig.mhc.isIncreaseGood = 3;     // 1 = Increase is good; 2 = Increase is Bad; 3 = Neutral
+indicatorConfig.mhc.initialNumIntervals = 5; // Initial number of time intervals shown on the graph (starting from most recent)
+indicatorConfig.mhc.statNumIntervals = 2; // Number of intervals used to calcuate the short stat
+indicatorConfig.mhc.isIncreaseGood = 3; // 1 = Increase is good; 2 = Increase is Bad; 3 = Neutral
 indicatorConfig.mhc.countiesFirstVisible = []
 indicatorConfig.mhc.chartConfig = {
     type: "line",
@@ -84,7 +84,7 @@ indicatorConfig.lft.chartConfig = {
 // POPULATION DRIVERS
 // natural change
 indicatorConfig.ntc = {};
-indicatorConfig.ntc.description = "Description for natural change. Description for natural change. Description for natural change. Description for natural change.Description for natural change.";
+indicatorConfig.ntc.description = "Natural change is the measurement of the number of births and deaths in a population. A greater natural increase (births - deaths > 0) means the population is growing naturally, otherwise, the population is decreasing naturally."
 indicatorConfig.ntc.note = "Note for data for natural change. Note for data for natural change.";
 indicatorConfig.ntc.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ntc.initialNumIntervals = 5;
@@ -111,7 +111,7 @@ indicatorConfig.ndm.chartConfig = {
 // INCOME
 // median household income
 indicatorConfig.mhi = {};
-indicatorConfig.mhi.description = "Description for natural change. Description for natural change. Description for natural change. Description for natural change.Description for natural change.";
+indicatorConfig.mhi.description = "A household income is the total amount of money those living in a home earn in a year. The median household income is the income amount that divides the population into two groups: half of the homes having an income above this amount, and half of those homes having an income less than that amount. The median household income is heavily influenced by the national economy, however, there are many local factors that can influence a region's median household income.";
 indicatorConfig.mhi.note = "Note for data for natural change. Note for data for natural change.";
 indicatorConfig.mhi.link = "https://data.census.gov/cedsci/";
 indicatorConfig.mhi.initialNumIntervals = 5;
