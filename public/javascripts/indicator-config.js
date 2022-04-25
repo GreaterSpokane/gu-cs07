@@ -111,7 +111,7 @@ indicatorConfig.ndm.chartConfig = {
 // INCOME
 // median household income
 indicatorConfig.mhi = {};
-indicatorConfig.mhi.description = "A household income is the total amount of money those living in a home earn in a year. The median household income is the income amount that divides the population into two groups: half of the homes having an income above this amount, and half of those homes having an income less than that amount. The median household income is heavily influenced by the national economy, however, there are many local factors that can influence a region's median household income.";
+indicatorConfig.mhi.description = "A household income is the total amount of money those living together in the same home earn in a year. The median household income is the income amount that divides the population into two groups: half of the homes having an income above this amount, and half of those homes having an income less than that amount. The median household income is heavily influenced by the national economy, however, there are many local factors that can influence a region's median household income.";
 indicatorConfig.mhi.note = "Note for data for natural change. Note for data for natural change.";
 indicatorConfig.mhi.link = "https://data.census.gov/cedsci/";
 indicatorConfig.mhi.initialNumIntervals = 5;
