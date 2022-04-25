@@ -3,7 +3,7 @@ var indicatorConfig = {};
 // HOUSING
 // median housing cost
 indicatorConfig.mhc = {};
-indicatorConfig.mhc.description = "Description for median housing cost. Description for median housing cost. Description for median housing cost. Description for median housing cost.Description for median housing cost.";
+indicatorConfig.mhc.description = "The cost of housing is a good indicator of the economic performance of a region. Generally, higher cost of housing indicates strong economic performance in a region, and vice versa. The median housing cost is the dollar amount of a home that divides the population into two groups: half of the homes having a cost greater than this amount, and half of the homes having a cost less than that amount. Typically, the median household cost is closely correlated with the median household income of a region.";
 indicatorConfig.mhc.note = "Note for data for median housing cost. Note for data for median housing cost.";
 indicatorConfig.mhc.link = "https://data.census.gov/cedsci/";
 indicatorConfig.mhc.initialNumIntervals = 5; // Initial number of time intervals shown on the graph (starting from most recent)
