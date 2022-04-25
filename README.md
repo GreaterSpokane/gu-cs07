@@ -12,7 +12,7 @@ Our group has developed a web based tool that visualizes a series of economic in
 The project also seeks to automate the data entry as much as possible, identifying the cycle that data may be updated from sources and posted on-line and then incorporated into the dashboard. For the dashboards that are not automatically updated, an admin page allows a limited set of users to make manual updates to key indicators. 
 
 # Contributers:
-* Simon Watkins: swatkins@zagmail.gonzaga.edu
+* Simon Watkins: swatkins2@zagmail.gonzaga.edu
 * Zac Foteff: zfoteff@zagmail.gonzaga.edu
 * Jessica Robertson: jrobertson@zagmail.gonzaga.edu
 * Lucas Abeln: labeln@zagmail.gonzaga.edu
@@ -55,7 +55,7 @@ the nodemon keyword instead of the node keyword
 ## Dashboard
 
 ## About Page
-The link to the [about page](https://spokaneeconomicdashboard.herokuapp.com/about) is found in the footer of the dashboard page. It includes some infomation about the project and the 
+The link to the [about page](https://spokaneeconomicdashboard.herokuapp.com/about) is found in the footer of the dashboard page. It includes some infomation about the project and the group developing it.
 
 ## Admin Page
 
