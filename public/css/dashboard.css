@@ -37,17 +37,9 @@
     /* height: 250px; */
 }
 
-.chart-container {
-    /* height: 200px; */
-    max-height: 225px;
-    /* width: 500px; */
-    max-width: 550px;
-    position: relative;
-}
-
 .active,
 .card:hover {
-    /* box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+  /* box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer; */
 }
 
@@ -82,43 +74,51 @@
     flex-wrap: wrap;
 }
 
+.chart-container {
+  /* height: 200px; */
+  /* max-height: 225px; */
+  /* width: 500px; */
+  /* max-width: 550px; */
+  position: relative;
+}
+
 .card {
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
-    /* this adds the "card" effect */
-    /* padding: 0px 16px 6px 16px; */
-    text-align: center;
-    background-color: #f1f1f1;
-    /* max-width: 500px; */
-    /* flex: 30%; */
-    /* flex: auto; */
-    /* max-width: 500px; */
-    margin: 10px 6px;
-    width: 600px;
-    max-width: 600px;
-    min-width: 200px;
-    height: 300px;
-    max-height: 300px;
-    flex: 33.3%;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  /* this adds the "card" effect */
+  /* padding: 0px 16px 6px 16px; */
+  text-align: center;
+  background-color: #f1f1f1;
+  /* max-width: 500px; */
+  /* flex: 30%; */
+  /* flex: auto; */
+  /* max-width: 500px; */
+  margin: 10px 6px;
+  /* width: 600px; */
+  max-width: 450px;
+  /* min-width: 200px; */
+  /* height: 300px; */
+  max-height: 300px;
+  flex: 33.3%;
 }
 
 .category-flex-container {
-    /* display: none; */
-    margin: 5px;
-    /* max-height: 0; */
-    /* overflow: hidden; */
-    /* transition: max-height 0.2s ease-out; */
-    /* border: 1px solid #ccc; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    /* flex: 33.3%; */
-    /* flex-wrap: wrap; */
+  /* display: none; */
+  margin: 5px;
+  /* max-height: 0; */
+  /* overflow: hidden; */
+  /* transition: max-height 0.2s ease-out; */
+  /* border: 1px solid #ccc; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex: 33.3%; */
+  border-radius: 5px;
+  flex-wrap: wrap;
 }
 
 #lfs {
-    height: 270px;
-    max-height: 270px;
+    /* height: 225px; */
+    max-height: 225px;
 }
 
 .category-snapshot-view {
@@ -197,16 +197,14 @@
 
 
 /* On mouse-over, add a grey background color */
-
 .checkbox-container:hover input~.checkmark {
-    background-color: rgb(156, 156, 156);
+  background-color: rgb(156, 156, 156);
 }
 
 
 /* When the checkbox is checked, add a blue background */
-
 .checkbox-container input:checked~.checkmark {
-    background-color: #00B4ED;
+  background-color: #00B4ED;
 }
 
 
@@ -220,9 +218,8 @@
 
 
 /* Show the checkmark when checked */
-
 .checkbox-container input:checked~.checkmark:after {
-    display: block;
+  display: block;
 }
 
 

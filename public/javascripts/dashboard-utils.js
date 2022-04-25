@@ -1,7 +1,7 @@
 import indicatorConfig from './indicator-config.js';
 
 window.onload = async function () {
-    const counties = ["Spokane", "Boise", "Salt Lake", "Eugene", "Fort Collins"]
+    const counties = ["Spokane", "Boise", "Salt Lake City", "Eugene", "Fort Collins"]
     for (const indicatorName of Object.keys(indicatorConfig)) {
         for (const county of counties) {
             console.log("calling", indicatorName, county)
@@ -24,7 +24,8 @@ window.onload = async function () {
 
         // range sliders
         const yearRange = getData(indicatorName, "spokane", true)
-        const startYear = Number(yearRange[yearRange.length - indicatorConfig[indicatorName]["initialNumIntervals"] - 1]);
+        // const startYear = Number(yearRange[yearRange.length - indicatorConfig[indicatorName]["initialNumIntervals"] - 1]);
+        const startYear = Number(yearRange[0]);
         const endYear = Number(yearRange[yearRange.length - 1]);
         const sliderElement = document.getElementById(indicatorName + "-slider")
         try {
@@ -40,10 +41,8 @@ window.onload = async function () {
                 tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })]
             });
             indicatorConfig[indicatorName]["rangeslider"].on("change", function (values) {
-                console.log('range slider values:', values);
-                let startIndex = yearRange.indexOf(Math.trunc(values[0]));
-                let endIndex = yearRange.indexOf(Math.trunc(values[1]));
-
+                let startIndex = yearRange.indexOf(String(Math.trunc(values[0])));
+                let endIndex = yearRange.indexOf(String(Math.trunc(values[1])));
                 updateRange(indicatorName, startIndex, endIndex);
             });
         } catch (error) {
@@ -128,13 +127,11 @@ window.onload = async function () {
 
 // updates the charts based on the range slider
 function updateRange(indicatorName, startIndex, endIndex) {
-    console.log("inside updateRange function");
     console.log("start/end indexes:", startIndex, endIndex);
-
-    let backupLabels = JSON.parse(JSON.stringify(indicatorConfig[indicatorName].detailchart.data.labels)); // deep copy
+    let backupData = []
+    const backupLabels = JSON.parse(JSON.stringify(indicatorConfig[indicatorName].detailchart.data.labels)); // deep copy
     indicatorConfig[indicatorName].detailchart.data.labels = backupLabels.slice(startIndex, endIndex + 1);
 
-    let backupData = []
     indicatorConfig[indicatorName].detailchart.data.datasets.forEach((dataset) => {
         backupData.push(JSON.parse(JSON.stringify(dataset.data)));
         dataset.data = dataset.data.slice(startIndex, endIndex + 1);
@@ -152,7 +149,8 @@ function updateRange(indicatorName, startIndex, endIndex) {
 // updates the locations shown in the detailed view based on the checkboxs
 function toggleLocations(indicatorName, labelText, isChecked) {
     indicatorConfig[indicatorName]["detailchart"]["data"]["datasets"].forEach((dataset) => {
-        if (dataset.label == labelText) {
+        console.log("dataset:", dataset)
+        if (dataset.label.includes(labelText)) {
             if (isChecked) {
                 console.log("adding data: " + labelText);
                 dataset.hidden = false;
@@ -270,8 +268,10 @@ function getConfig(indicatorName, isDetailView) {
     const purpleColor = "#866BAF"; // gsi purple
     const yellowColor = "#D7DC61";    // gsi yellow
     const greyColor = "#6E7277";   //gsi gray
+    const darkerGreyColor = '#515f70'
     const orangeColor = '#db6140';  // orange from initial syling
     const greenColor = '#719a45'    // green from initial stying
+    const blackColor = '#000000'
 
     // temp until add employment/unemployment
     if (indicatorName == "lfs") {
@@ -281,7 +281,7 @@ function getConfig(indicatorName, isDetailView) {
                 labels: [
                     'Employed',
                     'Unemployed',
-                    'Not in Labor Force'
+                    'Not in Labor Force / Other'
                 ],
                 datasets: [{
                     data: [0.5, 0.1, 0.4,],
@@ -294,7 +294,7 @@ function getConfig(indicatorName, isDetailView) {
                 }]
             },
             options: {
-                radius: "80%"
+                radius: "90%"
             }
         }
     }
@@ -308,23 +308,38 @@ function getConfig(indicatorName, isDetailView) {
                 data: getData(indicatorName, "spokane", false),
                 borderColor: blueColor,
                 fill: true,
-                label: "Spokane",
+                label: "Spokane County",
+                borderWidth: 4,
+                pointRadius: 2,
+                hidden: false
             }, {
                 data: getData(indicatorName, "boise", false),
                 borderColor: purpleColor,
-                label: "Boise",
+                label: "Boise, ID (Ada County)",
+                borderWidth: 2,
+                pointRadius: 2,
+                hidden: false,
             }, {
-                data: getData(indicatorName, "saltlake", false),
+                data: getData(indicatorName, "saltlakecity", false),
                 borderColor: greyColor,
-                label: "Salt Lake City",
+                label: "Salt Lake City, UT (Salt Lake County)",
+                borderWidth: 2,
+                pointRadius: 2,
+                hidden: true,
             }, {
                 data: getData(indicatorName, "eugene", false),
-                borderColor: greyColor,
-                label: "Eugene",
+                borderColor: yellowColor,
+                label: "Eugene, OR (Lane County)",
+                borderWidth: 2,
+                pointRadius: 2,
+                hidden: true,
             }, {
                 data: getData(indicatorName, "fortcollins", false),
-                borderColor: greyColor,
-                label: "Fort Collins",
+                borderColor: darkerGreyColor,
+                label: "Fort Collins, CO (Larimer County)",
+                borderWidth: 2,
+                pointRadius: 2,
+                hidden: true,
             }],
         },
         options: {
@@ -347,7 +362,7 @@ function getConfig(indicatorName, isDetailView) {
 
         });
     } else {
-        lineChartTemplate.data.datasets = templateDatasets.slice(0, 3);
+        lineChartTemplate.data.datasets = templateDatasets.slice(0, 2);
     }
     return lineChartTemplate;
 
