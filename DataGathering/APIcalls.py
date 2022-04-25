@@ -32,7 +32,6 @@ def housing(county, year):
 def education(county, year):
     data = censusdata.download('acs1', int(year), censusdata.censusgeo([('state', STATE_DICT[county]), ('county', COUNTY_DICT[county])]), ['B06009_001E', 'B06009_003E', 'B06009_004E', 'B06009_005E', 'B06009_006E'])
     rate = (data.iat[0,2] + data.iat[0,3] + data.iat[0,4] + data.iat[0,1])/data.iat[0,0]
-    print(rate)
 
     return rate
 
