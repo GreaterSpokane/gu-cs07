@@ -97,7 +97,7 @@ indicatorConfig.ntc.chartConfig = {
 
 // net domestic migration
 indicatorConfig.ndm = {};
-indicatorConfig.ndm.description = "Description for net domestic migration. Description for net domestic migration. Description for net domestic migration. Description for net domestic migration.Description for net domestic migration.";
+indicatorConfig.ndm.description = "Net domestic migration is the difference between in-migration and out-migration from a region. If the net migration is increasing, then the rate of migration into a region exceeds the rate of migration from a region. Many factors influence migration to and from regions in the United States, but it is clear that high net domestic migration strongly indicates the economic potential of a region.";
 indicatorConfig.ndm.note = "Note for data for net domestic migration. Note for data for net domestic migration.";
 indicatorConfig.ndm.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ndm.initialNumIntervals = 5;
