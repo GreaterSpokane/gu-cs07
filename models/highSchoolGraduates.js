@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const housingAffordabilityIndexSchema = mongoose.Schema({
+const highSchooolGraduatesSchema = mongoose.Schema({
     county: {
         type: String,
         required: true,
@@ -9,7 +9,7 @@ const housingAffordabilityIndexSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    housingAffordabilityIndex: {
+    graduated: {
         type: Number,
         required: true
     },
@@ -19,5 +19,5 @@ const housingAffordabilityIndexSchema = mongoose.Schema({
     }
 });
 
-var HousingAffordabilityIndex = mongoose.model('HousingAffordabilityIndex', housingAffordabilityIndexSchema, 'housingaffordabilityindex');
-module.exports = HousingAffordabilityIndex;
+var HighSchoolGraduates = mongoose.model('HighSchoolGraduates', highSchooolGraduatesSchema, 'highschoolgraduates');
+module.exports = HighSchoolGraduates;
