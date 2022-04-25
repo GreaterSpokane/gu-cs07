@@ -5,7 +5,7 @@ var router = express.Router();
 async function getPythonData(year){
     var spawn = require("child_process").spawn;
 
-    var process = spawn('python3',["./DataGathering/REST.py",
+    var process = spawn('python',["./DataGathering/REST.py",
                             year], {timeout: 20000} );
   
     // Takes stdout data from script which executed
