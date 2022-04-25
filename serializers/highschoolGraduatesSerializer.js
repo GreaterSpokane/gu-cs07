@@ -18,6 +18,6 @@ module.exports = async function serialize(highschoolGraduates) {
     serializedResult.indicator = "Highschool Graduates";
     serializedResult.indicator_id = 'hsg';
     serializedResult.years = serializedYears;
-    serializedResult.housingAffordability = serializedHighschooGraduates;
+    serializedResult.highschoolGraduates = serializedHighschooGraduates;
     return serializedResult;
 }
