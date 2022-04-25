@@ -1,8 +1,8 @@
-const HousingAffordabilityIndex = require('../../models/housingAffordability');
+const HighschoolGraduates = require('../../models/highschoolGraduates');
 
-module.exports = async function getManyHousingAffordability(county, start_year, end_year) {
+module.exports = async function getManyHighschoolGraduates(county, start_year, end_year) {
     /**
-     * Retrieve a range of housing affordability index indicators from the database, using the start and end year as bounds for the query.
+     * Retrieve a range of high school graduates indicators from the database, using the start and end year as bounds for the query.
      * Return the data in ascending order by year, matching the data points to the corresponding year
      * @param {string} county County for the data point
      * @param {string} start_year Start year for the range of data point
@@ -11,14 +11,14 @@ module.exports = async function getManyHousingAffordability(county, start_year, 
      */
 
     try {
-        var data = await HousingAffordabilityIndex.aggregate()
+        var data = await HighschoolGraduates.aggregate()
             .match({
                 county: county,
                 year: { $gte: start_year, $lte: end_year }
             })
             .group({
                 _id: '$year',
-                housingAffordabilityIndex: { $first: '$housingAffordabilityIndex' },
+                highschoolGraduates: { $first: '$highschoolGraduates' },
             })
             .sort({ _id: -1 });
         var result = { 'county': county, 'data': data };

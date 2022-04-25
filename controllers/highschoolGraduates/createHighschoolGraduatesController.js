@@ -1,6 +1,6 @@
 const HighschoolGraduates = require("../../models/highschoolGraduates");
 
-module.exports = async function createHousingAffordability(
+module.exports = async function createHighschoolGraduates(
     county,
     state,
     year,

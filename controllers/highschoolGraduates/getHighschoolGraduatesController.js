@@ -2,7 +2,7 @@ const HighschoolGraduates = require('../../models/highschoolGraduates');
 
 module.exports = async function getHighschoolGraduates(county, year) {
     /**
-     * Retrieve a single housing affordability index indicator from the database
+     * Retrieve a single high school graduates indicator from the database
      * @param {string} county County for the data point
      * @param {string} year Year for the data point
      * @return {object} JSON object containing the requested indicator's data
@@ -17,7 +17,7 @@ module.exports = async function getHighschoolGraduates(county, year) {
             'county': data.county,
             'state': data.state,
             'year': data.year,
-            'highSchoolGraduates': data.highSchoolGraduates
+            'highschoolGraduates': data.highschoolGraduates
         }
         return result
     } catch (err) {
