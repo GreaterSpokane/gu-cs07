@@ -31,7 +31,7 @@ def Employment(countyVal, yearVal, stateVal):
     return response
 
 def main():
-    code = LaborForce('Spokane', sys.argv[1], 'WA')
+    LaborForce('Spokane', sys.argv[1], 'WA')
     LaborForce('Boise', sys.argv[1], 'ID')
     LaborForce('Fort Collins', sys.argv[1], 'CO')
     LaborForce('Eugene', sys.argv[1], 'OR')
