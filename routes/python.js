@@ -5,14 +5,17 @@ var router = express.Router();
 async function getPythonData(year){
     var spawn = require("child_process").spawn;
 
-    var process = spawn('python',["./DataGathering/REST.py",
+    var process = spawn('python3',["./DataGathering/REST.py",
                             year], {timeout: 20000} );
   
     // Takes stdout data from script which executed
     // with arguments and send this data to res object
     process.stdout.on('data', function(data) {
         return data.toString()
-    } )
+    });
+    process.stderr.on('data', function(data) {
+        console.error(data.toString());
+    });
 }
 
 router.post('/v1/newPythonData', async(req, res) => {
