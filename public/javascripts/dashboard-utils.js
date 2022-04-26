@@ -372,7 +372,11 @@ function getConfig(indicatorName, isDetailView) {
     lineChartTemplate["options"] = indicatorConfig[indicatorName].chartOptions
     lineChartTemplate["options"]["responsive"] = true;
     lineChartTemplate["options"]["maintainAspectRatio"] = true;
-
+    lineChartTemplate["options"]["plugins"] = {
+        legend: {
+            onClick: null
+        }
+    }
     // TODO: take countiesFirstVisible attribute from config and hide show appropriate ones for detailed or \
     // slice/delete unused ones from snapshot. Then check/uncheck checkboxes to match
     const templateDatasets = lineChartTemplate.data.datasets;
