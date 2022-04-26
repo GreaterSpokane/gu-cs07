@@ -10,11 +10,11 @@ async function getPythonData(year){
   
     // Takes stdout data from script which executed
     // with arguments and send this data to res object
-    process.on('error', function(error) {
-        console.log("Error: bad command", error);
-    });
     process.stdout.on('data', function(data) {
         return data.toString()
+    });
+    process.stderr.on('data', function(data) {
+        console.error(data.toString());
     });
 }
 
