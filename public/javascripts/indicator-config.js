@@ -142,7 +142,7 @@ indicatorConfig.ntc.description = "Natural change is the measurement of the numb
 indicatorConfig.ntc.note = "Note for data for natural change. Note for data for natural change.";
 indicatorConfig.ntc.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ntc.initialNumIntervals = 5;
-indicatorConfig.ntc.statNumIntervals = 2;
+indicatorConfig.ntc.statNumIntervals = 5;
 indicatorConfig.ntc.isIncreaseGood = 1;
 indicatorConfig.ntc.chartOptions = {}
 
@@ -152,7 +152,7 @@ indicatorConfig.ndm.description = "Net domestic migration is the difference betw
 indicatorConfig.ndm.note = "Note for data for net domestic migration. Note for data for net domestic migration.";
 indicatorConfig.ndm.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ndm.initialNumIntervals = 5;
-indicatorConfig.ndm.statNumIntervals = 2;
+indicatorConfig.ndm.statNumIntervals = 5;
 indicatorConfig.ndm.isIncreaseGood = 1;
 indicatorConfig.ndm.chartOptions = {}
 
@@ -176,5 +176,15 @@ indicatorConfig.mhi.chartOptions = {
         }
     }
 }
+
+// high school graduates
+indicatorConfig.hsg = {};
+indicatorConfig.hsg.description = "This indicator displays the percentage of the population that has a high school degree (or equivalent) or higher. If a region has a higher level of educational attainment, the region's median household income is likely to be higher.";
+indicatorConfig.hsg.note = "Note for data for net domestic migration. Note for data for net domestic migration.";
+indicatorConfig.hsg.link = "https://data.census.gov/cedsci/";
+indicatorConfig.hsg.initialNumIntervals = 5;
+indicatorConfig.hsg.statNumIntervals = 5;
+indicatorConfig.hsg.isIncreaseGood = 1;
+indicatorConfig.hsg.chartOptions = {}
 
 export default indicatorConfig;
