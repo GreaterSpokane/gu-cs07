@@ -54,8 +54,10 @@ window.onload = async function () {
     }
     console.log(indicatorConfig)
 
-    // temp for employment/unemployement
+    // employment/unemployement dashboard chart
     new Chart("lfs", getConfig("lfs", true));
+
+    generateShortStats();
 
     // adds event listeners to each button
     var buttons = document.getElementsByClassName("button");
@@ -80,43 +82,7 @@ window.onload = async function () {
         });
     }
 
-    // create the short stat percentage for each card
-    const stats = document.getElementsByClassName("stat");
-    for (var i = 0; i < stats.length; i++) {
-        let indicatorName = String(stats[i].id).slice(0, 3);
-        if (indicatorName == "lfs") {
-            const uepStartYear = getData("uep", 'spokane', true).slice(-2, -1)
-            const uepStartData = Number(getData("uep", 'spokane', false).slice(-2, -1));
-            const empStartData = Number(getData("emp", 'spokane', false).slice(-2, -1));
-            const uepStartRate = uepStartData / (uepStartData + empStartData);
-            const uepEndYear = getData("uep", 'spokane', true).slice(-1)
-            const uepEndData = Number(getData("uep", 'spokane', false).slice(-1));
-            const empEndData = Number(getData("emp", 'spokane', false).slice(-1));
-            const uepEndRate = uepEndData / (uepEndData + empEndData);
-            const uepRateChange = Number((((uepEndRate - uepStartRate) / uepStartRate) * 100).toFixed(1))
-            let uepIncOrDec = 'increased'
-            if (uepRateChange < 0) {
-                uepIncOrDec = 'decreased'
-            }
-            console.log(uepRateChange)
-            stats[i].innerHTML = `Unemployment rate ${uepIncOrDec} ${Math.abs(uepRateChange)}% in Spokane county from ${uepStartYear} to ${uepEndYear}`;
-            continue;
-        }
-        const spokaneStatData = getData(indicatorName, 'spokane', false)
-        const yearsData = getData(indicatorName, 'spokane', true)
-        const dataLen = spokaneStatData.length
-        const endData = spokaneStatData[dataLen - 1]
-        const startData = spokaneStatData[dataLen - 2]
-        const statPercent = (((endData - startData) / startData) * 100).toFixed(1)
-        const endYear = yearsData[dataLen - 1]
-        const startYear = yearsData[dataLen - 2]
-        let incOrDec = 'Increased'
-        if (statPercent < 0) {
-            incOrDec = 'Decreased'
-        }
-        // TODO: Maybe Spokane county be added to each indicator card or at a note at the top saying all stats are from spokane?
-        stats[i].innerHTML = `${incOrDec} ${Math.abs(statPercent)}% in Spokane county from ${startYear} to ${endYear}`;
-    }
+
 
     // add event listeners to checkboxes
     var checkboxes = document.getElementsByClassName("checkbox");
@@ -136,6 +102,54 @@ window.onload = async function () {
         })
     }
 
+}
+
+// creates the short stat percentage for each card
+function generateShortStats() {
+    const stats = document.getElementsByClassName("stat");
+    for (var i = 0; i < stats.length; i++) {
+        let indicatorName = String(stats[i].id).slice(0, 3);
+
+        if(indicatorName == "hsg") {
+            // temp until get hsg working
+            continue;
+        }
+
+        if (indicatorName == "lfs") {
+            const numYearsToShow = indicatorConfig.uep.statNumIntervals;
+            const uepStartYear = getData("uep", 'spokane', true).slice((numYearsToShow * -1) - 1, numYearsToShow * -1)
+            const uepStartData = Number(getData("uep", 'spokane', false).slice((numYearsToShow * -1) - 1, numYearsToShow * -1))
+            const empStartData = Number(getData("emp", 'spokane', false).slice((numYearsToShow * -1) - 1, numYearsToShow * -1))
+            const uepStartRate = uepStartData / (uepStartData + empStartData);
+            const uepEndYear = getData("uep", 'spokane', true).slice(-1)
+            const uepEndData = Number(getData("uep", 'spokane', false).slice(-1));
+            const empEndData = Number(getData("emp", 'spokane', false).slice(-1));
+            const uepEndRate = uepEndData / (uepEndData + empEndData);
+            const uepRateChange = Number((((uepEndRate - uepStartRate) / uepStartRate) * 100).toFixed(1))
+            let uepIncOrDec = 'increased'
+            if (uepRateChange < 0) {
+                uepIncOrDec = 'decreased'
+            }
+            console.log(uepRateChange)
+            stats[i].innerHTML = `Unemployment rate ${uepIncOrDec} ${Math.abs(uepRateChange)}% in Spokane county from ${uepStartYear} to ${uepEndYear}`;
+            continue;
+        }
+        const spokaneStatData = getData(indicatorName, 'spokane', false)
+        const yearsData = getData(indicatorName, 'spokane', true)
+        const dataLen = spokaneStatData.length
+        const endData = spokaneStatData[dataLen - 1]
+        console.log(indicatorName)
+        const startData = spokaneStatData[dataLen - indicatorConfig[indicatorName].statNumIntervals - 1]
+        const statPercent = (((endData - startData) / startData) * 100).toFixed(1)
+        const endYear = yearsData[dataLen - 1]
+        const startYear = yearsData[dataLen - indicatorConfig[indicatorName].statNumIntervals - 1]
+        let incOrDec = 'Increased'
+        if (statPercent < 0) {
+            incOrDec = 'Decreased'
+        }
+        // TODO: Maybe Spokane county be added to each indicator card or at a note at the top saying all stats are from spokane?
+        stats[i].innerHTML = `${incOrDec} ${Math.abs(statPercent)}% in Spokane county from ${startYear} to ${endYear}`;
+    }
 }
 
 // updates the charts based on the range slider
