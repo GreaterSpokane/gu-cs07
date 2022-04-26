@@ -9,10 +9,12 @@ window.onload = async function () {
             console.log("response:", response)
             indicatorConfig[indicatorName][county.split(' ').join('').toLowerCase()] = response;
         }
-        // snapshot charts
-        console.log("CREATING CHART FOR:", indicatorName)
-        console.log("WITH CONFIG:", getConfig(indicatorName, false))
-        new Chart(indicatorName, getConfig(indicatorName, false));
+        if (indicatorName != 'emp' && indicatorName != 'uep') {
+            // snapshot charts
+            console.log("CREATING CHART FOR:", indicatorName)
+            console.log("WITH CONFIG:", getConfig(indicatorName, false))
+            new Chart(indicatorName, getConfig(indicatorName, false));
+        }
 
         // descriptions, ect.
         document.getElementById(indicatorName + "-description").innerText = indicatorConfig[indicatorName]["description"];
@@ -81,9 +83,25 @@ window.onload = async function () {
     // create the short stat percentage for each card
     const stats = document.getElementsByClassName("stat");
     for (var i = 0; i < stats.length; i++) {
-        console.log("inside short stat fucntion")
         let indicatorName = String(stats[i].id).slice(0, 3);
-        console.log("stat sliced", indicatorName)
+        if (indicatorName == "lfs") {
+            const uepStartYear = getData("uep", 'spokane', true).slice(-2, -1)
+            const uepStartData = Number(getData("uep", 'spokane', false).slice(-2, -1));
+            const empStartData = Number(getData("emp", 'spokane', false).slice(-2, -1));
+            const uepStartRate = uepStartData / (uepStartData + empStartData);
+            const uepEndYear = getData("uep", 'spokane', true).slice(-1)
+            const uepEndData = Number(getData("uep", 'spokane', false).slice(-1));
+            const empEndData = Number(getData("emp", 'spokane', false).slice(-1));
+            const uepEndRate = uepEndData / (uepEndData + empEndData);
+            const uepRateChange = Number((((uepEndRate - uepStartRate) / uepStartRate) * 100).toFixed(1))
+            let uepIncOrDec = 'increased'
+            if (uepRateChange < 0) {
+                uepIncOrDec = 'decreased'
+            }
+            console.log(uepRateChange)
+            stats[i].innerHTML = `Unemployment rate ${uepIncOrDec} ${Math.abs(uepRateChange)}% in Spokane county from ${uepStartYear} to ${uepEndYear}`;
+            continue;
+        }
         const spokaneStatData = getData(indicatorName, 'spokane', false)
         const yearsData = getData(indicatorName, 'spokane', true)
         const dataLen = spokaneStatData.length
@@ -92,17 +110,12 @@ window.onload = async function () {
         const statPercent = (((endData - startData) / startData) * 100).toFixed(1)
         const endYear = yearsData[dataLen - 1]
         const startYear = yearsData[dataLen - 2]
-        let incOrDec = 'increased'
+        let incOrDec = 'Increased'
         if (statPercent < 0) {
-            incOrDec = 'decreased'
+            incOrDec = 'Decreased'
         }
-        if (indicatorName == "lfs") {
-            stats[i].innerHTML = `Spokane county in ${endYear}`
-        } else {
-            // TODO: Maybe Spokane county be added to each indicator card or at a note at the top saying all stats are from spokane?
-            stats[i].innerHTML = `Spokane county ${incOrDec} ${Math.abs(statPercent)}% from ${startYear} to ${endYear}`;
-        }
-
+        // TODO: Maybe Spokane county be added to each indicator card or at a note at the top saying all stats are from spokane?
+        stats[i].innerHTML = `${incOrDec} ${Math.abs(statPercent)}% in Spokane county from ${startYear} to ${endYear}`;
     }
 
     // add event listeners to checkboxes
@@ -205,7 +218,7 @@ async function callData(indicatorName, county) {
             path = '/v1/getManyEmployed/'
             schemaDataName = 'employed';
             break;
-        case 'uem':
+        case 'uep':
             path = '/v1/getManyUnemployed/'
             schemaDataName = 'unemployed';
             break;
@@ -257,7 +270,7 @@ function getData(indicatorName, county, isYearsData) {
             return dataArray[1];
         }
     } catch (error) {
-        console.error("cant find data for", indicatorName, county, "in getData")
+        console.warn("cant find data for", indicatorName, county, "in getData. returning empty list...")
         return [];
     }
 }
@@ -275,26 +288,37 @@ function getConfig(indicatorName, isDetailView) {
 
     // temp until add employment/unemployment
     if (indicatorName == "lfs") {
+        const year = getData("uep", "spokane", true).slice(-1)
+        const empTotal = getData("emp", "spokane", false).slice(-1)
+        const uepTotal = getData("uep", "spokane", false).slice(-1)
+        const lfTotal = Number(empTotal) + Number(uepTotal);
+        const empRate = (empTotal / lfTotal) * 100
+        const uepRate = (uepTotal / lfTotal) * 100
         return {
             type: "doughnut",
             data: {
                 labels: [
-                    'Employed',
-                    'Unemployed',
-                    'Not in Labor Force / Other'
+                    'Employment Rate',
+                    'Unemployment Rate',
                 ],
                 datasets: [{
-                    data: [0.5, 0.1, 0.4,],
+                    data: [empRate, uepRate],
                     backgroundColor: [
-                        '#866BAF',
-                        '#00B4ED',
-                        '#6E7277',
+                        purpleColor,
+                        blueColor,
                     ],
                     hoverOffset: 4
                 }]
             },
             options: {
-                radius: "90%"
+                radius: "90%",
+                plugins: {
+                    title: {
+                        display: false,
+                        text: `Spokane county in ${year}`
+                    }
+                }
+
             }
         }
     }
@@ -344,7 +368,7 @@ function getConfig(indicatorName, isDetailView) {
         },
 
     }
-    
+
     lineChartTemplate["options"] = indicatorConfig[indicatorName].chartOptions
     lineChartTemplate["options"]["responsive"] = true;
     lineChartTemplate["options"]["maintainAspectRatio"] = true;

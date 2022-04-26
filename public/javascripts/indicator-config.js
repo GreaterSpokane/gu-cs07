@@ -87,31 +87,53 @@ indicatorConfig.lft.chartOptions = {
     }
 }
 
-// // Employed
-// indicatorConfig.emp = {};
-// indicatorConfig.emp.description = "Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment.Description for Employment and Unemployment.";
-// indicatorConfig.emp.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
-// indicatorConfig.emp.link = "https://data.census.gov/cedsci/";
-// indicatorConfig.emp.initialNumIntervals = 5;
-// indicatorConfig.emp.statNumIntervals = 2;
-// indicatorConfig.emp.isIncreaseGood = 1;
-// indicatorConfig.lfp.chartOptions = {
-//     type: "doughnut",
-//     options: {}
-// }
+// Employed
+indicatorConfig.emp = {};
+indicatorConfig.emp.description = "This indicator measures the total number of individuals that are employed in a given region. High levels of employment generally indicates a healthy economy in a region. This indicator displays three groups: employed, unemployed, and those who are not participating in the economy, such as students or young children.";
+indicatorConfig.emp.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
+indicatorConfig.emp.link = "https://data.census.gov/cedsci/";
+indicatorConfig.emp.initialNumIntervals = 5;
+indicatorConfig.emp.statNumIntervals = 2;
+indicatorConfig.emp.isIncreaseGood = 1;
+indicatorConfig.emp.chartOptions = {
+    scales: {
+        y: {
+            title: {
+                text: "# of People",
+                display: true
+            },
+            ticks: {
+                callback: function (value) {
+                    return String(value).slice(0, -3) + "K";
+                }
+            }
+        }
+    }
+}
 
-// // Unemployed
-// indicatorConfig.uem = {};
-// indicatorConfig.uem.description = "Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment. Description for Employment and Unemployment.Description for Employment and Unemployment.";
-// indicatorConfig.uem.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
-// indicatorConfig.uem.link = "https://data.census.gov/cedsci/";
-// indicatorConfig.uem.initialNumIntervals = 5;
-// indicatorConfig.uem.statNumIntervals = 2;
-// indicatorConfig.uem.isIncreaseGood = 1;
-// indicatorConfig.lfp.chartOptions = {
-//     type: "doughnut",
-//     options: {}
-// }
+// Unemployed
+indicatorConfig.uep = {};
+indicatorConfig.uep.description = "The amount of unemployed individuals in an economy is a strong indicator of the economic resilience of a region. Many factors influence the amount of unemployed individuals in a region, such as natural disaster, economic collapse, or limited economic opportunity. It is key to examine a region’s trend in unemployed individuals in order to determine its long term economic health.";
+indicatorConfig.uep.note = "Note for data for Employment and Unemployment. Note for data for Employment and Unemployment.";
+indicatorConfig.uep.link = "https://data.census.gov/cedsci/";
+indicatorConfig.uep.initialNumIntervals = 5;
+indicatorConfig.uep.statNumIntervals = 2;
+indicatorConfig.uep.isIncreaseGood = 1;
+indicatorConfig.uep.chartOptions = {
+    scales: {
+        y: {
+            title: {
+                text: "# of People",
+                display: true
+            },
+            ticks: {
+                callback: function (value) {
+                    return String(value).slice(0, -3) + "K";
+                }
+            }
+        }
+    }
+}
 
 // POPULATION DRIVERS
 // natural change
@@ -122,9 +144,7 @@ indicatorConfig.ntc.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ntc.initialNumIntervals = 5;
 indicatorConfig.ntc.statNumIntervals = 2;
 indicatorConfig.ntc.isIncreaseGood = 1;
-indicatorConfig.ntc.chartOptions = {
-    options: {}
-}
+indicatorConfig.ntc.chartOptions = {}
 
 // net domestic migration
 indicatorConfig.ndm = {};
@@ -134,9 +154,7 @@ indicatorConfig.ndm.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ndm.initialNumIntervals = 5;
 indicatorConfig.ndm.statNumIntervals = 2;
 indicatorConfig.ndm.isIncreaseGood = 1;
-indicatorConfig.ndm.chartOptions = {
-    options: {}
-}
+indicatorConfig.ndm.chartOptions = {}
 
 // INCOME
 // median household income
