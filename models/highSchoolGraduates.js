@@ -9,7 +9,7 @@ const highSchooolGraduatesSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    highschoolGraduates: {
+    highSchoolGraduates: {
         type: Number,
         required: true
     },

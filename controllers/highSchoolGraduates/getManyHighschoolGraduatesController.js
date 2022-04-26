@@ -1,6 +1,6 @@
-const HighschoolGraduates = require('../../models/highschoolGraduates');
+const HighSchoolGraduates = require('../../models/highSchoolGraduates');
 
-module.exports = async function getManyHighschoolGraduates(county, start_year, end_year) {
+module.exports = async function getManyHighSchoolGraduates(county, start_year, end_year) {
     /**
      * Retrieve a range of high school graduates indicators from the database, using the start and end year as bounds for the query.
      * Return the data in ascending order by year, matching the data points to the corresponding year
@@ -11,14 +11,14 @@ module.exports = async function getManyHighschoolGraduates(county, start_year, e
      */
 
     try {
-        var data = await HighschoolGraduates.aggregate()
+        var data = await HighSchoolGraduates.aggregate()
             .match({
                 county: county,
                 year: { $gte: start_year, $lte: end_year }
             })
             .group({
                 _id: '$year',
-                highschoolGraduates: { $first: '$highschoolGraduates' },
+                highSchoolGraduates: { $first: '$highSchoolGraduates' },
             })
             .sort({ _id: -1 });
         var result = { 'county': county, 'data': data };

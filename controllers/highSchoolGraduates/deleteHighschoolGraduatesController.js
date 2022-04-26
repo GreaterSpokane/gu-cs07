@@ -1,6 +1,6 @@
-const HighschoolGraduates = require('../../models/highschoolGraduates');
+const HighSchoolGraduates = require('../../models/highSchoolGraduates');
 
-module.exports = async function deleteHighschoolGraduates(corr_id) {
+module.exports = async function deleteHighSchoolGraduates(corr_id) {
     /**
      * Delete high school graduates indicator entry from the database using the indicator's correlation id as a key
      * @param {string} corr_id Correlation id of the object to delete from the database
@@ -8,14 +8,14 @@ module.exports = async function deleteHighschoolGraduates(corr_id) {
      */
 
     try {
-        var findResult = await HighschoolGraduates.findById(corr_id).exec();
+        var findResult = await HighSchoolGraduates.findById(corr_id).exec();
         if (findResult == (null || undefined))
             return {
                 result: "Failure",
                 reason: "Could not find the data associated with that correlation id"
             }
 
-        var deleteResult = await HighschoolGraduates.deleteOne({ _id: findResult._id }).exec();
+        var deleteResult = await HighSchoolGraduates.deleteOne({ _id: findResult._id }).exec();
         if (deleteResult.deletedCount == 1)
             return { result: "Success" };
         else

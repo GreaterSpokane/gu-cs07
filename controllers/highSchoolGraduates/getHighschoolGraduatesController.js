@@ -1,6 +1,6 @@
-const HighschoolGraduates = require('../../models/highschoolGraduates');
+const HighSchoolGraduates = require('../../models/highSchoolGraduates');
 
-module.exports = async function getHighschoolGraduates(county, year) {
+module.exports = async function getHighSchoolGraduates(county, year) {
     /**
      * Retrieve a single high school graduates indicator from the database
      * @param {string} county County for the data point
@@ -9,7 +9,7 @@ module.exports = async function getHighschoolGraduates(county, year) {
      */
 
     try {
-        var data = await HighschoolGraduates.findOne({ county: county, year: year }).exec();
+        var data = await HighSchoolGraduates.findOne({ county: county, year: year }).exec();
         if (data == null)
             return { 'corr_id': null };
         var result = {
@@ -17,7 +17,7 @@ module.exports = async function getHighschoolGraduates(county, year) {
             'county': data.county,
             'state': data.state,
             'year': data.year,
-            'highschoolGraduates': data.highschoolGraduates
+            'highSchoolGraduates': data.highSchoolGraduates
         }
         return result
     } catch (err) {

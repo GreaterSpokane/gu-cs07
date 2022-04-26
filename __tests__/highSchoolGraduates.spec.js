@@ -15,7 +15,7 @@ describe('High school graduates index database model tests', () => {
         'county': 'Spokane',
         'state': 'WA',
         'year': '2019',
-        'highschoolGraduates': .52
+        'highSchoolGraduates': .52
     };
 
     const MASS_DATA_COUNTY = "C1";
@@ -30,18 +30,18 @@ describe('High school graduates index database model tests', () => {
             'county': MASS_DATA_COUNTY,
             'state': MASS_DATA_STATE,
             'year': YEAR_1,
-            'highschoolGraduates': HIGH_SCHOOL_GRADUATES_1
+            'highSchoolGraduates': HIGH_SCHOOL_GRADUATES_1
         }),
         JSON.stringify({
             'county': MASS_DATA_COUNTY,
             'state': MASS_DATA_STATE,
             'year': YEAR_2,
-            'highschoolGraduates': HIGH_SCHOOL_GRADUATES_2
+            'highSchoolGraduates': HIGH_SCHOOL_GRADUATES_2
         }), JSON.stringify({
             'county': MASS_DATA_COUNTY,
             'state': MASS_DATA_STATE,
             'year': YEAR_3,
-            'highschoolGraduates': HIGH_SCHOOL_GRADUATES_3
+            'highSchoolGraduates': HIGH_SCHOOL_GRADUATES_3
         })
     ];
 
@@ -50,7 +50,7 @@ describe('High school graduates index database model tests', () => {
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.highschoolGraduates
+            DATA.highSchoolGraduates
         );
         //  Assert that an id is returned
         expect((await result).corr_id).not.toEqual(null || undefined);
@@ -61,14 +61,14 @@ describe('High school graduates index database model tests', () => {
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.highschoolGraduates
+            DATA.highSchoolGraduates
         );
         //  Find new entry in db
         const doc = await HighSchoolGraduates.findById(result.corr_id)
         expect(doc.county).toEqual(DATA.county);
         expect(doc.state).toEqual(DATA.state);
         expect(doc.year).toEqual(DATA.year);
-        expect(doc.highschoolGraduates).toEqual(DATA.highschoolGraduates);
+        expect(doc.highSchoolGraduates).toEqual(DATA.highSchoolGraduates);
     });
 
     it('should assert true if newly created object can be successfully retrieved from the database', async() => {
@@ -76,7 +76,7 @@ describe('High school graduates index database model tests', () => {
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.highschoolGraduates
+            DATA.highSchoolGraduates
         );
         //  Find new entry in db
         const found = await getHighSchoolGraduates(DATA.county, DATA.year);
@@ -84,7 +84,7 @@ describe('High school graduates index database model tests', () => {
         expect(found.county).toEqual(DATA.county);
         expect(found.state).toEqual(DATA.state);
         expect(found.year).toEqual(DATA.year);
-        expect(found.highschoolGraduates).toEqual(DATA.highschoolGraduates);
+        expect(found.highSchoolGraduates).toEqual(DATA.highSchoolGraduates);
     });
 
     it('should return true if newly created objects\' data matches the inserted objects\' data', async() => {
@@ -92,14 +92,14 @@ describe('High school graduates index database model tests', () => {
             DATA.county,
             DATA.state,
             DATA.year,
-            DATA.highschoolGraduates
+            DATA.highSchoolGraduates
         );
         //  Find new entry in DB with get controller
         const found = await getHighSchoolGraduates(DATA.county, DATA.year);
         expect(found.county).toEqual(DATA.county);
         expect(found.state).toEqual(DATA.state);
         expect(found.year).toEqual(DATA.year);
-        expect(found.highschoolGraduates).toEqual(DATA.highschoolGraduates);
+        expect(found.highSchoolGraduates).toEqual(DATA.highSchoolGraduates);
     });
 
     it('should return true if a mass retrieval call to an empty database returns an empty dataset', async() => {
@@ -114,7 +114,7 @@ describe('High school graduates index database model tests', () => {
                 encoded_data.county,
                 encoded_data.state,
                 encoded_data.year,
-                encoded_data.highschoolGraduates
+                encoded_data.highSchoolGraduates
             );
         }
 
@@ -129,7 +129,7 @@ describe('High school graduates index database model tests', () => {
                 encoded_data.county,
                 encoded_data.state,
                 encoded_data.year,
-                encoded_data.highschoolGraduates
+                encoded_data.highSchoolGraduates
             );
         }
 
