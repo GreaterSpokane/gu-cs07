@@ -12,7 +12,10 @@ async function getPythonData(year){
     // with arguments and send this data to res object
     process.stdout.on('data', function(data) {
         return data.toString()
-    } )
+    });
+    process.stderr.on('data', function(data) {
+        console.error(data.toString());
+    });
 }
 
 router.post('/v1/newPythonData', async(req, res) => {
