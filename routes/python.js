@@ -10,9 +10,12 @@ async function getPythonData(year){
   
     // Takes stdout data from script which executed
     // with arguments and send this data to res object
+    process.on('error', function(error) {
+        console.log("Error: bad command", error);
+    });
     process.stdout.on('data', function(data) {
         return data.toString()
-    } )
+    });
 }
 
 router.post('/v1/newPythonData', async(req, res) => {
