@@ -5,34 +5,34 @@ from APIcalls import *
 
 def Housing(countyVal, yearVal, stateVal):
     cost = housing(countyVal, yearVal)
-    response = requests.post(f'http://0.0.0.0:3000/v1/newMedianHousing?county={countyVal}&state={stateVal}&year={yearVal}&med_housing_cost={cost}')
+    response = requests.post(f'https://spokaneeconomicdashboard.herokuapp.com/v1/newMedianHousing?county={countyVal}&state={stateVal}&year={yearVal}&med_housing_cost={cost}')
     return response
 
 def LaborForce(countyVal, yearVal, stateVal):
     force, participation = labor(countyVal, yearVal)
-    response = requests.post(f'http://0.0.0.0:3000/v1/newLaborForce?county={countyVal}&state={stateVal}&year={yearVal}&labor_force={force}')
-    response2 = requests.post(f'http://0.0.0.0:3000/v1/newLaborParticipation?county={countyVal}&state={stateVal}&year={yearVal}&labor_participation={participation}')
+    response = requests.post(f'https://spokaneeconomicdashboard.herokuapp.com/v1/newLaborForce?county={countyVal}&state={stateVal}&year={yearVal}&labor_force={force}')
+    response2 = requests.post(f'https://spokaneeconomicdashboard.herokuapp.com/v1/newLaborParticipation?county={countyVal}&state={stateVal}&year={yearVal}&labor_participation={participation}')
     return response
 
 def Rent(countyVal, yearVal, stateVal):
     average_rent = housing_month(countyVal, yearVal)
-    response = requests.post(f'http://0.0.0.0:3000/v1/newAverageRent?county={countyVal}&state={stateVal}&year={yearVal}&average_rent={average_rent}')
+    response = requests.post(f'https://spokaneeconomicdashboard.herokuapp.com/v1/newAverageRent?county={countyVal}&state={stateVal}&year={yearVal}&average_rent={average_rent}')
     return response
 
 def Income(countyVal, yearVal, stateVal):
     median_income = MedianIncome(countyVal, yearVal)
-    response = requests.post(f'http://0.0.0.0:3000/v1/newMedianIncome?county={countyVal}&state={stateVal}&year={yearVal}&median_income={median_income}')
+    response = requests.post(f'https://spokaneeconomicdashboard.herokuapp.com/v1/newMedianIncome?county={countyVal}&state={stateVal}&year={yearVal}&median_income={median_income}')
     return response
 
 def Education(countyVal, yearVal, stateVal):
     rate = education(countyVal, yearVal)
-    response = requests.post(f'http://0.0.0.0:3000/v1/newHighSchoolGraduates?county={countyVal}&state={stateVal}&year={yearVal}&high_school_graduates={rate}')
+    response = requests.post(f'https://spokaneeconomicdashboard.herokuapp.com/v1/newHighSchoolGraduates?county={countyVal}&state={stateVal}&year={yearVal}&high_school_graduates={rate}')
     return response
 
 def Employment(countyVal, yearVal, stateVal):
     newEmployment, unemployment = laborBuerau_Employment(countyVal, yearVal)
-    response = requests.post(f'http://0.0.0.0:3000/v1/newEmployed?county={countyVal}&state={stateVal}&year={yearVal}&employed={newEmployment}')
-    response2 = requests.post(f'http://0.0.0.0:3000/v1/newUnemployed?county={countyVal}&state={stateVal}&year={yearVal}&unemployed={unemployment}')
+    response = requests.post(f'https://spokaneeconomicdashboard.herokuapp.com/v1/newEmployed?county={countyVal}&state={stateVal}&year={yearVal}&employed={newEmployment}')
+    response2 = requests.post(f'https://spokaneeconomicdashboard.herokuapp.com/v1/newUnemployed?county={countyVal}&state={stateVal}&year={yearVal}&unemployed={unemployment}')
     return response
 
 def main():
