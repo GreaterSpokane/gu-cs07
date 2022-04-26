@@ -159,6 +159,11 @@
   background: none; */
 }
 
+.lfs-buttons {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 
 /* custom checkboxes */
 

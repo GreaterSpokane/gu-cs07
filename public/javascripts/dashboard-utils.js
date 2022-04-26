@@ -9,10 +9,12 @@ window.onload = async function () {
             console.log("response:", response)
             indicatorConfig[indicatorName][county.split(' ').join('').toLowerCase()] = response;
         }
-        // snapshot charts
-        console.log("CREATING CHART FOR:", indicatorName)
-        console.log("WITH CONFIG:", getConfig(indicatorName, false))
-        new Chart(indicatorName, getConfig(indicatorName, false));
+        if (indicatorName != 'emp' && indicatorName != 'uep') {
+            // snapshot charts
+            console.log("CREATING CHART FOR:", indicatorName)
+            console.log("WITH CONFIG:", getConfig(indicatorName, false))
+            new Chart(indicatorName, getConfig(indicatorName, false));
+        }
 
         // descriptions, ect.
         document.getElementById(indicatorName + "-description").innerText = indicatorConfig[indicatorName]["description"];
@@ -205,7 +207,7 @@ async function callData(indicatorName, county) {
             path = '/v1/getManyEmployed/'
             schemaDataName = 'employed';
             break;
-        case 'uem':
+        case 'uep':
             path = '/v1/getManyUnemployed/'
             schemaDataName = 'unemployed';
             break;
@@ -257,7 +259,7 @@ function getData(indicatorName, county, isYearsData) {
             return dataArray[1];
         }
     } catch (error) {
-        console.error("cant find data for", indicatorName, county, "in getData")
+        console.warn("cant find data for", indicatorName, county, "in getData. returning empty list...")
         return [];
     }
 }
@@ -344,7 +346,7 @@ function getConfig(indicatorName, isDetailView) {
         },
 
     }
-    
+
     lineChartTemplate["options"] = indicatorConfig[indicatorName].chartOptions
     lineChartTemplate["options"]["responsive"] = true;
     lineChartTemplate["options"]["maintainAspectRatio"] = true;
