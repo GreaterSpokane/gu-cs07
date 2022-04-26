@@ -1,9 +1,9 @@
 const express = require('express');
-const createHighSchoolGraduates = require('../controllers/highschoolGraduates/createHighSchoolGraduatesController');
-const getHighSchoolGraduates = require('../controllers/highschoolGraduates/getHighSchoolGraduatesController');
-const getManyHighSchoolGraduates = require('../controllers/highschoolGraduates/getManyHighSchoolGraduatesController');
-const deleteHighSchoolGraduates = require('../controllers/highschoolGraduates/deleteHighSchoolGraduatesController')
-const serialize = require('../serializers/highschoolGraduatesSerializer');
+const createHighSchoolGraduates = require('../controllers/highSchoolGraduates/createHighSchoolGraduatesController');
+const getHighSchoolGraduates = require('../controllers/highSchoolGraduates/getHighSchoolGraduatesController');
+const getManyHighSchoolGraduates = require('../controllers/highSchoolGraduates/getManyHighSchoolGraduatesController');
+const deleteHighSchoolGraduates = require('../controllers/highSchoolGraduates/deleteHighSchoolGraduatesController')
+const serialize = require('../serializers/highSchoolGraduatesSerializer');
 var router = express.Router();
 
 /*  Insert new document into housing affordability index collection in db   */
