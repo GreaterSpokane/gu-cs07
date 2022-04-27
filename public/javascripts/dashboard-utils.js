@@ -110,7 +110,7 @@ function generateShortStats() {
     for (var i = 0; i < stats.length; i++) {
         let indicatorName = String(stats[i].id).slice(0, 3);
 
-        if(indicatorName == "hsg") {
+        if (indicatorName == "hsg") {
             // temp until get hsg working
             continue;
         }
@@ -291,16 +291,13 @@ function getData(indicatorName, county, isYearsData) {
 
 // returns the chartjs config for each indicator
 function getConfig(indicatorName, isDetailView) {
-    const blueColor = "#00B4ED"; //gsi blue
-    const purpleColor = "#866BAF"; // gsi purple
-    const yellowColor = "#D7DC61";    // gsi yellow
-    const greyColor = "#6E7277";   //gsi gray
-    const darkerGreyColor = '#515f70'
-    const orangeColor = '#db6140';  // orange from initial syling
-    const greenColor = '#719a45'    // green from initial stying
-    const blackColor = '#000000'
+    const blueColor = "#00B4ED";    // gsi blue
+    const purpleColor = "#866BAF";  // gsi purple
+    const yellowColor = "#D7DC61";  // gsi yellow
+    const greyColor = "#6E7277";    // gsi gray
+    const footerLighterGrey = '#444444' // from advantrage spokane site
 
-    // temp until add employment/unemployment
+    // employment/unemployment doughnut chart
     if (indicatorName == "lfs") {
         const year = getData("uep", "spokane", true).slice(-1)
         const empTotal = getData("emp", "spokane", false).slice(-1)
@@ -337,7 +334,6 @@ function getConfig(indicatorName, isDetailView) {
         }
     }
 
-
     const lineChartTemplate = {
         type: "line",
         data: {
@@ -373,7 +369,7 @@ function getConfig(indicatorName, isDetailView) {
                 hidden: true,
             }, {
                 data: getData(indicatorName, "fortcollins", false),
-                borderColor: darkerGreyColor,
+                borderColor: footerLighterGrey,
                 label: "Fort Collins, CO (Larimer County)",
                 borderWidth: 2,
                 pointRadius: 2,
@@ -391,18 +387,11 @@ function getConfig(indicatorName, isDetailView) {
             onClick: null
         }
     }
-    // TODO: take countiesFirstVisible attribute from config and hide show appropriate ones for detailed or \
-    // slice/delete unused ones from snapshot. Then check/uncheck checkboxes to match
-    const templateDatasets = lineChartTemplate.data.datasets;
-    if (isDetailView) {
-        templateDatasets.forEach(dataset => {
-            // dataset["hidden"] = 
-
-        });
-    } else {
+    
+    if (!isDetailView) {
+        const templateDatasets = lineChartTemplate.data.datasets;
         lineChartTemplate.data.datasets = templateDatasets.slice(0, 2);
     }
     return lineChartTemplate;
-
 
 }
