@@ -241,12 +241,31 @@ button {
     background-color: rgb(156, 156, 156);
 }
 
-
-/* When the checkbox is checked, add a blue background */
-.checkbox-container input:checked~.checkmark {
+/* .checkbox-container input:checked~.checkmark.spokane-checkbox {
     background-color: #00B4ED;
-    /* background-color: #866BAF; */
+} */
+
+/* When the checkbox is checked, add a background */
+.checkbox-container input:checked~.checkmark.spokane-checkmark {
+    background-color: #00B4ED;
 }
+
+.checkbox-container input:checked~.checkmark.boise-checkmark {
+    background-color: #866BAF;
+}
+
+.checkbox-container input:checked~.checkmark.saltlakecity-checkmark {
+    background-color: #6E7277;
+}
+
+.checkbox-container input:checked~.checkmark.eugene-checkmark {
+    background-color: #D7DC61;
+}
+
+.checkbox-container input:checked~.checkmark.fortcollins-checkmark {
+    background-color: #444444;
+}
+
 
 
 /* Create the checkmark/indicator (hidden when not checked) */
