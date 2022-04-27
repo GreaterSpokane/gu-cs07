@@ -53,7 +53,7 @@ indicatorConfig.lfp.chartOptions = {
         y: {
             ticks: {
                 callback: function (value) {
-                    return value * 100 + '%';
+                    return Math.trunc(Number(value) * 100) + '%';
                 }
             }
         }
