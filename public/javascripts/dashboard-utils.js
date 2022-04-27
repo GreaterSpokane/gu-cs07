@@ -9,14 +9,16 @@ window.onload = async function () {
             console.log("response:", response)
             indicatorConfig[indicatorName][county.split(' ').join('').toLowerCase()] = response;
         }
-        // snapshot charts
-        console.log("CREATING CHART FOR:", indicatorName)
-        console.log("WITH CONFIG:", getConfig(indicatorName, false))
-        new Chart(indicatorName, getConfig(indicatorName, false));
+        if (indicatorName != 'emp' && indicatorName != 'uep') {
+            // snapshot charts
+            console.log("CREATING CHART FOR:", indicatorName)
+            console.log("WITH CONFIG:", getConfig(indicatorName, false))
+            new Chart(indicatorName, getConfig(indicatorName, false));
+        }
 
         // descriptions, ect.
         document.getElementById(indicatorName + "-description").innerText = indicatorConfig[indicatorName]["description"];
-        document.getElementById(indicatorName + "-about").innerText = indicatorConfig[indicatorName]["note"];
+        document.getElementById(indicatorName + "-note").innerText = indicatorConfig[indicatorName]["note"];
         document.getElementById(indicatorName + "-link").setAttribute("href", indicatorConfig[indicatorName]["link"]);
 
         // detailed charts
@@ -52,8 +54,10 @@ window.onload = async function () {
     }
     console.log(indicatorConfig)
 
-    // temp for employment/unemployement
+    // employment/unemployement dashboard chart
     new Chart("lfs", getConfig("lfs", true));
+
+    generateShortStats();
 
     // adds event listeners to each button
     var buttons = document.getElementsByClassName("button");
@@ -66,44 +70,22 @@ window.onload = async function () {
                 if (detailedViews[i].style.maxHeight) {
                     detailedViews[i].style.maxHeight = null;
                     setTimeout(function () {    // waiting for css transition to finish
+                        resetDetailView(indicatorName)
                         detailedViews[i].style.display = "none";
                     }, 200);
                 } else {
                     if (String(detailedViews[i].id).slice(0, 3) == indicatorName) {
                         detailedViews[i].style.display = "flex";
                         detailedViews[i].style.maxHeight = detailedViews[i].scrollHeight + "px";
+                        indicatorConfig[indicatorName]["detailchart"].destroy();
+                        indicatorConfig[indicatorName]["detailchart"] = new Chart(indicatorName + "-detailed-chart-canvas", getConfig(indicatorName, true))
                     }
                 }
             }
         });
     }
 
-    // create the short stat percentage for each card
-    const stats = document.getElementsByClassName("stat");
-    for (var i = 0; i < stats.length; i++) {
-        console.log("inside short stat fucntion")
-        let indicatorName = String(stats[i].id).slice(0, 3);
-        console.log("stat sliced", indicatorName)
-        const spokaneStatData = getData(indicatorName, 'spokane', false)
-        const yearsData = getData(indicatorName, 'spokane', true)
-        const dataLen = spokaneStatData.length
-        const endData = spokaneStatData[dataLen - 1]
-        const startData = spokaneStatData[dataLen - 2]
-        const statPercent = (((endData - startData) / startData) * 100).toFixed(1)
-        const endYear = yearsData[dataLen - 1]
-        const startYear = yearsData[dataLen - 2]
-        let incOrDec = 'increased'
-        if (statPercent < 0) {
-            incOrDec = 'decreased'
-        }
-        if (indicatorName == "lfs") {
-            stats[i].innerHTML = `Spokane county in ${endYear}`
-        } else {
-            // TODO: Maybe Spokane county be added to each indicator card or at a note at the top saying all stats are from spokane?
-            stats[i].innerHTML = `Spokane county ${incOrDec} ${Math.abs(statPercent)}% from ${startYear} to ${endYear}`;
-        }
 
-    }
 
     // add event listeners to checkboxes
     var checkboxes = document.getElementsByClassName("checkbox");
@@ -123,6 +105,71 @@ window.onload = async function () {
         })
     }
 
+}
+
+// resets the range slider, checkboxes, and detail chart hidden regions
+function resetDetailView(indicatorName) {
+    document.getElementById(indicatorName + "-slider").noUiSlider.reset();
+    const checkboxes = document.getElementsByClassName("checkbox")
+    for (let i = 0; i < checkboxes.length; i++) {
+        const checkbox = checkboxes[i];
+        if (String(checkbox.id).split("-")[1] == "spokane" || String(checkbox.id).split("-")[1] == "boise") {
+            checkbox.checked = true;
+        } else {
+            checkbox.checked = false;
+        }
+    }
+    indicatorConfig[indicatorName]["detailchart"]["data"]["datasets"].forEach((dataset) => {
+        if (dataset.label.includes("Spokane") || dataset.label.includes("Boise")) {
+            dataset.hidden = false;
+        } else {
+            dataset.hidden = true;
+        }
+    });
+    indicatorConfig[indicatorName]["detailchart"].update();
+}
+
+// creates the short stat percentage for each card
+function generateShortStats() {
+    const stats = document.getElementsByClassName("stat");
+    for (var i = 0; i < stats.length; i++) {
+        let indicatorName = String(stats[i].id).slice(0, 3);
+        if (indicatorName == "lfs") {   // employment/unemployment doughnut chart
+            const numYearsToShow = indicatorConfig.uep.statNumIntervals;
+            const uepStartYear = getData("uep", 'spokane', true).slice((numYearsToShow * -1) - 1, numYearsToShow * -1)
+            const uepStartData = Number(getData("uep", 'spokane', false).slice((numYearsToShow * -1) - 1, numYearsToShow * -1))
+            const empStartData = Number(getData("emp", 'spokane', false).slice((numYearsToShow * -1) - 1, numYearsToShow * -1))
+            const uepStartRate = uepStartData / (uepStartData + empStartData);
+            const uepEndYear = getData("uep", 'spokane', true).slice(-1)
+            const uepEndData = Number(getData("uep", 'spokane', false).slice(-1));
+            const empEndData = Number(getData("emp", 'spokane', false).slice(-1));
+            const uepEndRate = uepEndData / (uepEndData + empEndData);
+            const uepRateChange = Number((((uepEndRate - uepStartRate) / uepStartRate) * 100).toFixed(1))
+            let uepIncOrDec = 'increased'
+            if (uepRateChange < 0) {
+                uepIncOrDec = 'decreased'
+            }
+            console.log(uepRateChange)
+            stats[i].innerHTML = `Unemployment rate ${uepIncOrDec} ${Math.abs(uepRateChange)}% in Spokane county from ${uepStartYear} to ${uepEndYear}`;
+            continue;
+        }
+        const spokaneStatData = getData(indicatorName, 'spokane', false)
+        const yearsData = getData(indicatorName, 'spokane', true)
+        const dataLen = spokaneStatData.length
+        const endData = spokaneStatData[dataLen - 1]
+        console.log(indicatorName)
+        const startData = spokaneStatData[dataLen - indicatorConfig[indicatorName].statNumIntervals - 1]
+        const statPercent = (((endData - startData) / startData) * 100).toFixed(1)
+        const endYear = yearsData[dataLen - 1]
+        const startYear = yearsData[dataLen - indicatorConfig[indicatorName].statNumIntervals - 1]
+        let incOrDec = 'Increased'
+        if (statPercent < 0) {
+            incOrDec = 'Decreased'
+        }
+        if (!isNaN(statPercent)) {
+            stats[i].innerHTML = `${incOrDec} ${Math.abs(statPercent)}% in Spokane county from ${startYear} to ${endYear}`;
+        }
+    }
 }
 
 // updates the charts based on the range slider
@@ -205,13 +252,13 @@ async function callData(indicatorName, county) {
             path = '/v1/getManyEmployed/'
             schemaDataName = 'employed';
             break;
-        case 'uem':
+        case 'uep':
             path = '/v1/getManyUnemployed/'
             schemaDataName = 'unemployed';
             break;
         case 'hsg':
             path = '/v1/getManyHighSchoolGraduates/'
-            schemaDataName = 'highschoolGraduates';
+            schemaDataName = 'highSchoolGraduates';
             break;
         default:
             console.error(`No matching endpoint for indicator: ${indicatorName}`);
@@ -229,7 +276,7 @@ async function callData(indicatorName, county) {
             return res.json();
         })
         .then(body => {
-            console.log("success for", indicatorName, county)
+            // console.log("success for", indicatorName, county)
             // console.log(body)
             return body;
         })
@@ -257,48 +304,55 @@ function getData(indicatorName, county, isYearsData) {
             return dataArray[1];
         }
     } catch (error) {
-        console.error("cant find data for", indicatorName, county, "in getData")
+        console.warn("cant find data for", indicatorName, county, "in getData. returning empty list...")
         return [];
     }
 }
 
 // returns the chartjs config for each indicator
 function getConfig(indicatorName, isDetailView) {
-    const blueColor = "#00B4ED"; //gsi blue
-    const purpleColor = "#866BAF"; // gsi purple
-    const yellowColor = "#D7DC61";    // gsi yellow
-    const greyColor = "#6E7277";   //gsi gray
-    const darkerGreyColor = '#515f70'
-    const orangeColor = '#db6140';  // orange from initial syling
-    const greenColor = '#719a45'    // green from initial stying
-    const blackColor = '#000000'
+    const blueColor = "#00B4ED";    // gsi blue
+    const purpleColor = "#866BAF";  // gsi purple
+    const yellowColor = "#D7DC61";  // gsi yellow
+    const greyColor = "#6E7277";    // gsi gray
+    const footerLighterGrey = '#444444' // from advantrage spokane site
 
-    // temp until add employment/unemployment
+    // employment/unemployment doughnut chart
     if (indicatorName == "lfs") {
+        const year = getData("uep", "spokane", true).slice(-1)
+        const empTotal = getData("emp", "spokane", false).slice(-1)
+        const uepTotal = getData("uep", "spokane", false).slice(-1)
+        const lfTotal = Number(empTotal) + Number(uepTotal);
+        const empRate = (empTotal / lfTotal) * 100
+        const uepRate = (uepTotal / lfTotal) * 100
         return {
             type: "doughnut",
             data: {
                 labels: [
-                    'Employed',
-                    'Unemployed',
-                    'Not in Labor Force / Other'
+                    'Employment Rate',
+                    'Unemployment Rate',
                 ],
                 datasets: [{
-                    data: [0.5, 0.1, 0.4,],
+                    data: [empRate, uepRate],
                     backgroundColor: [
-                        '#866BAF',
-                        '#00B4ED',
-                        '#6E7277',
+                        purpleColor,
+                        blueColor,
                     ],
                     hoverOffset: 4
                 }]
             },
             options: {
-                radius: "90%"
+                radius: "90%",
+                plugins: {
+                    title: {
+                        display: false,
+                        text: `Spokane county in ${year}`
+                    }
+                }
+
             }
         }
     }
-
 
     const lineChartTemplate = {
         type: "line",
@@ -335,7 +389,7 @@ function getConfig(indicatorName, isDetailView) {
                 hidden: true,
             }, {
                 data: getData(indicatorName, "fortcollins", false),
-                borderColor: darkerGreyColor,
+                borderColor: footerLighterGrey,
                 label: "Fort Collins, CO (Larimer County)",
                 borderWidth: 2,
                 pointRadius: 2,
@@ -344,23 +398,22 @@ function getConfig(indicatorName, isDetailView) {
         },
 
     }
-    
+
     lineChartTemplate["options"] = indicatorConfig[indicatorName].chartOptions
     lineChartTemplate["options"]["responsive"] = true;
     lineChartTemplate["options"]["maintainAspectRatio"] = true;
+    lineChartTemplate["options"]["tension"] = 0.1;
+    lineChartTemplate["options"]["spanGaps"] = true;
+    lineChartTemplate["options"]["plugins"] = {
+        legend: {
+            onClick: null
+        }
+    }
 
-    // TODO: take countiesFirstVisible attribute from config and hide show appropriate ones for detailed or \
-    // slice/delete unused ones from snapshot. Then check/uncheck checkboxes to match
-    const templateDatasets = lineChartTemplate.data.datasets;
-    if (isDetailView) {
-        templateDatasets.forEach(dataset => {
-            // dataset["hidden"] = 
-
-        });
-    } else {
+    if (!isDetailView) {
+        const templateDatasets = lineChartTemplate.data.datasets;
         lineChartTemplate.data.datasets = templateDatasets.slice(0, 2);
     }
     return lineChartTemplate;
-
 
 }

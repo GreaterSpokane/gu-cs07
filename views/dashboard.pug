@@ -39,34 +39,34 @@ block content
                             button#mmr-button.button More info
             #mhc-detailed-view.detailed-view-card
                 .detailed-view-half
-                    h4 About
+                    h4 Median Housing Cost
                     p#mhc-description
-                    h4 Data source notes
-                    p#mhc-about
-                    a#mhc-link(href="#" style="color:blue;") Data source
-                    h4 Comparison Counties
+                    p#mhc-note.note
+                    a#mhc-link.link   Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#mhc-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#mhc-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#mhc-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#mhc-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#mhc-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#mhc-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#mhc-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#mhc-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#mhc-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
+                            input#mhc-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
                     #mhc-range-slider.range-slider
                         br 
                         br                            
@@ -79,34 +79,34 @@ block content
                     br
             #mmr-detailed-view.detailed-view-card
                 .detailed-view-half
-                    h4 About
+                    h4 Median Monthly Rent
                     p#mmr-description
-                    h4 Data source notes
-                    p#mmr-about
-                    a#mmr-link(style="color:blue;") Data source
-                    h4 Comparison Counties
+                    p#mmr-note.note
+                    a#mmr-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#mmr-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#mmr-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#mmr-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#mmr-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#mmr-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#mmr-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#mmr-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#mmr-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#mmr-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
+                            input#mmr-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
                     #mmr-range-slider.range-slider
                         br 
                         br                            
@@ -130,11 +130,15 @@ block content
                     #lfs-card.card.non-line
                         .card-header
                             h3 Employment and Unemployment 
-                            p#lfs-stat.stat   
+                            p#lfs-stat.stat
+                            //- p#emp-stat.stat
+                            //- p#uep-stat.stat
                         .chart-container
                             canvas#lfs
                         .more-info-button
-                            button#lfs-button.button More info
+                            button#emp-button.button.lfs-button Employment Info
+                            span    
+                            button#uep-button.button.lfs-button Unemployment Info 
                     #lfp-card.card
                         .card-header
                             h3 Labor Force Participation Rate
@@ -145,34 +149,34 @@ block content
                             button#lfp-button.button More info
             #lft-detailed-view.detailed-view-card
                 .detailed-view-half
-                    h4 About
+                    h4 Labor Force Total
                     p#lft-description
-                    h4 Data source notes
-                    p#lft-about
-                    a#lft-link(style="color:blue;") Data source
-                    h4 Comparison Counties
+                    p#lft-note.note
+                    a#lft-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#lft-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#lft-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#lft-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#lft-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#lft-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#lft-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#lft-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#lft-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#lft-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
+                            input#lft-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
                     #lft-range-slider.range-slider
                         br 
                         br                            
@@ -182,75 +186,114 @@ block content
                 .detailed-view-half
                     canvas#lft-detailed-chart-canvas
                     br
-            #lfs-detailed-view.detailed-view-card
+            #emp-detailed-view.detailed-view-card
                 .detailed-view-half
-                    h4 About
-                    p#lfs-description
-                    h4 Data source notes
-                    p#lfs-about
-                    a#lfs-link(style="color:blue;") Data source
-                    h4 Comparison Counties
+                    h4 Employment
+                    p#emp-description
+                    p#emp-note.note
+                    a#emp-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#lfs-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#emp-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#lfs-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#emp-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#lfs-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#emp-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#lfs-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#emp-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#lfs-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
-                    #lfs-range-slider.range-slider
+                            input#emp-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
+                    #emp-range-slider.range-slider
                         br 
                         br                            
-                        #lfs-slider.slider
+                        #emp-slider.slider
                     p 
                     br
                 .detailed-view-half
-                    canvas#lfs-detailed-chart-canvas
+                    canvas#emp-detailed-chart-canvas
                     br
-            #lfp-detailed-view.detailed-view-card
+            #uep-detailed-view.detailed-view-card
                 .detailed-view-half
-                    h4 About
-                    p#lfp-description
-                    h4 Data source notes
-                    p#lfp-about
-                    a#lfp-link(style="color:blue;") Data source
-                    h4 Comparison Counties
+                    h4 Unemployment
+                    p#uep-description
+                    p#uep-note.note
+                    a#uep-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#lfp-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#uep-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#lfp-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#uep-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#lfp-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#uep-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#lfp-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#uep-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#lfp-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
+                            input#uep-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
+                    #uep-range-slider.range-slider
+                        br 
+                        br                            
+                        #uep-slider.slider
+                    p 
+                    br
+                .detailed-view-half
+                    canvas#uep-detailed-chart-canvas
+                    br
+            #lfp-detailed-view.detailed-view-card
+                .detailed-view-half
+                    h4 Labor Force Participation Rate
+                    p#lfp-description
+                    p#lfp-note.note
+                    a#lfp-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
+                    .checkboxs
+                        label.checkbox-container Spokane, WA 
+                            span.county-label (Spokane County)
+                            input#lfp-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
+                        label.checkbox-container Boise, ID 
+                            span.county-label (Ada County)
+                            input#lfp-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
+                        label.checkbox-container Salt Lake City, UT 
+                            span.county-label (Salt Lake County)
+                            input#lfp-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
+                        label.checkbox-container Eugene, OR 
+                            span.county-label (Lane County)
+                            input#lfp-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
+                        label.checkbox-container Fort Collins, CO   
+                            span.county-label (Larimer County)
+                            input#lfp-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
                     #lfp-range-slider.range-slider
                         br 
                         br                            
@@ -281,34 +324,34 @@ block content
                             button#ndm-button.button More info
             #ntc-detailed-view.detailed-view-card
                 .detailed-view-half
-                    h4 About
+                    h4 Natural Change
                     p#ntc-description
-                    h4 Data source notes
-                    p#ntc-about
-                    a#ntc-link(style="color:blue;") Data source
-                    h4 Comparison Counties
+                    p#ntc-note.note
+                    a#ntc-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#ntc-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#ntc-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#ntc-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#ntc-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#ntc-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#ntc-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#ntc-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#ntc-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#ntc-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
+                            input#ntc-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
                     #ntc-range-slider.range-slider
                         br 
                         br                            
@@ -319,36 +362,35 @@ block content
                     canvas#ntc-detailed-chart-canvas
                     br
             #ndm-detailed-view.detailed-view-card
-
                 .detailed-view-half
-                    h4 About
+                    h4 Net Domestic Migration
                     p#ndm-description
-                    h4 Data source notes
-                    p#ndm-about
-                    a#ndm-link(style="color:blue;") Data source
-                    h4 Comparison Counties
+                    p#ndm-note.note
+                    a#ndm-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#ndm-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#ndm-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#ndm-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#ndm-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#ndm-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#ndm-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#ndm-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#ndm-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#ndm-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
+                            input#ndm-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
                     #ndm-range-slider.range-slider
                         br 
                         br                            
@@ -358,8 +400,8 @@ block content
                 .detailed-view-half
                     canvas#ndm-detailed-chart-canvas
                     br
-            #population-drivers.category-snapshot-view
-                h2 Income
+            #other.category-snapshot-view
+                h2 Other
                 .category-flex-container 
                     #mhi-card.card
                         .card-header
@@ -379,34 +421,34 @@ block content
                             button#hsg-button.button More info
             #mhi-detailed-view.detailed-view-card
                 .detailed-view-half
-                    h4 About
+                    h4 Median Household Income
                     p#mhi-description
-                    h4 Data source notes
-                    p#mhi-about
-                    a#mhi-link(style="color:blue;") Data source
-                    h4 Comparison Counties
+                    p#mhi-note.note
+                    a#mhi-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#mhi-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#mhi-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#mhi-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#mhi-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#mhi-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#mhi-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#mhi-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#mhi-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#mhi-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
+                            input#mhi-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
                     #mhi-range-slider.range-slider
                         br 
                         br                            
@@ -418,34 +460,34 @@ block content
                     br
             #hsg-detailed-view.detailed-view-card
                 .detailed-view-half
-                    h4 About
+                    h4 High School Graduates
                     p#hsg-description
-                    h4 Data source notes
-                    p#hsg-about
-                    a#hsg-link(style="color:blue;") Data source
-                    h4 Comparison Counties
+                    p#hsg-note.note
+                    a#hsg-link.link  Data source link
+                    hr
+                    h5 Comparison Counties
                     .checkboxs
                         label.checkbox-container Spokane, WA 
                             span.county-label (Spokane County)
-                            input#hsg-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#hsg-spokane-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.spokane-checkmark
                         label.checkbox-container Boise, ID 
                             span.county-label (Ada County)
-                            input#hsg-checkbox.checkbox(type="checkbox" checked)
-                            span.checkmark
+                            input#hsg-boise-checkbox.checkbox(type="checkbox" checked)
+                            span.checkmark.boise-checkmark
                         label.checkbox-container Salt Lake City, UT 
                             span.county-label (Salt Lake County)
-                            input#hsg-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#hsg-saltlakecity-checkbox.checkbox(type="checkbox")
+                            span.checkmark.saltlakecity-checkmark
                         label.checkbox-container Eugene, OR 
                             span.county-label (Lane County)
-                            input#hsg-checkbox.checkbox(type="checkbox")
-                            span.checkmark
+                            input#hsg-eugene-checkbox.checkbox(type="checkbox")
+                            span.checkmark.eugene-checkmark
                         label.checkbox-container Fort Collins, CO   
                             span.county-label (Larimer County)
-                            input#hsg-checkbox.checkbox(type="checkbox")
-                            span.checkmark
-                    h4 Time Range
+                            input#hsg-fortcollins-checkbox.checkbox(type="checkbox")
+                            span.checkmark.fortcollins-checkmark
+                    h5 Time Range
                     #hsg-range-slider.range-slider
                         br 
                         br                            
@@ -455,4 +497,3 @@ block content
                 .detailed-view-half
                     canvas#hsg-detailed-chart-canvas
                     br
-            
