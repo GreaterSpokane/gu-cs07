@@ -14,7 +14,7 @@ module.exports = async function serialize(highSchoolGraduates) {
         serializedHighSchoolGraduates.push(highSchoolGraduates.data[i].highSchoolGraduates);
     }
 
-    serializedResult.county = highsShoolGraduates.county;
+    serializedResult.county = highSchoolGraduates.county;
     serializedResult.indicator = "High School Graduates";
     serializedResult.indicator_id = 'hsg';
     serializedResult.years = serializedYears;
