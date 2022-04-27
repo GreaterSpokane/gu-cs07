@@ -146,7 +146,14 @@ indicatorConfig.ndm.note = "Note for data for net domestic migration. Note for d
 indicatorConfig.ndm.link = "https://data.census.gov/cedsci/";
 indicatorConfig.ndm.statNumIntervals = 5;
 indicatorConfig.ndm.isIncreaseGood = 1;
-indicatorConfig.ndm.chartOptions = {}
+indicatorConfig.ndm.chartOptions = {scales: {
+    y: {
+        title: {
+            text: "In thousands",
+            display: true
+        },
+    }
+}}
 
 // INCOME
 // median household income

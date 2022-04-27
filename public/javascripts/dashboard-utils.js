@@ -382,6 +382,7 @@ function getConfig(indicatorName, isDetailView) {
     lineChartTemplate["options"] = indicatorConfig[indicatorName].chartOptions
     lineChartTemplate["options"]["responsive"] = true;
     lineChartTemplate["options"]["maintainAspectRatio"] = true;
+    lineChartTemplate["options"]["tension"] = 0.1;
     lineChartTemplate["options"]["plugins"] = {
         legend: {
             onClick: null
