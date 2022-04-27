@@ -77,6 +77,8 @@ window.onload = async function () {
                     if (String(detailedViews[i].id).slice(0, 3) == indicatorName) {
                         detailedViews[i].style.display = "flex";
                         detailedViews[i].style.maxHeight = detailedViews[i].scrollHeight + "px";
+                        indicatorConfig[indicatorName]["detailchart"].destroy();
+                        indicatorConfig[indicatorName]["detailchart"] = new Chart(indicatorName + "-detailed-chart-canvas", getConfig(indicatorName, true))
                     }
                 }
             }
