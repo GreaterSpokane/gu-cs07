@@ -18,7 +18,7 @@ window.onload = async function () {
 
         // descriptions, ect.
         document.getElementById(indicatorName + "-description").innerText = indicatorConfig[indicatorName]["description"];
-        document.getElementById(indicatorName + "-about").innerText = indicatorConfig[indicatorName]["note"];
+        document.getElementById(indicatorName + "-note").innerText = indicatorConfig[indicatorName]["note"];
         document.getElementById(indicatorName + "-link").setAttribute("href", indicatorConfig[indicatorName]["link"]);
 
         // detailed charts
