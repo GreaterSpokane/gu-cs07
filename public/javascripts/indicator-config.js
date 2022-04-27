@@ -126,7 +126,7 @@ indicatorConfig.uep.chartOptions = {
 // natural change
 indicatorConfig.ntc = {};
 indicatorConfig.ntc.description = "Natural change is the measurement of the number of births and deaths in a population. A greater natural increase (births - deaths > 0) means the population is growing naturally, otherwise, the population is decreasing naturally."
-indicatorConfig.ntc.note = "Data from the Census Bureau";
+indicatorConfig.ntc.note = "Data from the Census Bureau.";
 indicatorConfig.ntc.link = "https://www.census.gov/programs-surveys/popest/technical-documentation/research/evaluation-estimates/2020-evaluation-estimates.html";
 indicatorConfig.ntc.statNumIntervals = 5;
 indicatorConfig.ntc.chartOptions = {}
@@ -134,7 +134,7 @@ indicatorConfig.ntc.chartOptions = {}
 // net domestic migration
 indicatorConfig.ndm = {};
 indicatorConfig.ndm.description = "Net domestic migration is the difference between in-migration and out-migration from a region. If the net migration is increasing, then the rate of migration into a region exceeds the rate of migration from a region. Many factors influence migration to and from regions in the United States, but it is clear that high net domestic migration strongly indicates the economic potential of a region.";
-indicatorConfig.ndm.note = "Data from the Census Bureau";
+indicatorConfig.ndm.note = "Data from the Census Bureau.";
 indicatorConfig.ndm.link = "https://www.census.gov/programs-surveys/popest/technical-documentation/research/evaluation-estimates/2020-evaluation-estimates.html";
 indicatorConfig.ndm.statNumIntervals = 5;
 indicatorConfig.ndm.chartOptions = {
@@ -172,7 +172,17 @@ indicatorConfig.hsg = {};
 indicatorConfig.hsg.description = "This indicator displays the percentage of the population that has a high school degree (or equivalent) or higher. If a region has a higher level of educational attainment, the region's median household income is likely to be higher.";
 indicatorConfig.hsg.note = "Data from the Census Bureau's American Community Survey.";
 indicatorConfig.hsg.link = "https://data.census.gov/cedsci/table?q=B06009&g=0100000US_0400000US49_0500000US49035,53063";
-indicatorConfig.hsg.statNumIntervals = 5;
-indicatorConfig.hsg.chartOptions = {}
+indicatorConfig.hsg.statNumIntervals = 8;
+indicatorConfig.hsg.chartOptions = {
+    scales: {
+        y: {
+            ticks: {
+                callback: function (value) {
+                    return Math.trunc(Number(value) * 100) + '%';
+                }
+            }
+        }
+    }
+}
 
 export default indicatorConfig;

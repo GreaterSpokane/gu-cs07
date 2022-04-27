@@ -134,13 +134,7 @@ function generateShortStats() {
     const stats = document.getElementsByClassName("stat");
     for (var i = 0; i < stats.length; i++) {
         let indicatorName = String(stats[i].id).slice(0, 3);
-
-        if (indicatorName == "hsg") {
-            // temp until get hsg working
-            continue;
-        }
-
-        if (indicatorName == "lfs") {
+        if (indicatorName == "lfs") {   // employment/unemployment doughnut chart
             const numYearsToShow = indicatorConfig.uep.statNumIntervals;
             const uepStartYear = getData("uep", 'spokane', true).slice((numYearsToShow * -1) - 1, numYearsToShow * -1)
             const uepStartData = Number(getData("uep", 'spokane', false).slice((numYearsToShow * -1) - 1, numYearsToShow * -1))
@@ -172,8 +166,9 @@ function generateShortStats() {
         if (statPercent < 0) {
             incOrDec = 'Decreased'
         }
-        // TODO: Maybe Spokane county be added to each indicator card or at a note at the top saying all stats are from spokane?
-        stats[i].innerHTML = `${incOrDec} ${Math.abs(statPercent)}% in Spokane county from ${startYear} to ${endYear}`;
+        if (!isNaN(statPercent)) {
+            stats[i].innerHTML = `${incOrDec} ${Math.abs(statPercent)}% in Spokane county from ${startYear} to ${endYear}`;
+        }
     }
 }
 
@@ -263,7 +258,7 @@ async function callData(indicatorName, county) {
             break;
         case 'hsg':
             path = '/v1/getManyHighSchoolGraduates/'
-            schemaDataName = 'highschoolGraduates';
+            schemaDataName = 'highSchoolGraduates';
             break;
         default:
             console.error(`No matching endpoint for indicator: ${indicatorName}`);
@@ -281,7 +276,7 @@ async function callData(indicatorName, county) {
             return res.json();
         })
         .then(body => {
-            console.log("success for", indicatorName, county)
+            // console.log("success for", indicatorName, county)
             // console.log(body)
             return body;
         })
@@ -408,6 +403,7 @@ function getConfig(indicatorName, isDetailView) {
     lineChartTemplate["options"]["responsive"] = true;
     lineChartTemplate["options"]["maintainAspectRatio"] = true;
     lineChartTemplate["options"]["tension"] = 0.1;
+    lineChartTemplate["options"]["spanGaps"] = true;
     lineChartTemplate["options"]["plugins"] = {
         legend: {
             onClick: null
