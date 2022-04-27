@@ -70,6 +70,7 @@ window.onload = async function () {
                 if (detailedViews[i].style.maxHeight) {
                     detailedViews[i].style.maxHeight = null;
                     setTimeout(function () {    // waiting for css transition to finish
+                        resetDetailView(indicatorName)
                         detailedViews[i].style.display = "none";
                     }, 200);
                 } else {
@@ -102,6 +103,28 @@ window.onload = async function () {
         })
     }
 
+}
+
+// resets the range slider, checkboxes, and detail chart hidden regions
+function resetDetailView(indicatorName) {
+    document.getElementById(indicatorName + "-slider").noUiSlider.reset();
+    const checkboxes = document.getElementsByClassName("checkbox")
+    for (let i = 0; i < checkboxes.length; i++) {
+        const checkbox = checkboxes[i];
+        if (String(checkbox.id).split("-")[1] == "spokane" || String(checkbox.id).split("-")[1] == "boise") {
+            checkbox.checked = true;
+        } else {
+            checkbox.checked = false;
+        }
+    }
+    indicatorConfig[indicatorName]["detailchart"]["data"]["datasets"].forEach((dataset) => {
+        if (dataset.label.includes("Spokane") || dataset.label.includes("Boise")) {
+            dataset.hidden = false;
+        } else {
+            dataset.hidden = true;
+        }
+    });
+    indicatorConfig[indicatorName]["detailchart"].update();
 }
 
 // creates the short stat percentage for each card
@@ -388,7 +411,7 @@ function getConfig(indicatorName, isDetailView) {
             onClick: null
         }
     }
-    
+
     if (!isDetailView) {
         const templateDatasets = lineChartTemplate.data.datasets;
         lineChartTemplate.data.datasets = templateDatasets.slice(0, 2);
