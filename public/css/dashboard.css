@@ -233,6 +233,8 @@ button {
     height: 1em;
     width: 1em;
     background-color: #ccc;
+    border-radius: 3px;
+
 }
 
 
@@ -240,10 +242,6 @@ button {
 .checkbox-container:hover input~.checkmark {
     background-color: rgb(156, 156, 156);
 }
-
-/* .checkbox-container input:checked~.checkmark.spokane-checkbox {
-    background-color: #00B4ED;
-} */
 
 /* When the checkbox is checked, add a background */
 .checkbox-container input:checked~.checkmark.spokane-checkmark {
