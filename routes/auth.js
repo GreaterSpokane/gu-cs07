@@ -149,7 +149,7 @@ router
         var registerResult = await createAuthUser(username, password);
         if (registerResult.result == 'registered user') {
             sess.username = username
-            return res.redirect(302, '/auth')
+            return res.redirect(302, '/button')
         } else {
             console.log(registerResult)
             return res.redirect(400, '/register')
